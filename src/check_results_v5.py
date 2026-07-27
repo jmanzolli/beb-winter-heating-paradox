@@ -173,7 +173,8 @@ if os.path.exists(TEX):
     lit = re.search(r"\\subsection\{Related Literature.*?(?=\\subsection\{)",
                     tex, re.S)
     scan = tex.replace(lit.group(0), "") if lit else tex
-    for pat, name in ((r"heat[- ]?pump", "25a heat_pump_analysis_removed"),
+    for pat, name in ((r"heat[- ]?pump (case|sensitivity|experiment)|COP of|constant COP",
+                       "25a heat_pump_analysis_removed"),
                       (r"Scope~?2|Scope 2", "25b scope2_removed"),
                       (r"48\.7", "25c old_hp_number_removed"),
                       # the removed items are the FORMULATIONS, not the words:
