@@ -1,0 +1,21 @@
+{
+ "A_unbounded": {
+  "obj": 2372750.1,
+  "lb": 2372749.5,
+  "gap": 0.6,
+  "peak_ppre_kW": 40.0,
+  "annual_precond_kWh": 22889.5,
+  "time_s": 2.1
+ },
+ "B_heater_bounded": {
+  "obj": 2373018.7,
+  "lb": 2373018.1,
+  "gap": 0.6,
+  "peak_ppre_kW": 23.0,
+  "annual_precond_kWh": 21800.8,
+  "time_s": 2.2
+ },
+ "delta_obj": 268.6,
+ "heater_rating_kW": 23.0,
+ "design_label": "policy_lam100"
+}

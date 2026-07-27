@@ -1,0 +1,472 @@
+{
+ "runs": {
+  "econ_lam0": {
+   "archive_level": "search_log",
+   "log_lines": 172,
+   "incumbent": 2371675.4,
+   "lower_bound": 2371225.9,
+   "abs_gap": 449.5,
+   "rel_gap": 0.00019,
+   "runtime_s": 177.1,
+   "status": 2,
+   "phase2_log": null
+  },
+  "policy_lam100": {
+   "archive_level": "search_log",
+   "log_lines": 249,
+   "incumbent": 2374258.8,
+   "lower_bound": 2373710.7,
+   "abs_gap": 548.1,
+   "rel_gap": 0.000231,
+   "runtime_s": 533.1,
+   "status": 2,
+   "phase2_log": null
+  },
+  "policy_lam100_ops": {
+   "archive_level": "search_log",
+   "log_lines": 53,
+   "incumbent": 2374504.8,
+   "lower_bound": 2373710.7,
+   "abs_gap": 794.2,
+   "rel_gap": 0.000334,
+   "runtime_s": 0.3,
+   "status": 2,
+   "phase2_log": null
+  },
+  "eps_1.00": {
+   "archive_level": "search_log",
+   "log_lines": 582,
+   "incumbent": 2371675.6,
+   "lower_bound": 2371225.9,
+   "abs_gap": 449.6,
+   "rel_gap": 0.00019,
+   "runtime_s": 1800.0,
+   "status": 9,
+   "phase2_log": true
+  },
+  "eps_0.70": {
+   "archive_level": "search_log",
+   "log_lines": 445,
+   "incumbent": 2374944.6,
+   "lower_bound": 2373076.4,
+   "abs_gap": 1868.2,
+   "rel_gap": 0.000787,
+   "runtime_s": 1800.1,
+   "status": 9,
+   "phase2_log": true
+  },
+  "eps_0.50": {
+   "archive_level": "search_log",
+   "log_lines": 418,
+   "incumbent": 2374743.6,
+   "lower_bound": 2374593.1,
+   "abs_gap": 150.5,
+   "rel_gap": 6.3e-05,
+   "runtime_s": 1800.1,
+   "status": 9,
+   "phase2_log": true
+  },
+  "eps_0.35": {
+   "archive_level": "search_log",
+   "log_lines": 406,
+   "incumbent": 2374862.8,
+   "lower_bound": 2374181.4,
+   "abs_gap": 681.4,
+   "rel_gap": 0.000287,
+   "runtime_s": 1800.1,
+   "status": 9,
+   "phase2_log": true
+  },
+  "eps_0.20": {
+   "archive_level": "search_log",
+   "log_lines": 846,
+   "incumbent": 2383648.2,
+   "lower_bound": 2381461.6,
+   "abs_gap": 2186.6,
+   "rel_gap": 0.000917,
+   "runtime_s": 1800.1,
+   "status": 9,
+   "phase2_log": true
+  },
+  "eps_0.10": {
+   "archive_level": "search_log",
+   "log_lines": 615,
+   "incumbent": 2393580.4,
+   "lower_bound": 2386564.3,
+   "abs_gap": 7016.1,
+   "rel_gap": 0.002931,
+   "runtime_s": 1800.0,
+   "status": 9,
+   "phase2_log": true
+  },
+  "eps_0.00": {
+   "archive_level": "search_log",
+   "log_lines": 1192,
+   "incumbent": 2404038.6,
+   "lower_bound": 2402319.0,
+   "abs_gap": 1719.7,
+   "rel_gap": 0.000715,
+   "runtime_s": 0.1,
+   "status": 2,
+   "phase2_log": true
+  },
+  "lam_200": {
+   "archive_level": "search_log",
+   "log_lines": 368,
+   "incumbent": 2376597.1,
+   "lower_bound": 2376037.6,
+   "abs_gap": 559.4,
+   "rel_gap": 0.000235,
+   "runtime_s": 1591.1,
+   "status": 2,
+   "phase2_log": null
+  },
+  "lam_500": {
+   "archive_level": "search_log",
+   "log_lines": 339,
+   "incumbent": 2379435.8,
+   "lower_bound": 2378780.6,
+   "abs_gap": 655.1,
+   "rel_gap": 0.000275,
+   "runtime_s": 633.8,
+   "status": 2,
+   "phase2_log": null
+  },
+  "lam_1000": {
+   "archive_level": "search_log",
+   "log_lines": 394,
+   "incumbent": 2384019.8,
+   "lower_bound": 2383127.7,
+   "abs_gap": 892.1,
+   "rel_gap": 0.000374,
+   "runtime_s": 957.4,
+   "status": 2,
+   "phase2_log": null
+  },
+  "lam_2000": {
+   "archive_level": "search_log",
+   "log_lines": 1121,
+   "incumbent": 2392135.3,
+   "lower_bound": 2391035.9,
+   "abs_gap": 1099.4,
+   "rel_gap": 0.00046,
+   "runtime_s": 7200.1,
+   "status": 9,
+   "phase2_log": null
+  },
+  "lam_3500": {
+   "archive_level": "search_log",
+   "log_lines": 734,
+   "incumbent": 2396685.2,
+   "lower_bound": 2395013.3,
+   "abs_gap": 1671.9,
+   "rel_gap": 0.000698,
+   "runtime_s": 3508.9,
+   "status": 17,
+   "phase2_log": null
+  },
+  "lam_5000": {
+   "archive_level": "search_log",
+   "log_lines": 554,
+   "incumbent": 2397699.6,
+   "lower_bound": 2396700.9,
+   "abs_gap": 998.7,
+   "rel_gap": 0.000417,
+   "runtime_s": 2679.3,
+   "status": 2,
+   "phase2_log": null
+  },
+  "lam_10000": {
+   "archive_level": "search_log",
+   "log_lines": 811,
+   "incumbent": 2400569.2,
+   "lower_bound": 2398230.2,
+   "abs_gap": 2339.0,
+   "rel_gap": 0.000974,
+   "runtime_s": 7200.1,
+   "status": 9,
+   "phase2_log": null
+  },
+  "bp_lam_241": {
+   "archive_level": "search_log",
+   "log_lines": 359,
+   "incumbent": 2377112.7,
+   "lower_bound": 2376125.2,
+   "abs_gap": 987.5,
+   "rel_gap": 0.000415,
+   "runtime_s": 1091.9,
+   "status": 2,
+   "phase2_log": null
+  },
+  "bp_lam_2309": {
+   "archive_level": "search_log",
+   "log_lines": 842,
+   "incumbent": 2395041.8,
+   "lower_bound": 2392274.3,
+   "abs_gap": 2767.5,
+   "rel_gap": 0.001155,
+   "runtime_s": 7200.3,
+   "status": 9,
+   "phase2_log": null
+  },
+  "bp_lam_2535": {
+   "archive_level": "search_log",
+   "log_lines": 1002,
+   "incumbent": 2395875.0,
+   "lower_bound": 2393079.6,
+   "abs_gap": 2795.3,
+   "rel_gap": 0.001167,
+   "runtime_s": 7200.3,
+   "status": 9,
+   "phase2_log": null
+  },
+  "det_meanT": {
+   "archive_level": "search_log",
+   "log_lines": 80,
+   "incumbent": 2349219.4,
+   "lower_bound": 2348264.2,
+   "abs_gap": 955.2,
+   "rel_gap": 0.000407,
+   "runtime_s": 34.0,
+   "status": 2,
+   "phase2_log": null
+  },
+  "det_design_full_test": {
+   "archive_level": "search_log",
+   "log_lines": 33,
+   "incumbent": null,
+   "lower_bound": null,
+   "abs_gap": null,
+   "rel_gap": null,
+   "runtime_s": null,
+   "status": 3,
+   "phase2_log": null
+  },
+  "ffh_om_500": {
+   "archive_level": "search_log",
+   "log_lines": 462,
+   "incumbent": 2365258.5,
+   "lower_bound": 2364710.7,
+   "abs_gap": 547.8,
+   "rel_gap": 0.000232,
+   "runtime_s": 1673.3,
+   "status": 2,
+   "phase2_log": null
+  },
+  "ffh_om_2000": {
+   "archive_level": "search_log",
+   "log_lines": 472,
+   "incumbent": 2392258.2,
+   "lower_bound": 2391275.0,
+   "abs_gap": 983.2,
+   "rel_gap": 0.000411,
+   "runtime_s": 1362.3,
+   "status": 2,
+   "phase2_log": null
+  },
+  "grid_100": {
+   "archive_level": "search_log",
+   "log_lines": 435,
+   "incumbent": 2372357.9,
+   "lower_bound": 2371705.7,
+   "abs_gap": 652.2,
+   "rel_gap": 0.000275,
+   "runtime_s": 1624.0,
+   "status": 2,
+   "phase2_log": null
+  },
+  "grid_300": {
+   "archive_level": "search_log",
+   "log_lines": 345,
+   "incumbent": 2376332.3,
+   "lower_bound": 2375715.7,
+   "abs_gap": 616.6,
+   "rel_gap": 0.000259,
+   "runtime_s": 1035.2,
+   "status": 2,
+   "phase2_log": null
+  },
+  "batt_100": {
+   "archive_level": "search_log",
+   "log_lines": 352,
+   "incumbent": 2374287.8,
+   "lower_bound": 2373487.1,
+   "abs_gap": 800.7,
+   "rel_gap": 0.000337,
+   "runtime_s": 584.7,
+   "status": 2,
+   "phase2_log": null
+  },
+  "batt_50": {
+   "archive_level": "search_log",
+   "log_lines": 342,
+   "incumbent": 2373996.6,
+   "lower_bound": 2373043.2,
+   "abs_gap": 953.4,
+   "rel_gap": 0.000402,
+   "runtime_s": 956.8,
+   "status": 2,
+   "phase2_log": null
+  },
+  "ffh_capex_5000": {
+   "archive_level": "search_log",
+   "log_lines": 422,
+   "incumbent": 2384688.5,
+   "lower_bound": 2383862.7,
+   "abs_gap": 825.9,
+   "rel_gap": 0.000346,
+   "runtime_s": 1150.1,
+   "status": 2,
+   "phase2_log": null
+  },
+  "ffh_capex_15000": {
+   "archive_level": "search_log",
+   "log_lines": 964,
+   "incumbent": 2397710.1,
+   "lower_bound": 2394574.8,
+   "abs_gap": 3135.4,
+   "rel_gap": 0.001308,
+   "runtime_s": 3600.1,
+   "status": 9,
+   "phase2_log": null
+  },
+  "derate_mild": {
+   "archive_level": "search_log",
+   "log_lines": 451,
+   "incumbent": 2372588.1,
+   "lower_bound": 2371728.5,
+   "abs_gap": 859.6,
+   "rel_gap": 0.000362,
+   "runtime_s": 1500.5,
+   "status": 2,
+   "phase2_log": null
+  },
+  "derate_harsh": {
+   "archive_level": "search_log",
+   "log_lines": 348,
+   "incumbent": 2374258.7,
+   "lower_bound": 2373710.7,
+   "abs_gap": 548.1,
+   "rel_gap": 0.000231,
+   "runtime_s": 761.8,
+   "status": 2,
+   "phase2_log": null
+  },
+  "reserve_25": {
+   "archive_level": "search_log",
+   "log_lines": 354,
+   "incumbent": 2374263.3,
+   "lower_bound": 2373712.1,
+   "abs_gap": 551.2,
+   "rel_gap": 0.000232,
+   "runtime_s": 1384.0,
+   "status": 2,
+   "phase2_log": null
+  },
+  "reserve_50": {
+   "archive_level": "search_log",
+   "log_lines": 226,
+   "incumbent": 2376351.2,
+   "lower_bound": 2375460.9,
+   "abs_gap": 890.3,
+   "rel_gap": 0.000375,
+   "runtime_s": 624.0,
+   "status": 2,
+   "phase2_log": null
+  },
+  "precond_tau_0.25": {
+   "archive_level": "search_log",
+   "log_lines": 542,
+   "incumbent": 2375585.3,
+   "lower_bound": 2374594.2,
+   "abs_gap": 991.1,
+   "rel_gap": 0.000417,
+   "runtime_s": 2705.1,
+   "status": 2,
+   "phase2_log": null
+  },
+  "precond_tau_1.0": {
+   "archive_level": "search_log",
+   "log_lines": 342,
+   "incumbent": 2373782.2,
+   "lower_bound": 2373232.1,
+   "abs_gap": 550.1,
+   "rel_gap": 0.000232,
+   "runtime_s": 718.5,
+   "status": 2,
+   "phase2_log": null
+  },
+  "spare_15": {
+   "archive_level": "search_log",
+   "log_lines": 355,
+   "incumbent": 2830831.0,
+   "lower_bound": 2818713.9,
+   "abs_gap": 12117.1,
+   "rel_gap": 0.00428,
+   "runtime_s": 3600.3,
+   "status": 9,
+   "phase2_log": null
+  },
+  "frozen_z": {
+   "archive_level": "search_log",
+   "log_lines": 339,
+   "incumbent": 2374664.9,
+   "lower_bound": 2373710.7,
+   "abs_gap": 954.3,
+   "rel_gap": 0.000402,
+   "runtime_s": 1062.3,
+   "status": 2,
+   "phase2_log": null
+  },
+  "n_minus_1": {
+   "archive_level": "search_log",
+   "log_lines": 46,
+   "incumbent": 2390834.8,
+   "lower_bound": 2390461.4,
+   "abs_gap": 373.5,
+   "rel_gap": 0.000156,
+   "runtime_s": 0.3,
+   "status": 2,
+   "phase2_log": null
+  }
+ },
+ "summary": {
+  "n_runs": 39,
+  "with_search_log": 39,
+  "record_only": 0
+ },
+ "hardware": {
+  "machine": "Apple M1 Pro / Intel Xeon Gold 6138",
+  "cores": "8 / 80",
+  "ram_gb": "16 / 282",
+  "os": "macOS 26.5 / Ubuntu 18.04 LTS",
+  "hosts": [
+   "MacBook-de-Jonatas.local",
+   "manager.inescc.pt",
+   "unknown"
+  ],
+  "note": "baseline, frontier and carbon-price runs on the laptop; sensitivity, refinement and division-scale runs on the compute server"
+ },
+ "solver": {
+  "name": "Gurobi",
+  "version": [
+   11,
+   0,
+   3
+  ],
+  "interface": "gurobipy, Python 3.9.13",
+  "threads": "6 (laptop) / 16-24 (server)",
+  "params_changed": {
+   "MIPGapAbs": 1000.0,
+   "TimeLimit": "3600 s (7200 s for hard cap and price points)",
+   "Threads": "6 / 16-24",
+   "NodefileStart": "1 GB (tree spilled to disk)",
+   "NodefileDir": "gurobi_nodefiles",
+   "SoftMemLimit": "11 GB",
+   "LogToConsole": 0
+  },
+  "seed": "default (not varied)",
+  "mip_start": "recorded design used as warm start in the frontier refinement pass"
+ },
+ "disclosure": "Solver logs are archived for all 39 of 39 runs."
+}

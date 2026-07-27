@@ -1,0 +1,765 @@
+{
+ "cases": {
+  "C_shared_infra_frozen_z": {
+   "label": "C_shared_infra_frozen_z_ws",
+   "obj_solver": 2714534.3,
+   "lb_solver": 2504742.8,
+   "abs_gap": 209791.6,
+   "rel_gap_diff_cost": 0.077285,
+   "time_s": 14400.5,
+   "status": 9,
+   "total_annual_cost": 23356934.3,
+   "differentiating_cost": 2714534.3,
+   "cost_parts": {
+    "battery_increment": 0.0,
+    "charger_site_capital": 617462.5,
+    "grid_capital": 76190.0,
+    "demand_charges": 592012.3,
+    "electricity": 1330000.5,
+    "ffh_om": 45000.0,
+    "diesel_cost": 53869.1
+   },
+   "n_buses": 183,
+   "n_ffh": 45,
+   "n_ext": 0,
+   "fleet": {
+    "NF-std-FFH": 45,
+    "NF-std-eOnly": 138
+   },
+   "chargers": {
+    "depot:450": 14,
+    "pioneerVillage:450": 1,
+    "yorkMillsStn:300": 4
+   },
+   "n_opp_chargers": 5,
+   "grid_kW": {
+    "depot": 4000.0,
+    "pioneerVillage": 250.0,
+    "yorkMillsStn": 500.0
+   },
+   "peak_depot_kW": 4600.0,
+   "diesel_L": 28961.9,
+   "co2_t": 77.618,
+   "lb_diff": 2504742.7
+  },
+  "D_full_coordination": {
+   "label": "D_full_coordination_ws",
+   "obj_solver": 2726880.7,
+   "lb_solver": 2514182.8,
+   "abs_gap": 200351.5,
+   "rel_gap_diff_cost": 0.078,
+   "time_s": 14400.8,
+   "status": 9,
+   "total_annual_cost": 23356934.3,
+   "differentiating_cost": 2714534.3,
+   "cost_parts": {
+    "battery_increment": 0.0,
+    "charger_site_capital": 593676.4,
+    "grid_capital": 136340.0,
+    "demand_charges": 620624.7,
+    "electricity": 1307316.6,
+    "ffh_om": 47000.0,
+    "diesel_cost": 21923.1
+   },
+   "n_buses": 183,
+   "n_ffh": 45,
+   "n_ext": 0,
+   "fleet": {
+    "NF-std-FFH": 45,
+    "NF-std-eOnly": 138
+   },
+   "chargers": {
+    "depot:450": 14,
+    "pioneerVillage:450": 1,
+    "yorkMillsStn:300": 4
+   },
+   "n_opp_chargers": 5,
+   "grid_kW": {
+    "depot": 4000.0,
+    "pioneerVillage": 250.0,
+    "yorkMillsStn": 500.0
+   },
+   "peak_depot_kW": 4600.0,
+   "diesel_L": 28961.9,
+   "co2_t": 77.618,
+   "lb_diff": 2514182.8,
+   "differentiating_cost_recorded": 2726880.7,
+   "incumbent_source": "C_shared_infra_frozen_z_ws",
+   "note": "incumbent taken from C_shared_infra_frozen_z_ws, which is feasible for D because D relaxes that case's constraints; D's own search returned a worse solution after the MIP start was discarded. Bound is D's own.",
+   "own_search": {
+    "differentiating_cost": 2726880.7,
+    "n_ffh": 47,
+    "n_ext": 0,
+    "n_opp_chargers": 4,
+    "fleet": {
+     "NF-std-FFH": 47,
+     "NF-std-eOnly": 136
+    },
+    "chargers": {
+     "depot:450": 14,
+     "pioneerVillage:450": 1,
+     "yorkMillsStn:300": 3
+    }
+   }
+  },
+  "B_shared_infra_route_locked": {
+   "label": "B_shared_infra_route_locked_ws",
+   "obj_solver": 2728900.7,
+   "lb_solver": 2540463.7,
+   "abs_gap": 188437.0,
+   "rel_gap_diff_cost": 0.069052,
+   "time_s": 14400.3,
+   "status": 9,
+   "total_annual_cost": 23371300.7,
+   "differentiating_cost": 2728900.7,
+   "cost_parts": {
+    "battery_increment": 0.0,
+    "charger_site_capital": 518424.2,
+    "grid_capital": 136340.0,
+    "demand_charges": 628018.1,
+    "electricity": 1306652.3,
+    "ffh_om": 90000.0,
+    "diesel_cost": 49466.1
+   },
+   "n_buses": 183,
+   "n_ffh": 90,
+   "n_ext": 0,
+   "fleet": {
+    "NF-std-FFH": 90,
+    "NF-std-eOnly": 93
+   },
+   "chargers": {
+    "depot:100": 54,
+    "pioneerVillage:100": 4,
+    "yorkMillsStn:100": 6
+   },
+   "n_opp_chargers": 10,
+   "grid_kW": {
+    "depot": 8000.0,
+    "pioneerVillage": 250.0,
+    "yorkMillsStn": 250.0
+   },
+   "peak_depot_kW": 5353.1,
+   "diesel_L": 26594.7,
+   "co2_t": 71.274,
+   "lb_diff": 2540463.7
+  },
+  "A_fragmented": {
+   "label": "A_fragmented",
+   "per_route": {
+    "108": {
+     "label": "A_route_108",
+     "obj_solver": 157440.3,
+     "lb_solver": 157345.2,
+     "abs_gap": 95.1,
+     "rel_gap_diff_cost": 0.000604,
+     "time_s": 97.3,
+     "status": 2,
+     "total_annual_cost": 1059840.3,
+     "differentiating_cost": 157440.3,
+     "cost_parts": {
+      "battery_increment": 0.0,
+      "charger_site_capital": 30595.9,
+      "grid_capital": 0.0,
+      "demand_charges": 44004.2,
+      "electricity": 71083.7,
+      "ffh_om": 8000.0,
+      "diesel_cost": 3756.5
+     },
+     "n_buses": 8,
+     "n_ffh": 8,
+     "n_ext": 0,
+     "fleet": {
+      "NF-std-FFH": 8
+     },
+     "chargers": {
+      "depot:100": 4
+     },
+     "n_opp_chargers": 0,
+     "grid_kW": {},
+     "peak_depot_kW": 398.7,
+     "diesel_L": 2019.6,
+     "co2_t": 5.413
+    },
+    "120": {
+     "label": "A_route_120",
+     "obj_solver": 59198.5,
+     "lb_solver": 58949.4,
+     "abs_gap": 249.1,
+     "rel_gap_diff_cost": 0.004208,
+     "time_s": 28.2,
+     "status": 2,
+     "total_annual_cost": 397598.5,
+     "differentiating_cost": 59198.5,
+     "cost_parts": {
+      "battery_increment": 0.0,
+      "charger_site_capital": 14114.8,
+      "grid_capital": 0.0,
+      "demand_charges": 16290.1,
+      "electricity": 24563.6,
+      "ffh_om": 3000.0,
+      "diesel_cost": 1230.0
+     },
+     "n_buses": 3,
+     "n_ffh": 3,
+     "n_ext": 0,
+     "fleet": {
+      "NF-std-FFH": 3
+     },
+     "chargers": {
+      "depot:150": 1
+     },
+     "n_opp_chargers": 0,
+     "grid_kW": {},
+     "peak_depot_kW": 150.0,
+     "diesel_L": 661.3,
+     "co2_t": 1.772
+    },
+    "165": {
+     "label": "A_route_165",
+     "obj_solver": 554522.8,
+     "lb_solver": 536507.4,
+     "abs_gap": 18015.4,
+     "rel_gap_diff_cost": 0.032488,
+     "time_s": 3600.1,
+     "status": 9,
+     "total_annual_cost": 3487322.8,
+     "differentiating_cost": 554522.8,
+     "cost_parts": {
+      "battery_increment": 0.0,
+      "charger_site_capital": 99436.6,
+      "grid_capital": 16040.0,
+      "demand_charges": 143146.6,
+      "electricity": 241947.7,
+      "ffh_om": 26000.0,
+      "diesel_cost": 27951.9
+     },
+     "n_buses": 26,
+     "n_ffh": 26,
+     "n_ext": 0,
+     "fleet": {
+      "NF-std-FFH": 26
+     },
+     "chargers": {
+      "depot:100": 13
+     },
+     "n_opp_chargers": 0,
+     "grid_kW": {
+      "depot": 1000.0
+     },
+     "peak_depot_kW": 1282.3,
+     "diesel_L": 15027.9,
+     "co2_t": 40.275
+    },
+    "35": {
+     "label": "A_route_35",
+     "obj_solver": 191217.6,
+     "lb_solver": 191150.5,
+     "abs_gap": 67.1,
+     "rel_gap_diff_cost": 0.000351,
+     "time_s": 983.2,
+     "status": 2,
+     "total_annual_cost": 1432017.6,
+     "differentiating_cost": 191217.6,
+     "cost_parts": {
+      "battery_increment": 0.0,
+      "charger_site_capital": 38244.9,
+      "grid_capital": 0.0,
+      "demand_charges": 52897.6,
+      "electricity": 86632.7,
+      "ffh_om": 9000.0,
+      "diesel_cost": 4442.5
+     },
+     "n_buses": 11,
+     "n_ffh": 9,
+     "n_ext": 0,
+     "fleet": {
+      "NF-std-FFH": 9,
+      "NF-std-eOnly": 2
+     },
+     "chargers": {
+      "depot:100": 5
+     },
+     "n_opp_chargers": 0,
+     "grid_kW": {},
+     "peak_depot_kW": 496.9,
+     "diesel_L": 2388.4,
+     "co2_t": 6.401
+    },
+    "36": {
+     "label": "A_route_36",
+     "obj_solver": 102875.4,
+     "lb_solver": 102834.8,
+     "abs_gap": 40.6,
+     "rel_gap_diff_cost": 0.000394,
+     "time_s": 8.9,
+     "status": 2,
+     "total_annual_cost": 666875.4,
+     "differentiating_cost": 102875.4,
+     "cost_parts": {
+      "battery_increment": 0.0,
+      "charger_site_capital": 22946.9,
+      "grid_capital": 0.0,
+      "demand_charges": 28457.2,
+      "electricity": 44544.3,
+      "ffh_om": 5000.0,
+      "diesel_cost": 1927.0
+     },
+     "n_buses": 5,
+     "n_ffh": 5,
+     "n_ext": 0,
+     "fleet": {
+      "NF-std-FFH": 5
+     },
+     "chargers": {
+      "depot:100": 3
+     },
+     "n_opp_chargers": 0,
+     "grid_kW": {},
+     "peak_depot_kW": 263.6,
+     "diesel_L": 1036.0,
+     "co2_t": 2.776
+    },
+    "52": {
+     "label": "A_route_52",
+     "obj_solver": 591453.8,
+     "lb_solver": 568510.5,
+     "abs_gap": 22943.3,
+     "rel_gap_diff_cost": 0.038791,
+     "time_s": 1800.1,
+     "status": 9,
+     "total_annual_cost": 4201053.8,
+     "differentiating_cost": 591453.8,
+     "cost_parts": {
+      "battery_increment": 0.0,
+      "charger_site_capital": 136916.7,
+      "grid_capital": 20050.0,
+      "demand_charges": 141852.0,
+      "electricity": 263109.2,
+      "ffh_om": 16000.0,
+      "diesel_cost": 13526.0
+     },
+     "n_buses": 32,
+     "n_ffh": 16,
+     "n_ext": 0,
+     "fleet": {
+      "NF-std-FFH": 16,
+      "NF-std-eOnly": 16
+     },
+     "chargers": {
+      "depot:450": 3,
+      "lawrenceStn:300": 1
+     },
+     "n_opp_chargers": 1,
+     "grid_kW": {
+      "depot": 1000.0,
+      "lawrenceStn": 250.0
+     },
+     "peak_depot_kW": 1186.9,
+     "diesel_L": 7272.0,
+     "co2_t": 19.489
+    },
+    "84": {
+     "label": "A_route_84",
+     "obj_solver": 126008.4,
+     "lb_solver": 125872.7,
+     "abs_gap": 135.7,
+     "rel_gap_diff_cost": 0.001077,
+     "time_s": 57.6,
+     "status": 2,
+     "total_annual_cost": 802808.4,
+     "differentiating_cost": 126008.4,
+     "cost_parts": {
+      "battery_increment": 0.0,
+      "charger_site_capital": 22946.9,
+      "grid_capital": 0.0,
+      "demand_charges": 33957.4,
+      "electricity": 55765.9,
+      "ffh_om": 6000.0,
+      "diesel_cost": 7338.2
+     },
+     "n_buses": 6,
+     "n_ffh": 6,
+     "n_ext": 0,
+     "fleet": {
+      "NF-std-FFH": 6
+     },
+     "chargers": {
+      "depot:100": 3
+     },
+     "n_opp_chargers": 0,
+     "grid_kW": {},
+     "peak_depot_kW": 300.0,
+     "diesel_L": 3945.3,
+     "co2_t": 10.573
+    },
+    "927": {
+     "label": "A_route_927",
+     "obj_solver": 146629.8,
+     "lb_solver": 146629.1,
+     "abs_gap": 0.7,
+     "rel_gap_diff_cost": 5e-06,
+     "time_s": 29.3,
+     "status": 2,
+     "total_annual_cost": 1951429.8,
+     "differentiating_cost": 146629.8,
+     "cost_parts": {
+      "battery_increment": 0.0,
+      "charger_site_capital": 22946.9,
+      "grid_capital": 0.0,
+      "demand_charges": 26402.2,
+      "electricity": 97280.6,
+      "ffh_om": 0.0,
+      "diesel_cost": 0.0
+     },
+     "n_buses": 16,
+     "n_ffh": 0,
+     "n_ext": 0,
+     "fleet": {
+      "NF-std-eOnly": 16
+     },
+     "chargers": {
+      "depot:100": 3
+     },
+     "n_opp_chargers": 0,
+     "grid_kW": {},
+     "peak_depot_kW": 232.7,
+     "diesel_L": 0.0,
+     "co2_t": 0.0
+    },
+    "935": {
+     "label": "A_route_935",
+     "obj_solver": 62940.2,
+     "lb_solver": 62761.0,
+     "abs_gap": 179.2,
+     "rel_gap_diff_cost": 0.002847,
+     "time_s": 197.5,
+     "status": 2,
+     "total_annual_cost": 1303740.2,
+     "differentiating_cost": 62940.2,
+     "cost_parts": {
+      "battery_increment": 0.0,
+      "charger_site_capital": 7649.0,
+      "grid_capital": 0.0,
+      "demand_charges": 11369.3,
+      "electricity": 42777.4,
+      "ffh_om": 1000.0,
+      "diesel_cost": 144.6
+     },
+     "n_buses": 11,
+     "n_ffh": 1,
+     "n_ext": 0,
+     "fleet": {
+      "NF-std-FFH": 1,
+      "NF-std-eOnly": 10
+     },
+     "chargers": {
+      "depot:100": 1
+     },
+     "n_opp_chargers": 0,
+     "grid_kW": {},
+     "peak_depot_kW": 100.0,
+     "diesel_L": 77.7,
+     "co2_t": 0.208
+    },
+    "952": {
+     "label": "A_route_952",
+     "obj_solver": 35683.6,
+     "lb_solver": 35484.9,
+     "abs_gap": 198.7,
+     "rel_gap_diff_cost": 0.005569,
+     "time_s": 2.1,
+     "status": 2,
+     "total_annual_cost": 825283.6,
+     "differentiating_cost": 35683.6,
+     "cost_parts": {
+      "battery_increment": 0.0,
+      "charger_site_capital": 7649.0,
+      "grid_capital": 0.0,
+      "demand_charges": 6359.9,
+      "electricity": 21674.7,
+      "ffh_om": 0.0,
+      "diesel_cost": 0.0
+     },
+     "n_buses": 7,
+     "n_ffh": 0,
+     "n_ext": 0,
+     "fleet": {
+      "NF-std-eOnly": 7
+     },
+     "chargers": {
+      "depot:100": 1
+     },
+     "n_opp_chargers": 0,
+     "grid_kW": {},
+     "peak_depot_kW": 59.6,
+     "diesel_L": 0.0,
+     "co2_t": 0.0
+    },
+    "96": {
+     "label": "A_route_96",
+     "obj_solver": 554559.1,
+     "lb_solver": 540704.3,
+     "abs_gap": 13854.8,
+     "rel_gap_diff_cost": 0.024983,
+     "time_s": 1800.6,
+     "status": 9,
+     "total_annual_cost": 3712959.1,
+     "differentiating_cost": 554559.1,
+     "cost_parts": {
+      "battery_increment": 0.0,
+      "charger_site_capital": 99436.6,
+      "grid_capital": 16040.0,
+      "demand_charges": 143218.4,
+      "electricity": 247109.1,
+      "ffh_om": 28000.0,
+      "diesel_cost": 20755.0
+     },
+     "n_buses": 28,
+     "n_ffh": 28,
+     "n_ext": 0,
+     "fleet": {
+      "NF-std-FFH": 28
+     },
+     "chargers": {
+      "depot:100": 13
+     },
+     "n_opp_chargers": 0,
+     "grid_kW": {
+      "depot": 1000.0
+     },
+     "peak_depot_kW": 1300.0,
+     "diesel_L": 11158.6,
+     "co2_t": 29.905
+    },
+    "984": {
+     "label": "A_route_984",
+     "obj_solver": 33523.0,
+     "lb_solver": 33506.1,
+     "abs_gap": 16.9,
+     "rel_gap_diff_cost": 0.000504,
+     "time_s": 4.1,
+     "status": 2,
+     "total_annual_cost": 597523.0,
+     "differentiating_cost": 33523.0,
+     "cost_parts": {
+      "battery_increment": 0.0,
+      "charger_site_capital": 7649.0,
+      "grid_capital": 0.0,
+      "demand_charges": 5707.5,
+      "electricity": 20166.5,
+      "ffh_om": 0.0,
+      "diesel_cost": 0.0
+     },
+     "n_buses": 5,
+     "n_ffh": 0,
+     "n_ext": 0,
+     "fleet": {
+      "NF-std-eOnly": 5
+     },
+     "chargers": {
+      "depot:100": 1
+     },
+     "n_opp_chargers": 0,
+     "grid_kW": {},
+     "peak_depot_kW": 53.0,
+     "diesel_L": 0.0,
+     "co2_t": 0.0
+    },
+    "99": {
+     "label": "A_route_99",
+     "obj_solver": 94394.1,
+     "lb_solver": 87453.3,
+     "abs_gap": 6940.8,
+     "rel_gap_diff_cost": 0.07353,
+     "time_s": 3600.1,
+     "status": 9,
+     "total_annual_cost": 658394.1,
+     "differentiating_cost": 94394.1,
+     "cost_parts": {
+      "battery_increment": 0.0,
+      "charger_site_capital": 37391.9,
+      "grid_capital": 4010.0,
+      "demand_charges": 17217.1,
+      "electricity": 35775.0,
+      "ffh_om": 0.0,
+      "diesel_cost": 0.0
+     },
+     "n_buses": 5,
+     "n_ffh": 0,
+     "n_ext": 0,
+     "fleet": {
+      "NF-std-eOnly": 5
+     },
+     "chargers": {
+      "depot:100": 1,
+      "none:100": 2
+     },
+     "n_opp_chargers": 2,
+     "grid_kW": {
+      "none": 250.0
+     },
+     "peak_depot_kW": 100.0,
+     "diesel_L": 0.0,
+     "co2_t": 0.0
+    },
+    "996": {
+     "label": "A_route_996",
+     "obj_solver": 93907.8,
+     "lb_solver": 89515.0,
+     "abs_gap": 4392.8,
+     "rel_gap_diff_cost": 0.046777,
+     "time_s": 1800.1,
+     "status": 9,
+     "total_annual_cost": 2349907.8,
+     "differentiating_cost": 93907.8,
+     "cost_parts": {
+      "battery_increment": 0.0,
+      "charger_site_capital": 15297.9,
+      "grid_capital": 0.0,
+      "demand_charges": 21402.0,
+      "electricity": 52872.6,
+      "ffh_om": 4000.0,
+      "diesel_cost": 335.3
+     },
+     "n_buses": 20,
+     "n_ffh": 4,
+     "n_ext": 0,
+     "fleet": {
+      "NF-std-FFH": 4,
+      "NF-std-eOnly": 16
+     },
+     "chargers": {
+      "depot:100": 2
+     },
+     "n_opp_chargers": 0,
+     "grid_kW": {},
+     "peak_depot_kW": 189.3,
+     "diesel_L": 180.3,
+     "co2_t": 0.483
+    }
+   },
+   "total_annual_cost": 23446754.4,
+   "differentiating_cost": 2804354.4,
+   "diesel_L": 43767.1,
+   "co2_t": 117.3,
+   "n_buses": 183,
+   "n_ffh": 106,
+   "n_ext": 0,
+   "n_opp_chargers": 3,
+   "chargers": {
+    "depot:100": 50,
+    "depot:150": 1,
+    "depot:450": 3,
+    "lawrenceStn:300": 1,
+    "none:100": 2
+   },
+   "grid_kW": {
+    "depot": 3000.0,
+    "lawrenceStn": 250.0,
+    "none": 250.0
+   },
+   "worst_route_gap": 22943.3,
+   "abs_gap": 67130.2,
+   "gap_note": "sum of the 14 per-route absolute gaps; case A is a sum of independent optima, so its slack accumulates",
+   "note": "sum of 14 independent route optima; no shared terminal chargers, depot capacity, grid tier, or bus pool"
+  },
+  "stability": {
+   "tau": 25000.0,
+   "base_diff_cost": 2784865.5,
+   "stab_n_ffh_min": null
+  }
+ },
+ "meta": {
+  "shards": [
+   "div_BCD_ws.json",
+   "div_A.json",
+   "campaign_division_v5.json"
+  ],
+  "per_shard_meta": {
+   "div_BCD_ws.json": {
+    "rerun_minutes": 720.6,
+    "rerun_tlim": 14400,
+    "warm_started": true
+   },
+   "div_A.json": {
+    "minutes": 187.5,
+    "lam": 0.0,
+    "tau": 25000.0,
+    "abs_gap_diff_cost": 2000.0,
+    "gurobi": [
+     10,
+     0,
+     2
+    ]
+   },
+   "campaign_division_v5.json": {
+    "shards": [
+     "div_A.json",
+     "campaign_division_v5.json"
+    ],
+    "per_shard_meta": {
+     "div_A.json": {
+      "minutes": 187.5,
+      "lam": 0.0,
+      "tau": 25000.0,
+      "abs_gap_diff_cost": 2000.0,
+      "gurobi": [
+       10,
+       0,
+       2
+      ]
+     },
+     "campaign_division_v5.json": {
+      "shards": [
+       "div_D.json",
+       "div_C.json",
+       "div_B.json"
+      ],
+      "per_shard_meta": {
+       "div_D.json": {
+        "minutes": 120.1,
+        "lam": 0.0,
+        "tau": 25000.0,
+        "abs_gap_diff_cost": 2000.0,
+        "gurobi": [
+         11,
+         0,
+         3
+        ]
+       },
+       "div_C.json": {
+        "minutes": 120.1,
+        "lam": 0.0,
+        "tau": 25000.0,
+        "abs_gap_diff_cost": 2000.0,
+        "gurobi": [
+         11,
+         0,
+         3
+        ]
+       },
+       "div_B.json": {
+        "minutes": 120.1,
+        "lam": 0.0,
+        "tau": 25000.0,
+        "abs_gap_diff_cost": 2000.0,
+        "gurobi": [
+         11,
+         0,
+         3
+        ]
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "coordination_bound": {
+  "A_lower_bound": 2737224.2,
+  "D_best_feasible": 2714534.3,
+  "certified_min_saving": 22689.9,
+  "argument": "A is a sum of 14 independent optima, so its true cost is at least the sum of the per-route lower bounds; the coordinated incumbent is a feasible solution. The difference is therefore a valid lower bound on the value of coordination, independent of the division-scale optimality gaps."
+ }
+}
