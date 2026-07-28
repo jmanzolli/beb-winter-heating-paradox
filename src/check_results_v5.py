@@ -17,7 +17,7 @@ os.environ.setdefault("ROUTE_INPUTS", "route52_inputs_v5.json")
 import route52_prototype as R
 
 RES = "campaign_v5_results.json"
-TEX = "../Overleaf/main.tex"
+TEX = os.environ.get("CHECK_TEX", "../Overleaf/main.tex")
 ABS_TOL = 1.0          # CAD
 REL_TOL = 1e-6
 

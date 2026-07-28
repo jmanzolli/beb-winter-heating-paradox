@@ -121,21 +121,22 @@ def table_scen(runs, label="policy_lam100_ops"):
 
 # ----------------------------------------------------------------- Table V
 def table_designs(runs, labels=None):
-    labels = labels or [l for l in ("econ_lam0", "eps_0.50", "eps_0.20",
-                                    "eps_0.10", "eps_0.00") if l in runs]
+    """Consolidated Route-52 experiment table: the designs that explain the
+    frontier's transitions plus the deterministic and N-1 benchmarks, with
+    out-of-sample reliability where it was evaluated (E8)."""
+    labels = labels or [l for l in ("econ_lam0", "eps_0.35", "eps_0.20",
+                                    "eps_0.00", "det_meanT", "n_minus_1")
+                        if l in runs]
     sel = [runs[l] for l in labels]
     if not sel:
         print("SKIP tab_designs: no frontier runs")
         return
-    kname = {k: bc.name for k, bc in enumerate(R.BUS_CLASSES)}
 
     def cnt(r, pred):
         return sum(v for k, v in r["fleet"].items()
                    if pred(next(bc for bc in R.BUS_CLASSES if bc.name == k)))
 
     def fleet_of(r, at_depot):
-        """'8$\\times$100' -- count alone would hide that 8x100 kW and
-        3x300 kW are different infrastructure at the same site."""
         parts = []
         for key, v in sorted(r["chargers"].items()):
             n, p = key.split(":")
@@ -143,61 +144,90 @@ def table_designs(runs, labels=None):
                 parts.append(rf"{v}$\times${p}")
         return ", ".join(parts) if parts else "---"
 
-    def opp(r):
-        return sum(v for key, v in r["chargers"].items()
-                   if not key.startswith("depot"))
+    # out-of-sample floor compliance exists only for the designs the E8
+    # harness evaluated: the lambda=100 design (composition identical to the
+    # baseline) and the zero-emission endpoint
+    rel = {}
+    ra = load("reliability_reserve10.json")
+    rz = load("reliability_zeroemission.json")
+    W = {"mild": 45, "cold": 45, "verycold": 36, "extreme": 19, "severe": 6}
+    def _floor(rr):
+        lv = rr["levels"]["heat_cv_0.00"]
+        return 100 * sum(lv[w]["p_soc_floor_ok"] * W[w] for w in W) / 151
+    if ra:
+        rel["econ_lam0"] = _floor(ra)
+    if rz:
+        rel["eps_0.00"] = _floor(rz)
 
-    def depot(r):
-        return sum(v for key, v in r["chargers"].items()
-                   if key.startswith("depot"))
-
-    heads = []
+    heads, det = [], set()
     for r in sel:
-        if r["label"] == "econ_lam0":
-            heads.append(r"\textbf{Economic baseline}")
+        lb = r["label"]
+        if lb == "econ_lam0":
+            heads.append(r"\makecell{\textbf{Baseline}\\(E1)}")
+        elif lb == "det_meanT":
+            heads.append(r"\makecell{\textbf{Determin.}\\(E5)}")
+            det.add(lb)
+        elif lb == "n_minus_1":
+            heads.append(r"\makecell{\textbf{$N{-}1$ outage}\\(E7)}")
         elif r.get("eps") is not None and r["eps"] < 1e-6:
-            heads.append(r"\textbf{Zero onboard \COtwo{}}")
+            heads.append(r"\makecell{\textbf{Zero \COtwo{}}\\(E4)}")
         else:
-            heads.append(r"\textbf{Cap: %.1f t}" % r["eps"])
-    lines = [
-        ("Standard battery, FFH-equipped (buses)",
-         [cnt(r, lambda b: b.ffh and b.batt_nom < 600) for r in sel], 0),
-        ("Standard battery, electric-heating-only",
-         [cnt(r, lambda b: not b.ffh and b.batt_nom < 600) for r in sel], 0),
-        ("Extended battery, FFH-equipped",
-         [cnt(r, lambda b: b.ffh and b.batt_nom > 600) for r in sel], 0),
-        ("Extended battery, electric-heating-only",
-         [cnt(r, lambda b: not b.ffh and b.batt_nom > 600) for r in sel], 0),
-        ("Depot grid upgrade (kW)",
-         [r.get("grid_kW", {}).get("depot", 0) for r in sel], 0),
-        ("Annual diesel (L)", [r["diesel_L"] for r in sel], 0),
-        ("Onboard emissions (t\\COtwo{}/yr)", [r["co2_t"] for r in sel], 2),
-        ("Phase-1 cost bound (kCAD/yr)", [r["lb"] / 1e3 for r in sel], 1),
-        ("Phase-1 cost incumbent (kCAD/yr)", [r["obj"] / 1e3 for r in sel], 1),
-        ("Cost of tabulated design (kCAD/yr)",
-         [r["F1"] / 1e3 for r in sel], 1),
-        ("Absolute optimality gap (kCAD/yr)",
-         [r["abs_gap"] / 1e3 for r in sel], 2),
-    ]
-    rows = "\n".join(
-        f"{nm:<44} & " + " & ".join(num(v, d) for v in vals) + r" \\"
-        for nm, vals, d in lines)
-    # charger rows carry a rating, so they are strings not numbers and are
-    # inserted after the bus-composition block
-    chrows = "\n".join(
-        f"{nm:<44} & " + " & ".join(fleet_of(r, dep) for r in sel) + r" \\"
-        for nm, dep in (("Depot chargers (count$\\times$kW)", True),
-                        ("Opportunity chargers (count$\\times$kW)", False)))
-    rows = rows.replace("Depot grid upgrade", chrows + "\nDepot grid upgrade", 1)
+            heads.append(r"\makecell{\textbf{Cap %.2f t}\\(E3)}" % r["eps"])
+
+    def col(r, key, scale, dec, skip_det=False):
+        if skip_det and r["label"] in det:
+            return "---"
+        return num(r[key] / scale, dec)
+
+    rows = []
+    for nm, pred in (
+            ("Std.\\ battery, FFH-equipped (buses)",
+             lambda b: b.ffh and b.batt_nom < 600),
+            ("Std.\\ battery, electric-only",
+             lambda b: not b.ffh and b.batt_nom < 600),
+            ("Ext.\\ battery, FFH-equipped",
+             lambda b: b.ffh and b.batt_nom > 600),
+            ("Ext.\\ battery, electric-only",
+             lambda b: not b.ffh and b.batt_nom > 600)):
+        rows.append(f"{nm:<40} & " +
+                    " & ".join(num(cnt(r, pred)) for r in sel) + r" \\")
+    for nm, dep in (("Depot chargers (count$\\times$kW)", True),
+                    ("Opportunity chargers", False)):
+        rows.append(f"{nm:<40} & " +
+                    " & ".join(fleet_of(r, dep) for r in sel) + r" \\")
+    rows.append("Depot grid upgrade (kW)".ljust(40) + " & " +
+                " & ".join(num(r.get("grid_kW", {}).get("depot", 0))
+                           for r in sel) + r" \\")
+    rows.append("Annual diesel (L)".ljust(40) + " & " +
+                " & ".join(col(r, "diesel_L", 1, 0, skip_det=True)
+                           for r in sel) + r" \\")
+    rows.append("Onboard emissions (t\\COtwo{}/yr)".ljust(40) + " & " +
+                " & ".join(col(r, "co2_t", 1, 2, skip_det=True)
+                           for r in sel) + r" \\")
+    rows.append("Cost of tabulated design (kCAD/yr)".ljust(40) + " & " +
+                " & ".join(num(r["F1"] / 1e3, 1) for r in sel) + r" \\")
+    base_f1 = runs["econ_lam0"]["F1"]
+    rows.append("Increment vs.\\ baseline (kCAD/yr)".ljust(40) + " & " +
+                " & ".join(num((r["F1"] - base_f1) / 1e3, 1) for r in sel)
+                + r" \\")
+    rows.append("Feasible on full scenario set".ljust(40) + " & " +
+                " & ".join("no" if r["label"] in det else "yes"
+                           for r in sel) + r" \\")
+    rows.append("Winter days above SoC floor (\\%, E8)".ljust(40) + " & " +
+                " & ".join(num(rel.get(r["label"]), 2) for r in sel) + r" \\")
+    rows.append("Absolute optimality gap (kCAD/yr)".ljust(40) + " & " +
+                " & ".join(num(r["abs_gap"] / 1e3, 2) for r in sel) + r" \\")
     body = r"""\begin{table*}[!t]
-\caption{Route~52 frontier designs and certified bounds. Cap points are solved
-in two phases; the tabulated design is the phase-2 emissions-minimizing
-solution, whose cost may exceed the phase-1 certified incumbent by at most
-$\theta=0.5$~kCAD/yr.}
+\caption{Route~52 experiments. Phase-2 designs may cost up to
+$\theta=0.5$~kCAD/yr above the phase-1 certified incumbent. The
+deterministic column is evaluated on its single mean day (diesel and
+emissions not comparable) and is infeasible on the full scenario set; floor
+compliance is shown where evaluated out of sample. Intermediate frontier
+points: supplementary material.}
 \label{tab:designs}
 \centering
 \footnotesize
-\setlength{\tabcolsep}{8pt}
+\setlength{\tabcolsep}{5.5pt}
 \renewcommand{\arraystretch}{1.12}
 \begin{tabular}{@{}l%s@{}}
 \toprule
@@ -207,7 +237,7 @@ $\theta=0.5$~kCAD/yr.}
 \bottomrule
 \end{tabular}
 \end{table*}
-""" % ("r" * len(sel), " & ".join(heads), rows)
+""" % ("r" * len(sel), " & ".join(heads), "\n".join(rows))
     write("tab_designs.tex", body)
 
 
@@ -260,8 +290,8 @@ def table_division(div):
     rows.insert(4, "FFH share (\\%)".ljust(40) + " & "
                 + " & ".join(num(v, 0) for v in ffh_share) + r" \\")
     body = r"""\begin{table}[!t]
-\caption{Division-scale coordination on one 14-route, 183-block system:
-A fragmented, B route-locked, C fixed assignment, D coordinated.}
+\caption{Division coordination cases: A fragmented, B route-locked,
+C fixed assignment, D full.}
 \label{tab:garage}
 \centering
 \footnotesize

@@ -52,8 +52,9 @@ def save(fig, name):
     plt.close(fig)
 
 def panel_label(ax, s, x=0.5, y=1.02):
+    va, ha = ("top", "left") if y <= 1.0 else ("bottom", "center")
     ax.text(x, y, s, transform=ax.transAxes, fontsize=9, fontweight="bold",
-            va="bottom", ha="center")
+            va=va, ha=ha)
 
 # ----------------------------------------------------------------------------
 # data — read programmatically from solver outputs
@@ -137,32 +138,25 @@ def fig1(width, name):
               ("Extended-\nbattery buses", [r["n_ext"] for r in frontier], TEAL, "s", "--"),
               ("Opportunity\nchargers", [opp_ch(r) for r in frontier], ORANGE, "D", "-."),
               ("Depot\nchargers", [depot_ch(r) for r in frontier], GRAY, "^", ":")]
-    h = 3.7 if width < 5 else 3.3
+    # transition annotations moved to the caption; markers stay in the plot
+    h = 2.6 if width < 5 else 2.3
     fig, axes = plt.subplots(4, 1, figsize=(width, h), sharex=True)
-    trans = [(4.91, "extended batteries enter"),
-             (2.06, "opportunity charging enters"),
-             (0.0, "all FFHs removed")]
+    trans = [4.91, 2.06, 0.0]
     for ax, (lab, vals, col, mk, ls) in zip(axes, series):
         ax.step(caps, vals, where="post", color=col, lw=LW_MAIN, ls=ls, zorder=3)
         ax.plot(caps, vals, mk, color=col, ms=MS - 1, zorder=4)
-        ax.set_ylabel(lab, fontsize=8)
+        ax.set_ylabel(lab, fontsize=7.5)
         ymax = max(vals)
-        ax.set_yticks(range(0, ymax + 1, max(1, int(np.ceil(ymax / 3)))))
-        ax.set_ylim(-0.6, ymax * 1.25 + 0.6)
-        for xv, _ in trans:
+        ax.set_yticks(range(0, ymax + 1, max(1, int(np.ceil(ymax / 2)))))
+        ax.set_ylim(-0.6, ymax * 1.2 + 0.6)
+        for xv in trans:
             ax.axvline(xv, color=LGRAY, lw=0.8, zorder=1)
-    for (xv, txt), ax_i, dy in zip(trans, [1, 2, 0], [0.72, 0.72, 0.75]):
-        ax = axes[ax_i]
-        ax.annotate(txt, xy=(xv, ax.get_ylim()[1] * 0.55),
-                    xytext=(xv + (4.5 if width < 5 else 3.2), ax.get_ylim()[1] * dy),
-                    fontsize=7.5, color="#333333", ha="left",
-                    arrowprops=dict(arrowstyle="-|>", color=GRAY, lw=0.8))
     axes[-1].set_xlabel("Residual Scope 1 emissions cap [tCO$_2$/yr]")
     axes[-1].invert_xaxis()
     for i, ax in enumerate(axes):
-        panel_label(ax, f"({chr(97+i)})")
+        panel_label(ax, f"({chr(97+i)})", x=0.02, y=0.98)
     fig.align_ylabels(axes)
-    fig.subplots_adjust(hspace=0.62 if width < 5 else 0.45)
+    fig.subplots_adjust(hspace=0.30 if width < 5 else 0.26)
     save(fig, name)
 
 fig1(3.5, "fig1_1col")
@@ -171,7 +165,7 @@ fig1(7.16, "fig1_2col")
 # ============================================================================
 # FIGURE 2 — cost–emissions frontier: (a) full, (b) low-emissions zoom
 # ============================================================================
-def draw_frontier(ax, xlim=None, label_lams=(200, 2000)):
+def draw_frontier(ax, xlim=None, label_lams=(200, 2000), label_pos=None):
     fx, fy = [r["co2_t"] for r in frontier], [dF1(r) for r in frontier]
     fe = [herr(r) for r in frontier]
     ax.errorbar(fx, fy, yerr=fe, color=BLUE, lw=LW_MAIN, marker="o", ms=MS - 1,
@@ -195,29 +189,52 @@ def draw_frontier(ax, xlim=None, label_lams=(200, 2000)):
     for r in lsweep:
         if r["lam"] in label_lams and (xlim is None or
                                        xlim[1] <= r["co2_t"] <= xlim[0]):
-            dy = -11 if r["lam"] < 2500 else 7
-            ax.annotate(f"$\\lambda$={r['lam']:g}",
-                        (r["co2_t"], dF1(r)), textcoords="offset points",
-                        xytext=(5, dy), fontsize=7, color=ORANGE)
+            # labels sit in empty plot regions with a thin leader line, so
+            # they can never collide with the elbow points or each other
+            spec = (label_pos or {}).get(r["lam"])
+            if spec:
+                ax.annotate(f"$\\lambda$={r['lam']:g}",
+                            (r["co2_t"], dF1(r)), xytext=spec,
+                            textcoords="data", fontsize=7, color=ORANGE,
+                            ha="center", va="center",
+                            arrowprops=dict(arrowstyle="-", color="#999999",
+                                            lw=0.55, shrinkA=8, shrinkB=3))
+            else:
+                dy = -11 if r["lam"] < 2500 else 7
+                ax.annotate(f"$\\lambda$={r['lam']:g}",
+                            (r["co2_t"], dF1(r)), textcoords="offset points",
+                            xytext=(5, dy), fontsize=7, color=ORANGE)
     if xlim:
         ax.set_xlim(*xlim)
 
 def fig2(width, name):
     if width < 5:
-        fig, (a, b) = plt.subplots(2, 1, figsize=(width, 3.8))
+        fig, (a, b) = plt.subplots(2, 1, figsize=(width, 2.9))
     else:
-        fig, (a, b) = plt.subplots(1, 2, figsize=(width, 2.9),
+        fig, (a, b) = plt.subplots(1, 2, figsize=(width, 2.1), sharey=True,
                                    gridspec_kw={"width_ratios": [1.35, 1]})
-    draw_frontier(a); a.invert_xaxis()
-    a.set_title("(a) Full frontier", fontsize=9)
-    draw_frontier(b, xlim=(10, -0.4), label_lams=(2000, 3500))
-    b.set_title("(b) Low-emissions region", fontsize=9)
-    for ax in (a, b):
-        ax.set_xlabel("Residual Scope 1 emissions [tCO$_2$/yr]"
-                      "\n(cap tightened $\\rightarrow$)")
-        ax.set_ylabel("Incremental annual\nsystem cost [kCAD/yr]")
-    a.legend(loc="upper left", handlelength=1.6)
-    fig.subplots_adjust(hspace=0.78, wspace=0.30)
+    draw_frontier(a, label_pos={200: (14.5, 8.5), 2000: (11.0, 14.5)})
+    a.invert_xaxis()
+    a.set_title("(a) Full frontier", fontsize=8.5)
+    draw_frontier(b, xlim=(10, -0.4), label_lams=(2000, 3500),
+                  label_pos={3500: (4.0, 28.0)})
+    b.set_title("(b) Low-emissions region", fontsize=8.5)
+    a.set_ylabel("Incremental annual\nsystem cost [kCAD/yr]")
+    if width < 5:
+        # stacked layout: one x-label for both panels, compact legend
+        b.set_xlabel("Residual Scope 1 emissions [tCO$_2$/yr] "
+                     "(cap tightened $\\rightarrow$)", fontsize=8)
+        b.set_ylabel("Incremental annual\nsystem cost [kCAD/yr]")
+        a.legend(loc="upper left", handlelength=1.1, fontsize=6.2,
+                 labelspacing=0.25, borderaxespad=0.15)
+        fig.subplots_adjust(hspace=0.42)
+    else:
+        for ax in (a, b):
+            ax.set_xlabel("Residual Scope 1 emissions [tCO$_2$/yr]"
+                          "\n(cap tightened $\\rightarrow$)")
+        b.tick_params(labelleft=False)
+        a.legend(loc="upper left", handlelength=1.6)
+        fig.subplots_adjust(wspace=0.10)
     save(fig, name)
 
 fig2(3.5, "fig2_1col")
@@ -304,16 +321,17 @@ SENS_LBL = ["FFH O&M 0.5 kCAD/yr", "FFH O&M 2 kCAD/yr",
             "Battery 100 CAD/kWh", "Battery 50 CAD/kWh"]
 
 def fig5(width, name):
+    # two panels: certified cost interval and fleet composition. The diesel
+    # response is tabulated in the supplementary sensitivity table.
     y = np.arange(len(sens_order))
     lo = [(sens[k]["lb"] - base["obj"]) / 1e3 for k in sens_order]
     hi = [(sens[k]["obj"] - base["lb"]) / 1e3 for k in sens_order]
     mid = [(a + b) / 2 for a, b in zip(lo, hi)]
     err = [(b - a) / 2 for a, b in zip(lo, hi)]
-    diesel = [sens[k]["diesel_L"] / 1e3 for k in sens_order]
     if width < 5:
-        fig, (a, b, c) = plt.subplots(3, 1, figsize=(width, 4.3))
+        fig, (a, c) = plt.subplots(2, 1, figsize=(width, 2.8))
     else:
-        fig, (a, b, c) = plt.subplots(1, 3, figsize=(width, 2.7), sharey=True)
+        fig, (a, c) = plt.subplots(1, 2, figsize=(width, 2.15), sharey=True)
     a.errorbar(mid, y, xerr=err, fmt="o", color=BLUE, ms=MS - 1,
                elinewidth=LW_ERR, capsize=2.6)
     a.axvline(0, color=GRAY, lw=LW_REF, ls="--")
@@ -321,18 +339,7 @@ def fig5(width, name):
     a.invert_yaxis()
     a.set_xlabel("$\\Delta$ annual cost [kCAD/yr]")
     a.grid(axis="x"); a.grid(axis="y", visible=False)
-    b.barh(y, diesel, 0.55, color=TEAL, edgecolor="white", lw=0.5)
-    b.axvline(base["diesel_L"] / 1e3, color=GRAY, lw=LW_REF, ls="--")
-    b.annotate("baseline", (base["diesel_L"] / 1e3, -0.62),
-               fontsize=7.5, color=GRAY, ha="center", va="bottom",
-               annotation_clip=False)
-    if width < 5:
-        b.set_yticks(y, SENS_LBL, fontsize=7.5)
-    b.invert_yaxis() if width < 5 else None
-    b.set_xlabel("Diesel [10$^3$ L/yr]")
-    b.set_xlim(0, max(diesel) * 1.15)
-    b.grid(axis="x"); b.grid(axis="y", visible=False)
-    # (c) fleet composition: the specification is NOT invariant across these
+    # fleet composition: the specification is NOT invariant across these
     # cases, so it is plotted rather than asserted in an annotation
     def _n(k, ffh):
         return sum(v for nm, v in sens[k]["fleet"].items()
@@ -344,20 +351,30 @@ def fig5(width, name):
     c.barh(y + 0.19, next_, 0.36, color=ORANGE, edgecolor="white", lw=0.4,
            label="extended battery")
     c.axvline(18, color=GRAY, lw=LW_REF, ls="--")
-    c.set_yticks(y); c.tick_params(labelleft=False)
+    if width < 5:
+        c.set_yticks(y, SENS_LBL, fontsize=7.5)
+        c.invert_yaxis()
+        legend_y = -0.36
+    else:
+        c.set_yticks(y); c.tick_params(labelleft=False)
+        legend_y = -0.34
     c.set_xlabel("Buses [-]")
     c.set_xlim(0, 21)
-    c.legend(loc="upper center", bbox_to_anchor=(0.5, -0.28), ncol=2,
+    c.legend(loc="upper center", bbox_to_anchor=(0.5, legend_y), ncol=2,
              fontsize=6.5, frameon=False, handlelength=1.2,
              columnspacing=1.0)
     c.grid(axis="x"); c.grid(axis="y", visible=False)
-    panel_label(a, "(a)")
-    panel_label(b, "(b)")
-    panel_label(c, "(c)")
     if width < 5:
-        fig.subplots_adjust(hspace=0.75, left=0.34, bottom=0.13)
+        # stacked layout: panel tags inside the axes (top-right corners are
+        # data-free), so only the x-label sits between the panels
+        for ax, tag in ((a, "(a)"), (c, "(b)")):
+            ax.text(0.985, 0.96, tag, transform=ax.transAxes, fontsize=9,
+                    fontweight="bold", va="top", ha="right")
+        fig.subplots_adjust(hspace=0.42, left=0.34, bottom=0.14)
     else:
-        fig.subplots_adjust(wspace=0.12, left=0.155, bottom=0.30, right=0.99)
+        panel_label(a, "(a)")
+        panel_label(c, "(b)")
+        fig.subplots_adjust(wspace=0.10, left=0.20, bottom=0.36, right=0.99)
     save(fig, name)
 
 fig5(3.5, "fig5_1col")
