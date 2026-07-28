@@ -1,5 +1,7 @@
 # Zero-Emission Heating Paradox — reproduction package
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21652815.svg)](https://doi.org/10.5281/zenodo.21652815)
+
 Code, inputs, results, and solver logs for:
 
 > **The Zero-Emission Heating Paradox: Stochastic Planning and Operation of
@@ -156,6 +158,16 @@ empirical models from scratch (`fit_v5_inputs.py`) requires it.
 
 Python 3.9+, `gurobipy` 11.x (licence needed only for re-solving),
 `numpy`, `pandas`, `matplotlib`.
+
+## Citing
+
+Please cite the manuscript (title above; reference details in
+`CITATION.cff`) and the archived snapshot of this repository:
+
+* Submission snapshot v1.0.1 — DOI
+  [10.5281/zenodo.21652816](https://doi.org/10.5281/zenodo.21652816)
+* All versions (concept DOI) —
+  [10.5281/zenodo.21652815](https://doi.org/10.5281/zenodo.21652815)
 
 ## Licence
 

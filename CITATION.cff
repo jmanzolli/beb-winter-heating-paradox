@@ -4,9 +4,10 @@ message: >-
   and this repository.
 title: "Zero-Emission Heating Paradox: reproduction package"
 type: software
-version: v1.0.0
+version: v1.0.1
 date-released: 2026-07-28
 repository-code: "https://github.com/jmanzolli/beb-winter-heating-paradox"
+doi: 10.5281/zenodo.21652816
 license: MIT
 authors:
   - family-names: Manzolli
