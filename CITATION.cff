@@ -1,0 +1,43 @@
+cff-version: 1.2.0
+message: >-
+  If you use this code or these results, please cite the manuscript below
+  and this repository.
+title: "Zero-Emission Heating Paradox: reproduction package"
+type: software
+version: v1.0.0
+date-released: 2026-07-28
+repository-code: "https://github.com/jmanzolli/beb-winter-heating-paradox"
+license: MIT
+authors:
+  - family-names: Manzolli
+    given-names: Jônatas Augusto
+    orcid: "https://orcid.org/0000-0003-1043-6417"
+    affiliation: McGill University
+  - family-names: Liu
+    given-names: Qiujia
+    orcid: "https://orcid.org/0000-0003-4249-0039"
+    affiliation: McGill University
+  - family-names: Sun
+    given-names: Lijun
+    orcid: "https://orcid.org/0000-0001-9488-0712"
+    affiliation: McGill University
+  - family-names: Miranda-Moreno
+    given-names: Luis
+    orcid: "https://orcid.org/0000-0003-3322-1814"
+    affiliation: McGill University
+preferred-citation:
+  type: article
+  title: >-
+    The Zero-Emission Heating Paradox: Stochastic Planning and Operation of
+    Electric Bus Fleets in Cold Climates
+  authors:
+    - family-names: Manzolli
+      given-names: Jônatas Augusto
+    - family-names: Liu
+      given-names: Qiujia
+    - family-names: Sun
+      given-names: Lijun
+    - family-names: Miranda-Moreno
+      given-names: Luis
+  year: 2026
+  notes: Under review.

@@ -1,0 +1,13 @@
+{
+  "title": "Zero-Emission Heating Paradox: reproduction package",
+  "description": "Code, inputs, archived solver results, and logs reproducing every number, table, and figure of 'The Zero-Emission Heating Paradox: Stochastic Planning and Operation of Electric Bus Fleets in Cold Climates'. Two-stage stochastic MILP for cold-climate battery-electric bus fleet planning with fuel-fired-heater retention, EVSE-coupled preconditioning, emissions policy, and division-scale coordination.",
+  "creators": [
+    {"name": "Manzolli, Jônatas Augusto", "affiliation": "McGill University", "orcid": "0000-0003-1043-6417"},
+    {"name": "Liu, Qiujia", "affiliation": "McGill University", "orcid": "0000-0003-4249-0039"},
+    {"name": "Sun, Lijun", "affiliation": "McGill University", "orcid": "0000-0001-9488-0712"},
+    {"name": "Miranda-Moreno, Luis", "affiliation": "McGill University", "orcid": "0000-0003-3322-1814"}
+  ],
+  "license": "MIT",
+  "upload_type": "software",
+  "keywords": ["electric buses", "cold-climate transit", "stochastic programming", "fuel-fired heaters", "charging infrastructure", "MILP", "reproducibility"]
+}
