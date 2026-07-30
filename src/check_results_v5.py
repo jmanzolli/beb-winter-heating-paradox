@@ -16,7 +16,7 @@ import sys
 os.environ.setdefault("ROUTE_INPUTS", "route52_inputs_v5.json")
 import route52_prototype as R
 
-RES = "campaign_v5_results.json"
+RES = os.environ.get("CHECK_RES", "campaign_v5_results.json")
 TEX = os.environ.get("CHECK_TEX", "../Overleaf/main.tex")
 ABS_TOL = 1.0          # CAD
 REL_TOL = 1e-6
@@ -154,8 +154,9 @@ if fr:
 # 26. computational provenance exists, covers every run, and discloses which
 # runs lack a raw search log (user decision: keep the structured record and
 # disclose, rather than re-solving those runs for log capture)
-if os.path.exists("provenance_v5.json"):
-    prov = json.load(open("provenance_v5.json"))
+PROVF = os.environ.get("CHECK_PROV", "provenance_v5.json")
+if os.path.exists(PROVF):
+    prov = json.load(open(PROVF))
     ck("26a provenance_covers_runs",
        set(prov["runs"]) >= set(runs),
        f"({len(prov['runs'])} vs {len(runs)} runs)")

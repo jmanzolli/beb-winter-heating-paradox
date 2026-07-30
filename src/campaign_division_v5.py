@@ -145,9 +145,47 @@ def summarize(m, label, extra=None):
     return d
 
 
+def _apply_start(m, rec):
+    """MIP-start the first-stage variables from a stored case record.
+
+    DIV_START_FROM=<file>:<case> injects a known-good coordinated design
+    (e.g. case C, which is feasible for D by construction) so a re-run
+    does not depend on the root heuristic finding a usable incumbent.
+    """
+    h = m._handles
+    name2k = {bc.name: k for k, bc in enumerate(R.BUS_CLASSES)}
+    for k in range(len(R.BUS_CLASSES)):
+        h["x"][k].Start = 0
+    for name, cnt in rec["fleet"].items():
+        h["x"][name2k[name]].Start = cnt
+    for n in R.SITES:
+        for p in R.CH_CLASSES:
+            h["wch"][n, p].Start = 0
+            h["ysite"][n, p].Start = 0
+    for key, cnt in rec["chargers"].items():
+        n, p = key.split(":")
+        h["wch"][n, int(p)].Start = cnt
+        h["ysite"][n, int(p)].Start = 1
+    for n in R.SITES:
+        for j in range(len(R.GRID_TIERS)):
+            h["ygrid"][n, j].Start = 0
+        kw = rec.get("grid_kW", {}).get(n)
+        if kw:
+            for j, g in enumerate(R.GRID_TIERS):
+                if abs(g - kw) < 1e-6:
+                    h["ygrid"][n, j].Start = 1
+    print("MIP start injected from", rec["label"], flush=True)
+
+
 def solve_case(label, freeze_z=False, route_lock=False, tlim=TLIM):
     m = R.build_model(carbon_price_t=LAM, fix_fleet_total=True,
                       diff_objective=True)
+    sf = os.environ.get("DIV_START_FROM")
+    if sf and not route_lock:
+        fn, case = sf.rsplit(":", 1)
+        rec0 = json.load(open(fn))["cases"].get(case)
+        if rec0:
+            _apply_start(m, rec0)
     if freeze_z:
         W = list(R.SCEN.keys())
         z0 = m._scen[W[0]]["z"]

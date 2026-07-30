@@ -1,0 +1,116 @@
+{
+ "design_label": "eps_0.00",
+ "design": {
+  "NF-std-eOnly": 14,
+  "NF-ext-eOnly": 4
+ },
+ "chargers": {
+  "depot:100": 9,
+  "lawrenceStn:300": 1
+ },
+ "n_per_band": 1000,
+ "seed": 20260725,
+ "traction_residuals": {
+  "n_bus_days": 1377,
+  "unit": "one telemetry row = one bus-day (median 13 h, 184 km)",
+  "mean_ratio": 0.9934,
+  "sd_ratio": 0.0762,
+  "p05": 0.881,
+  "p95": 1.117,
+  "cold_subset_n": 50,
+  "cold_mean_ratio": 1.0176,
+  "cold_sd_ratio": 0.0693,
+  "source": "route-band interface (v7) evaluated on Route 52 runs"
+ },
+ "levels": {
+  "heat_cv_0.00": {
+   "mild": {
+    "T": 2.5,
+    "days": 45,
+    "n": 1000,
+    "n_solved": 1000,
+    "n_unsolved": 0,
+    "unsolved_status": null,
+    "p_all_trips_served": 0.995,
+    "p_soc_floor_ok": 0.998,
+    "reserve_setting_kWh": 10.0,
+    "expected_shortfall_kWh": 0.143,
+    "p95_shortfall_kWh": 0.0,
+    "min_reserve_p05": 48.11,
+    "min_reserve_median": 78.05,
+    "mean_blocks_infeasible": 0.002
+   },
+   "cold": {
+    "T": -2.5,
+    "days": 45,
+    "n": 1000,
+    "n_solved": 1000,
+    "n_unsolved": 0,
+    "unsolved_status": null,
+    "p_all_trips_served": 0.983,
+    "p_soc_floor_ok": 0.997,
+    "reserve_setting_kWh": 10.0,
+    "expected_shortfall_kWh": 0.159,
+    "p95_shortfall_kWh": 0.0,
+    "min_reserve_p05": 22.82,
+    "min_reserve_median": 54.28,
+    "mean_blocks_infeasible": 0.003
+   },
+   "verycold": {
+    "T": -7.5,
+    "days": 36,
+    "n": 1000,
+    "n_solved": 1000,
+    "n_unsolved": 0,
+    "unsolved_status": null,
+    "p_all_trips_served": 0.875,
+    "p_soc_floor_ok": 0.968,
+    "reserve_setting_kWh": 10.0,
+    "expected_shortfall_kWh": 1.779,
+    "p95_shortfall_kWh": 4.691,
+    "min_reserve_p05": 5.49,
+    "min_reserve_median": 24.21,
+    "mean_blocks_infeasible": 0.032
+   },
+   "extreme": {
+    "T": -12.5,
+    "days": 19,
+    "n": 1000,
+    "n_solved": 1000,
+    "n_unsolved": 0,
+    "unsolved_status": null,
+    "p_all_trips_served": 0.804,
+    "p_soc_floor_ok": 0.994,
+    "reserve_setting_kWh": 10.0,
+    "expected_shortfall_kWh": 0.99,
+    "p95_shortfall_kWh": 3.648,
+    "min_reserve_p05": 7.01,
+    "min_reserve_median": 17.4,
+    "mean_blocks_infeasible": 0.006
+   },
+   "severe": {
+    "T": -17.5,
+    "days": 6,
+    "n": 1000,
+    "n_solved": 1000,
+    "n_unsolved": 0,
+    "unsolved_status": null,
+    "p_all_trips_served": 0.584,
+    "p_soc_floor_ok": 0.925,
+    "reserve_setting_kWh": 10.0,
+    "expected_shortfall_kWh": 5.25,
+    "p95_shortfall_kWh": 25.445,
+    "min_reserve_p05": -6.15,
+    "min_reserve_median": 11.4,
+    "mean_blocks_infeasible": 0.08
+   },
+   "winter_weighted": {
+    "p_day_fully_served": 0.9225,
+    "expected_shortfall_kWh_per_winter": 127.9
+   }
+  }
+ },
+ "method": "empirical block-day traction residuals (out of sample) plus parametric lognormal cabin-heat stress levels; design and day-ahead assignment fixed; dispatch re-optimized; penalized slack measures shortfall",
+ "heat_uncertainty_note": "cabin-heat dispersion is a declared stress level, not an empirical estimate: FFH output is unmetered and Route 52 electric-heating runtime is a median 0.11 h/day, so no delivered-heat residual can be formed",
+ "minutes": 23.8
+}

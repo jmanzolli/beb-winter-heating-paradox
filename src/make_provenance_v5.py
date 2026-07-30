@@ -19,9 +19,9 @@ Usage: python3 make_provenance_v5.py
 import json
 import os
 
-RES = "campaign_v5_results.json"
+RES = os.environ.get("PROV_RES", "campaign_v5_results.json")
 LOGDIR = "logs_v5"
-OUT = "provenance_v5.json"
+OUT = os.environ.get("PROV_OUT", "provenance_v5.json")
 MIN_LINES = 20
 
 

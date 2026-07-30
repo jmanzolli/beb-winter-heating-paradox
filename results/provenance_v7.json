@@ -1,0 +1,482 @@
+{
+ "runs": {
+  "econ_lam0": {
+   "archive_level": "search_log",
+   "log_lines": 1511,
+   "incumbent": 2372454.2,
+   "lower_bound": 2372112.9,
+   "abs_gap": 341.3,
+   "rel_gap": 0.000144,
+   "runtime_s": 225.7,
+   "status": 2,
+   "phase2_log": null
+  },
+  "policy_lam100": {
+   "archive_level": "search_log",
+   "log_lines": 363,
+   "incumbent": 2375358.7,
+   "lower_bound": 2374675.5,
+   "abs_gap": 683.2,
+   "rel_gap": 0.000288,
+   "runtime_s": 943.7,
+   "status": 2,
+   "phase2_log": null
+  },
+  "policy_lam100_ops": {
+   "archive_level": "search_log",
+   "log_lines": 52,
+   "incumbent": 2375560.9,
+   "lower_bound": 2374675.5,
+   "abs_gap": 885.4,
+   "rel_gap": 0.000373,
+   "runtime_s": 0.6,
+   "status": 2,
+   "phase2_log": null
+  },
+  "eps_1.00": {
+   "archive_level": "search_log",
+   "log_lines": 372,
+   "incumbent": 2373019.4,
+   "lower_bound": 2372112.9,
+   "abs_gap": 906.5,
+   "rel_gap": 0.000382,
+   "runtime_s": 1800.3,
+   "status": 9,
+   "phase2_log": true
+  },
+  "eps_0.70": {
+   "archive_level": "search_log",
+   "log_lines": 393,
+   "incumbent": 2375549.2,
+   "lower_bound": 2374595.1,
+   "abs_gap": 954.1,
+   "rel_gap": 0.000402,
+   "runtime_s": 1800.1,
+   "status": 9,
+   "phase2_log": true
+  },
+  "eps_0.50": {
+   "archive_level": "search_log",
+   "log_lines": 249,
+   "incumbent": 2375896.7,
+   "lower_bound": 2375549.2,
+   "abs_gap": 347.5,
+   "rel_gap": 0.000146,
+   "runtime_s": 1661.6,
+   "status": 2,
+   "phase2_log": true
+  },
+  "eps_0.35": {
+   "archive_level": "search_log",
+   "log_lines": 922,
+   "incumbent": 2376903.7,
+   "lower_bound": 2376817.2,
+   "abs_gap": 86.6,
+   "rel_gap": 3.6e-05,
+   "runtime_s": 622.9,
+   "status": 2,
+   "phase2_log": true
+  },
+  "eps_0.20": {
+   "archive_level": "search_log",
+   "log_lines": 2371,
+   "incumbent": 2390651.9,
+   "lower_bound": 2383361.4,
+   "abs_gap": 7290.5,
+   "rel_gap": 0.00305,
+   "runtime_s": 1800.1,
+   "status": 9,
+   "phase2_log": true
+  },
+  "eps_0.10": {
+   "archive_level": "search_log",
+   "log_lines": 378,
+   "incumbent": 2394437.2,
+   "lower_bound": 2393466.6,
+   "abs_gap": 970.6,
+   "rel_gap": 0.000405,
+   "runtime_s": 1800.1,
+   "status": 9,
+   "phase2_log": true
+  },
+  "eps_0.00": {
+   "archive_level": "search_log",
+   "log_lines": 2306,
+   "incumbent": 2408069.7,
+   "lower_bound": 2407658.2,
+   "abs_gap": 411.5,
+   "rel_gap": 0.000171,
+   "runtime_s": 0.1,
+   "status": 2,
+   "phase2_log": true
+  },
+  "lam_200": {
+   "archive_level": "search_log",
+   "log_lines": 352,
+   "incumbent": 2378071.3,
+   "lower_bound": 2377142.0,
+   "abs_gap": 929.2,
+   "rel_gap": 0.000391,
+   "runtime_s": 689.6,
+   "status": 2,
+   "phase2_log": null
+  },
+  "lam_500": {
+   "archive_level": "search_log",
+   "log_lines": 319,
+   "incumbent": 2381148.9,
+   "lower_bound": 2380811.3,
+   "abs_gap": 337.5,
+   "rel_gap": 0.000142,
+   "runtime_s": 692.5,
+   "status": 2,
+   "phase2_log": null
+  },
+  "lam_1000": {
+   "archive_level": "search_log",
+   "log_lines": 384,
+   "incumbent": 2386057.9,
+   "lower_bound": 2385716.9,
+   "abs_gap": 341.1,
+   "rel_gap": 0.000143,
+   "runtime_s": 706.0,
+   "status": 2,
+   "phase2_log": null
+  },
+  "lam_2000": {
+   "archive_level": "search_log",
+   "log_lines": 613,
+   "incumbent": 2395786.8,
+   "lower_bound": 2394317.1,
+   "abs_gap": 1469.7,
+   "rel_gap": 0.000613,
+   "runtime_s": 3600.4,
+   "status": 9,
+   "phase2_log": null
+  },
+  "lam_3500": {
+   "archive_level": "search_log",
+   "log_lines": 400,
+   "incumbent": 2399332.2,
+   "lower_bound": 2398344.7,
+   "abs_gap": 987.5,
+   "rel_gap": 0.000412,
+   "runtime_s": 1222.8,
+   "status": 2,
+   "phase2_log": null
+  },
+  "lam_5000": {
+   "archive_level": "search_log",
+   "log_lines": 774,
+   "incumbent": 2400995.8,
+   "lower_bound": 2399072.6,
+   "abs_gap": 1923.2,
+   "rel_gap": 0.000801,
+   "runtime_s": 3600.2,
+   "status": 9,
+   "phase2_log": null
+  },
+  "lam_10000": {
+   "archive_level": "search_log",
+   "log_lines": 1239,
+   "incumbent": 2404482.4,
+   "lower_bound": 2401498.9,
+   "abs_gap": 2983.5,
+   "rel_gap": 0.001241,
+   "runtime_s": 7200.2,
+   "status": 9,
+   "phase2_log": null
+  },
+  "bp_lam_154": {
+   "archive_level": "search_log",
+   "log_lines": 484,
+   "incumbent": 2376669.3,
+   "lower_bound": 2376057.7,
+   "abs_gap": 611.6,
+   "rel_gap": 0.000257,
+   "runtime_s": 1747.7,
+   "status": 2,
+   "phase2_log": null
+  },
+  "bp_lam_915": {
+   "archive_level": "search_log",
+   "log_lines": 353,
+   "incumbent": 2385417.1,
+   "lower_bound": 2384883.0,
+   "abs_gap": 534.1,
+   "rel_gap": 0.000224,
+   "runtime_s": 458.2,
+   "status": 2,
+   "phase2_log": null
+  },
+  "bp_lam_2051": {
+   "archive_level": "search_log",
+   "log_lines": 755,
+   "incumbent": 2397596.7,
+   "lower_bound": 2394056.9,
+   "abs_gap": 3539.9,
+   "rel_gap": 0.001476,
+   "runtime_s": 3600.1,
+   "status": 9,
+   "phase2_log": null
+  },
+  "det_meanT": {
+   "archive_level": "search_log",
+   "log_lines": 800,
+   "incumbent": 2347542.5,
+   "lower_bound": 2345697.8,
+   "abs_gap": 1844.7,
+   "rel_gap": 0.000786,
+   "runtime_s": 3600.0,
+   "status": 9,
+   "phase2_log": null
+  },
+  "det_design_full_test": {
+   "archive_level": "search_log",
+   "log_lines": 34,
+   "incumbent": null,
+   "lower_bound": null,
+   "abs_gap": null,
+   "rel_gap": null,
+   "runtime_s": null,
+   "status": 3,
+   "phase2_log": null
+  },
+  "frozen_z": {
+   "archive_level": "search_log",
+   "log_lines": 503,
+   "incumbent": 2375298.1,
+   "lower_bound": 2374304.8,
+   "abs_gap": 993.4,
+   "rel_gap": 0.000418,
+   "runtime_s": 1676.1,
+   "status": 2,
+   "phase2_log": null
+  },
+  "n_minus_1": {
+   "archive_level": "search_log",
+   "log_lines": 46,
+   "incumbent": 2394377.7,
+   "lower_bound": 2393795.4,
+   "abs_gap": 582.4,
+   "rel_gap": 0.000243,
+   "runtime_s": 0.3,
+   "status": 2,
+   "phase2_log": null
+  },
+  "ffh_om_500": {
+   "archive_level": "search_log",
+   "log_lines": 286,
+   "incumbent": 2366319.5,
+   "lower_bound": 2365430.0,
+   "abs_gap": 889.5,
+   "rel_gap": 0.000376,
+   "runtime_s": 406.9,
+   "status": 2,
+   "phase2_log": null
+  },
+  "ffh_om_2000": {
+   "archive_level": "search_log",
+   "log_lines": 360,
+   "incumbent": 2393566.3,
+   "lower_bound": 2392675.5,
+   "abs_gap": 890.8,
+   "rel_gap": 0.000372,
+   "runtime_s": 1242.1,
+   "status": 2,
+   "phase2_log": null
+  },
+  "grid_100": {
+   "archive_level": "search_log",
+   "log_lines": 263,
+   "incumbent": 2373154.8,
+   "lower_bound": 2372340.8,
+   "abs_gap": 814.0,
+   "rel_gap": 0.000343,
+   "runtime_s": 482.3,
+   "status": 2,
+   "phase2_log": null
+  },
+  "grid_300": {
+   "archive_level": "search_log",
+   "log_lines": 322,
+   "incumbent": 2377099.0,
+   "lower_bound": 2376680.5,
+   "abs_gap": 418.5,
+   "rel_gap": 0.000176,
+   "runtime_s": 455.2,
+   "status": 2,
+   "phase2_log": null
+  },
+  "batt_100": {
+   "archive_level": "search_log",
+   "log_lines": 417,
+   "incumbent": 2375148.7,
+   "lower_bound": 2374675.5,
+   "abs_gap": 473.2,
+   "rel_gap": 0.000199,
+   "runtime_s": 1235.8,
+   "status": 2,
+   "phase2_log": null
+  },
+  "batt_50": {
+   "archive_level": "search_log",
+   "log_lines": 378,
+   "incumbent": 2375425.9,
+   "lower_bound": 2374427.9,
+   "abs_gap": 998.1,
+   "rel_gap": 0.00042,
+   "runtime_s": 1368.5,
+   "status": 2,
+   "phase2_log": null
+  },
+  "derate_mild": {
+   "archive_level": "search_log",
+   "log_lines": 427,
+   "incumbent": 2374472.4,
+   "lower_bound": 2373515.3,
+   "abs_gap": 957.2,
+   "rel_gap": 0.000403,
+   "runtime_s": 1367.4,
+   "status": 2,
+   "phase2_log": null
+  },
+  "derate_harsh": {
+   "archive_level": "search_log",
+   "log_lines": 205,
+   "incumbent": 2375271.2,
+   "lower_bound": 2374675.5,
+   "abs_gap": 595.6,
+   "rel_gap": 0.000251,
+   "runtime_s": 380.9,
+   "status": 2,
+   "phase2_log": null
+  },
+  "reserve_25": {
+   "archive_level": "search_log",
+   "log_lines": 271,
+   "incumbent": 2375281.8,
+   "lower_bound": 2374675.5,
+   "abs_gap": 606.2,
+   "rel_gap": 0.000255,
+   "runtime_s": 805.3,
+   "status": 2,
+   "phase2_log": null
+  },
+  "reserve_50": {
+   "archive_level": "search_log",
+   "log_lines": 832,
+   "incumbent": 2377238.6,
+   "lower_bound": 2376219.9,
+   "abs_gap": 1018.8,
+   "rel_gap": 0.000429,
+   "runtime_s": 3600.1,
+   "status": 9,
+   "phase2_log": null
+  },
+  "spare_15": {
+   "archive_level": "search_log",
+   "log_lines": 367,
+   "incumbent": 2830372.6,
+   "lower_bound": 2829875.5,
+   "abs_gap": 497.1,
+   "rel_gap": 0.000176,
+   "runtime_s": 934.6,
+   "status": 2,
+   "phase2_log": null
+  },
+  "precond_tau_0.25": {
+   "archive_level": "search_log",
+   "log_lines": 313,
+   "incumbent": 2375970.5,
+   "lower_bound": 2375317.7,
+   "abs_gap": 652.9,
+   "rel_gap": 0.000275,
+   "runtime_s": 795.9,
+   "status": 2,
+   "phase2_log": null
+  },
+  "precond_tau_1.0": {
+   "archive_level": "search_log",
+   "log_lines": 283,
+   "incumbent": 2374815.3,
+   "lower_bound": 2374088.6,
+   "abs_gap": 726.7,
+   "rel_gap": 0.000306,
+   "runtime_s": 270.3,
+   "status": 2,
+   "phase2_log": null
+  },
+  "ffh_capex_5000": {
+   "archive_level": "search_log",
+   "log_lines": 401,
+   "incumbent": 2385478.9,
+   "lower_bound": 2384827.5,
+   "abs_gap": 651.4,
+   "rel_gap": 0.000273,
+   "runtime_s": 1285.9,
+   "status": 2,
+   "phase2_log": null
+  },
+  "ffh_capex_15000": {
+   "archive_level": "search_log",
+   "log_lines": 821,
+   "incumbent": 2399038.7,
+   "lower_bound": 2398020.4,
+   "abs_gap": 1018.4,
+   "rel_gap": 0.000424,
+   "runtime_s": 3600.1,
+   "status": 9,
+   "phase2_log": null
+  },
+  "econ_lam0_ops": {
+   "archive_level": "search_log",
+   "log_lines": 52,
+   "incumbent": 2372912.9,
+   "lower_bound": 2372112.9,
+   "abs_gap": 800.0,
+   "rel_gap": 0.000337,
+   "runtime_s": 0.6,
+   "status": 2,
+   "phase2_log": null
+  }
+ },
+ "summary": {
+  "n_runs": 40,
+  "with_search_log": 40,
+  "record_only": 0
+ },
+ "hardware": {
+  "machine": "Apple M1 Pro / Intel Xeon Gold 6138",
+  "cores": "8 / 80",
+  "ram_gb": "16 / 282",
+  "os": "macOS 26.5 / Ubuntu 18.04 LTS",
+  "hosts": [
+   "manager.inescc.pt",
+   "unknown"
+  ],
+  "note": "baseline, frontier and carbon-price runs on the laptop; sensitivity, refinement and division-scale runs on the compute server"
+ },
+ "solver": {
+  "name": "Gurobi",
+  "version": [
+   11,
+   0,
+   3
+  ],
+  "interface": "gurobipy, Python 3.9.13",
+  "threads": "6 (laptop) / 16-24 (server)",
+  "params_changed": {
+   "MIPGapAbs": 1000.0,
+   "TimeLimit": "3600 s (7200 s for hard cap and price points)",
+   "Threads": "6 / 16-24",
+   "NodefileStart": "1 GB (tree spilled to disk)",
+   "NodefileDir": "gurobi_nodefiles",
+   "SoftMemLimit": "11 GB",
+   "LogToConsole": 0
+  },
+  "seed": "default (not varied)",
+  "mip_start": "recorded design used as warm start in the frontier refinement pass"
+ },
+ "disclosure": "Solver logs are archived for all 40 of 40 runs."
+}

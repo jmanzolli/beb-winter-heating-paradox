@@ -1,0 +1,886 @@
+{
+ "traction": {
+  "a0": 0.66058,
+  "a1_cold": 0.00742,
+  "a2_speed": 0.00159,
+  "T_ref": 5.0,
+  "fit_runs": 13757,
+  "fit_R2": 0.117,
+  "fit_note": "full sample (all routes)"
+ },
+ "branches": {
+  "r35_N0": {
+   "east": {
+    "dist_km": 13.26,
+    "dur_min": 43.9,
+    "speed_kmh": 18.1,
+    "stops": 43,
+    "layover_min": 11.2,
+    "headway_min": 23.0
+   },
+   "west": {
+    "dist_km": 13.69,
+    "dur_min": 42.9,
+    "speed_kmh": 19.1,
+    "stops": 43,
+    "layover_min": 6.6,
+    "headway_min": 23.3
+   },
+   "site_east": "pioneerVillage",
+   "site_west": "mountDennisStn",
+   "n_buses": 5
+  },
+  "r35_N1": {
+   "east": {
+    "dist_km": 14.45,
+    "dur_min": 47.5,
+    "speed_kmh": 18.3,
+    "stops": 48,
+    "layover_min": 7.2,
+    "headway_min": 18.0
+   },
+   "west": {
+    "dist_km": 14.98,
+    "dur_min": 45.8,
+    "speed_kmh": 19.6,
+    "stops": 49,
+    "layover_min": 6.4,
+    "headway_min": 18.0
+   },
+   "site_east": "pioneerVillage",
+   "site_west": "mountDennisStn",
+   "n_buses": 6
+  },
+  "r36_E0": {
+   "east": {
+    "dist_km": 7.36,
+    "dur_min": 21.5,
+    "speed_kmh": 20.5,
+    "stops": 22,
+    "layover_min": 3.6,
+    "headway_min": 11.0
+   },
+   "west": {
+    "dist_km": 7.04,
+    "dur_min": 18.6,
+    "speed_kmh": 22.7,
+    "stops": 21,
+    "layover_min": 4.0,
+    "headway_min": 11.0
+   },
+   "site_east": "finchStn",
+   "site_west": "finchWestStn",
+   "n_buses": 5
+  },
+  "r52_E0": {
+   "east": {
+    "dist_km": 19.32,
+    "dur_min": 58.2,
+    "speed_kmh": 19.9,
+    "stops": 59,
+    "layover_min": 6.1,
+    "headway_min": 20.2
+   },
+   "west": {
+    "dist_km": 20.17,
+    "dur_min": 63.7,
+    "speed_kmh": 19.0,
+    "stops": 61,
+    "layover_min": 0.0,
+    "headway_min": 20.2
+   },
+   "site_east": "lawrenceStn",
+   "site_west": "pearson",
+   "n_buses": 7
+  },
+  "r52_E1": {
+   "east": {
+    "dist_km": 23.63,
+    "dur_min": 75.2,
+    "speed_kmh": 18.9,
+    "stops": 73,
+    "layover_min": 6.7,
+    "headway_min": 22.6
+   },
+   "west": {
+    "dist_km": 23.8,
+    "dur_min": 77.9,
+    "speed_kmh": 18.3,
+    "stops": 80,
+    "layover_min": 12.0,
+    "headway_min": 21.9
+   },
+   "site_east": "lawrenceStn",
+   "site_west": "westwood",
+   "n_buses": 8
+  },
+  "r52_E2": {
+   "east": {
+    "dist_km": 21.94,
+    "dur_min": 63.2,
+    "speed_kmh": 20.8,
+    "stops": 65,
+    "layover_min": 5.8,
+    "headway_min": 21.8
+   },
+   "west": {
+    "dist_km": 21.99,
+    "dur_min": 65.5,
+    "speed_kmh": 20.1,
+    "stops": 72,
+    "layover_min": 5.8,
+    "headway_min": 21.7
+   },
+   "site_east": "lawrenceStn",
+   "site_west": "victoryMcNaughton",
+   "n_buses": 7
+  },
+  "r52_E3": {
+   "east": {
+    "dist_km": 11.24,
+    "dur_min": 37.1,
+    "speed_kmh": 18.2,
+    "stops": 41,
+    "layover_min": 7.4,
+    "headway_min": 21.9
+   },
+   "west": {
+    "dist_km": 11.93,
+    "dur_min": 38.4,
+    "speed_kmh": 18.6,
+    "stops": 43,
+    "layover_min": 3.5,
+    "headway_min": 21.8
+   },
+   "site_east": "lawrenceWestStn",
+   "site_west": "martinGrove",
+   "n_buses": 4
+  },
+  "r52_E4": {
+   "east": {
+    "dist_km": 11.19,
+    "dur_min": 42.2,
+    "speed_kmh": 15.9,
+    "stops": 42,
+    "layover_min": 6.0,
+    "headway_min": 19.6
+   },
+   "west": {
+    "dist_km": 11.65,
+    "dur_min": 49.8,
+    "speed_kmh": 14.0,
+    "stops": 43,
+    "layover_min": 4.9,
+    "headway_min": 20.2
+   },
+   "site_east": "lawrenceStn",
+   "site_west": "none",
+   "n_buses": 6
+  },
+  "r84_E0": {
+   "east": {
+    "dist_km": 12.85,
+    "dur_min": 34.1,
+    "speed_kmh": 22.6,
+    "stops": 39,
+    "layover_min": 6.1,
+    "headway_min": 13.4
+   },
+   "west": {
+    "dist_km": 13.55,
+    "dur_min": 36.0,
+    "speed_kmh": 22.6,
+    "stops": 41,
+    "layover_min": 4.2,
+    "headway_min": 13.8
+   },
+   "site_east": "sheppardYongeStn",
+   "site_west": "none",
+   "n_buses": 6
+  },
+  "r96_E0": {
+   "east": {
+    "dist_km": 23.0,
+    "dur_min": 67.1,
+    "speed_kmh": 20.6,
+    "stops": 67,
+    "layover_min": 4.7,
+    "headway_min": 20.3
+   },
+   "west": {
+    "dist_km": 22.69,
+    "dur_min": 61.3,
+    "speed_kmh": 22.2,
+    "stops": 71,
+    "layover_min": 12.5,
+    "headway_min": 43.1
+   },
+   "site_east": "yorkMillsStn",
+   "site_west": "none",
+   "n_buses": 8
+  },
+  "r96_E1": {
+   "east": {
+    "dist_km": 23.73,
+    "dur_min": 67.7,
+    "speed_kmh": 21.0,
+    "stops": 72,
+    "layover_min": 4.9,
+    "headway_min": 16.7
+   },
+   "west": {
+    "dist_km": 23.32,
+    "dur_min": 64.0,
+    "speed_kmh": 21.9,
+    "stops": 74,
+    "layover_min": 8.8,
+    "headway_min": 17.1
+   },
+   "site_east": "yorkMillsStn",
+   "site_west": "none",
+   "n_buses": 9
+  },
+  "r96_E2": {
+   "east": {
+    "dist_km": 24.52,
+    "dur_min": 69.9,
+    "speed_kmh": 21.1,
+    "stops": 72,
+    "layover_min": 5.2,
+    "headway_min": 14.9
+   },
+   "west": {
+    "dist_km": 24.22,
+    "dur_min": 68.8,
+    "speed_kmh": 21.1,
+    "stops": 77,
+    "layover_min": 5.4,
+    "headway_min": 15.0
+   },
+   "site_east": "yorkMillsStn",
+   "site_west": "none",
+   "n_buses": 11
+  },
+  "r99_N0": {
+   "east": {
+    "dist_km": 4.79,
+    "dur_min": 12.7,
+    "speed_kmh": 22.7,
+    "stops": 15,
+    "layover_min": 4.2,
+    "headway_min": 16.2
+   },
+   "west": {
+    "dist_km": 4.79,
+    "dur_min": 12.7,
+    "speed_kmh": 22.7,
+    "stops": 15,
+    "layover_min": 4.2,
+    "headway_min": 16.2
+   },
+   "site_east": "none",
+   "site_west": "none",
+   "n_buses": 3
+  },
+  "r99_N1": {
+   "east": {
+    "dist_km": 3.35,
+    "dur_min": 5.6,
+    "speed_kmh": 35.8,
+    "stops": 8,
+    "layover_min": 7.4,
+    "headway_min": 16.3
+   },
+   "west": {
+    "dist_km": 3.35,
+    "dur_min": 5.6,
+    "speed_kmh": 35.8,
+    "stops": 8,
+    "layover_min": 7.4,
+    "headway_min": 16.3
+   },
+   "site_east": "none",
+   "site_west": "none",
+   "n_buses": 2
+  },
+  "r108_E0": {
+   "east": {
+    "dist_km": 12.83,
+    "dur_min": 34.6,
+    "speed_kmh": 22.2,
+    "stops": 37,
+    "layover_min": 7.9,
+    "headway_min": 24.5
+   },
+   "west": {
+    "dist_km": 13.29,
+    "dur_min": 34.0,
+    "speed_kmh": 23.5,
+    "stops": 39,
+    "layover_min": 7.4,
+    "headway_min": 24.4
+   },
+   "site_east": "sheppardWestStn",
+   "site_west": "pioneerVillage",
+   "n_buses": 4
+  },
+  "r108_E1": {
+   "east": {
+    "dist_km": 11.73,
+    "dur_min": 30.6,
+    "speed_kmh": 23.0,
+    "stops": 31,
+    "layover_min": 10.0,
+    "headway_min": 24.4
+   },
+   "west": {
+    "dist_km": 12.19,
+    "dur_min": 30.2,
+    "speed_kmh": 24.2,
+    "stops": 34,
+    "layover_min": 7.2,
+    "headway_min": 24.3
+   },
+   "site_east": "sheppardWestStn",
+   "site_west": "pioneerVillage",
+   "n_buses": 4
+  },
+  "r120_E0": {
+   "east": {
+    "dist_km": 8.67,
+    "dur_min": 26.6,
+    "speed_kmh": 19.5,
+    "stops": 30,
+    "layover_min": 6.7,
+    "headway_min": 27.8
+   },
+   "west": {
+    "dist_km": 8.83,
+    "dur_min": 25.6,
+    "speed_kmh": 20.7,
+    "stops": 30,
+    "layover_min": 5.5,
+    "headway_min": 27.2
+   },
+   "site_east": "wilsonStn",
+   "site_west": "none",
+   "n_buses": 3
+  },
+  "r165_E0": {
+   "east": {
+    "dist_km": 17.78,
+    "dur_min": 54.5,
+    "speed_kmh": 19.6,
+    "stops": 54,
+    "layover_min": 5.6,
+    "headway_min": 8.1
+   },
+   "west": {
+    "dist_km": 20.74,
+    "dur_min": 60.7,
+    "speed_kmh": 20.5,
+    "stops": 67,
+    "layover_min": 4.8,
+    "headway_min": 8.5
+   },
+   "site_east": "yorkMillsStn",
+   "site_west": "none",
+   "n_buses": 16
+  },
+  "r165_E1": {
+   "east": {
+    "dist_km": 17.77,
+    "dur_min": 40.8,
+    "speed_kmh": 26.1,
+    "stops": 54,
+    "layover_min": 5.0,
+    "headway_min": 10.2
+   },
+   "west": {
+    "dist_km": 17.77,
+    "dur_min": 40.8,
+    "speed_kmh": 26.1,
+    "stops": 54,
+    "layover_min": 5.0,
+    "headway_min": 10.2
+   },
+   "site_east": "yorkMillsStn",
+   "site_west": "yorkMillsStn",
+   "n_buses": 9
+  },
+  "r165_E2": {
+   "east": {
+    "dist_km": 4.86,
+    "dur_min": 14.4,
+    "speed_kmh": 20.3,
+    "stops": 17,
+    "layover_min": 1.0,
+    "headway_min": 68.5
+   },
+   "west": {
+    "dist_km": 4.86,
+    "dur_min": 14.4,
+    "speed_kmh": 20.3,
+    "stops": 17,
+    "layover_min": 1.0,
+    "headway_min": 68.5
+   },
+   "site_east": "none",
+   "site_west": "none",
+   "n_buses": 1
+  },
+  "r927_N0": {
+   "east": {
+    "dist_km": 15.03,
+    "dur_min": 23.2,
+    "speed_kmh": 38.9,
+    "stops": 5,
+    "layover_min": 9.4,
+    "headway_min": 26.4
+   },
+   "west": {
+    "dist_km": 15.32,
+    "dur_min": 20.5,
+    "speed_kmh": 44.9,
+    "stops": 5,
+    "layover_min": 5.5,
+    "headway_min": 26.7
+   },
+   "site_east": "humberCollege",
+   "site_west": "kiplingStn",
+   "n_buses": 3,
+   "windows": [
+    [
+     6.0,
+     10.0
+    ],
+    [
+     15.5,
+     19.0
+    ]
+   ]
+  },
+  "r927_N1": {
+   "east": {
+    "dist_km": 20.54,
+    "dur_min": 39.0,
+    "speed_kmh": 31.6,
+    "stops": 24,
+    "layover_min": 3.3,
+    "headway_min": 11.3
+   },
+   "west": {
+    "dist_km": 20.6,
+    "dur_min": 37.9,
+    "speed_kmh": 32.6,
+    "stops": 23,
+    "layover_min": 5.4,
+    "headway_min": 11.9
+   },
+   "site_east": "martinGrove",
+   "site_west": "kiplingStn",
+   "n_buses": 8,
+   "windows": [
+    [
+     6.0,
+     10.0
+    ],
+    [
+     15.5,
+     19.0
+    ]
+   ]
+  },
+  "r927_N2": {
+   "east": {
+    "dist_km": 16.61,
+    "dur_min": 32.3,
+    "speed_kmh": 30.9,
+    "stops": 12,
+    "layover_min": 4.5,
+    "headway_min": 15.9
+   },
+   "west": {
+    "dist_km": 16.23,
+    "dur_min": 26.6,
+    "speed_kmh": 36.6,
+    "stops": 10,
+    "layover_min": 4.9,
+    "headway_min": 15.0
+   },
+   "site_east": "humberCollege",
+   "site_west": "kiplingStn",
+   "n_buses": 5,
+   "windows": [
+    [
+     6.0,
+     10.0
+    ],
+    [
+     15.5,
+     19.0
+    ]
+   ]
+  },
+  "r935_N0": {
+   "east": {
+    "dist_km": 15.91,
+    "dur_min": 44.2,
+    "speed_kmh": 21.6,
+    "stops": 18,
+    "layover_min": 7.0,
+    "headway_min": 9.5
+   },
+   "west": {
+    "dist_km": 15.82,
+    "dur_min": 43.4,
+    "speed_kmh": 21.9,
+    "stops": 18,
+    "layover_min": 7.8,
+    "headway_min": 9.6
+   },
+   "site_east": "pioneerVillage",
+   "site_west": "janeStn",
+   "n_buses": 11,
+   "windows": [
+    [
+     6.0,
+     10.0
+    ],
+    [
+     15.5,
+     19.0
+    ]
+   ]
+  },
+  "r952_E0": {
+   "east": {
+    "dist_km": 19.32,
+    "dur_min": 62.7,
+    "speed_kmh": 18.5,
+    "stops": 21,
+    "layover_min": 6.3,
+    "headway_min": 20.8
+   },
+   "west": {
+    "dist_km": 19.32,
+    "dur_min": 62.7,
+    "speed_kmh": 18.5,
+    "stops": 21,
+    "layover_min": 6.3,
+    "headway_min": 20.8
+   },
+   "site_east": "lawrenceStn",
+   "site_west": "lawrenceStn",
+   "n_buses": 7,
+   "windows": [
+    [
+     6.0,
+     10.0
+    ],
+    [
+     15.5,
+     19.0
+    ]
+   ]
+  },
+  "r984_E0": {
+   "east": {
+    "dist_km": 13.7,
+    "dur_min": 38.9,
+    "speed_kmh": 21.1,
+    "stops": 15,
+    "layover_min": 4.5,
+    "headway_min": 21.0
+   },
+   "west": {
+    "dist_km": 13.7,
+    "dur_min": 38.9,
+    "speed_kmh": 21.1,
+    "stops": 15,
+    "layover_min": 4.5,
+    "headway_min": 21.0
+   },
+   "site_east": "none",
+   "site_west": "none",
+   "n_buses": 5,
+   "windows": [
+    [
+     6.0,
+     10.0
+    ],
+    [
+     15.5,
+     19.0
+    ]
+   ]
+  },
+  "r996_E0": {
+   "east": {
+    "dist_km": 35.92,
+    "dur_min": 102.2,
+    "speed_kmh": 21.1,
+    "stops": 44,
+    "layover_min": 7.4,
+    "headway_min": 10.9
+   },
+   "west": {
+    "dist_km": 35.26,
+    "dur_min": 103.8,
+    "speed_kmh": 20.4,
+    "stops": 44,
+    "layover_min": 3.7,
+    "headway_min": 11.0
+   },
+   "site_east": "scarbCentreStn",
+   "site_west": "none",
+   "n_buses": 20,
+   "windows": [
+    [
+     6.0,
+     10.0
+    ],
+    [
+     15.5,
+     19.0
+    ]
+   ]
+  }
+ },
+ "scenarios": {
+  "mild": {
+   "T": 2.5,
+   "days": 45
+  },
+  "cold": {
+   "T": -2.5,
+   "days": 45
+  },
+  "verycold": {
+   "T": -7.5,
+   "days": 36
+  },
+  "extreme": {
+   "T": -12.5,
+   "days": 19
+  },
+  "severe": {
+   "T": -17.5,
+   "days": 6
+  },
+  "offseason": {
+   "T": 17.4,
+   "days": 214,
+   "heat": false,
+   "note": "Apr-Oct 2024+2025 ECCC daily means, n=419; cabin heating zero (assumption); AC not modeled"
+  }
+ },
+ "eccc": {
+  "source": "ECCC climate-daily API, Toronto City (CLIMATE_IDENTIFIER 6158355)",
+  "winters": [
+   "2024-25",
+   "2025-26"
+  ],
+  "counts_by_winter": {
+   "2024-25": {
+    "mild_ge0": 48,
+    "cold": 54,
+    "verycold": 35,
+    "extreme": 13,
+    "severe_lt-15": 1
+   },
+   "2025-26": {
+    "mild_ge0": 41,
+    "cold": 35,
+    "verycold": 38,
+    "extreme": 25,
+    "severe_lt-15": 11
+   }
+  }
+ },
+ "grid_upgrade_cost_per_kw": 200.0,
+ "grid_cost_note": "NREL/industry depot grid-upgrade range 100-300 $/kW; Toronto Hydro: project-specific capital contribution, no public schedule",
+ "ffh_annual_om": 1000.0,
+ "ffh_om_note": "assumption: annual burner service; CALSTART FFH white paper (2021) documents fuel use only; sweep 500-2000",
+ "service_start_h": 5.0,
+ "service_end_h": 22.0,
+ "deadhead_km": 7.0,
+ "deadhead_min": 15.0,
+ "pax_per_h": 60.0,
+ "sites": [
+  "depot",
+  "finchStn",
+  "finchWestStn",
+  "humberCollege",
+  "janeStn",
+  "kiplingStn",
+  "lawrenceStn",
+  "lawrenceWestStn",
+  "martinGrove",
+  "mountDennisStn",
+  "pearson",
+  "pioneerVillage",
+  "scarbCentreStn",
+  "sheppardWestStn",
+  "sheppardYongeStn",
+  "victoryMcNaughton",
+  "westwood",
+  "wilsonStn",
+  "yorkMillsStn"
+ ],
+ "instance_name": "arrowRoadGarage",
+ "grid_tiers": [
+  250,
+  500,
+  1000,
+  2000,
+  4000,
+  8000,
+  12000
+ ],
+ "traction_full_sample": {
+  "a0": 0.66058,
+  "a1_cold": 0.00742,
+  "a2_speed": 0.00159,
+  "T_ref": 5.0,
+  "fit_runs": 13757,
+  "fit_R2": 0.117,
+  "fit_note": "full sample (all routes)"
+ },
+ "traction_loo52": {
+  "a0": 0.65874,
+  "a1_cold": 0.00731,
+  "a2_speed": 0.00168,
+  "T_ref": 5.0,
+  "fit_runs": 12380,
+  "fit_R2": 0.11,
+  "fit_note": "leave-Route-52-out"
+ },
+ "ffh_rated_kw": 12.0,
+ "ffh_rated_note": "winter-conditions FFH useful output, Liu et al. (Paper 1)",
+ "el_heater_rated_kw": 23.0,
+ "el_heater_note": "p99 of eHeat energy / electric-heating time over 9,001 telemetry runs",
+ "traction_bands_by_route": {
+  "52": {
+   "2.5": 0.7427,
+   "-2.5": 0.7509,
+   "-7.5": 0.7699,
+   "-12.5": 0.842,
+   "-17.5": 0.8726,
+   "17.4": 0.6894
+  },
+  "35": {
+   "2.5": 0.758,
+   "-2.5": 0.7663,
+   "-7.5": 0.7857,
+   "-12.5": 0.8593,
+   "-17.5": 0.8905,
+   "17.4": 0.7035
+  },
+  "36": {
+   "2.5": 0.7614,
+   "-2.5": 0.7698,
+   "-7.5": 0.7893,
+   "-12.5": 0.8632,
+   "-17.5": 0.8946,
+   "17.4": 0.7067
+  },
+  "84": {
+   "2.5": 0.7409,
+   "-2.5": 0.749,
+   "-7.5": 0.7679,
+   "-12.5": 0.8398,
+   "-17.5": 0.8704,
+   "17.4": 0.6876
+  },
+  "96": {
+   "2.5": 0.7517,
+   "-2.5": 0.7599,
+   "-7.5": 0.7791,
+   "-12.5": 0.8521,
+   "-17.5": 0.8831,
+   "17.4": 0.6977
+  },
+  "99": {
+   "2.5": 0.6917,
+   "-2.5": 0.6993,
+   "-7.5": 0.7169,
+   "-12.5": 0.7841,
+   "-17.5": 0.8126,
+   "17.4": 0.642
+  },
+  "108": {
+   "2.5": 0.7564,
+   "-2.5": 0.7647,
+   "-7.5": 0.7841,
+   "-12.5": 0.8575,
+   "-17.5": 0.8886,
+   "17.4": 0.702
+  },
+  "120": {
+   "2.5": 0.7316,
+   "-2.5": 0.7396,
+   "-7.5": 0.7583,
+   "-12.5": 0.8294,
+   "-17.5": 0.8595,
+   "17.4": 0.679
+  },
+  "165": {
+   "2.5": 0.7581,
+   "-2.5": 0.7664,
+   "-7.5": 0.7858,
+   "-12.5": 0.8594,
+   "-17.5": 0.8906,
+   "17.4": 0.7036
+  },
+  "927": {
+   "2.5": 0.8168,
+   "-2.5": 0.8257,
+   "-7.5": 0.8466,
+   "-12.5": 0.9259,
+   "-17.5": 0.9595,
+   "17.4": 0.7581
+  },
+  "935": {
+   "2.5": 0.7136,
+   "-2.5": 0.7214,
+   "-7.5": 0.7397,
+   "-12.5": 0.8089,
+   "-17.5": 0.8383,
+   "17.4": 0.6623
+  },
+  "952": {
+   "2.5": 0.729,
+   "-2.5": 0.737,
+   "-7.5": 0.7556,
+   "-12.5": 0.8264,
+   "-17.5": 0.8564,
+   "17.4": 0.6766
+  },
+  "984": {
+   "2.5": 0.7186,
+   "-2.5": 0.7265,
+   "-7.5": 0.7448,
+   "-12.5": 0.8146,
+   "-17.5": 0.8442,
+   "17.4": 0.6669
+  },
+  "996": {
+   "2.5": 0.7171,
+   "-2.5": 0.7249,
+   "-7.5": 0.7433,
+   "-12.5": 0.8129,
+   "-17.5": 0.8424,
+   "17.4": 0.6655
+  },
+  "_default": {
+   "2.5": 0.7371,
+   "-2.5": 0.7451,
+   "-7.5": 0.764,
+   "-12.5": 0.8355,
+   "-17.5": 0.8659,
+   "17.4": 0.6841
+  }
+ },
+ "traction_v7_note": "route mean x system-wide band factor (make_traction_v7.py); route means from >=30-run telemetry, Route 52 from winter 1 only; all 14 division routes clear the 30-run threshold, _default unused"
+}

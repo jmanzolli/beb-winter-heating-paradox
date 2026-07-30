@@ -1,0 +1,302 @@
+{
+ "ebar_all": 0.7073,
+ "band_factors": {
+  "mild": 1.0421,
+  "cold": 1.0535,
+  "verycold": 1.0801,
+  "extreme": 1.1813,
+  "severe": 1.2242,
+  "offseason": 0.9672
+ },
+ "band_n": {
+  "mild": 2185,
+  "cold": 2198,
+  "verycold": 761,
+  "extreme": 52,
+  "severe": 4,
+  "offseason": 8557
+ },
+ "route_means": {
+  "52": 0.7128,
+  "35": 0.7274,
+  "36": 0.7307,
+  "84": 0.711,
+  "96": 0.7213,
+  "99": 0.6637,
+  "108": 0.7259,
+  "120": 0.7021,
+  "165": 0.7275,
+  "927": 0.7838,
+  "935": 0.6848,
+  "952": 0.6996,
+  "984": 0.6896,
+  "996": 0.6881
+ },
+ "route_n": {
+  "52": 573,
+  "35": 143,
+  "36": 1020,
+  "84": 981,
+  "96": 294,
+  "99": 498,
+  "108": 695,
+  "120": 212,
+  "165": 1129,
+  "927": 421,
+  "935": 113,
+  "952": 784,
+  "984": 409,
+  "996": 772
+ },
+ "min_n_fallback": 30,
+ "r52_winter1_mean": 0.7128,
+ "metrics": {
+  "regression": {
+   "run_MAE_kWh_km": 0.055,
+   "route_mean_MAPE_pct": 3.785,
+   "band_mean_MAPE_pct": 1.995,
+   "blockday_MAPE_pct": 7.055,
+   "route_rank_spearman": 0.547
+  },
+  "v7": {
+   "run_MAE_kWh_km": 0.05,
+   "route_mean_MAPE_pct": 2.316,
+   "band_mean_MAPE_pct": 1.044,
+   "blockday_MAPE_pct": 6.438,
+   "route_rank_spearman": 0.927
+  },
+  "r52_temporal": {
+   "w1_n": 573,
+   "w2_n": 804,
+   "w2_energy_ratio_pred_over_obs": 1.0195
+  }
+ },
+ "e_hat": {
+  "52": {
+   "mild": 0.7427,
+   "cold": 0.7509,
+   "verycold": 0.7699,
+   "extreme": 0.842,
+   "severe": 0.8726,
+   "offseason": 0.6894
+  },
+  "35": {
+   "mild": 0.758,
+   "cold": 0.7663,
+   "verycold": 0.7857,
+   "extreme": 0.8593,
+   "severe": 0.8905,
+   "offseason": 0.7035
+  },
+  "36": {
+   "mild": 0.7614,
+   "cold": 0.7698,
+   "verycold": 0.7893,
+   "extreme": 0.8632,
+   "severe": 0.8946,
+   "offseason": 0.7067
+  },
+  "84": {
+   "mild": 0.7409,
+   "cold": 0.749,
+   "verycold": 0.7679,
+   "extreme": 0.8398,
+   "severe": 0.8704,
+   "offseason": 0.6876
+  },
+  "96": {
+   "mild": 0.7517,
+   "cold": 0.7599,
+   "verycold": 0.7791,
+   "extreme": 0.8521,
+   "severe": 0.8831,
+   "offseason": 0.6977
+  },
+  "99": {
+   "mild": 0.6917,
+   "cold": 0.6993,
+   "verycold": 0.7169,
+   "extreme": 0.7841,
+   "severe": 0.8126,
+   "offseason": 0.642
+  },
+  "108": {
+   "mild": 0.7564,
+   "cold": 0.7647,
+   "verycold": 0.7841,
+   "extreme": 0.8575,
+   "severe": 0.8886,
+   "offseason": 0.702
+  },
+  "120": {
+   "mild": 0.7316,
+   "cold": 0.7396,
+   "verycold": 0.7583,
+   "extreme": 0.8294,
+   "severe": 0.8595,
+   "offseason": 0.679
+  },
+  "165": {
+   "mild": 0.7581,
+   "cold": 0.7664,
+   "verycold": 0.7858,
+   "extreme": 0.8594,
+   "severe": 0.8906,
+   "offseason": 0.7036
+  },
+  "927": {
+   "mild": 0.8168,
+   "cold": 0.8257,
+   "verycold": 0.8466,
+   "extreme": 0.9259,
+   "severe": 0.9595,
+   "offseason": 0.7581
+  },
+  "935": {
+   "mild": 0.7136,
+   "cold": 0.7214,
+   "verycold": 0.7397,
+   "extreme": 0.8089,
+   "severe": 0.8383,
+   "offseason": 0.6623
+  },
+  "952": {
+   "mild": 0.729,
+   "cold": 0.737,
+   "verycold": 0.7556,
+   "extreme": 0.8264,
+   "severe": 0.8564,
+   "offseason": 0.6766
+  },
+  "984": {
+   "mild": 0.7186,
+   "cold": 0.7265,
+   "verycold": 0.7448,
+   "extreme": 0.8146,
+   "severe": 0.8442,
+   "offseason": 0.6669
+  },
+  "996": {
+   "mild": 0.7171,
+   "cold": 0.7249,
+   "verycold": 0.7433,
+   "extreme": 0.8129,
+   "severe": 0.8424,
+   "offseason": 0.6655
+  }
+ },
+ "e_hat_additive": {
+  "52": {
+   "mild": 0.7425,
+   "cold": 0.7506,
+   "verycold": 0.7695,
+   "extreme": 0.841,
+   "severe": 0.8714,
+   "offseason": 0.6895
+  },
+  "35": {
+   "mild": 0.7572,
+   "cold": 0.7653,
+   "verycold": 0.7841,
+   "extreme": 0.8556,
+   "severe": 0.886,
+   "offseason": 0.7042
+  },
+  "36": {
+   "mild": 0.7605,
+   "cold": 0.7686,
+   "verycold": 0.7874,
+   "extreme": 0.8589,
+   "severe": 0.8893,
+   "offseason": 0.7075
+  },
+  "84": {
+   "mild": 0.7407,
+   "cold": 0.7488,
+   "verycold": 0.7677,
+   "extreme": 0.8392,
+   "severe": 0.8696,
+   "offseason": 0.6877
+  },
+  "96": {
+   "mild": 0.7511,
+   "cold": 0.7592,
+   "verycold": 0.778,
+   "extreme": 0.8496,
+   "severe": 0.8799,
+   "offseason": 0.6981
+  },
+  "99": {
+   "mild": 0.6935,
+   "cold": 0.7016,
+   "verycold": 0.7204,
+   "extreme": 0.792,
+   "severe": 0.8224,
+   "offseason": 0.6405
+  },
+  "108": {
+   "mild": 0.7556,
+   "cold": 0.7637,
+   "verycold": 0.7826,
+   "extreme": 0.8541,
+   "severe": 0.8845,
+   "offseason": 0.7027
+  },
+  "120": {
+   "mild": 0.7318,
+   "cold": 0.7399,
+   "verycold": 0.7588,
+   "extreme": 0.8303,
+   "severe": 0.8607,
+   "offseason": 0.6789
+  },
+  "165": {
+   "mild": 0.7573,
+   "cold": 0.7654,
+   "verycold": 0.7842,
+   "extreme": 0.8557,
+   "severe": 0.8861,
+   "offseason": 0.7043
+  },
+  "927": {
+   "mild": 0.8135,
+   "cold": 0.8216,
+   "verycold": 0.8405,
+   "extreme": 0.912,
+   "severe": 0.9424,
+   "offseason": 0.7606
+  },
+  "935": {
+   "mild": 0.7145,
+   "cold": 0.7226,
+   "verycold": 0.7415,
+   "extreme": 0.813,
+   "severe": 0.8434,
+   "offseason": 0.6616
+  },
+  "952": {
+   "mild": 0.7293,
+   "cold": 0.7374,
+   "verycold": 0.7562,
+   "extreme": 0.8278,
+   "severe": 0.8582,
+   "offseason": 0.6763
+  },
+  "984": {
+   "mild": 0.7193,
+   "cold": 0.7274,
+   "verycold": 0.7463,
+   "extreme": 0.8178,
+   "severe": 0.8482,
+   "offseason": 0.6663
+  },
+  "996": {
+   "mild": 0.7179,
+   "cold": 0.726,
+   "verycold": 0.7448,
+   "extreme": 0.8164,
+   "severe": 0.8467,
+   "offseason": 0.6649
+  }
+ }
+}

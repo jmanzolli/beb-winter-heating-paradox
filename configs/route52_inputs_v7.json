@@ -1,0 +1,170 @@
+{
+ "traction": {
+  "a0": 0.65874,
+  "a1_cold": 0.00731,
+  "a2_speed": 0.00168,
+  "T_ref": 5.0,
+  "fit_runs": 12380,
+  "fit_R2": 0.11,
+  "fit_note": "leave-Route-52-out"
+ },
+ "branches": {
+  "52A": {
+   "east": {
+    "dist_km": 19.32,
+    "dur_min": 58.2,
+    "stops": 59,
+    "speed_kmh": 19.9,
+    "layover_min": 6.1,
+    "headway_min": 20.2
+   },
+   "west": {
+    "dist_km": 20.17,
+    "dur_min": 63.7,
+    "stops": 61,
+    "speed_kmh": 19.0,
+    "layover_min": 0.0,
+    "headway_min": 20.2
+   },
+   "site_east": "lawrenceStn",
+   "site_west": "pearson",
+   "cycle_min": 128.0,
+   "n_buses": 7
+  },
+  "52D": {
+   "east": {
+    "dist_km": 21.94,
+    "dur_min": 63.2,
+    "stops": 65,
+    "speed_kmh": 20.8,
+    "layover_min": 5.8,
+    "headway_min": 21.8
+   },
+   "west": {
+    "dist_km": 21.99,
+    "dur_min": 65.5,
+    "stops": 72,
+    "speed_kmh": 20.1,
+    "layover_min": 5.8,
+    "headway_min": 21.7
+   },
+   "site_east": "lawrenceStn",
+   "site_west": "victoryMcNaughton",
+   "cycle_min": 140.3,
+   "n_buses": 7
+  },
+  "52G": {
+   "east": {
+    "dist_km": 11.24,
+    "dur_min": 37.1,
+    "stops": 41,
+    "speed_kmh": 18.2,
+    "layover_min": 7.4,
+    "headway_min": 21.9
+   },
+   "west": {
+    "dist_km": 11.93,
+    "dur_min": 38.4,
+    "stops": 43,
+    "speed_kmh": 18.6,
+    "layover_min": 3.5,
+    "headway_min": 21.8
+   },
+   "site_east": "lawrenceWestStn",
+   "site_west": "martinGrove",
+   "cycle_min": 86.4,
+   "n_buses": 4
+  }
+ },
+ "scenarios": {
+  "mild": {
+   "T": 2.5,
+   "days": 45
+  },
+  "cold": {
+   "T": -2.5,
+   "days": 45
+  },
+  "verycold": {
+   "T": -7.5,
+   "days": 36
+  },
+  "extreme": {
+   "T": -12.5,
+   "days": 19
+  },
+  "severe": {
+   "T": -17.5,
+   "days": 6
+  },
+  "offseason": {
+   "T": 17.4,
+   "days": 214,
+   "heat": false,
+   "note": "Apr-Oct 2024+2025 ECCC daily means, n=419; cabin heating zero (assumption); AC not modeled"
+  }
+ },
+ "eccc": {
+  "source": "ECCC climate-daily API, Toronto City (CLIMATE_IDENTIFIER 6158355)",
+  "winters": [
+   "2024-25",
+   "2025-26"
+  ],
+  "counts_by_winter": {
+   "2024-25": {
+    "mild_ge0": 48,
+    "cold": 54,
+    "verycold": 35,
+    "extreme": 13,
+    "severe_lt-15": 1
+   },
+   "2025-26": {
+    "mild_ge0": 41,
+    "cold": 35,
+    "verycold": 38,
+    "extreme": 25,
+    "severe_lt-15": 11
+   }
+  }
+ },
+ "grid_upgrade_cost_per_kw": 200.0,
+ "grid_cost_note": "NREL/industry depot grid-upgrade range 100-300 $/kW; Toronto Hydro: project-specific capital contribution, no public schedule",
+ "ffh_annual_om": 1000.0,
+ "ffh_om_note": "assumption: annual burner service; CALSTART FFH white paper (2021) documents fuel use only; sweep 500-2000",
+ "service_start_h": 5.0,
+ "service_end_h": 22.0,
+ "deadhead_km": 7.0,
+ "deadhead_min": 15.0,
+ "pax_per_h": 60.0,
+ "traction_full_sample": {
+  "a0": 0.66058,
+  "a1_cold": 0.00742,
+  "a2_speed": 0.00159,
+  "T_ref": 5.0,
+  "fit_runs": 13757,
+  "fit_R2": 0.117,
+  "fit_note": "full sample (all routes)"
+ },
+ "traction_loo52": {
+  "a0": 0.65874,
+  "a1_cold": 0.00731,
+  "a2_speed": 0.00168,
+  "T_ref": 5.0,
+  "fit_runs": 12380,
+  "fit_R2": 0.11,
+  "fit_note": "leave-Route-52-out"
+ },
+ "ffh_rated_kw": 12.0,
+ "ffh_rated_note": "winter-conditions FFH useful output, Liu et al. (Paper 1)",
+ "el_heater_rated_kw": 23.0,
+ "el_heater_note": "p99 of eHeat energy / electric-heating time over 9,001 telemetry runs",
+ "traction_bands": {
+  "2.5": 0.7427,
+  "-2.5": 0.7509,
+  "-7.5": 0.7699,
+  "-12.5": 0.842,
+  "-17.5": 0.8726,
+  "17.4": 0.6894
+ },
+ "traction_v7_note": "route-mean x band-factor interface; R52 mean from Jan-Mar 2025 winter (temporal split); factors from full fleet"
+}

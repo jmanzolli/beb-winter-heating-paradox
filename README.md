@@ -32,22 +32,31 @@ python3 -m venv venv && . venv/bin/activate
 pip install -r requirements.txt          # gurobipy, numpy, pandas, matplotlib
 
 cd src
-export ROUTE_INPUTS=../configs/route52_inputs_v5.json
+export ROUTE_INPUTS=../configs/route52_inputs_v7.json
+export TAB_RES=../results/campaign_v7_results.json
+export TAB_DIV=../results/campaign_division_v7.json
+export TAB_PROV=../results/provenance_v7.json
+export TAB_REL_BASE=../results/rel_v7_econ_cv00.json
+export TAB_REL_ZERO=../results/rel_v7_zero_cv00.json
+export SUPP_REL_BASE=$TAB_REL_BASE SUPP_REL_ZERO=$TAB_REL_ZERO
+export SUPP_REL_FULL=../results/rel_v7_econ_full.json
+export FIG_RES=$TAB_RES FIG_DIV=$TAB_DIV
+export FIG_DETBAND=../results/detband_v7.json
+export FIG_REL_BASE=$TAB_REL_BASE FIG_REL_ZERO=$TAB_REL_ZERO
+export CHECK_RES=$TAB_RES CHECK_PROV=$TAB_PROV
 
-python3 check_results_v5.py              # 38 runs: accounting + consistency audit
-python3 make_tables_v6.py                # paper Tables IV-V
+python3 check_results_v5.py              # 39 runs: accounting + consistency audit
+python3 make_tables_v6.py                # paper Tables II-V
 python3 make_supp_tables.py              # supplementary tables
-python3 figdata_v6.py ../results/campaign_v5_results.json campaign_results_v6.json
-FIG_CAMPAIGN=campaign_results_v6.json python3 ieee_figures.py   # paper figures
-python3 ieee_fig6.py                     # supplementary operations figure
+python3 make_fig_m.py                    # paper Figs. 3-5 + supplementary Fig. S6
 ```
 
 Notes:
 
 * `gurobipy` must be importable (the model module defines the instance), but
   **no Gurobi licence is needed at this level** — nothing is solved.
-* `check_results_v5.py` exits 0 with `failures: 0`; its three warnings are
-  the loose-gap disclosures discussed in the paper.
+* `check_results_v5.py` exits 0 with `failures: 0`; its warnings are the
+  loose-gap disclosures discussed in the paper.
 * Figure scripts also write `figures/verification_tables.md`: every plotted
   value, dumped straight from the records.
 
@@ -56,28 +65,39 @@ Notes:
 Requires a Gurobi licence. Route-scale runs take minutes to hours each; the
 division cases run up to 4 h each by design.
 
-Route 52:
+Route 52 (the route--band traction interface is built first from the
+telemetry, or reuse the archived `configs/traction_v7.json`):
 
 ```bash
 cd src
-export ROUTE_INPUTS=../configs/route52_inputs_v5.json
+python3 make_traction_v7.py            # route means + band factors (needs telemetry)
+export ROUTE_INPUTS=../configs/route52_inputs_v7.json
+export CAMP_OUT=../results/campaign_v7_results.json
 
-python3 test_v5.py                     # formulation unit checks
-python3 campaign_v5.py                 # baseline, prices, cap frontier, benchmarks
-python3 sens_v6.py cost physical ops   # sensitivity block (parallelizable)
-python3 refine_v6.py                   # warm-started refinement of loose runs
-python3 reliability_v5.py 1000         # out-of-sample reliability (1,000/band)
-python3 check_results_v5.py            # audit the fresh results
+python3 campaign_v5.py                 # baseline, prices, cap frontier, benchmarks,
+                                       # sensitivities, warm-started refinement
+python3 v7_econ_ops.py                 # baseline operating metrics (fix-design)
+REL_RESULTS=$CAMP_OUT REL_POOL=../configs/v7_residual_pool.json \
+  REL_DESIGN=econ_lam0 REL_LAM=0 python3 reliability_v5.py 1000
+DETBAND_RES=$CAMP_OUT DETBAND_OUT=../results/detband_v7.json \
+  python3 detband_check.py             # per-band benchmark feasibility
+python3 v7_extra.py                    # severe-factor / FFH-rating variants
+                                       # (run per variant instance, see header)
+PROV_RES=$CAMP_OUT PROV_OUT=../results/provenance_v7.json \
+  python3 make_provenance_v5.py
 ```
 
-Division scale:
+Division scale (case D warm-starts from case C via `DIV_START_FROM`):
 
 ```bash
-export ROUTE_INPUTS=../configs/garage_inputs_v5.json
-python3 campaign_division_v5.py D C B A
-python3 rerun_div_v6.py                # warm-started C -> D -> B
-python3 tighten_A_v6.py 250 3600       # tighten the per-route subproblems
-python3 make_provenance_v5.py          # run inventory / provenance record
+export ROUTE_INPUTS=../configs/garage_inputs_v7.json
+DIV_OUT=../results/div_A.json python3 campaign_division_v5.py A
+DIV_OUT=../results/div_B.json python3 campaign_division_v5.py B
+DIV_OUT=../results/div_C.json python3 campaign_division_v5.py C
+DIV_OUT=../results/div_D.json DIV_TLIM=25200 \
+  DIV_START_FROM=../results/div_C.json:C_shared_infra_frozen_z \
+  python3 campaign_division_v5.py D
+python3 merge_division.py ../results/campaign_division_v7.json ../results/div_*.json
 ```
 
 Re-running overwrites the result JSONs; the quick-start pipeline then
@@ -89,14 +109,14 @@ Gurobi logs are in `logs/solver_logs.tar.gz`.
 
 | Paper artifact | Generator | Reads |
 |---|---|---|
-| Table IV (Route 52 experiments E1–E11) | `make_tables_v6.py` | `campaign_v5_results.json`, `reliability_*.json` |
-| Table V (division cases A–D) | `make_tables_v6.py` | `campaign_division_v5.json` |
-| Supplementary tables (scenario ops, sensitivities, reliability, stress, run inventory, per-route, stability, computation) | `make_tables_v6.py`, `make_supp_tables.py` | result files |
-| Fig. 3 (design transitions) | `ieee_figures.py` → `fig1_*` | frontier runs |
-| Fig. 4 (cost–emissions frontier) | `ieee_figures.py` → `fig2_*` | frontier + price sweep |
-| Fig. 5 (parameter sensitivity) | `ieee_figures.py` → `fig5_*` | sensitivity runs |
-| Supplementary diagnostics figures | `ieee_figures.py` → `fig3_*`, `ieee_fig6.py` | operations metrics |
-| Headline numbers (9,641 L; 25.8 t; 32.9 kCAD/yr; ≥22.7 kCAD/yr coordination bound; 99.85 % / 97.19 % floor compliance) | recomputed and asserted by `check_results_v5.py` | result files |
+| Table IV (representative Route 52 designs) | `make_tables_v6.py` | `campaign_v7_results.json`, `rel_v7_*.json` |
+| Table V (fragmented vs. coordinated division) | `make_tables_v6.py` | `campaign_division_v7.json` |
+| Supplementary tables (traction interface, scenario ops, sensitivities, reliability, stress, per-route, stability, computation) | `make_traction_v7.py`, `make_tables_v6.py`, `make_supp_tables.py` | result files |
+| Fig. 3 (weather-adaptive operation) | `make_fig_m.py` → `fig3_ops` | baseline scenario record |
+| Fig. 4 (out-of-sample compliance by band) | `make_fig_m.py` → `fig5_uncertainty` | `rel_v7_*.json` |
+| Fig. 5 (cost–emissions frontier and designs) | `make_fig_m.py` → `fig4_frontier` | frontier + price sweep |
+| Supplementary figures (division heterogeneity, sensitivity, diagnostics) | `make_fig_m.py`, `ieee_figures.py`, `ieee_fig6.py` | result files |
+| Headline numbers (9,854 L; 26.4 t; 36.1 kCAD/yr; ≥21.8 kCAD/yr coordination bound; 99.85 % / 98.71 % floor compliance) | recomputed and asserted by `check_results_v5.py` | result files |
 
 ## Layout
 

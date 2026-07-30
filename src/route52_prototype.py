@@ -53,6 +53,7 @@ import argparse
 import json
 import math
 import os
+import re as _re_mod
 from dataclasses import dataclass, field
 
 import gurobipy as gp
@@ -171,8 +172,43 @@ def phi_useful(T_amb):
     return min(1.0, max(0.05, 0.5192 + 0.0054 * T_amb))
 
 # --- traction: fitted interface (Choga-style), drivetrain only --------------
+# v7 override: if the instance carries per-band intensity tables
+# ("traction_bands" for a single-route instance, "traction_bands_by_route"
+# keyed by route with a "_default" fallback), those values are used verbatim
+# (route mean x system-wide band factor) and the regression is bypassed.
 _TR = INP["traction"]
-def e_traction_per_km(T_amb, v):
+_TRB = INP.get("traction_bands")
+_TRBR = INP.get("traction_bands_by_route")
+_ROUTE_RE = _re_mod.compile(r"r(\d+)")
+
+def _band_key(T):
+    """Map an arbitrary ambient temperature to its band's scenario-temp key.
+
+    The band tables are keyed by the scenario representative temperatures.
+    An exact-string lookup would silently fall back to the regression for
+    any other temperature (deterministic winter mean, telemetry rows), so
+    the band is resolved by its edges instead.
+    """
+    if T >= 5:
+        return "17.4"          # off-season
+    if T >= 0:
+        return "2.5"           # mild
+    if T >= -5:
+        return "-2.5"          # cold
+    if T >= -10:
+        return "-7.5"          # very cold
+    if T >= -15:
+        return "-12.5"         # extreme
+    return "-17.5"             # severe
+
+def e_traction_per_km(T_amb, v, route=None):
+    key = _band_key(T_amb)
+    if _TRBR is not None:
+        tab = _TRBR.get(route) or _TRBR.get("_default")
+        if tab is not None and key in tab:
+            return tab[key]
+    if _TRB is not None and key in _TRB:
+        return _TRB[key]
     return (_TR["a0"] + _TR["a1_cold"] * max(0.0, _TR["T_ref"] - T_amb)
             + _TR["a2_speed"] * v)
 
@@ -406,7 +442,11 @@ def build_model(eps_cap_t=None, carbon_price_t=CARBON_PRICE_T, eta_el_by_scen=No
                             else hm * q_heat_rate(T_amb, tr.f_stop, tr.speed)
                             * tr.dur_h)
                 dist = tr.dist_km + (DEADHEAD_KM if i in (0, nt - 1) else 0.0)
-                ekm = tm * e_traction_per_km(T_amb, tr.speed)
+                # branch names are 'r<route>_<variant>' (e.g. r52_E0); the
+                # leading digit group is the route key for the band table
+                _mt = _ROUTE_RE.match(blk.branch)
+                _rt = _mt.group(1) if _mt else blk.branch
+                ekm = tm * e_traction_per_km(T_amb, tr.speed, route=_rt)
                 e_use[i] = gp.quicksum(ekm * dist * (1 + BUS_CLASSES[k].mass_pen)
                                        * z[b, k] for k in K)
 

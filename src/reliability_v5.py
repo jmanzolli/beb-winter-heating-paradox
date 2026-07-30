@@ -66,6 +66,10 @@ REPO = "/Users/natomanzolli/Documents/GitHub/heating_system_study"
 RESULTS = os.environ.get("REL_RESULTS", "campaign_v5_results.json")
 OUT_FILE = os.environ.get("REL_OUT", "reliability_v5.json")
 DESIGN_LABEL = os.environ.get("REL_DESIGN", "policy_lam100")
+# carbon price used inside the planning-assignment and dispatch re-solves;
+# set REL_LAM=0 when evaluating the economic baseline so day-ahead
+# assignment and recourse use the same objective the design was built with
+REL_LAM = float(os.environ.get("REL_LAM", 100.0))
 N_DEFAULT = 200
 SEED = int(os.environ.get("REL_SEED", 20260725))
 # declared cabin-heat stress levels (coefficient of variation); 0 = empirical
@@ -84,8 +88,22 @@ BANDS = [w for w in R.SCEN if w not in R.HEATLESS]
 
 # ---------------------------------------------------------------- residuals
 def traction_pool():
-    """Block-day multiplicative residuals of the leave-Route-52-out fit,
-    evaluated on Route 52 (out of sample by construction)."""
+    """Block-day multiplicative residuals of the planning interface,
+    evaluated on Route 52.
+
+    Under the v5 regression instance the prediction is the leave-Route-52-out
+    fit (out of sample by construction). Under a v7 instance the prediction is
+    the route--band interface (route mean x band factor), so the pool measures
+    the run-level dispersion the band means deliberately exclude.
+
+    REL_POOL=<file>: if the file exists, load the pool from it instead of the
+    telemetry workbook (the workbook lives on the analysis machine, not the
+    solve host); if it does not exist, compute the pool and write it there.
+    """
+    pf = os.environ.get("REL_POOL")
+    if pf and os.path.exists(pf):
+        pj = json.load(open(pf))
+        return np.asarray(pj["ratios"]), pj["stats"]
     df = pd.read_excel(f"{REPO}/data/TTC_Preprocessed_version2_2.xlsx")
     df["route"] = (df["Route  Number"].astype(str).str.strip()
                    .str.replace(r"\.0$", "", regex=True))
@@ -110,7 +128,13 @@ def traction_pool():
              "cold_subset_n": int(len(cold)),
              "cold_mean_ratio": round(float(cold.mean()), 4) if len(cold) else None,
              "cold_sd_ratio": round(float(cold.std()), 4) if len(cold) else None,
-             "source": "leave-Route-52-out fit evaluated on Route 52 runs"}
+             "source": ("route-band interface (v7) evaluated on Route 52 runs"
+                        if (R.INP.get("traction_bands")
+                            or R.INP.get("traction_bands_by_route"))
+                        else "leave-Route-52-out fit evaluated on Route 52 runs")}
+    if pf:
+        json.dump({"ratios": [round(float(x), 5) for x in t["ratio"].values],
+                   "stats": stats}, open(pf, "w"), indent=1)
     return t["ratio"].values, stats
 
 
@@ -132,7 +156,7 @@ def draw(rng, pool_t, w, heat_cv):
 # ------------------------------------------------------------------ harness
 def planning_solution(design):
     """Re-solve with the design fixed to recover the day-ahead assignment."""
-    m = R.build_model(carbon_price_t=100.0)
+    m = R.build_model(carbon_price_t=REL_LAM)
     h = m._handles
     for k in range(len(R.BUS_CLASSES)):
         m.addConstr(h["x"][k] == design["x"][k])
@@ -157,7 +181,7 @@ def planning_solution(design):
 
 
 def simulate(w, lm, zfix, design):
-    m = R.build_model(carbon_price_t=100.0, load_mult=lm, elastic=True,
+    m = R.build_model(carbon_price_t=REL_LAM, load_mult=lm, elastic=True,
                       only_scen=w)
     h = m._handles
     for k in range(len(R.BUS_CLASSES)):
