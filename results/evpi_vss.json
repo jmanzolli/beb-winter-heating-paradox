@@ -1,0 +1,91 @@
+{
+ "heat_penalty_CAD_per_kWh": 1000.0,
+ "runs": {
+  "RP_stochastic": {
+   "label": "RP_stochastic",
+   "objective": 3137660.6,
+   "bound": 3136739.3,
+   "abs_gap": 921.2,
+   "resource_cost": 3137660.7,
+   "unmet_heat_kWh_yr": -0.0,
+   "penalty_cost": -0.1,
+   "co2_t": 21.274,
+   "time_s": 420.9
+  },
+  "EEV_meantemp": {
+   "label": "EEV_meantemp",
+   "objective": 22502030.4,
+   "bound": 22501226.2,
+   "abs_gap": 804.1,
+   "resource_cost": 3117265.0,
+   "unmet_heat_kWh_yr": 19384.8,
+   "penalty_cost": 19384765.4,
+   "co2_t": 15.549,
+   "time_s": 2.7
+  },
+  "WS_by_band": {
+   "mild": {
+    "label": "WS_mild",
+    "objective": 2923319.1,
+    "bound": 2918370.7,
+    "abs_gap": 4948.5,
+    "resource_cost": 2923319.1,
+    "unmet_heat_kWh_yr": 0.0,
+    "penalty_cost": 0.0,
+    "co2_t": 0.096,
+    "time_s": 600.0
+   },
+   "cold": {
+    "label": "WS_cold",
+    "objective": 2928936.1,
+    "bound": 2927126.9,
+    "abs_gap": 1809.1,
+    "resource_cost": 2928936.1,
+    "unmet_heat_kWh_yr": 0.0,
+    "penalty_cost": 0.0,
+    "co2_t": 45.222,
+    "time_s": 600.0
+   },
+   "verycold": {
+    "label": "WS_verycold",
+    "objective": 2926986.4,
+    "bound": 2925617.3,
+    "abs_gap": 1369.1,
+    "resource_cost": 2926986.4,
+    "unmet_heat_kWh_yr": 0.0,
+    "penalty_cost": 0.0,
+    "co2_t": 46.413,
+    "time_s": 600.0
+   },
+   "extreme": {
+    "label": "WS_extreme",
+    "objective": 2920069.5,
+    "bound": 2912515.2,
+    "abs_gap": 7554.3,
+    "resource_cost": 2920069.5,
+    "unmet_heat_kWh_yr": 0.0,
+    "penalty_cost": 0.0,
+    "co2_t": 34.47,
+    "time_s": 600.0
+   },
+   "severe": {
+    "label": "WS_severe",
+    "objective": 2904820.8,
+    "bound": 2894218.7,
+    "abs_gap": 10602.1,
+    "resource_cost": 2904820.8,
+    "unmet_heat_kWh_yr": 0.0,
+    "penalty_cost": 0.0,
+    "co2_t": 12.467,
+    "time_s": 600.0
+   }
+  }
+ },
+ "VSS": 19364369.8,
+ "VSS_resource_only": -20395.7,
+ "EEV_unmet_heat_kWh_yr": 19384.8,
+ "VSS_note": "VSS is linear in the comfort penalty: VSS(pi) = pi*unmet - resource_saving. Reporting a single VSS hides the arbitrary penalty, so the break-even comfort price is the penalty-free statement.",
+ "resource_saving_of_EEV_CAD_yr": 20395.7,
+ "breakeven_comfort_price_CAD_per_kWh": 1.052,
+ "WS_by_band_note": "NOT a wait-and-see value. Each entry is annualized capital plus ONE band's operating cost, because only_scen keeps a single scenario's day weight; summing them would count the capital five times. A valid WS would also require the bands to be mutually exclusive futures, which they are not -- all of them occur within the same planning year, so a per-band fleet is not implementable and EVPI is not well posed here."
+}

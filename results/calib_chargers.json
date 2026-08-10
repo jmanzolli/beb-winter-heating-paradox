@@ -1,0 +1,151 @@
+{
+ "observed_L": 10305.0,
+ "cases": [
+  {
+   "n": 2,
+   "kW": 100,
+   "installed_kW": 200,
+   "grid_kW": 0.0,
+   "feasible": false
+  },
+  {
+   "n": 3,
+   "kW": 100,
+   "installed_kW": 300,
+   "grid_kW": 0.0,
+   "feasible": false
+  },
+  {
+   "n": 4,
+   "kW": 100,
+   "installed_kW": 400,
+   "grid_kW": 0.0,
+   "feasible": false
+  },
+  {
+   "n": 6,
+   "kW": 100,
+   "installed_kW": 600,
+   "grid_kW": 0.0,
+   "feasible": false
+  },
+  {
+   "n": 8,
+   "kW": 100,
+   "installed_kW": 800,
+   "grid_kW": 250.0,
+   "feasible": true,
+   "diesel_L": 18671.6,
+   "co2_t": 50.04,
+   "F1": 3140716.0
+  },
+  {
+   "n": 10,
+   "kW": 100,
+   "installed_kW": 1000,
+   "grid_kW": 250.0,
+   "feasible": true,
+   "diesel_L": 10148.4,
+   "co2_t": 27.198,
+   "F1": 3146709.4
+  },
+  {
+   "n": 12,
+   "kW": 100,
+   "installed_kW": 1200,
+   "grid_kW": 250.0,
+   "feasible": true,
+   "diesel_L": 10146.8,
+   "co2_t": 27.194,
+   "F1": 3162005.3
+  },
+  {
+   "n": 2,
+   "kW": 150,
+   "installed_kW": 300,
+   "grid_kW": 0.0,
+   "feasible": false
+  },
+  {
+   "n": 3,
+   "kW": 150,
+   "installed_kW": 450,
+   "grid_kW": 0.0,
+   "feasible": false
+  },
+  {
+   "n": 4,
+   "kW": 150,
+   "installed_kW": 600,
+   "grid_kW": 0.0,
+   "feasible": false
+  },
+  {
+   "n": 6,
+   "kW": 150,
+   "installed_kW": 900,
+   "grid_kW": 250.0,
+   "feasible": true,
+   "diesel_L": 9182.4,
+   "co2_t": 24.609,
+   "F1": 3153007.9
+  },
+  {
+   "n": 8,
+   "kW": 150,
+   "installed_kW": 1200,
+   "grid_kW": 250.0,
+   "feasible": true,
+   "diesel_L": 8783.4,
+   "co2_t": 23.539,
+   "F1": 3180754.4
+  },
+  {
+   "n": 10,
+   "kW": 150,
+   "installed_kW": 1500,
+   "grid_kW": 250.0,
+   "feasible": true,
+   "diesel_L": 8783.4,
+   "co2_t": 23.539,
+   "F1": 3208984.1
+  },
+  {
+   "n": 2,
+   "kW": 300,
+   "installed_kW": 600,
+   "grid_kW": 0.0,
+   "feasible": false
+  },
+  {
+   "n": 3,
+   "kW": 300,
+   "installed_kW": 900,
+   "grid_kW": 250.0,
+   "feasible": true,
+   "diesel_L": 8583.4,
+   "co2_t": 23.004,
+   "F1": 3138267.7
+  },
+  {
+   "n": 4,
+   "kW": 300,
+   "installed_kW": 1200,
+   "grid_kW": 250.0,
+   "feasible": true,
+   "diesel_L": 7618.4,
+   "co2_t": 20.417,
+   "F1": 3161138.3
+  }
+ ],
+ "closest": {
+  "n": 10,
+  "kW": 100,
+  "installed_kW": 1000,
+  "grid_kW": 250.0,
+  "feasible": true,
+  "diesel_L": 10148.4,
+  "co2_t": 27.198,
+  "F1": 3146709.4
+ }
+}

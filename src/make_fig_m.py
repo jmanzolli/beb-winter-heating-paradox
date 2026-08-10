@@ -39,8 +39,8 @@ plt.rcParams.update({
 
 OUT = "ieee_figs"
 os.makedirs(OUT, exist_ok=True)
-# submission master only; the long draft at ../Overleaf is a frozen archive
-FIGDIRS = [d for d in ("../Overleaf/short/figures",)
+# submission master (../Overleaf); superseded long draft is archived
+FIGDIRS = [d for d in ("../Overleaf/figures",)
            if os.path.isdir(d)]
 
 RES = os.environ.get("FIG_RES", "campaign_v5_results.json")

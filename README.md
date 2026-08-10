@@ -1,11 +1,11 @@
-# Zero-Emission Heating Paradox — reproduction package
+# Diesel Heat in Zero-Emission Fleets — reproduction package
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21652815.svg)](https://doi.org/10.5281/zenodo.21652815)
 
 Code, inputs, results, and solver logs for:
 
-> **The Zero-Emission Heating Paradox: Stochastic Planning and Operation of
-> Electric Bus Fleets in Cold Climates**
+> **Diesel Heat in Zero-Emission Fleets: Stochastic Planning and Operation
+> of Cold-Climate Electric Buses**
 
 A two-stage stochastic MILP that jointly selects bus heating and battery
 specifications, charging infrastructure, terminal activation, and grid
@@ -18,6 +18,43 @@ this repository from the archived result files. Nothing is transcribed by
 hand.**
 
 ---
+
+## v2.0.0 supersedes v1.0.1
+
+Every thermal input was re-estimated from the revised companion study, and the
+vehicle and battery costs were corrected to CAD. All results changed; numbers
+from v1.0.x should not be quoted against this version. The archive here is the
+v8 campaign:
+
+| file | what it holds |
+|---|---|
+| `results/campaign_v8_results.json` | Route 52 campaign, 43 runs |
+| `results/campaign_division_v8.json` | division cases A, C, D |
+| `results/provenance_v8.json` | per-run archive level; all runs retain full solver logs |
+| `results/calib_chargers.json` | implied depot-configuration sweep |
+| `results/relmatch_v8.json` + `results/rel_v8_relmatch_*` | reliability-matched premium |
+| `results/evpi_vss.json` | soft heat balance and value of the stochastic solution |
+
+Regenerate every table and figure with:
+
+```bash
+cd src
+export ROUTE_INPUTS=route52_inputs_v7.json
+export TAB_RES=campaign_v8_results.json TAB_DIV=campaign_division_v8.json
+export TAB_PROV=provenance_v8.json
+export TAB_REL_BASE=rel_v8_econ_full.json TAB_REL_ZERO=rel_v8_zero_cv00.json
+python3 make_tables_v6.py && python3 make_supp_tables.py
+FIG_RES=$TAB_RES FIG_DIV=$TAB_DIV FIG_DETBAND=detband_v8.json \
+FIG_REL_BASE=$TAB_REL_BASE FIG_REL_ZERO=$TAB_REL_ZERO \
+FIG_DEP=eps_0.70 FIG_MIX=eps_0.35 python3 make_fig_m.py
+python3 v8_to_figschema.py && FIG_CAMPAIGN=fig_schema_v8.json \
+FIG_GARAGE=fig_garage_v8.json python3 ieee_figures.py
+```
+
+Two checkers run over the result: `check_results_v5.py` verifies accounting,
+feasibility and monotonicity across every run, and `audit_v8.py` cross-checks
+each quantitative claim in the manuscript and supplement against the archive,
+so a stale sentence fails the same way a stale table would.
 
 ## Quick start — verify the paper in ~2 minutes
 

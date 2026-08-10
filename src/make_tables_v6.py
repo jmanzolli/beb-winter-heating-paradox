@@ -34,11 +34,10 @@ import route52_prototype as R
 # hand -- that hand copy is exactly where stale numbers used to creep in.
 OUTDIR = "tables_v6"
 os.makedirs(OUTDIR, exist_ok=True)
-# both manuscript trees: long draft (../Overleaf) and submission master
-# (../Overleaf/short) each \input their own tables_v6/
-# submission master only; the long draft at ../Overleaf is a frozen archive
+# submission master (../Overleaf) only; the superseded long draft lives in
+# ../_archive_2026-08-07/long_version and is never written to
 TEXDIRS = []
-for base in (os.path.join("..", "Overleaf", "short"),):
+for base in (os.path.join("..", "Overleaf"),):
     if os.path.isdir(base):
         d = os.path.join(base, "tables_v6")
         os.makedirs(d, exist_ok=True)
@@ -46,6 +45,10 @@ for base in (os.path.join("..", "Overleaf", "short"),):
 RES = os.environ.get("TAB_RES", "campaign_v5_results.json")
 DIV = os.environ.get("TAB_DIV", "campaign_division_v5.json")
 PROV = os.environ.get("TAB_PROV", "provenance_v5.json")
+
+# frontier point order (loosest cap first), taken from the result
+# file; set in __main__ so pick_representatives can walk it
+FRONTIER_ORDER = []
 
 BAND_LABEL = {"mild": "Mild", "cold": "Cold", "verycold": "Very cold",
               "extreme": "Extreme", "severe": "Severe",
@@ -95,8 +98,8 @@ def table_scen(runs, label="econ_lam0"):
             f"{num(s['electricity_cost'])} & {num(dsl_cost)} & "
             f"{num(s['electricity_cost'] + dsl_cost)} \\\\")
     body = r"""\begin{table*}[!t]
-\caption{Scenario operation of the economic baseline design, per
-representative day.}
+\caption{Scenario operation of the economic baseline, per representative
+day.}
 \label{tab:scen}
 \centering
 \footnotesize
@@ -125,13 +128,76 @@ representative day.}
 
 
 # ----------------------------------------------------------------- Table V
+def pick_representatives(runs, anchor="econ_lam0", endpoint="eps_0.00",
+                         sep_tol=0.0, verbose=True):
+    """Frontier points whose cost is certifiably above the previous one.
+
+    Walking the frontier from the economic baseline towards a zero cap, a
+    candidate B is admitted only when
+
+        lb(B) > F1(A) + sep_tol,
+
+    where A is the last admitted design. B's true cost is at least lb(B) and
+    A's is at most F1(A), so the inequality certifies that B really is the
+    costlier design and that the tabulated increment is a lower bound on the
+    real one. Candidates whose bound overlaps the previous representative are
+    skipped: their increment cannot be told apart from remaining search error,
+    which is precisely the claim the table would otherwise be making.
+
+    The anchor and the zero-cap endpoint are always kept -- the first is the
+    reference every increment is measured from, the second is a defined policy
+    point rather than a discovered one. Every other row has to earn its place.
+    """
+    # frontier order is by loosening cap, i.e. increasing cost
+    cands = [l for l in FRONTIER_ORDER if l in runs and l != endpoint]
+    if not cands:
+        cands = [l for l in runs if l.startswith("eps_") and l != endpoint]
+    cands.sort(key=lambda l: -(runs[l].get("eps") or 0.0))
+
+    def structure(r):
+        return (tuple(sorted(r.get("fleet", {}).items())),
+                tuple(sorted(r.get("chargers", {}).items())),
+                tuple(sorted((r.get("grid_kW") or {}).items())))
+
+    kept, unseparated, samestruct = [], [], []
+    last = runs.get(anchor)
+    if last is None:
+        return [l for l in ([anchor] + cands + [endpoint]) if l in runs]
+    for l in cands:
+        r = runs[l]
+        lb, prev = r.get("lb"), last.get("F1")
+        if lb is not None and prev is not None and lb <= prev + sep_tol:
+            # cost bound overlaps the previous representative: the increment
+            # cannot be distinguished from remaining search error
+            unseparated.append((l, (prev - lb) / 1e3))
+            continue
+        if structure(r) == structure(last):
+            # separated in cost but the same design; nothing new to show
+            samestruct.append(l)
+            continue
+        kept.append(l)
+        last = r
+    out = [anchor] + kept + ([endpoint] if endpoint in runs else [])
+    if verbose:
+        print(f"representatives: {', '.join(out)}")
+        if unseparated:
+            print("  dropped, cost bound overlaps previous (kCAD): "
+                  + ", ".join(f"{l} {ov:.1f}" for l, ov in unseparated))
+        if samestruct:
+            print("  dropped, same fleet/charger/grid configuration: "
+                  + ", ".join(samestruct))
+    return out
+
+
 def table_designs(runs, labels=None):
     """Consolidated Route-52 experiment table: the designs that explain the
     frontier's transitions plus the deterministic and N-1 benchmarks, with
     out-of-sample reliability where it was evaluated (E8)."""
-    default = os.environ.get(
-        "TAB_DESIGNS", "econ_lam0,eps_0.50,eps_0.20,eps_0.00,det_meanT")
-    labels = labels or [l for l in default.split(",") if l in runs]
+    env = os.environ.get("TAB_DESIGNS")
+    if labels is None:
+        labels = ([l for l in env.split(",") if l in runs] if env
+                  else pick_representatives(runs) + ["det_meanT"])
+    labels = [l for l in labels if l in runs]
     sel = [runs[l] for l in labels]
     if not sel:
         print("SKIP tab_designs: no frontier runs")
@@ -168,20 +234,53 @@ def table_designs(runs, labels=None):
     # first stage (advisor rule): designs emerge from the same stochastic
     # MILP under successively tighter caps and are labelled by what the
     # optimizer changed, not by an imposed configuration.
-    heads, det = [], set()
+    # Names come from what the optimizer actually changed relative to the
+    # previous column, not from the cap value: which structural move happens
+    # at which cap differs between input revisions, and hardcoding it by eps
+    # produced duplicate headers.
+    def _ffh(r):
+        return r.get("n_ffh", 0)
+
+    def _ch(r):
+        return tuple(sorted(r.get("chargers", {}).items()))
+
+    def _grid(r):
+        return tuple(sorted((r.get("grid_kW") or {}).items()))
+
+    heads, det, prev, _nd = [], set(), None, 0
     for r in sel:
         lb = r["label"]
         if lb == "econ_lam0":
-            heads.append(r"\makecell{\textbf{Economic}\\\textbf{baseline}}")
+            name = (r"\textbf{Economic}", r"\textbf{baseline}")
         elif lb == "det_meanT":
-            heads.append(r"\makecell{\textbf{Mean-temp.}\\\textbf{benchmark}}")
+            name = (r"\textbf{Mean-temp.}", r"\textbf{benchmark}")
             det.add(lb)
-        elif r.get("eps") is not None and r["eps"] < 1e-6:
-            heads.append(r"\makecell{\textbf{Full heating}\\\textbf{electrification}}")
-        elif r.get("eps") is not None and r["eps"] > 7:
-            heads.append(r"\makecell{\textbf{Depot-enabled}\\\textbf{abatement}}")
+        elif _ffh(r) == 0:
+            name = (r"\textbf{Full heating}", r"\textbf{electrification}")
+        elif prev is not None and _ffh(prev) - _ffh(r) >= 5:
+            name = (r"\textbf{Mixed-fleet}", r"\textbf{transition}")
+        elif prev is not None and (_ch(r) != _ch(prev)
+                                   or _grid(r) != _grid(prev)):
+            # most of the fleet stays; the abatement is bought with charging
+            # capacity and grid headroom
+            name = (r"\textbf{Depot capacity}", r"\textbf{expansion}")
         else:
-            heads.append(r"\makecell{\textbf{Mixed-fleet}\\\textbf{transition}}")
+            name = (r"\textbf{Partial}", r"\textbf{electrification}")
+        # intermediate designs always carry their remaining burner count: it
+        # is what distinguishes them, and two caps can trigger the same move
+        if lb not in ("econ_lam0", "det_meanT") and _ffh(r) > 0:
+            name = name + (r"\textbf{(%d FFH)}" % _ffh(r),)
+        # a short identifier so the prose can name a column without
+        # restating its whole configuration
+        if lb == "det_meanT":
+            ident = "B"
+        else:
+            ident = f"D{_nd}"
+            _nd += 1
+        name = (r"\textbf{(%s)}" % ident,) + name
+        heads.append(r"\makecell{%s}" % "\\\\".join(name))
+        if lb != "det_meanT":
+            prev = r
 
     def col(r, key, scale, dec, skip_det=False):
         if skip_det and r["label"] in det:
@@ -211,7 +310,11 @@ def table_designs(runs, labels=None):
                 " & ".join(col(r, "diesel_L", 1, 0, skip_det=True)
                            for r in sel) + r" \\")
     def _cap(r):
-        if r["label"] in det or r.get("eps") is None:
+        # the baseline is solved with a deliberately non-binding cap so that
+        # the lexicographic phase 2 can run; that sentinel is not a policy
+        # instrument and must not appear as one
+        if (r["label"] in det or r.get("eps") is None
+                or r["eps"] > 1e3):
             return "---"
         return num(r["eps"], 2)
     rows.append("Imposed cap $\\varepsilon^{\\mathrm{ann}}$ (t\\COtwo{}/yr)"
@@ -250,14 +353,13 @@ def table_designs(runs, labels=None):
     else:
         colspec = "r" * ncol
     body = r"""\begin{table*}[!t]
-\caption{Representative Route~52 designs and outcomes
-(mean-temperature benchmark set apart; ``---'' marks quantities not
-comparable or not evaluated for a column).}
+\caption{Representative Route~52 designs and outcomes, with the
+mean-temperature benchmark set apart.}
 \label{tab:designs}
 \centering
 \footnotesize
 \setlength{\tabcolsep}{5.5pt}
-\renewcommand{\arraystretch}{1.12}
+\renewcommand{\arraystretch}{1.0}
 \begin{tabular}{@{}l%s@{}}
 \toprule
 \textbf{Design or outcome} & %s \\
@@ -296,6 +398,21 @@ def table_division(div, order=None, name="tab_division.tex", caption=None,
         if "per_route" in rec:
             return sum(v["lb_solver"] for v in rec["per_route"].values())
         return rec.get("lb_solver")
+
+    # the fragmented case has no case-level peak or runtime: it is fourteen
+    # independent solves. Both aggregate as sums -- every route draws from the
+    # same Arrow Road depot, so the implied depot peak is the sum of the
+    # per-route peaks (nothing in case A stops them coinciding), and the
+    # solve effort is the sum of the fourteen solves.
+    AGGREGABLE = ("peak_depot_kW", "time_s")
+
+    def field_of(rec, key):
+        v = rec.get(key)
+        if v is None and key in AGGREGABLE and "per_route" in rec:
+            vals = [r.get(key) for r in rec["per_route"].values()]
+            if all(x is not None for x in vals):
+                return sum(vals)
+        return v
     fields = [
         ("Total cost (MCAD/yr)", "total_annual_cost", 1e6, 2),
         ("Best incumbent, diff.\\ cost (kCAD/yr)", "differentiating_cost",
@@ -314,7 +431,7 @@ def table_division(div, order=None, name="tab_division.tex", caption=None,
     for nm, key, scale, dec in fields:
         vals = []
         for _, rec in sel:
-            v = rec.get(key)
+            v = field_of(rec, key)
             if key == "abs_gap" and v is None:
                 v = rec.get("worst_route_gap")
             vals.append(None if v is None else v / scale)
@@ -330,15 +447,27 @@ def table_division(div, order=None, name="tab_division.tex", caption=None,
     rows.insert(2, "Best bound, diff.\\ cost (kCAD/yr)".ljust(40) + " & "
                 + " & ".join(num(bound_of(rec) / 1e3, 0) for _, rec in sel)
                 + r" \\")
-    # certified saving: fragmented bound minus coordinated incumbent
+    # Certified saving: fragmented bound minus the BEST coordinated incumbent
+    # found. Cases B and C add constraints to D, so any solution they find is
+    # feasible for the coordinated problem and bounds its optimum from above.
+    # Taking D's own incumbent would be wrong whenever D's search ends worse
+    # than a constrained special case -- which is what happens at this size,
+    # and which otherwise reports a negative "saving".
     frag = cases.get("A_fragmented")
     coord = cases.get("D_full_coordination")
-    if frag and coord and "per_route" in frag:
-        sav = (bound_of(frag) - coord["differentiating_cost"]) / 1e3
+    coord_feasible = [c for k, c in cases.items()
+                      if k != "A_fragmented"
+                      and c.get("differentiating_cost")]
+    if frag and coord and "per_route" in frag and coord_feasible:
+        best_coord = min(c["differentiating_cost"] for c in coord_feasible)
+        sav = (bound_of(frag) - best_coord) / 1e3
         def _sav_cell(rec):
-            if rec is coord:
-                return r"$\ge$" + num(sav, 1)
-            return "ref." if rec is frag else "---"
+            # the saving is against whichever coordinated solution is shown,
+            # which need not be case D
+            if rec is frag:
+                return "ref."
+            return (r"$\ge$" + num(sav, 1)
+                    if rec.get("differentiating_cost") == best_coord else "---")
         rows.insert(3, ("Certified coordination saving (kCAD/yr)".ljust(40)
                         + " & " + " & ".join(_sav_cell(rec)
                                              for _, rec in sel) + r" \\"))
@@ -444,7 +573,7 @@ def table_comp(runs, prov, div):
             f"{num(g)} & --- & {num(rec.get('time_s'))} & "
             f"{rec.get('status', '---')} \\\\")
     body = r"""\begin{table*}[!t]
-\caption{Computational performance on %s (%s cores, %s GB); solver %s %s, %s threads.}
+\caption{Computational performance and solve statistics.}
 \label{tab:comp}
 \centering
 \scriptsize
@@ -459,10 +588,7 @@ def table_comp(runs, prov, div):
 \bottomrule
 \end{tabular}
 \end{table*}
-""" % (hw.get("machine", "---"), hw.get("cores", "---"),
-       hw.get("ram_gb", "---"), sv.get("name", "Gurobi"),
-       ".".join(str(v) for v in sv.get("version", [])) or "---",
-       sv.get("threads", "---"), "\n".join(rows))
+""" % ("\n".join(rows),)
     write("tab_comp.tex", body)
 
 
@@ -470,22 +596,30 @@ if __name__ == "__main__":
     d = load(RES)
     runs = {r["label"]: r for r in d["runs"]
             if "error" not in r and not r.get("infeasible")} if d else {}
+    FRONTIER_ORDER = list((d or {}).get("frontier_labels", []))
     div = load(DIV)
     prov = load(PROV)
     print(f"{len(runs)} Route 52 runs | "
           f"{len((div or {}).get('cases', {}))} division cases")
     table_scen(runs)
     table_designs(runs)
+    # report the best coordinated solution found, not necessarily case D:
+    # B and C constrain D, so their solutions are feasible for it, and at this
+    # instance size D's own search can finish above a constrained variant
+    _cases = (div or {}).get("cases", {})
+    _coord = [k for k in _cases if k != "A_fragmented"
+              and _cases[k].get("differentiating_cost")]
+    _best = (min(_coord, key=lambda k: _cases[k]["differentiating_cost"])
+             if _coord else "D_full_coordination")
     table_division(
         div, order=[("A_fragmented", r"\textbf{Fragmented}"),
-                    ("D_full_coordination", r"\textbf{Coordinated}")],
+                    (_best, r"\textbf{Coordinated}")],
         name="tab_division.tex", label="tab:garage",
-        caption="Fragmented versus fully coordinated planning for the "
-                "Arrow Road division.")
+        caption="Fragmented versus coordinated planning for the Arrow Road "
+                "division.")
     table_division(
         div, name="tab_division_full.tex", label="tab:garage-full",
-        caption="All division coordination cases: A fragmented, B "
-                "route-locked, C fixed assignment, D full coordination.")
+        caption="All division coordination cases.")
     table_stability(div)
     table_comp(runs, prov, div)
     print("\nInclude in main.tex with e.g. \\input{tables_v6/tab_designs}")

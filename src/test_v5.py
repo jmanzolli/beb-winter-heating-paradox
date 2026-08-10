@@ -23,7 +23,9 @@ def check(name, cond, detail=""):
 days = sum(R.SCEN[w][1] for w in R.SCEN)
 check("weights_sum_365", days == 365, f"(={days})")
 check("offseason_heatless", "offseason" in R.HEATLESS)
-check("ffh_rated_12", abs(R.P_FFH_RATED - 12.0) < TOL)
+check("ffh_nominal_35", abs(R.P_FFH_NOM - 35.0) < TOL)
+check("phi_severe_band",
+      0.50 < R.phi_useful(-17.5) < 0.56, f"(={R.phi_useful(-17.5):.4f})")
 check("el_rated_23", abs(R.P_ELH_RATED - 23.0) < TOL)
 
 # preconditioning and depot-charging windows disjoint by construction
@@ -62,7 +64,7 @@ for w in R.SCEN:
             bad_el += 1
     for (b, i), v in s["qff"].items():
         dur = R.BLOCKS[b].trips[i].dur_h
-        if v.X > dur * R.P_FFH_RATED + 1e-4:
+        if v.X > dur * R.phi_useful(R.SCEN[w][0]) * R.P_FFH_NOM + 1e-4:
             bad_ff += 1
     check(f"{w}_heater_limits", bad_el == 0 and bad_ff == 0,
           f"(el={bad_el}, ffh={bad_ff})")

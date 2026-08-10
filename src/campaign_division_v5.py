@@ -224,7 +224,12 @@ def solve_case(label, freeze_z=False, route_lock=False, tlim=TLIM):
 
 def case_A():
     """Fragmented planning: each route optimized on its own instance."""
-    base = json.load(open(os.environ["ROUTE_INPUTS"]))
+    # the per-route sub-instances overwrite ROUTE_INPUTS, so remember what the
+    # division instance actually was; the old code restored a hardcoded
+    # "garage_inputs_v5.json", which no longer exists and made the reload at
+    # the end of this function throw away all fourteen completed solves
+    division_inputs = os.environ["ROUTE_INPUTS"]
+    base = json.load(open(division_inputs))
     routes = sorted({route_of(b) for b in base["branches"]})
     agg = {"label": "A_fragmented", "per_route": {}}
     tot = {k: 0.0 for k in ("total_annual_cost", "differentiating_cost",
@@ -284,7 +289,7 @@ def case_A():
     agg["note"] = ("sum of 14 independent route optima; no shared terminal "
                    "chargers, depot capacity, grid tier, or bus pool")
     # restore the division instance
-    os.environ["ROUTE_INPUTS"] = "garage_inputs_v5.json"
+    os.environ["ROUTE_INPUTS"] = division_inputs
     import importlib
     importlib.reload(R)
     return agg

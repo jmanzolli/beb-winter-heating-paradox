@@ -78,9 +78,10 @@ for src, dst, tr in [("route52_inputs.json", "route52_inputs_v5.json", tr_loo),
     inp["traction_full_sample"] = tr_full
     inp["traction_loo52"] = tr_loo
     inp["scenarios"]["offseason"] = OFF
-    inp["ffh_rated_kw"] = 12.0
-    inp["ffh_rated_note"] = ("winter-conditions FFH useful output, Liu et "
-                             "al. (Paper 1)")
+    inp["ffh_nominal_kw"] = 35.0
+    inp["ffh_nominal_note"] = ("manufacturer heat flow, Valeo Thermo+ 350 "
+                               "(New Flyer); useful output = phi(T) x nominal, "
+                               "Liu et al. (Paper 1, rev. Aug 2026)")
     inp["el_heater_rated_kw"] = 23.0
     inp["el_heater_note"] = ("p99 of eHeat energy / electric-heating time "
                              "over 9,001 telemetry runs")

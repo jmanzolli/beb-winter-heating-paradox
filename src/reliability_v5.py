@@ -55,7 +55,12 @@ import route52_prototype as R
 if os.environ.get("REL_RESERVE"):
     R.RESERVE_RETURN = float(os.environ["REL_RESERVE"])
 
-REPO = "/Users/natomanzolli/Documents/GitHub/heating_system_study"
+# telemetry workbook lives with the paper code since Aug 2026 (the old
+# heating_system_study clone is gone); override via TTC_XLSX if elsewhere.
+TTC_XLSX = os.environ.get(
+    "TTC_XLSX",
+    os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                 "data", "TTC_Preprocessed_version2_2.xlsx"))
 # Overridable so an alternative design (e.g. the larger-reserve one) can be
 # evaluated against the SAME service criterion. Note the harness deliberately
 # keeps R.RESERVE_RETURN at its default: the planning reserve a design was
@@ -104,7 +109,7 @@ def traction_pool():
     if pf and os.path.exists(pf):
         pj = json.load(open(pf))
         return np.asarray(pj["ratios"]), pj["stats"]
-    df = pd.read_excel(f"{REPO}/data/TTC_Preprocessed_version2_2.xlsx")
+    df = pd.read_excel(TTC_XLSX)
     df["route"] = (df["Route  Number"].astype(str).str.strip()
                    .str.replace(r"\.0$", "", regex=True))
     t = df[(df["route"] == "52") & (df["Distance [km]"] > 3)

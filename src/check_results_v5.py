@@ -115,8 +115,19 @@ wk("19 frontier_tolerance", not loose, f"(loose: {loose})")
 COMPARABLE = re.compile(r"^(eps_|lam_|bp_lam_|policy_lam)")
 base = runs.get("econ_lam0")
 if base:
-    worse = [(r["label"], round(base["F1"] - r["F1"], 1)) for r in runs.values()
-             if COMPARABLE.match(r["label"]) and r["F1"] < base["F1"] - ABS_TOL]
+    # Compare the CERTIFIED cost, not the reported F1. The baseline is solved
+    # lexicographically, so its F1 is measured after phase 2 has spent up to
+    # LEX_TOL buying emissions (20.58 t rather than the 21.0 t the cheapest
+    # cost solution happens to emit). Its phase-1 incumbent "obj" is the
+    # min-F1 answer, and that is the quantity a domination claim is about;
+    # ranking on F1 flags the deliberate slack as an error.
+    # A cheaper comparable run only contradicts the baseline if it beats it by
+    # more than the baseline's own certified gap: inside that gap the two are
+    # the same answer to within what the solver proved.
+    base_cost = base.get("obj", base["F1"])
+    tol = max(ABS_TOL, base.get("abs_gap", 0.0))
+    worse = [(r["label"], round(base_cost - r["F1"], 1)) for r in runs.values()
+             if COMPARABLE.match(r["label"]) and r["F1"] < base_cost - tol]
     ck("22b baseline_not_dominated", not worse, f"(cheaper runs: {worse})")
 
 # 22c. carbon-price monotonicity. At the true optimum, raising lambda cannot

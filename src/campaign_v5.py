@@ -54,7 +54,10 @@ OUT = {"runs": [], "meta": {
     "inputs": os.environ["ROUTE_INPUTS"],
     "abs_gap": ABS_GAP, "lex_tol": LEX_TOL,
     "scen_days": {w: R.SCEN[w][1] for w in R.SCEN},
-    "ffh_rated_kw": R.P_FFH_RATED, "el_heater_rated_kw": R.P_ELH_RATED,
+    "ffh_nominal_kw": R.P_FFH_NOM,
+    "ffh_useful_kw_by_scen": {w: round(R.phi_useful(R.SCEN[w][0]) * R.P_FFH_NOM, 2)
+                              for w in R.SCEN},
+    "el_heater_rated_kw": R.P_ELH_RATED,
     "reserve_kwh": R.RESERVE_RETURN,
     "formulation": "v6 (C1 heater-bounded preconditioning, C2 chi retention, "
                    "C3 single plug per bus, C4 FFH-free procurement)",
@@ -70,8 +73,11 @@ DONE = {}
 if os.path.exists(OUT_FILE):
     _prev = json.load(open(OUT_FILE))
     OUT["runs"] = _prev.get("runs", [])
-    for _k in ("ops_metrics_policy", "frontier_labels", "breakpoint_prices",
-               "det_feasible_full", "n_minus_1_feasible"):
+    # every non-"runs" key a post-campaign driver may have added has to be
+    # carried across, or the next driver that imports this module silently
+    # drops it on the following _dump(); ops_metrics_econ was lost that way
+    for _k in ("ops_metrics_policy", "ops_metrics_econ", "frontier_labels",
+               "breakpoint_prices", "det_feasible_full", "n_minus_1_feasible"):
         if _k in _prev:
             OUT[_k] = _prev[_k]
     DONE = {r["label"]: r for r in OUT["runs"]}
@@ -411,6 +417,67 @@ def set_deterministic():
     return f, g
 
 
+def dedup_runs():
+    """Collapse repeated labels, keeping the best incumbent and the
+    best bound proved for each. Safe to call from post-campaign drivers
+    that add or re-solve a single run."""
+    # Keep, per label, the record with the BEST INCUMBENT, and tighten its gap
+    # with the best lower bound proved for that label by any pass.
+    #
+    # The previous rule kept the tightest gap instead, which silently discarded
+    # re-solves that found a cheaper design but happened to end with a slightly
+    # wider gap -- exactly what the refinement and H2 passes produce, since a
+    # warm start lowers the incumbent faster than it raises the bound. That
+    # defeated the purpose of running them.
+    #
+    # Combining across records is valid: any feasible incumbent is an upper
+    # bound on the true optimum and any proved bound is a lower bound, so
+    # min(incumbent) and max(bound) over the passes bracket it at least as
+    # tightly as either pass alone.
+    #
+    # Everything here works in SOLVER-OBJECTIVE space ("obj" and "lb"), never
+    # in F1. Two reasons. At a carbon price the objective is F1 + lambda*F2,
+    # so F1 and lb are not commensurable and F1 - lb is meaningless -- for a
+    # lambda=100 sensitivity it can even come out negative. And for a
+    # lexicographic run, F1 is measured after phase 2 has deliberately spent up
+    # to LEX_TOL of cost to buy emissions, so its F1 can exceed that of a
+    # worse pass while its certified phase-1 cost is lower. Ranking on F1
+    # therefore discards exactly the re-solves this function exists to keep.
+    # Within one label lambda and eps are fixed, so "obj" is comparable.
+    def _key(r):
+        return r.get("obj", 9e18)
+
+    best = {}
+    for r in OUT["runs"]:
+        lb = r["label"]
+        cur = best.get(lb)
+        if cur is None or _key(r) < _key(cur):
+            best[lb] = r
+    for r in OUT["runs"]:
+        lb = r["label"]
+        keep = best[lb]
+        if r is keep:
+            continue
+        # a bound proved by a discarded pass still applies to this label
+        if r.get("lb") is not None and r["lb"] > (keep.get("lb") or -9e18):
+            keep["lb"] = r["lb"]
+            keep["bound_from_superseded_pass"] = True
+    for lb, keep in best.items():
+        if keep.get("lb") is not None and keep.get("obj") is not None:
+            keep["abs_gap"] = round(keep["obj"] - keep["lb"], 1)
+            keep["rel_gap"] = round(abs(keep["abs_gap"])
+                                    / max(1.0, abs(keep["obj"])), 6)
+    seen, dedup = set(), []
+    for r in OUT["runs"]:
+        if r["label"] in seen:
+            continue
+        seen.add(r["label"])
+        dedup.append(best[r["label"]])
+    OUT["runs"] = dedup
+    _dump()
+
+
+
 if __name__ == "__main__":
     t0 = time.time()
     print("=== v5 campaign |", os.environ["ROUTE_INPUTS"],
@@ -484,7 +551,9 @@ if __name__ == "__main__":
         f, g = set_om(v); solve(f"ffh_om_{int(v)}", mods=f, unmods=g)
     for gc in (100.0, 300.0):
         f, g = set_grid(gc); solve(f"grid_{int(gc)}", mods=f, unmods=g)
-    for bp in (100.0, 50.0):
+    # base 205.5 CAD/kWh (150 USD at 1.37); sweep cheaper-pack scenarios and
+    # a high-side point bracketing the base
+    for bp in (150.0, 100.0, 300.0):
         f, g = set_batt(bp); solve(f"batt_{int(bp)}", mods=f, unmods=g)
     for tag, cs, as_ in (("derate_mild", 0.002, 0.004),
                          ("derate_harsh", 0.006, 0.012)):
@@ -541,20 +610,7 @@ if __name__ == "__main__":
             solve("econ_lam0", lam=0.0, tlim=TLIM_HARD, force=True,
                   mip_start=design_from_record(best))
 
-    # keep, per label, the record with the tightest certified gap
-    best = {}
-    for r in OUT["runs"]:
-        lb = r["label"]
-        if lb not in best or r.get("abs_gap", 9e9) < best[lb].get("abs_gap", 9e9):
-            best[lb] = r
-    seen, dedup = set(), []
-    for r in OUT["runs"]:
-        if r["label"] in seen:
-            continue
-        seen.add(r["label"])
-        dedup.append(best[r["label"]])
-    OUT["runs"] = dedup
-    _dump()
+    dedup_runs()
 
     OUT["meta"]["total_minutes"] = round((time.time() - t0) / 60, 1)
     _dump()

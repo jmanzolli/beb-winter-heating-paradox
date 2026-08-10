@@ -85,8 +85,10 @@ class BusClass:
     cost: float
     mass_pen: float
 
-BATT_COST = 150.0
-BUS_BASE = 1_000_000.0
+# Paper 1 Appendix C reports 150 USD/kWh and 1.0 MUSD/bus; model runs in CAD,
+# converted at the Paper 1 exchange rate 1.37 CAD/USD.
+BATT_COST = 205.5
+BUS_BASE = 1_370_000.0
 MASS_PEN_EXT = 0.02
 BUS_CLASSES = [
     BusClass("NF-std-FFH",   525.0, True,  BUS_BASE, 0.0),
@@ -130,7 +132,15 @@ WINTER_MONTHS = 5
 OFFSEASON_MONTHS = 7
 DIESEL_PRICE = 1.86
 CO2_PER_L = 2.68
-DIESEL_LHV = 9.96
+# FFH fuel conversion (Paper 1 rev. Aug 2026): burner runs at rated load when
+# lit, so fuel follows burner-on time, not delivered heat. Useful heat per
+# liter = phi x (nominal heat flow / volumetric fuel rate); the phi factor is
+# applied where diesel is computed. New Flyer Valeo Thermo+ 350: 35 kW at
+# 3.6 kg/h, diesel 0.837 kg/L -> 8.137 kWh nominal heat per liter.
+FFH_NOM_KW = 35.0
+FFH_FUEL_KG_H = 3.6
+DIESEL_DENSITY_KG_L = 0.837
+FFH_KWH_PER_L = FFH_NOM_KW / (FFH_FUEL_KG_H / DIESEL_DENSITY_KG_L)
 CARBON_PRICE_T = 100.0
 
 # scenarios: ECCC Toronto City, winters 2024-25 & 2025-26 (see fit_inputs.py)
@@ -139,10 +149,12 @@ SCEN = {name: (s["T"], s["days"]) for name, s in INP["scenarios"].items()}
 HEATLESS = {name for name, s in INP["scenarios"].items()
             if not s.get("heat", True)}
 
-# heater rated outputs (v5 R1): FFH 12 kW winter-conditions useful output
-# (Paper 1); electric heater 23 kW = p99 of eHeat-energy/heating-time over
-# 9,001 telemetry runs. Fallbacks keep pre-v5 inputs runnable.
-P_FFH_RATED = INP.get("ffh_rated_kw", 12.0)
+# heater rated outputs (v5 R1, revised): FFH useful output is temperature-
+# dependent, phi_useful(T) x nominal 35 kW (Paper 1 rev. Aug 2026), applied
+# per scenario in the heat-limit constraint. "ffh_nominal_kw" overrides the
+# nominal flow; the legacy fixed "ffh_rated_kw" input is no longer used.
+# Electric heater 23 kW = p99 of eHeat-energy/heating-time over 9,001 runs.
+P_FFH_NOM = INP.get("ffh_nominal_kw", FFH_NOM_KW)
 P_ELH_RATED = INP.get("el_heater_rated_kw", 23.0)
 
 # cold-weather derating (reviewer fix: usable capacity + charging acceptance
@@ -156,20 +168,27 @@ DERATE = {w: INP.get("derates", {}).get(w) or _derates(SCEN[w][0])
           for w in SCEN}
 
 # --- thermal demand: Paper 1 Table 4 posterior medians (New Flyer) ----------
-B0, B1, B2 = 4.5130, 0.1839, 0.0009
-B3, B4, B5 = 0.1889, -0.4642, -0.2023
-E_DOOR, E_PAX = 0.0014, 0.027
+# rev. Aug 2026 posterior: motion term centered at 15 km/h airspeed, door and
+# passenger coefficients in direct energy units (kWh/(stop.C), kWh/pax), no
+# separate per-event scaling constants.
+B0, B1, B2 = 4.1121, 0.2694, 0.00208
+B3, B4, B5 = 3.70e-5, -0.0074, -0.9275
+V_REF = 15.0
 CABIN_T, R_DRV = 20.0, 0.85
 F_PAX, RHO_SOLAR_W = INP["pax_per_h"], 0.15
 
 def q_heat_rate(T_amb, f_stop, v):
     dT = CABIN_T - T_amb
-    return max(0.0, B0 + B1 * dT + B2 * v * R_DRV * dT
-               + B3 * f_stop * dT * E_DOOR + B4 * F_PAX * E_PAX
+    return max(0.0, B0 + B1 * dT + B2 * (v * R_DRV - V_REF) * dT
+               + B3 * f_stop * dT + B4 * F_PAX
                + B5 * RHO_SOLAR_W)
 
+# useful-heating fraction, logit link (Paper 1 rev.: gamma, kappa on log-odds
+# scale, New Flyer). Replaces the linear 0.5192 + 0.0054 T form.
+GAMMA_T, KAPPA_T = 0.3301, 0.0117
+
 def phi_useful(T_amb):
-    return min(1.0, max(0.05, 0.5192 + 0.0054 * T_amb))
+    return 1.0 / (1.0 + math.exp(-(GAMMA_T + KAPPA_T * T_amb)))
 
 # --- traction: fitted interface (Choga-style), drivetrain only --------------
 # v7 override: if the instance carries per-band intensity tables
@@ -331,7 +350,8 @@ SHORTFALL_PENALTY = 1000.0     # $/kWh on elastic energy slack (simulation only)
 
 def build_model(eps_cap_t=None, carbon_price_t=CARBON_PRICE_T, eta_el_by_scen=None,
                 spare_ratio=0.0, fix_fleet_total=False, diff_objective=False,
-                load_mult=None, elastic=False, only_scen=None, ffh_free=False):
+                load_mult=None, elastic=False, only_scen=None, ffh_free=False,
+                soft_heat=False, heat_penalty=None):
     """...
     v5 simulation hooks (defaults reproduce the planning model exactly):
       load_mult  {(w, b, i): (traction_mult, heat_mult)} multiplicative
@@ -359,6 +379,7 @@ def build_model(eps_cap_t=None, carbon_price_t=CARBON_PRICE_T, eta_el_by_scen=No
     HW = {w: SCEN[w][1] for w in W}
     LM = load_mult or {}
     slack_terms = []
+    heat_slack_terms = []
 
     x = m.addVars(K, vtype=GRB.INTEGER, ub=N_BLOCKS + 20, name="x_bus")
     if fix_fleet_total:
@@ -479,15 +500,29 @@ def build_model(eps_cap_t=None, carbon_price_t=CARBON_PRICE_T, eta_el_by_scen=No
                 if len(sites_t) > 1:
                     m.addConstr(gp.quicksum(u[b, n, t] for n in sites_t) <= 1)
 
+            # soft_heat: cabin heat may go unmet at a declared penalty, so a
+            # design that cannot heat the bus returns a comfort shortfall
+            # instead of an infeasible model. Unlike the `elastic` slacks,
+            # which relax the battery constraints, this keeps the state of
+            # charge physical and puts the cost where it actually lands --
+            # on the passengers. Weighted by scenario days, so a shortfall on
+            # six severe days is not priced like one on forty-five mild ones.
+            sh = (m.addVars(range(nt), lb=0.0, name=f"heatslack_{w}_{b}")
+                  if soft_heat else None)
+            if soft_heat:
+                heat_slack_terms += [(HW[w], sh[i]) for i in range(nt)]
+
             for i in range(nt):
                 credit = qpre_cr if i == 0 else 0.0
-                m.addConstr(qel[b, i] + qff[b, i] + credit == qtrip[i])
+                m.addConstr(qel[b, i] + qff[b, i] + credit
+                            + (sh[i] if soft_heat else 0.0) == qtrip[i])
                 m.addConstr(qff[b, i] <= qtrip[i] *
                             gp.quicksum(z[b, k] for k in K if BUS_CLASSES[k].ffh))
-                # v5 R1: rated heater outputs (energy <= duration x rating)
+                # v5 R1: rated heater outputs (energy <= duration x rating);
+                # FFH useful output = phi(T_w) x nominal, scenario-dependent
                 dur = blk.trips[i].dur_h
                 m.addConstr(qel[b, i] <= dur * P_ELH_RATED)
-                m.addConstr(qff[b, i] <= dur * P_FFH_RATED *
+                m.addConstr(qff[b, i] <= dur * phi * P_FFH_NOM *
                             gp.quicksum(z[b, k] for k in K if BUS_CLASSES[k].ffh))
 
             for (n, t), favail in av.items():
@@ -547,7 +582,9 @@ def build_model(eps_cap_t=None, carbon_price_t=CARBON_PRICE_T, eta_el_by_scen=No
                 m.addConstr(rho[n, "off" if w in HEATLESS else "win"]
                             >= site_load)
 
-        m.addConstr(D == gp.quicksum(qff[b, i] for (b, i) in TI) / (phi * DIESEL_LHV))
+        # liters = burner-on time x volumetric rate = qff / (phi x nominal
+        # heat flow) x rate = qff / (phi x FFH_KWH_PER_L)   [Paper 1 convention]
+        m.addConstr(D == gp.quicksum(qff[b, i] for (b, i) in TI) / (phi * FFH_KWH_PER_L))
         diesel[w] = D
 
         energy_cost = (gp.quicksum(tou(t) * DT * c[b, n, t] for (b, n, t) in ckeys)
@@ -563,8 +600,15 @@ def build_model(eps_cap_t=None, carbon_price_t=CARBON_PRICE_T, eta_el_by_scen=No
 
     total_cost = capex + demand_annual + gp.quicksum(HW[w] * opex[w] for w in W)
     shortfall = gp.quicksum(slack_terms) if slack_terms else 0.0
-    m.setObjective(total_cost + SHORTFALL_PENALTY * shortfall, GRB.MINIMIZE)
+    # annual unmet cabin heat (kWh/yr), already day-weighted
+    heat_short = (gp.quicksum(h * v for h, v in heat_slack_terms)
+                  if heat_slack_terms else 0.0)
+    hpen = SHORTFALL_PENALTY if heat_penalty is None else heat_penalty
+    m.setObjective(total_cost + SHORTFALL_PENALTY * shortfall
+                   + hpen * heat_short, GRB.MINIMIZE)
     m._shortfall = shortfall
+    m._heat_short = heat_short
+    m._heat_penalty = hpen
     m._handles = dict(x=x, wch=wch, ysite=ysite, ygrid=ygrid, rho=rho,
                       opex=opex, diesel=diesel, demand_annual=demand_annual,
                       g_add=g_add)
@@ -599,7 +643,9 @@ def solve_and_report(eps_cap_t=None, label="base", quiet=False):
                      for n in SITES for p in CH_CLASSES if wch[n, p].X > 0.5},
         "grid_upgrade_kW": {n: round(h["g_add"][n].getValue(), 0)
                             for n in SITES if h["g_add"][n].getValue() > 1},
-        "monthly_peak_kW": {n: round(rho[n].X, 1) for n in SITES if rho[n].X > 1},
+        "monthly_peak_kW": {n: pk for n in SITES
+                            if (pk := round(max(v.X for (nn, _l), v in rho.items()
+                                                if nn == n), 1)) > 1},
         "annual_demand_charges": round(h["demand_annual"].getValue(), 0),
         "winter_energy_opex": round(sum(SCEN[w][1] * h["opex"][w].getValue()
                                         for w in SCEN), 0),

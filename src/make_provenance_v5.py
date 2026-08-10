@@ -20,9 +20,23 @@ import json
 import os
 
 RES = os.environ.get("PROV_RES", "campaign_v5_results.json")
-LOGDIR = "logs_v5"
+LOGDIR = os.environ.get("PROV_LOGDIR", "logs_v5")
 OUT = os.environ.get("PROV_OUT", "provenance_v5.json")
 MIN_LINES = 20
+
+# Hardware description per host, so the record states where the runs actually
+# happened instead of repeating a campaign-specific split. v7 was laptop plus
+# server; v8 is server only. Unknown hosts fall through to their own name.
+HOSTS = {
+    "manager.inescc.pt": {"machine": "Intel Xeon Gold 6138", "cores": "80",
+                          "ram_gb": "282", "os": "Ubuntu 18.04 LTS"},
+    None: {"machine": "Apple M1 Pro", "cores": "8", "ram_gb": "16",
+           "os": "macOS 26.5"},
+}
+
+
+def _join(vals):
+    return " / ".join(str(v) for v in vals)
 
 
 def log_lines(label):
@@ -52,25 +66,34 @@ for r in runs:
     }
 
 meta = D.get("meta", {})
+
+# hardware and thread counts are read off the records, so the provenance
+# describes the campaign that actually ran
+# infeasible runs are recorded as stubs with no solve metadata, so they carry
+# no host; they must not invent a machine that never ran anything
+hosts = sorted({r["host"] for r in runs if r.get("host")})
+specs = [HOSTS.get(h, {"machine": str(h), "cores": "?", "ram_gb": "?",
+                       "os": "?"}) for h in hosts]
+threads = sorted({r["threads"] for r in runs if r.get("threads")})
+hw_note = ("all runs on a single host" if len(hosts) == 1 else
+           "runs split across hosts; every record carries its own host")
+
 prov = {
     "runs": rows,
     "summary": {"n_runs": len(runs), "with_search_log": n_full,
                 "record_only": n_rec},
-    # runs are split across two machines; every record carries its own host
-    "hardware": {"machine": "Apple M1 Pro / Intel Xeon Gold 6138",
-                 "cores": "8 / 80", "ram_gb": "16 / 282",
-                 "os": "macOS 26.5 / Ubuntu 18.04 LTS",
-                 "hosts": sorted({r.get("host", "unknown") for r in runs}),
-                 "note": ("baseline, frontier and carbon-price runs on the "
-                          "laptop; sensitivity, refinement and division-scale "
-                          "runs on the compute server")},
+    "hardware": {"machine": _join(s["machine"] for s in specs),
+                 "cores": _join(s["cores"] for s in specs),
+                 "ram_gb": _join(s["ram_gb"] for s in specs),
+                 "os": _join(s["os"] for s in specs),
+                 "hosts": hosts, "note": hw_note},
     "solver": {"name": "Gurobi", "version": meta.get("gurobi"),
                "interface": "gurobipy, Python 3.9.13",
-               "threads": "6 (laptop) / 16-24 (server)",
+               "threads": _join(threads) if threads else "unrecorded",
                "params_changed": {
                    "MIPGapAbs": meta.get("abs_gap"),
                    "TimeLimit": "3600 s (7200 s for hard cap and price points)",
-                   "Threads": "6 / 16-24",
+                   "Threads": _join(threads) if threads else "unrecorded",
                    "NodefileStart": "1 GB (tree spilled to disk)",
                    "NodefileDir": "gurobi_nodefiles",
                    "SoftMemLimit": "11 GB",

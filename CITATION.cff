@@ -2,12 +2,12 @@ cff-version: 1.2.0
 message: >-
   If you use this code or these results, please cite the manuscript below
   and this repository.
-title: "Zero-Emission Heating Paradox: reproduction package"
+title: "Diesel Heat in Zero-Emission Fleets: Stochastic Planning and Operation of Cold-Climate Electric Buses — reproduction package"
 type: software
-version: v1.0.1
-date-released: 2026-07-28
+version: v2.0.0
+date-released: 2026-08-10
 repository-code: "https://github.com/jmanzolli/beb-winter-heating-paradox"
-doi: 10.5281/zenodo.21652816
+doi: 10.5281/zenodo.21652815
 license: MIT
 authors:
   - family-names: Manzolli

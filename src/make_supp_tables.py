@@ -21,8 +21,8 @@ import route52_prototype as R
 
 OUT = "supp_tables"
 # both manuscript trees, so the submission master never holds a stale copy
-# submission master only; the long draft at ../Overleaf is a frozen archive
-TEXDIRS = [d for d in (os.path.join("..", "Overleaf", "short", "supp_tables"),)
+# submission master (../Overleaf); superseded long draft is archived
+TEXDIRS = [d for d in (os.path.join("..", "Overleaf", "supp_tables"),)
            if os.path.isdir(os.path.dirname(d))]
 os.makedirs(OUT, exist_ok=True)
 
@@ -248,6 +248,104 @@ bound were returned in every case).}
     write("tab_runs.tex", body)
 
 
+
+# ------------------------------------------------- charger calibration sweep
+def table_calib():
+    """Which depot configuration reproduces the observed Route 52 diesel.
+
+    The fleet is pinned to the observed all-FFH composition and only dispatch
+    is re-optimized, so the sweep identifies the charging capability the
+    observed fuel use implies instead of assuming one.
+    """
+    d = load(os.environ.get("SUPP_CALIB", "calib_chargers.json"))
+    if not d:
+        print("SKIP tab_calib")
+        return
+    obs = d["observed_L"]
+    rows = []
+    for r in sorted(d["cases"], key=lambda r: (r["kW"], r["n"])):
+        if not r["feasible"]:
+            rows.append(f"{r['n']}$\\times${r['kW']} & {r['installed_kW']:,} & "
+                        f"\\multicolumn{{3}}{{c}}{{infeasible}} \\\\")
+            continue
+        dev = 100.0 * (r["diesel_L"] - obs) / obs
+        rows.append(f"{r['n']}$\\times${r['kW']} & {r['installed_kW']:,} & "
+                    f"{r['diesel_L']:,.0f} & {dev:+.1f} & {r['F1']/1e3:,.1f} \\\\")
+    body = r"""\begin{table}[!ht]
+\caption{Depot configurations under the observed fleet composition.}
+\label{tab:supp-calib}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+\textbf{Depot chargers} & \textbf{Installed (kW)} & \textbf{Diesel (L/yr)} &
+\textbf{vs observed (\%%)} & \textbf{$F_1$ (kCAD/yr)} \\
+\midrule
+%s
+\bottomrule
+\end{tabular}
+\end{table}
+""" % ("\n".join(rows),)
+    write("tab_calib.tex", body)
+
+
+# ------------------------------------------- reliability-matched premium
+def table_relmatch():
+    """Cost and out-of-sample compliance of the FFH-free design as the
+    planning reserve is raised. Every design is judged at the standard
+    requirement, not at its own reserve."""
+    m = load(os.environ.get("SUPP_RELMATCH", "relmatch_v8.json"))
+    base = load(os.environ.get("TAB_RES", "campaign_v8_results.json"))
+    if not m or not base:
+        print("SKIP tab_relmatch")
+        return
+    B = {r["label"]: r for r in base["runs"]}
+    b, z = B["econ_lam0"], B["eps_0.00"]
+    M = {r["label"]: r for r in m["runs"]}
+    W = {"mild": 45, "cold": 45, "verycold": 36, "extreme": 19, "severe": 6}
+    T = sum(W.values())
+
+    def compl(fn):
+        d = load(fn)
+        if not d:
+            return None, None
+        L = d["levels"]["heat_cv_0.00"]
+        return (100 * sum(L[w]["p_soc_floor_ok"] * W[w] for w in W) / T,
+                100 * sum(L[w]["p_all_trips_served"] * W[w] for w in W) / T)
+
+    fl0, rs0 = compl(os.environ.get("SUPP_REL_ZERO", "rel_v8_zero_cv00.json"))
+    rows = [f"10 (base) & {(z['F1']-b['F1'])/1e3:+.1f} & {fl0:.2f} & {rs0:.2f} \\\\"]
+    for g in sorted(int(l.split("_r")[1]) for l in M if l.startswith("relmatch_eps0_r")):
+        lab = f"relmatch_eps0_r{g}"
+        fl, rs = compl(f"rel_v8_{lab}.json")
+        if fl is None:
+            continue
+        rows.append(f"{g} & {(M[lab]['F1']-b['F1'])/1e3:+.1f} & {fl:.2f} & {rs:.2f} \\\\")
+    flb, rsb = compl(os.environ.get("SUPP_REL_BASE", "rel_v8_econ_full.json"))
+    body = r"""\begin{table}[!ht]
+\caption{FFH-free design re-selected at higher planning reserves.}
+\label{tab:supp-relmatch}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+\textbf{\makecell{Planning reserve\\$\Gamma^{\mathrm{ret}}$ (kWh)}} &
+\textbf{\makecell{Premium over\\baseline (kCAD/yr)}} &
+\textbf{\makecell{Floor\\(\%% of days)}} &
+\textbf{\makecell{Reserve\\(\%% of days)}} \\
+\midrule
+%s
+\midrule
+\multicolumn{2}{@{}l}{Economic baseline, for reference} & %.2f & %.2f \\
+\bottomrule
+\end{tabular}
+\end{table}
+""" % ("\n".join(rows), flb, rsb)
+    write("tab_relmatch.tex", body)
+
+
 if __name__ == "__main__":
     d = load(os.environ.get("TAB_RES", "campaign_v5_results.json"))
     runs = {r["label"]: r for r in d["runs"]
@@ -258,3 +356,5 @@ if __name__ == "__main__":
     table_reliability()
     table_routes(div)
     table_runs(runs, prov)
+    table_calib()
+    table_relmatch()
