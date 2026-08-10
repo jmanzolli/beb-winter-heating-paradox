@@ -4,7 +4,7 @@ message: >-
   and this repository.
 title: "Diesel Heat in Zero-Emission Fleets: Stochastic Planning and Operation of Cold-Climate Electric Buses — reproduction package"
 type: software
-version: v2.0.0
+version: v2.0.1
 date-released: 2026-08-10
 repository-code: "https://github.com/jmanzolli/beb-winter-heating-paradox"
 doi: 10.5281/zenodo.21652815

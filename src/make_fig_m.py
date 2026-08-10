@@ -165,10 +165,14 @@ def fig_frontier(name="fig4_frontier"):
     # regions of the plane so no box crosses the frontier curve
     DEP = os.environ.get("FIG_DEP", "eps_0.50")
     MIX = os.environ.get("FIG_MIX", "eps_0.20")
-    named = {"econ_lam0": ("Economic\nbaseline", (24.5, 6.0), "right"),
-             DEP: ("Depot-enabled\nabatement", (13.5, 6.5), "left"),
-             MIX: ("Mixed-fleet\ntransition", (18.0, 24.0), "left"),
-             "eps_0.00": ("Full heating\nelectrification", (8.0, 24.0), "left")}
+    # Labels carry only the design identifier and its name; the fleet and
+    # charger counts they used to repeat are in Table IV, and stacking them
+    # here made the boxes large enough to cross the frontier they annotate.
+    named = {"econ_lam0": ("(D0) Economic\nbaseline", (21.0, 14.5), "right"),
+             DEP: ("(D1) Depot capacity\nexpansion", (12.8, 24.5), "left"),
+             MIX: ("(D2) Mixed-fleet\ntransition", (7.0, 7.0), "left"),
+             "eps_0.00": ("(D4) Full heating\nelectrification", (5.0, 40.0),
+                          "left")}
 
     fig, ax = plt.subplots(figsize=(3.5, 2.8))
 
@@ -194,8 +198,8 @@ def fig_frontier(name="fig4_frontier"):
         r = RUNS[lb]
         xr, yr = r["co2_t"], (r["F1"] - f0) / 1e3
         ax.plot(xr, yr, "o", color=BLUE, ms=5.5, zorder=4)
-        ax.annotate(f"{txt}\n{_design_note(r)}", (xr, yr),
-                    textcoords="data", xytext=pos, fontsize=5.6,
+        ax.annotate(txt, (xr, yr),
+                    textcoords="data", xytext=pos, fontsize=6.0,
                     ha=ha, va="bottom", zorder=6,
                     arrowprops=dict(arrowstyle="-", lw=0.5, color="0.4",
                                     shrinkB=3),
@@ -229,7 +233,12 @@ def fig_routes(name="figS_routes"):
         return
     dv = json.load(open(DIVF))["cases"]
     A = dv.get("A_fragmented", {})
-    Dc = dv.get("D_full_coordination", {})
+    # the coordinated reference is the best coordinated solution found, which
+    # need not be case D: constrained variants are feasible for it and can
+    # finish lower at this instance size
+    _coord = [c for k, c in dv.items()
+              if k != "A_fragmented" and c.get("differentiating_cost")]
+    Dc = min(_coord, key=lambda c: c["differentiating_cost"]) if _coord else {}
     per = A.get("per_route")
     if not per or not Dc:
         print("skip fig_routes: incomplete cases")
@@ -248,9 +257,10 @@ def fig_routes(name="figS_routes"):
     ax.set_yticklabels([f"{r}  ({n} buses)" for r, n in zip(routes, nb)],
                        fontsize=6.6)
     ax.axvline(coord, color=BLUE, lw=1.2, ls="--")
-    ax.text(coord + 1, len(routes) - 0.4,
-            f"coordinated\nfleet: {coord:.0f}%", color=BLUE, fontsize=6.6,
-            va="top")
+    # anchor the label in the empty band at the bottom, where the zero-share
+    # routes leave clear space; at the top it sat on the longest bar
+    ax.text(coord + 2, 0.15, f"coordinated fleet: {coord:.0f}%",
+            color=BLUE, fontsize=6.6, va="center", ha="left")
     ax.set_xlabel("FFH-equipped share of the route's fleet (%)")
     ax.set_xlim(0, 105)
     ax.grid(axis="x", color="#DDDDDD", lw=0.4)

@@ -89,7 +89,7 @@ num_in("main", r"burns ([\d,]+)~L of diesel per year", b["diesel_L"], 1, "baseli
 num_in("main", r"at ([\d,]+\.\d)~kCAD/yr, certified", b["F1"] / 1e3, 0.05, "baseline F1")
 num_in("main", r"certified to within (\d+\.\d+)~kCAD", b["abs_gap"] / 1e3, 0.005, "baseline gap")
 num_in("main", r"onboard emissions are ([\d.]+)~t", b["co2_t"], 0.05, "baseline CO2")
-num_in("main", r"That is (\d+)\\% below the ([\d,]+)~L observed",
+num_in("main", r"That is (\d+)\\% below the ([\d,]+)~L that Route~52",
        round(100 * (10305 - b["diesel_L"]) / 10305), 1, "diesel gap pct")
 
 # per-band FFH share and severe diesel
@@ -229,7 +229,37 @@ if os.path.exists(RM):
         num_in("main", r"by at least (\d+)~kCAD/yr",
                prem_top - (z["F1"] - b["F1"]) / 1e3, 1.0, "relmatch delta")
 
+# supplement robustness prose: these were wrong once and nothing else checks them
+_pol = R.get("policy_lam100")
+if _pol:
+    for lab, pat in (("derate_mild", r"emissions fall about (\d+)\\% under the milder"),
+                     ("derate_harsh", r"rise about (\d+)\\% under the harsher")):
+        if lab in R:
+            pct = abs(100 * (R[lab]["co2_t"] - _pol["co2_t"]) / _pol["co2_t"])
+            num_in("supp", pat, pct, 1.0, f"supp {lab} pct")
+
+# marginal abatement structure: the uniform-cost claim was wrong once
+_bp = RAW["breakpoint_prices"]
+num_in("main", r"starts at about ([\d.]+)~kCAD per tonne", _bp[0] / 1e3, 0.1, "marginal start")
+num_in("main", r"reaches ([\d.]+)~kCAD for", _bp[-1] / 1e3, 0.1, "marginal end")
+num_in("main", r"averaging ([\d.]+)~kCAD per tonne over full",
+       (z["F1"] - b["F1"]) / 1e3 / b["co2_t"], 0.1, "average abatement")
+
+# severe-band sweep: verified against the pulled v8 variant archives
+import glob as _glob
+for _f, _tag in (("sev115_v8.json", "1.15"), ("sev130_v8.json", "1.30")):
+    if os.path.exists(_f):
+        _r = {x["label"]: x for x in json.load(open(_f))["runs"]}["econ_lam0"]
+        checks += 1
+        same = (_r["fleet"] == b["fleet"] and _r["chargers"] == b["chargers"])
+        if not same:
+            fails.append(f"[supp] sev sweep {_tag}: design differs from baseline "
+                         f"but prose claims identical")
+
 print(f"audit: {checks} checks")
+
+
+
 
 
 if fails:

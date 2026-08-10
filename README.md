@@ -19,12 +19,14 @@ hand.**
 
 ---
 
-## v2.0.0 supersedes v1.0.1
+## v2.0.x supersedes v1.0.1
 
 Every thermal input was re-estimated from the revised companion study, and the
 vehicle and battery costs were corrected to CAD. All results changed; numbers
-from v1.0.x should not be quoted against this version. The archive here is the
-v8 campaign:
+from v1.0.x should not be quoted against this version. The archive here is the v8 campaign. v2.0.1 corrects v2.0.0's archive to a
+single solve host, adds the severe-band factor sensitivity under current
+inputs (`results/sev115_v8.json`, `sev130_v8.json`), and splits the traction
+table:
 
 | file | what it holds |
 |---|---|

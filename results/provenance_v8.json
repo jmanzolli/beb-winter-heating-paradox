@@ -440,17 +440,6 @@
    "status": 9,
    "phase2_log": null
   },
-  "econ_lam0_ops": {
-   "archive_level": "search_log",
-   "log_lines": 63,
-   "incumbent": 3137829.1,
-   "lower_bound": 3137345.0,
-   "abs_gap": 484.1,
-   "rel_gap": 0.000154,
-   "runtime_s": 0.9,
-   "status": 2,
-   "phase2_log": null
-  },
   "batt_50": {
    "archive_level": "search_log",
    "log_lines": 236,
@@ -459,6 +448,17 @@
    "abs_gap": 756.8,
    "rel_gap": 0.000241,
    "runtime_s": 375.2,
+   "status": 2,
+   "phase2_log": null
+  },
+  "econ_lam0_ops": {
+   "archive_level": "search_log",
+   "log_lines": 126,
+   "incumbent": 3137829.1,
+   "lower_bound": 3137345.0,
+   "abs_gap": 484.2,
+   "rel_gap": 0.000154,
+   "runtime_s": 1.4,
    "status": 2,
    "phase2_log": null
   }
