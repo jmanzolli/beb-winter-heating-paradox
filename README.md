@@ -18,7 +18,9 @@ hand.**
 
 ---
 
-## v2.1.0 (v9 campaign) supersedes v2.0.x
+## v2.1.1 (v9 campaign) supersedes v2.0.x
+
+Zenodo record 10.5281/zenodo.23995255, labelled v2.1.0, was created in error from the v2.0.1 tree and does not contain the v9 campaign; use v2.1.1.
 
 The model and the thermal inputs are those of v2.0.x. The cost inputs are
 aligned with the companion study (Liu et al., *Applied Energy*, in press), so
