@@ -27,7 +27,7 @@ aligned with the companion study (Liu et al., *Applied Energy*, in press), so
 **all results changed**; numbers from v2.0.x should not be quoted against this
 version.
 
-| parameter | v8 (v2.0.x) | v9 (v2.1.0) |
+| parameter | v8 (v2.0.x) | v9 (v2.1.1) |
 |---|---|---|
 | demand charge, Route 52 and division terminals | 12 CAD/kW-month | 18.06 (Toronto Hydro GS 50–999 kW, 2026) |
 | demand charge, division depot | 12 | 16.08 (GS 1,000–4,999 kW, 2026) |
