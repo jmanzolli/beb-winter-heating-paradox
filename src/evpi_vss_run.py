@@ -58,7 +58,7 @@ def solve(label, fix_design=None, only_scen=None, tlim=TLIM):
             m.addConstr(h["ygrid"][n, j] == v)
     m.Params.OutputFlag = 1
     m.Params.LogToConsole = 0
-    m.Params.LogFile = f"logs_v5/evpi_{label}.log"
+    m.Params.LogFile = f"{os.environ.get('CAMP_LOGDIR', 'logs_v5')}/evpi_{label}.log"
     m.Params.MIPGapAbs = C.ABS_GAP
     m.Params.TimeLimit = tlim
     m.Params.Threads = C.THREADS

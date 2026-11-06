@@ -22,13 +22,15 @@ import route52_prototype as R
 OUT = "supp_tables"
 # both manuscript trees, so the submission master never holds a stale copy
 # submission master (../Overleaf); superseded long draft is archived
-TEXDIRS = [d for d in (os.path.join("..", "Overleaf", "supp_tables"),)
+TEXDIRS = [d for d in (os.environ.get("TAB_TEXDIR_SUPP", os.path.join("..", "Overleaf", "supp_tables")),)
            if os.path.isdir(os.path.dirname(d))]
 os.makedirs(OUT, exist_ok=True)
 
 BAND = {"mild": "Mild", "cold": "Cold", "verycold": "Very cold",
         "extreme": "Extreme", "severe": "Severe"}
-W = {"mild": 45, "cold": 45, "verycold": 36, "extreme": 19, "severe": 6}
+# v9: winter-band day weights come from the inputs (v8 hard-coded 45/45/36/19/6)
+W = {w: R.SCEN[w][1] for w in ("mild", "cold", "verycold", "extreme", "severe")}
+WT = sum(W.values())
 
 
 def load(fn):
@@ -41,6 +43,14 @@ def write(name, body):
         os.makedirs(d, exist_ok=True)
         open(os.path.join(d, name), "w").write(stamp + body)
     print("wrote", name)
+
+
+def rev(s):
+    """Red revision mark (rev. 2026-09-28); \\rev is defined in the preamble.
+    TAB_NO_REV=1 writes the content without the mark."""
+    if os.environ.get("TAB_NO_REV"):
+        return s
+    return r"\rev{%s}" % s
 
 
 def esc(s):
@@ -105,18 +115,18 @@ def table_reliability():
             f"{100*Z['p_soc_floor_ok']:.1f} & {100*Z['p_all_trips_served']:.1f} & "
             f"{Z['expected_shortfall_kWh']:.2f} \\\\")
     fa = sum(a["levels"]["heat_cv_0.00"][w]["p_soc_floor_ok"] * W[w]
-             for w in W) / 151
+             for w in W) / WT
     fz = sum(z["levels"]["heat_cv_0.00"][w]["p_soc_floor_ok"] * W[w]
-             for w in W) / 151
+             for w in W) / WT
     sa = sum(a["levels"]["heat_cv_0.00"][w]["p_all_trips_served"] * W[w]
-             for w in W) / 151
+             for w in W) / WT
     sz = sum(z["levels"]["heat_cv_0.00"][w]["p_all_trips_served"] * W[w]
-             for w in W) / 151
+             for w in W) / WT
     ea = sum(a["levels"]["heat_cv_0.00"][w]["expected_shortfall_kWh"] * W[w]
              for w in W)
     ez = sum(z["levels"]["heat_cv_0.00"][w]["expected_shortfall_kWh"] * W[w]
              for w in W)
-    rows.append(r"\midrule \textbf{Winter-weighted} & & 151 & "
+    rows.append(r"\midrule \textbf{Winter-weighted} & & " + f"{WT}" + r" & "
                 f"{100*fa:.2f} & {100*sa:.2f} & {ea:.1f} & "
                 f"{100*fz:.2f} & {100*sz:.2f} & {ez:.1f} \\\\")
     body = r"""\begin{table}[!ht]
@@ -128,8 +138,8 @@ block-correlated traction uncertainty.}
 \setlength{\tabcolsep}{3.4pt}
 \begin{tabular}{@{}lrrrrrrrr@{}}
 \toprule
-& & & \multicolumn{3}{c}{\textbf{Economic baseline}} &
-\multicolumn{3}{c}{\textbf{Full electrification}} \\
+& & & \multicolumn{3}{c}{\textbf{Economic baseline (D0)}} &
+\multicolumn{3}{c}{\textbf{Full heating electrification (D4)}} \\
 \cmidrule(lr){4-6}\cmidrule(lr){7-9}
 \textbf{Band} & \textbf{$T$} & \textbf{d/yr} &
 \textbf{Floor \%%} & \textbf{Reserve \%%} & \textbf{kWh} &
@@ -150,19 +160,24 @@ block-correlated traction uncertainty.}
             ww = lv[key]["winter_weighted"]
             per = " & ".join(f"{100*lv[key][w]['p_all_trips_served']:.1f}"
                              for w in W)
+            # rev. 2026-09-28: winter-weighted floor compliance, quoted in the
+            # manuscript (95.4% at CV 0.40) but absent from the v8 table
+            fl = sum(lv[key][w]["p_soc_floor_ok"] * W[w] for w in W) / sum(W.values())
             rws.append(f"{cv} & {per} & {100*ww['p_day_fully_served']:.1f} & "
+                       f"{rev(f'{100*fl:.1f}')} & "
                        f"{ww['expected_shortfall_kWh_per_winter']:,.1f} \\\\")
         body2 = r"""\begin{table}[!ht]
 \caption{Cabin-heat stress levels: share of reserve-compliant days
-by band on the economic baseline design.}
+by band on the economic baseline design, with the winter-weighted
+shares of reserve-compliant and floor-compliant days.}
 \label{tab:supp-stress}
 \centering
 \footnotesize
-\begin{tabular}{@{}lrrrrrrr@{}}
+\begin{tabular}{@{}lrrrrrrrr@{}}
 \toprule
 \textbf{CV} & \textbf{Mild} & \textbf{Cold} & \textbf{V.\ cold} &
 \textbf{Extreme} & \textbf{Severe} & \textbf{Winter \%%} &
-\textbf{kWh/winter} \\
+\textbf{Floor \%%} & \textbf{kWh/winter} \\
 \midrule
 %s
 \bottomrule
@@ -212,8 +227,12 @@ def table_routes(div):
 def table_runs(runs, prov):
     pr = (prov or {}).get("runs", {})
     rows = []
+    stats = set()
     for l in sorted(runs):
         r = runs[l]
+        stats.add(r["status"])
+        ph = r.get("phase2") or {}
+        mark = r"$^{\ast}$" if ph else ""
         host = r.get("host", "---")
         host = "laptop" if "MacBook" in host else ("server" if "manager" in host
                                                    else host)
@@ -222,14 +241,21 @@ def table_runs(runs, prov):
         rows.append(f"{esc(l)} & {r['F1']/1e3:,.1f} & {r['co2_t']:.2f} & "
                     f"{carbon/1e3:.1f} & {r['obj']/1e3:,.1f} & "
                     f"{r['lb']/1e3:,.1f} & {r['abs_gap']:,.0f} & "
-                    f"{r['time_s']:,.0f} & {r['status']} & {host} \\\\")
+                    f"{r['time_s'] + ph.get('time_ph1', 0.0):,.0f} & "
+                    f"{r['status']}{mark} & {host} \\\\")
+    names = {2: "2 optimal within the declared absolute tolerance",
+             9: "9 time limit", 17: "17 soft memory limit"}
+    st_txt = ", ".join(names.get(k, str(k)) for k in sorted(stats))
     body = r"""\begin{table}[!ht]
 \caption{Complete Route~52 run inventory. $F_1$ is resource cost excluding
 carbon payments; the solver objective is $F_1+\lambda F_2$ for carbon-price
 runs and $F_1$ otherwise, so the two columns differ only where $\lambda>0$.
-Costs in kCAD/yr, gap in CAD/yr. Gurobi status: 2 optimal within the declared
-absolute tolerance, 9 time limit, 17 soft memory limit (a valid incumbent and
-bound were returned in every case).}
+Costs in kCAD/yr, gap in CAD/yr. Gurobi status: %s; a valid incumbent and
+bound were returned in every case. $^{\ast}$Lexicographic run: objective,
+bound and gap are phase-1 values, time is the total of both phases, and the
+status refers to phase~2. The two runs without a solution by design (the
+fixed mean-temperature design on the full scenario set and the $N{-}1$
+charger outage) are omitted.}
 \label{tab:supp-runs}
 \centering
 \scriptsize
@@ -244,7 +270,7 @@ bound were returned in every case).}
 \bottomrule
 \end{tabular}
 \end{table}
-""" % "\n".join(rows)
+""" % (st_txt, "\n".join(rows))
     write("tab_runs.tex", body)
 
 
@@ -303,8 +329,7 @@ def table_relmatch():
     B = {r["label"]: r for r in base["runs"]}
     b, z = B["econ_lam0"], B["eps_0.00"]
     M = {r["label"]: r for r in m["runs"]}
-    W = {"mild": 45, "cold": 45, "verycold": 36, "extreme": 19, "severe": 6}
-    T = sum(W.values())
+    T = WT
 
     def compl(fn):
         d = load(fn)
@@ -318,7 +343,7 @@ def table_relmatch():
     rows = [f"10 (base) & {(z['F1']-b['F1'])/1e3:+.1f} & {fl0:.2f} & {rs0:.2f} \\\\"]
     for g in sorted(int(l.split("_r")[1]) for l in M if l.startswith("relmatch_eps0_r")):
         lab = f"relmatch_eps0_r{g}"
-        fl, rs = compl(f"rel_v8_{lab}.json")
+        fl, rs = compl(f"rel_{os.environ.get('SUPP_VER', 'v8')}_{lab}.json")
         if fl is None:
             continue
         rows.append(f"{g} & {(M[lab]['F1']-b['F1'])/1e3:+.1f} & {fl:.2f} & {rs:.2f} \\\\")
@@ -346,6 +371,70 @@ def table_relmatch():
     write("tab_relmatch.tex", body)
 
 
+# ------------------------------------ burner fuel-rate range (rev. 2026-09-28)
+def envelope(runs, labels, r=1.0):
+    """Lower convex envelope of (F2, F1) over the given designs, with burner
+    fuel consumption scaled by r at FIXED design and dispatch: diesel, its
+    cost and CO2 scale by r, everything else is unchanged. Returns the
+    envelope segments (from, to, slope CAD/t), cheapest design first."""
+    pts = sorted((r * runs[l]["co2_t"],
+                  runs[l]["F1"] + (r - 1) * runs[l]["cost_parts"]["diesel_cost"],
+                  l) for l in labels if l in runs)
+    lower = []
+    for p in pts:
+        while len(lower) >= 2:
+            (x1, y1, _), (x2, y2, _) = lower[-2], lower[-1]
+            if (y2 - y1) * (p[0] - x1) >= (p[1] - y1) * (x2 - x1):
+                lower.pop()
+            else:
+                break
+        lower.append(p)
+    i = min(range(len(lower)), key=lambda k: lower[k][1])
+    seg = lower[:i + 1][::-1]
+    return [(seg[k][2], seg[k + 1][2],
+             (seg[k + 1][1] - seg[k][1]) / (seg[k][0] - seg[k + 1][0]))
+            for k in range(len(seg) - 1)]
+
+
+def table_fuelrate(runs, frontier):
+    """Paper 1 bounds burner consumption at 70-115% of the rated full-load
+    rate. With the designs held fixed this is an exact rescaling, so the
+    table needs no new solve; whether the designs themselves move is the
+    re-solve listed as future work (R1)."""
+    labels = ["econ_lam0"] + list(frontier)
+    b, z = runs["econ_lam0"], runs["eps_0.00"]
+    rows = []
+    for r in (0.70, 1.00, 1.15):
+        env = envelope(runs, labels, r)
+        f1b = b["F1"] + (r - 1) * b["cost_parts"]["diesel_cost"]
+        avg = (z["F1"] - f1b) / (r * b["co2_t"])
+        sl = " & ".join(f"{e[2]/1e3:.2f}" for e in env)
+        rows.append(f"{100*r:.0f} & {r*b['diesel_L']:,.0f} & {r*b['co2_t']:.1f} & "
+                    f"{sl} & {avg/1e3:.2f} \\\\")
+    nseg = len(envelope(runs, labels, 1.0))
+    body = r"""\begin{table}[!ht]
+\caption{Burner fuel-rate range of \cite{liu2026zero} applied to the
+Route~52 designs, with designs and dispatch held fixed: economic-baseline
+diesel and emissions, slopes of the cost--emissions envelope from the
+baseline to full electrification, and the average abatement cost.}
+\label{tab:supp-fuelrate}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}rrr%s r@{}}
+\toprule
+\textbf{\makecell{Fuel rate\\(\%%\ rated)}} & \textbf{\makecell{Diesel\\(L/yr)}} &
+\textbf{\makecell{\COtwo{}\\(t/yr)}} & \multicolumn{%d}{c}{\textbf{Envelope slopes (kCAD/t)}} &
+\textbf{\makecell{Average\\(kCAD/t)}} \\
+\midrule
+%s
+\bottomrule
+\end{tabular}
+\end{table}
+""" % ("r" * nseg, nseg, "\n".join(rows))
+    write("tab_fuelrate.tex", body)
+
+
 if __name__ == "__main__":
     d = load(os.environ.get("TAB_RES", "campaign_v5_results.json"))
     runs = {r["label"]: r for r in d["runs"]
@@ -358,3 +447,4 @@ if __name__ == "__main__":
     table_runs(runs, prov)
     table_calib()
     table_relmatch()
+    table_fuelrate(runs, d.get("frontier_labels", []))

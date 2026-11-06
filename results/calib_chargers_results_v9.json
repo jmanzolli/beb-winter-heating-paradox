@@ -1,0 +1,1005 @@
+{
+ "runs": [
+  {
+   "label": "calib_2x100",
+   "status": 3,
+   "infeasible": true,
+   "lam": 0.0,
+   "eps": null
+  },
+  {
+   "label": "calib_3x100",
+   "status": 3,
+   "infeasible": true,
+   "lam": 0.0,
+   "eps": null
+  },
+  {
+   "label": "calib_4x100",
+   "status": 3,
+   "infeasible": true,
+   "lam": 0.0,
+   "eps": null
+  },
+  {
+   "label": "calib_6x100",
+   "status": 3,
+   "infeasible": true,
+   "lam": 0.0,
+   "eps": null
+  },
+  {
+   "label": "calib_8x100",
+   "lam": 0.0,
+   "eps": null,
+   "obj": 3222660.9,
+   "lb": 3221847.7,
+   "abs_gap": 813.2,
+   "rel_gap": 0.000252,
+   "time_s": 1.3,
+   "status": 2,
+   "phase2": null,
+   "host": "manager.inescc.pt",
+   "threads": 4,
+   "F1": 3222660.9,
+   "co2_t": 26.812,
+   "diesel_L": 10004.3,
+   "diesel_by_scen": {
+    "mild": 3.67,
+    "cold": 74.36,
+    "verycold": 170.86,
+    "extreme": 337.14,
+    "severe": 462.93,
+    "offseason": 0.0
+   },
+   "scen_ops": {
+    "mild": {
+     "T": 2.5,
+     "days": 83,
+     "q_el_kWh": 1999.1,
+     "q_ffh_kWh": 17.6,
+     "diesel_L": 3.67,
+     "precond_kWh": 94.6,
+     "electricity_cost": 684.88
+    },
+    "cold": {
+     "T": -2.5,
+     "days": 38,
+     "q_el_kWh": 1980.9,
+     "q_ffh_kWh": 347.7,
+     "diesel_L": 74.36,
+     "precond_kWh": 138.9,
+     "electricity_cost": 692.7
+    },
+    "verycold": {
+     "T": -7.5,
+     "days": 21,
+     "q_el_kWh": 1882.3,
+     "q_ffh_kWh": 779.0,
+     "diesel_L": 170.86,
+     "precond_kWh": 162.9,
+     "electricity_cost": 695.58
+    },
+    "extreme": {
+     "T": -12.5,
+     "days": 7,
+     "q_el_kWh": 1508.4,
+     "q_ffh_kWh": 1497.5,
+     "diesel_L": 337.14,
+     "precond_kWh": 165.7,
+     "electricity_cost": 695.9
+    },
+    "severe": {
+     "T": -17.5,
+     "days": 2,
+     "q_el_kWh": 1349.7,
+     "q_ffh_kWh": 2001.4,
+     "diesel_L": 462.93,
+     "precond_kWh": 167.2,
+     "electricity_cost": 696.08
+    },
+    "offseason": {
+     "T": 16.8,
+     "days": 214,
+     "q_el_kWh": 0.0,
+     "q_ffh_kWh": 0.0,
+     "diesel_L": 0.0,
+     "precond_kWh": 0.0,
+     "electricity_cost": 417.35
+    }
+   },
+   "cost_parts": {
+    "bus_capital": 2781648.0,
+    "charger_site_capital": 74985.6,
+    "grid_capital": 4010.0,
+    "demand_charges": 132058.8,
+    "electricity": 193350.4,
+    "ffh_om": 18000.0,
+    "diesel_cost": 18608.0,
+    "carbon_cost": 0.0,
+    "diesel_L": 10004.3,
+    "co2_t": 26.8,
+    "F1": 3222660.9
+   },
+   "n_ffh": 18,
+   "n_ext": 0,
+   "fleet": {
+    "NF-std-FFH": 18
+   },
+   "chargers": {
+    "depot:100": 8
+   },
+   "grid_kW": {
+    "depot": 250.0
+   },
+   "precond": {
+    "peak_kW": 23.0,
+    "annual_kWh": 18043.5,
+    "tau_h": 0.5
+   },
+   "rho_kW": {
+    "depot:win": 795.7,
+    "depot:off": 476.2
+   }
+  },
+  {
+   "label": "calib_10x100",
+   "lam": 0.0,
+   "eps": null,
+   "obj": 3238092.0,
+   "lb": 3238078.4,
+   "abs_gap": 13.6,
+   "rel_gap": 4e-06,
+   "time_s": 1.0,
+   "status": 2,
+   "phase2": null,
+   "host": "manager.inescc.pt",
+   "threads": 4,
+   "F1": 3238092.0,
+   "co2_t": 12.322,
+   "diesel_L": 4597.6,
+   "diesel_by_scen": {
+    "mild": 0.0,
+    "cold": 0.77,
+    "verycold": 94.91,
+    "extreme": 258.67,
+    "severe": 382.32,
+    "offseason": 0.0
+   },
+   "scen_ops": {
+    "mild": {
+     "T": 2.5,
+     "days": 83,
+     "q_el_kWh": 2055.7,
+     "q_ffh_kWh": 0.0,
+     "diesel_L": 0.0,
+     "precond_kWh": 45.1,
+     "electricity_cost": 680.64
+    },
+    "cold": {
+     "T": -2.5,
+     "days": 38,
+     "q_el_kWh": 2329.4,
+     "q_ffh_kWh": 3.6,
+     "diesel_L": 0.77,
+     "precond_kWh": 130.4,
+     "electricity_cost": 731.74
+    },
+    "verycold": {
+     "T": -7.5,
+     "days": 21,
+     "q_el_kWh": 2228.6,
+     "q_ffh_kWh": 432.7,
+     "diesel_L": 94.91,
+     "precond_kWh": 162.9,
+     "electricity_cost": 735.25
+    },
+    "extreme": {
+     "T": -12.5,
+     "days": 7,
+     "q_el_kWh": 1857.0,
+     "q_ffh_kWh": 1148.9,
+     "diesel_L": 258.67,
+     "precond_kWh": 165.7,
+     "electricity_cost": 735.85
+    },
+    "severe": {
+     "T": -17.5,
+     "days": 2,
+     "q_el_kWh": 1698.3,
+     "q_ffh_kWh": 1652.9,
+     "diesel_L": 382.32,
+     "precond_kWh": 167.2,
+     "electricity_cost": 736.03
+    },
+    "offseason": {
+     "T": 16.8,
+     "days": 214,
+     "q_el_kWh": 0.0,
+     "q_ffh_kWh": 0.0,
+     "diesel_L": 0.0,
+     "precond_kWh": 0.0,
+     "electricity_cost": 417.35
+    }
+   },
+   "cost_parts": {
+    "bus_capital": 2781648.0,
+    "charger_site_capital": 93732.0,
+    "grid_capital": 4010.0,
+    "demand_charges": 136475.9,
+    "electricity": 195674.5,
+    "ffh_om": 18000.0,
+    "diesel_cost": 8551.5,
+    "carbon_cost": 0.0,
+    "diesel_L": 4597.6,
+    "co2_t": 12.3,
+    "F1": 3238092.0
+   },
+   "n_ffh": 18,
+   "n_ext": 0,
+   "fleet": {
+    "NF-std-FFH": 18
+   },
+   "chargers": {
+    "depot:100": 10
+   },
+   "grid_kW": {
+    "depot": 250.0
+   },
+   "precond": {
+    "peak_kW": 23.0,
+    "annual_kWh": 13618.1,
+    "tau_h": 0.5
+   },
+   "rho_kW": {
+    "depot:win": 844.6,
+    "depot:off": 476.2
+   }
+  },
+  {
+   "label": "calib_12x100",
+   "lam": 0.0,
+   "eps": null,
+   "obj": 3256824.8,
+   "lb": 3256824.8,
+   "abs_gap": 0.0,
+   "rel_gap": 0.0,
+   "time_s": 0.6,
+   "status": 2,
+   "phase2": null,
+   "host": "manager.inescc.pt",
+   "threads": 4,
+   "F1": 3256824.8,
+   "co2_t": 12.18,
+   "diesel_L": 4544.8,
+   "diesel_by_scen": {
+    "mild": 0.0,
+    "cold": 0.77,
+    "verycold": 93.01,
+    "extreme": 257.22,
+    "severe": 380.83,
+    "offseason": 0.0
+   },
+   "scen_ops": {
+    "mild": {
+     "T": 2.5,
+     "days": 83,
+     "q_el_kWh": 2055.7,
+     "q_ffh_kWh": 0.0,
+     "diesel_L": 0.0,
+     "precond_kWh": 45.1,
+     "electricity_cost": 680.54
+    },
+    "cold": {
+     "T": -2.5,
+     "days": 38,
+     "q_el_kWh": 2335.8,
+     "q_ffh_kWh": 3.6,
+     "diesel_L": 0.77,
+     "precond_kWh": 121.2,
+     "electricity_cost": 731.3
+    },
+    "verycold": {
+     "T": -7.5,
+     "days": 21,
+     "q_el_kWh": 2237.3,
+     "q_ffh_kWh": 424.1,
+     "diesel_L": 93.01,
+     "precond_kWh": 162.9,
+     "electricity_cost": 736.27
+    },
+    "extreme": {
+     "T": -12.5,
+     "days": 7,
+     "q_el_kWh": 1863.4,
+     "q_ffh_kWh": 1142.5,
+     "diesel_L": 257.22,
+     "precond_kWh": 165.7,
+     "electricity_cost": 736.59
+    },
+    "severe": {
+     "T": -17.5,
+     "days": 2,
+     "q_el_kWh": 1704.7,
+     "q_ffh_kWh": 1646.5,
+     "diesel_L": 380.83,
+     "precond_kWh": 167.2,
+     "electricity_cost": 736.77
+    },
+    "offseason": {
+     "T": 16.8,
+     "days": 214,
+     "q_el_kWh": 0.0,
+     "q_ffh_kWh": 0.0,
+     "diesel_L": 0.0,
+     "precond_kWh": 0.0,
+     "electricity_cost": 417.35
+    }
+   },
+   "cost_parts": {
+    "bus_capital": 2781648.0,
+    "charger_site_capital": 112478.4,
+    "grid_capital": 4010.0,
+    "demand_charges": 136557.3,
+    "electricity": 195677.8,
+    "ffh_om": 18000.0,
+    "diesel_cost": 8453.3,
+    "carbon_cost": 0.0,
+    "diesel_L": 4544.8,
+    "co2_t": 12.2,
+    "F1": 3256824.8
+   },
+   "n_ffh": 18,
+   "n_ext": 0,
+   "fleet": {
+    "NF-std-FFH": 18
+   },
+   "chargers": {
+    "depot:100": 12
+   },
+   "grid_kW": {
+    "depot": 250.0
+   },
+   "precond": {
+    "peak_kW": 23.0,
+    "annual_kWh": 13268.9,
+    "tau_h": 0.5
+   },
+   "rho_kW": {
+    "depot:win": 845.5,
+    "depot:off": 476.2
+   }
+  },
+  {
+   "label": "calib_2x150",
+   "status": 3,
+   "infeasible": true,
+   "lam": 0.0,
+   "eps": null
+  },
+  {
+   "label": "calib_3x150",
+   "status": 3,
+   "infeasible": true,
+   "lam": 0.0,
+   "eps": null
+  },
+  {
+   "label": "calib_4x150",
+   "status": 3,
+   "infeasible": true,
+   "lam": 0.0,
+   "eps": null
+  },
+  {
+   "label": "calib_6x150",
+   "lam": 0.0,
+   "eps": null,
+   "obj": 3245176.1,
+   "lb": 3244825.2,
+   "abs_gap": 350.9,
+   "rel_gap": 0.000108,
+   "time_s": 0.8,
+   "status": 2,
+   "phase2": null,
+   "host": "manager.inescc.pt",
+   "threads": 4,
+   "F1": 3245176.1,
+   "co2_t": 13.252,
+   "diesel_L": 4944.6,
+   "diesel_by_scen": {
+    "mild": 2.13,
+    "cold": 3.78,
+    "verycold": 96.61,
+    "extreme": 260.91,
+    "severe": 384.62,
+    "offseason": 0.0
+   },
+   "scen_ops": {
+    "mild": {
+     "T": 2.5,
+     "days": 83,
+     "q_el_kWh": 2042.8,
+     "q_ffh_kWh": 10.2,
+     "diesel_L": 2.13,
+     "precond_kWh": 49.4,
+     "electricity_cost": 680.89
+    },
+    "cold": {
+     "T": -2.5,
+     "days": 38,
+     "q_el_kWh": 2319.4,
+     "q_ffh_kWh": 17.7,
+     "diesel_L": 3.78,
+     "precond_kWh": 125.5,
+     "electricity_cost": 731.2
+    },
+    "verycold": {
+     "T": -7.5,
+     "days": 21,
+     "q_el_kWh": 2220.9,
+     "q_ffh_kWh": 440.5,
+     "diesel_L": 96.61,
+     "precond_kWh": 162.9,
+     "electricity_cost": 735.67
+    },
+    "extreme": {
+     "T": -12.5,
+     "days": 7,
+     "q_el_kWh": 1847.0,
+     "q_ffh_kWh": 1158.9,
+     "diesel_L": 260.91,
+     "precond_kWh": 165.7,
+     "electricity_cost": 735.98
+    },
+    "severe": {
+     "T": -17.5,
+     "days": 2,
+     "q_el_kWh": 1688.3,
+     "q_ffh_kWh": 1662.9,
+     "diesel_L": 384.62,
+     "precond_kWh": 167.2,
+     "electricity_cost": 736.16
+    },
+    "offseason": {
+     "T": 16.8,
+     "days": 214,
+     "q_el_kWh": 0.0,
+     "q_ffh_kWh": 0.0,
+     "diesel_L": 0.0,
+     "precond_kWh": 0.0,
+     "electricity_cost": 417.74
+    }
+   },
+   "cost_parts": {
+    "bus_capital": 2781648.0,
+    "charger_site_capital": 101873.4,
+    "grid_capital": 4010.0,
+    "demand_charges": 134679.8,
+    "electricity": 195767.9,
+    "ffh_om": 18000.0,
+    "diesel_cost": 9197.0,
+    "carbon_cost": 0.0,
+    "diesel_L": 4944.6,
+    "co2_t": 13.3,
+    "F1": 3245176.1
+   },
+   "n_ffh": 18,
+   "n_ext": 0,
+   "fleet": {
+    "NF-std-FFH": 18
+   },
+   "chargers": {
+    "depot:150": 6
+   },
+   "grid_kW": {
+    "depot": 250.0
+   },
+   "precond": {
+    "peak_kW": 23.0,
+    "annual_kWh": 13783.1,
+    "tau_h": 0.5
+   },
+   "rho_kW": {
+    "depot:win": 831.3,
+    "depot:off": 471.6
+   }
+  },
+  {
+   "label": "calib_8x150",
+   "lam": 0.0,
+   "eps": null,
+   "obj": 3278762.2,
+   "lb": 3278673.6,
+   "abs_gap": 88.6,
+   "rel_gap": 2.7e-05,
+   "time_s": 0.5,
+   "status": 2,
+   "phase2": null,
+   "host": "manager.inescc.pt",
+   "threads": 4,
+   "F1": 3278762.2,
+   "co2_t": 12.305,
+   "diesel_L": 4591.3,
+   "diesel_by_scen": {
+    "mild": 0.83,
+    "cold": 0.77,
+    "verycold": 92.27,
+    "extreme": 256.46,
+    "severe": 380.24,
+    "offseason": 0.0
+   },
+   "scen_ops": {
+    "mild": {
+     "T": 2.5,
+     "days": 83,
+     "q_el_kWh": 2047.3,
+     "q_ffh_kWh": 4.0,
+     "diesel_L": 0.83,
+     "precond_kWh": 50.9,
+     "electricity_cost": 681.44
+    },
+    "cold": {
+     "T": -2.5,
+     "days": 38,
+     "q_el_kWh": 2339.2,
+     "q_ffh_kWh": 3.6,
+     "diesel_L": 0.77,
+     "precond_kWh": 116.2,
+     "electricity_cost": 732.53
+    },
+    "verycold": {
+     "T": -7.5,
+     "days": 21,
+     "q_el_kWh": 2240.7,
+     "q_ffh_kWh": 420.7,
+     "diesel_L": 92.27,
+     "precond_kWh": 162.9,
+     "electricity_cost": 738.09
+    },
+    "extreme": {
+     "T": -12.5,
+     "days": 7,
+     "q_el_kWh": 1866.8,
+     "q_ffh_kWh": 1139.1,
+     "diesel_L": 256.46,
+     "precond_kWh": 165.7,
+     "electricity_cost": 738.41
+    },
+    "severe": {
+     "T": -17.5,
+     "days": 2,
+     "q_el_kWh": 1707.2,
+     "q_ffh_kWh": 1644.0,
+     "diesel_L": 380.24,
+     "precond_kWh": 167.2,
+     "electricity_cost": 738.48
+    },
+    "offseason": {
+     "T": 16.8,
+     "days": 214,
+     "q_el_kWh": 0.0,
+     "q_ffh_kWh": 0.0,
+     "diesel_L": 0.0,
+     "precond_kWh": 0.0,
+     "electricity_cost": 417.74
+    }
+   },
+   "cost_parts": {
+    "bus_capital": 2781648.0,
+    "charger_site_capital": 135831.1,
+    "grid_capital": 4010.0,
+    "demand_charges": 134796.2,
+    "electricity": 195937.1,
+    "ffh_om": 18000.0,
+    "diesel_cost": 8539.7,
+    "carbon_cost": 0.0,
+    "diesel_L": 4591.3,
+    "co2_t": 12.3,
+    "F1": 3278762.2
+   },
+   "n_ffh": 18,
+   "n_ext": 0,
+   "fleet": {
+    "NF-std-FFH": 18
+   },
+   "chargers": {
+    "depot:150": 8
+   },
+   "grid_kW": {
+    "depot": 250.0
+   },
+   "precond": {
+    "peak_kW": 23.0,
+    "annual_kWh": 13557.2,
+    "tau_h": 0.5
+   },
+   "rho_kW": {
+    "depot:win": 832.6,
+    "depot:off": 471.6
+   }
+  },
+  {
+   "label": "calib_10x150",
+   "lam": 0.0,
+   "eps": null,
+   "obj": 3312631.4,
+   "lb": 3312631.4,
+   "abs_gap": 0.0,
+   "rel_gap": 0.0,
+   "time_s": 0.6,
+   "status": 2,
+   "phase2": null,
+   "host": "manager.inescc.pt",
+   "threads": 4,
+   "F1": 3312631.4,
+   "co2_t": 12.072,
+   "diesel_L": 4504.6,
+   "diesel_by_scen": {
+    "mild": 0.0,
+    "cold": 0.77,
+    "verycold": 91.69,
+    "extreme": 255.86,
+    "severe": 379.43,
+    "offseason": 0.0
+   },
+   "scen_ops": {
+    "mild": {
+     "T": 2.5,
+     "days": 83,
+     "q_el_kWh": 2055.7,
+     "q_ffh_kWh": 0.0,
+     "diesel_L": 0.0,
+     "precond_kWh": 45.1,
+     "electricity_cost": 681.88
+    },
+    "cold": {
+     "T": -2.5,
+     "days": 38,
+     "q_el_kWh": 2341.8,
+     "q_ffh_kWh": 3.6,
+     "diesel_L": 0.77,
+     "precond_kWh": 112.0,
+     "electricity_cost": 732.38
+    },
+    "verycold": {
+     "T": -7.5,
+     "days": 21,
+     "q_el_kWh": 2243.3,
+     "q_ffh_kWh": 418.0,
+     "diesel_L": 91.69,
+     "precond_kWh": 162.9,
+     "electricity_cost": 738.4
+    },
+    "extreme": {
+     "T": -12.5,
+     "days": 7,
+     "q_el_kWh": 1869.4,
+     "q_ffh_kWh": 1136.5,
+     "diesel_L": 255.86,
+     "precond_kWh": 165.7,
+     "electricity_cost": 738.71
+    },
+    "severe": {
+     "T": -17.5,
+     "days": 2,
+     "q_el_kWh": 1710.7,
+     "q_ffh_kWh": 1640.5,
+     "diesel_L": 379.43,
+     "precond_kWh": 167.2,
+     "electricity_cost": 738.89
+    },
+    "offseason": {
+     "T": 16.8,
+     "days": 214,
+     "q_el_kWh": 0.0,
+     "q_ffh_kWh": 0.0,
+     "diesel_L": 0.0,
+     "precond_kWh": 0.0,
+     "electricity_cost": 417.74
+    }
+   },
+   "cost_parts": {
+    "bus_capital": 2781648.0,
+    "charger_site_capital": 169788.9,
+    "grid_capital": 4010.0,
+    "demand_charges": 134828.7,
+    "electricity": 195977.1,
+    "ffh_om": 18000.0,
+    "diesel_cost": 8378.6,
+    "carbon_cost": 0.0,
+    "diesel_L": 4504.6,
+    "co2_t": 12.1,
+    "F1": 3312631.4
+   },
+   "n_ffh": 18,
+   "n_ext": 0,
+   "fleet": {
+    "NF-std-FFH": 18
+   },
+   "chargers": {
+    "depot:150": 10
+   },
+   "grid_kW": {
+    "depot": 250.0
+   },
+   "precond": {
+    "peak_kW": 23.0,
+    "annual_kWh": 12918.5,
+    "tau_h": 0.5
+   },
+   "rho_kW": {
+    "depot:win": 832.9,
+    "depot:off": 471.6
+   }
+  },
+  {
+   "label": "calib_2x300",
+   "status": 3,
+   "infeasible": true,
+   "lam": 0.0,
+   "eps": null
+  },
+  {
+   "label": "calib_3x300",
+   "lam": 0.0,
+   "eps": null,
+   "obj": 3217236.6,
+   "lb": 3216254.4,
+   "abs_gap": 982.2,
+   "rel_gap": 0.000305,
+   "time_s": 1.8,
+   "status": 2,
+   "phase2": null,
+   "host": "manager.inescc.pt",
+   "threads": 4,
+   "F1": 3217236.6,
+   "co2_t": 13.456,
+   "diesel_L": 5020.8,
+   "diesel_by_scen": {
+    "mild": 5.11,
+    "cold": 7.48,
+    "verycold": 86.08,
+    "extreme": 249.61,
+    "severe": 378.84,
+    "offseason": 0.0
+   },
+   "scen_ops": {
+    "mild": {
+     "T": 2.5,
+     "days": 83,
+     "q_el_kWh": 2031.3,
+     "q_ffh_kWh": 24.5,
+     "diesel_L": 5.11,
+     "precond_kWh": 45.1,
+     "electricity_cost": 679.55
+    },
+    "cold": {
+     "T": -2.5,
+     "days": 38,
+     "q_el_kWh": 2310.7,
+     "q_ffh_kWh": 35.0,
+     "diesel_L": 7.48,
+     "precond_kWh": 115.6,
+     "electricity_cost": 730.69
+    },
+    "verycold": {
+     "T": -7.5,
+     "days": 21,
+     "q_el_kWh": 2280.4,
+     "q_ffh_kWh": 392.5,
+     "diesel_L": 86.08,
+     "precond_kWh": 141.7,
+     "electricity_cost": 741.66
+    },
+    "extreme": {
+     "T": -12.5,
+     "days": 7,
+     "q_el_kWh": 1908.7,
+     "q_ffh_kWh": 1108.7,
+     "diesel_L": 249.61,
+     "precond_kWh": 144.4,
+     "electricity_cost": 742.26
+    },
+    "severe": {
+     "T": -17.5,
+     "days": 2,
+     "q_el_kWh": 1724.8,
+     "q_ffh_kWh": 1637.9,
+     "diesel_L": 378.84,
+     "precond_kWh": 146.0,
+     "electricity_cost": 739.16
+    },
+    "offseason": {
+     "T": 16.8,
+     "days": 214,
+     "q_el_kWh": 0.0,
+     "q_ffh_kWh": 0.0,
+     "diesel_L": 0.0,
+     "precond_kWh": 0.0,
+     "electricity_cost": 417.89
+    }
+   },
+   "cost_parts": {
+    "bus_capital": 2781648.0,
+    "charger_site_capital": 74500.1,
+    "grid_capital": 4010.0,
+    "demand_charges": 133892.8,
+    "electricity": 195847.0,
+    "ffh_om": 18000.0,
+    "diesel_cost": 9338.6,
+    "carbon_cost": 0.0,
+    "diesel_L": 5020.8,
+    "co2_t": 13.5,
+    "F1": 3217236.6
+   },
+   "n_ffh": 18,
+   "n_ext": 0,
+   "fleet": {
+    "NF-std-FFH": 18
+   },
+   "chargers": {
+    "depot:300": 3
+   },
+   "grid_kW": {
+    "depot": 250.0
+   },
+   "precond": {
+    "peak_kW": 23.0,
+    "annual_kWh": 12416.7,
+    "tau_h": 0.5
+   },
+   "rho_kW": {
+    "depot:win": 825.1,
+    "depot:off": 469.8
+   }
+  },
+  {
+   "label": "calib_4x300",
+   "lam": 0.0,
+   "eps": null,
+   "obj": 3241079.0,
+   "lb": 3241039.3,
+   "abs_gap": 39.7,
+   "rel_gap": 1.2e-05,
+   "time_s": 0.7,
+   "status": 2,
+   "phase2": null,
+   "host": "manager.inescc.pt",
+   "threads": 4,
+   "F1": 3241079.0,
+   "co2_t": 12.174,
+   "diesel_L": 4542.4,
+   "diesel_by_scen": {
+    "mild": 0.0,
+    "cold": 0.77,
+    "verycold": 92.83,
+    "extreme": 257.38,
+    "severe": 380.96,
+    "offseason": 0.0
+   },
+   "scen_ops": {
+    "mild": {
+     "T": 2.5,
+     "days": 83,
+     "q_el_kWh": 2055.7,
+     "q_ffh_kWh": 0.0,
+     "diesel_L": 0.0,
+     "precond_kWh": 45.1,
+     "electricity_cost": 683.23
+    },
+    "cold": {
+     "T": -2.5,
+     "days": 38,
+     "q_el_kWh": 2344.6,
+     "q_ffh_kWh": 3.6,
+     "diesel_L": 0.77,
+     "precond_kWh": 107.8,
+     "electricity_cost": 733.64
+    },
+    "verycold": {
+     "T": -7.5,
+     "days": 21,
+     "q_el_kWh": 2246.1,
+     "q_ffh_kWh": 423.3,
+     "diesel_L": 92.83,
+     "precond_kWh": 150.2,
+     "electricity_cost": 738.69
+    },
+    "extreme": {
+     "T": -12.5,
+     "days": 7,
+     "q_el_kWh": 1872.2,
+     "q_ffh_kWh": 1143.2,
+     "diesel_L": 257.38,
+     "precond_kWh": 152.9,
+     "electricity_cost": 739.0
+    },
+    "severe": {
+     "T": -17.5,
+     "days": 2,
+     "q_el_kWh": 1713.5,
+     "q_ffh_kWh": 1647.0,
+     "diesel_L": 380.96,
+     "precond_kWh": 154.5,
+     "electricity_cost": 739.19
+    },
+    "offseason": {
+     "T": 16.8,
+     "days": 214,
+     "q_el_kWh": 0.0,
+     "q_ffh_kWh": 0.0,
+     "diesel_L": 0.0,
+     "precond_kWh": 0.0,
+     "electricity_cost": 417.89
+    }
+   },
+   "cost_parts": {
+    "bus_capital": 2781648.0,
+    "charger_site_capital": 99333.4,
+    "grid_capital": 4010.0,
+    "demand_charges": 133458.9,
+    "electricity": 196179.8,
+    "ffh_om": 18000.0,
+    "diesel_cost": 8448.8,
+    "carbon_cost": 0.0,
+    "diesel_L": 4542.4,
+    "co2_t": 12.2,
+    "F1": 3241079.0
+   },
+   "n_ffh": 18,
+   "n_ext": 0,
+   "fleet": {
+    "NF-std-FFH": 18
+   },
+   "chargers": {
+    "depot:300": 4
+   },
+   "grid_kW": {
+    "depot": 250.0
+   },
+   "precond": {
+    "peak_kW": 23.0,
+    "annual_kWh": 12374.5,
+    "tau_h": 0.5
+   },
+   "rho_kW": {
+    "depot:win": 820.3,
+    "depot:off": 469.8
+   }
+  }
+ ],
+ "meta": {
+  "inputs": "route52_inputs_v9.json",
+  "abs_gap": 1000.0,
+  "lex_tol": 500.0,
+  "scen_days": {
+   "mild": 83,
+   "cold": 38,
+   "verycold": 21,
+   "extreme": 7,
+   "severe": 2,
+   "offseason": 214
+  },
+  "ffh_nominal_kw": 35.0,
+  "ffh_useful_kw_by_scen": {
+   "mild": 20.61,
+   "cold": 20.11,
+   "verycold": 19.61,
+   "extreme": 19.1,
+   "severe": 18.6,
+   "offseason": 22.0
+  },
+  "el_heater_rated_kw": 23.0,
+  "reserve_kwh": 10.0,
+  "formulation": "v6 (C1 heater-bounded preconditioning, C2 chi retention, C3 single plug per bus, C4 FFH-free procurement)",
+  "precond_tau_h": 0.5,
+  "precond_max_kwh": 10.0,
+  "gurobi": [
+   11,
+   0,
+   3
+  ],
+  "threads": "all (default)"
+ }
+}

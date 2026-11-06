@@ -32,7 +32,7 @@ ABS_GAP = 1000.0
 LEX_TOL = 500.0
 TLIM = 3600
 TLIM_HARD = 7200
-LOGDIR = "logs_v5"
+LOGDIR = os.environ.get("CAMP_LOGDIR", "logs_v5")
 os.makedirs(LOGDIR, exist_ok=True)
 
 # memory safety (16 GB laptop): a hard branch-and-bound tree caused a Gurobi

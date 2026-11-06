@@ -1,3 +1,25 @@
+# v2.1.0 — v9 re-run (2026-11-05)
+
+Same model and thermal inputs as v8. Only the cost parameters change, to match
+the companion study (Liu et al., Applied Energy, in press, Table C.1):
+
+| parameter | v8 | v9 | source |
+|---|---|---|---|
+| demand charge, Route 52 sites and division terminals | 12 CAD/kW-month | 18.06 | Toronto Hydro GS 50–999 kW, 2026, as in the companion study |
+| demand charge, division depot (4.6–6.3 MW peak) | 12 | 16.08 | Toronto Hydro GS 1,000–4,999 kW, 2026 |
+| extended-battery traction penalty | +2% | +3.7% | 165 Wh/kg, 13,500 kg curb, elasticity 0.7 |
+| charger cost point "160 kCAD" | at 160 kW | at 120 kW | Manzolli et al. 2025 (Sustainable Futures), Charger C |
+
+Charger costs per class become (CAD): 100 kW 97,333 (was 79,429), 150 kW 176,312 (146,571),
+200 kW 203,500 (184,857), 300 kW 257,875 (247,000), 450 kW unchanged.
+
+The parameters are read from the inputs file. With `route52_inputs_v7.json` and
+`garage_inputs_v7.json` the code still reproduces v8 exactly. The originals of the
+edited scripts are in `_backup_2026-11-05_pre-v9/`.
+
+
+---
+
 # Revision changelog (T-ITS revision protocol, deliverable 7)
 
 Status legend: **done** — code, results and manuscript all updated and

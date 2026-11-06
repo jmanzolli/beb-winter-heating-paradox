@@ -52,7 +52,8 @@ def solve(depot_only=False):
 print("solving carbon-price design ...")
 m_opt = solve()
 # cost composition for three frontier designs, read from the campaign record
-_R = json.load(open("campaign_v5_results.json"))
+import os
+_R = json.load(open(os.environ.get("FIG6_RES", "campaign_v5_results.json")))
 _runs = {r["label"]: r for r in _R["runs"]}
 DESIGNS = [("Economic", "econ_lam0"), ("First transition", "eps_0.20"),
            ("Zero emission", "eps_0.00")]

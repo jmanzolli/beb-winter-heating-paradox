@@ -1,0 +1,503 @@
+{
+ "runs": {
+  "policy_lam100": {
+   "archive_level": "search_log",
+   "log_lines": 673,
+   "incumbent": 3211469.7,
+   "lower_bound": 3210631.4,
+   "abs_gap": 838.3,
+   "rel_gap": 0.000261,
+   "runtime_s": 825.9,
+   "status": 2,
+   "phase2_log": null
+  },
+  "det_meanT": {
+   "archive_level": "search_log",
+   "log_lines": 794,
+   "incumbent": 3191045.4,
+   "lower_bound": 3188061.3,
+   "abs_gap": 2984.1,
+   "rel_gap": 0.000935,
+   "runtime_s": 3600.0,
+   "status": 9,
+   "phase2_log": null
+  },
+  "det_design_full_test": {
+   "archive_level": "search_log",
+   "log_lines": 34,
+   "incumbent": null,
+   "lower_bound": null,
+   "abs_gap": null,
+   "rel_gap": null,
+   "runtime_s": null,
+   "status": 3,
+   "phase2_log": null
+  },
+  "frozen_z": {
+   "archive_level": "search_log",
+   "log_lines": 807,
+   "incumbent": 3211307.2,
+   "lower_bound": 3209773.6,
+   "abs_gap": 1533.6,
+   "rel_gap": 0.000478,
+   "runtime_s": 3600.0,
+   "status": 9,
+   "phase2_log": null
+  },
+  "n_minus_1": {
+   "archive_level": "search_log",
+   "log_lines": 43,
+   "incumbent": null,
+   "lower_bound": null,
+   "abs_gap": null,
+   "rel_gap": null,
+   "runtime_s": null,
+   "status": 3,
+   "phase2_log": null
+  },
+  "ffh_om_500": {
+   "archive_level": "search_log",
+   "log_lines": 253,
+   "incumbent": 3202434.2,
+   "lower_bound": 3201439.5,
+   "abs_gap": 994.7,
+   "rel_gap": 0.000311,
+   "runtime_s": 911.1,
+   "status": 2,
+   "phase2_log": null
+  },
+  "ffh_om_2000": {
+   "archive_level": "search_log",
+   "log_lines": 484,
+   "incumbent": 3229500.3,
+   "lower_bound": 3228520.9,
+   "abs_gap": 979.4,
+   "rel_gap": 0.000303,
+   "runtime_s": 2400.1,
+   "status": 2,
+   "phase2_log": null
+  },
+  "grid_100": {
+   "archive_level": "search_log",
+   "log_lines": 664,
+   "incumbent": 3209484.4,
+   "lower_bound": 3208356.5,
+   "abs_gap": 1127.9,
+   "rel_gap": 0.000351,
+   "runtime_s": 3600.1,
+   "status": 9,
+   "phase2_log": null
+  },
+  "grid_300": {
+   "archive_level": "search_log",
+   "log_lines": 676,
+   "incumbent": 3213457.6,
+   "lower_bound": 3212463.8,
+   "abs_gap": 993.8,
+   "rel_gap": 0.000309,
+   "runtime_s": 3390.4,
+   "status": 2,
+   "phase2_log": null
+  },
+  "batt_150": {
+   "archive_level": "search_log",
+   "log_lines": 497,
+   "incumbent": 3211430.9,
+   "lower_bound": 3210439.1,
+   "abs_gap": 991.8,
+   "rel_gap": 0.000309,
+   "runtime_s": 2373.1,
+   "status": 2,
+   "phase2_log": null
+  },
+  "batt_100": {
+   "archive_level": "search_log",
+   "log_lines": 398,
+   "incumbent": 3211342.6,
+   "lower_bound": 3210356.9,
+   "abs_gap": 985.7,
+   "rel_gap": 0.000307,
+   "runtime_s": 1558.1,
+   "status": 2,
+   "phase2_log": null
+  },
+  "batt_300": {
+   "archive_level": "search_log",
+   "log_lines": 803,
+   "incumbent": 3211465.5,
+   "lower_bound": 3210355.7,
+   "abs_gap": 1109.8,
+   "rel_gap": 0.000346,
+   "runtime_s": 3600.1,
+   "status": 9,
+   "phase2_log": null
+  },
+  "derate_mild": {
+   "archive_level": "search_log",
+   "log_lines": 337,
+   "incumbent": 3210479.0,
+   "lower_bound": 3209497.0,
+   "abs_gap": 982.0,
+   "rel_gap": 0.000306,
+   "runtime_s": 1196.0,
+   "status": 2,
+   "phase2_log": null
+  },
+  "derate_harsh": {
+   "archive_level": "search_log",
+   "log_lines": 516,
+   "incumbent": 3213400.1,
+   "lower_bound": 3212407.9,
+   "abs_gap": 992.2,
+   "rel_gap": 0.000309,
+   "runtime_s": 1846.5,
+   "status": 2,
+   "phase2_log": null
+  },
+  "batt_50": {
+   "archive_level": "search_log",
+   "log_lines": 462,
+   "incumbent": 3211535.6,
+   "lower_bound": 3210621.2,
+   "abs_gap": 914.4,
+   "rel_gap": 0.000285,
+   "runtime_s": 2063.1,
+   "status": 2,
+   "phase2_log": null
+  },
+  "reserve_25": {
+   "archive_level": "search_log",
+   "log_lines": 688,
+   "incumbent": 3212919.6,
+   "lower_bound": 3211316.5,
+   "abs_gap": 1603.1,
+   "rel_gap": 0.000499,
+   "runtime_s": 3600.1,
+   "status": 9,
+   "phase2_log": null
+  },
+  "reserve_50": {
+   "archive_level": "search_log",
+   "log_lines": 764,
+   "incumbent": 3216878.7,
+   "lower_bound": 3215545.7,
+   "abs_gap": 1333.0,
+   "rel_gap": 0.000414,
+   "runtime_s": 3600.1,
+   "status": 9,
+   "phase2_log": null
+  },
+  "spare_15": {
+   "archive_level": "search_log",
+   "log_lines": 411,
+   "incumbent": 3833930.4,
+   "lower_bound": 3832965.3,
+   "abs_gap": 965.1,
+   "rel_gap": 0.000252,
+   "runtime_s": 1201.8,
+   "status": 2,
+   "phase2_log": null
+  },
+  "precond_tau_0.25": {
+   "archive_level": "search_log",
+   "log_lines": 824,
+   "incumbent": 3211636.1,
+   "lower_bound": 3210577.6,
+   "abs_gap": 1058.5,
+   "rel_gap": 0.00033,
+   "runtime_s": 3600.1,
+   "status": 9,
+   "phase2_log": null
+  },
+  "precond_tau_1.0": {
+   "archive_level": "search_log",
+   "log_lines": 627,
+   "incumbent": 3211152.2,
+   "lower_bound": 3210177.1,
+   "abs_gap": 975.1,
+   "rel_gap": 0.000304,
+   "runtime_s": 2335.4,
+   "status": 2,
+   "phase2_log": null
+  },
+  "ffh_capex_5000": {
+   "archive_level": "search_log",
+   "log_lines": 708,
+   "incumbent": 3221499.6,
+   "lower_bound": 3220288.6,
+   "abs_gap": 1211.0,
+   "rel_gap": 0.000376,
+   "runtime_s": 3600.1,
+   "status": 9,
+   "phase2_log": null
+  },
+  "ffh_capex_15000": {
+   "archive_level": "search_log",
+   "log_lines": 699,
+   "incumbent": 3244646.6,
+   "lower_bound": 3238684.6,
+   "abs_gap": 5962.0,
+   "rel_gap": 0.001837,
+   "runtime_s": 3600.1,
+   "status": 9,
+   "phase2_log": null
+  },
+  "econ_lam0": {
+   "archive_level": "search_log",
+   "log_lines": 3207,
+   "incumbent": 3209462.5,
+   "lower_bound": 3208683.7,
+   "abs_gap": 778.8,
+   "rel_gap": 0.000243,
+   "runtime_s": 1800.1,
+   "status": 9,
+   "phase2_log": true
+  },
+  "policy_lam100_ops": {
+   "archive_level": "search_log",
+   "log_lines": 76,
+   "incumbent": 3211547.4,
+   "lower_bound": 3211209.6,
+   "abs_gap": 337.8,
+   "rel_gap": 0.000105,
+   "runtime_s": 6.2,
+   "status": 2,
+   "phase2_log": null
+  },
+  "eps_1.00": {
+   "archive_level": "search_log",
+   "log_lines": 670,
+   "incumbent": 3209490.3,
+   "lower_bound": 3208676.7,
+   "abs_gap": 813.6,
+   "rel_gap": 0.000253,
+   "runtime_s": 1800.2,
+   "status": 9,
+   "phase2_log": true
+  },
+  "eps_0.70": {
+   "archive_level": "search_log",
+   "log_lines": 288,
+   "incumbent": 3216254.4,
+   "lower_bound": 3216254.4,
+   "abs_gap": 0.0,
+   "rel_gap": 0.0,
+   "runtime_s": 1800.1,
+   "status": 9,
+   "phase2_log": true
+  },
+  "eps_0.50": {
+   "archive_level": "search_log",
+   "log_lines": 298,
+   "incumbent": 3216611.2,
+   "lower_bound": 3216420.9,
+   "abs_gap": 190.3,
+   "rel_gap": 5.9e-05,
+   "runtime_s": 1800.2,
+   "status": 9,
+   "phase2_log": true
+  },
+  "eps_0.35": {
+   "archive_level": "search_log",
+   "log_lines": 1790,
+   "incumbent": 3234072.4,
+   "lower_bound": 3222942.7,
+   "abs_gap": 11129.7,
+   "rel_gap": 0.003441,
+   "runtime_s": 1800.1,
+   "status": 9,
+   "phase2_log": true
+  },
+  "eps_0.00": {
+   "archive_level": "search_log",
+   "log_lines": 1695,
+   "incumbent": 3274991.9,
+   "lower_bound": 3271748.9,
+   "abs_gap": 3243.0,
+   "rel_gap": 0.00099,
+   "runtime_s": 0.2,
+   "status": 2,
+   "phase2_log": true
+  },
+  "eps_0.10": {
+   "archive_level": "search_log",
+   "log_lines": 1277,
+   "incumbent": 3241725.3,
+   "lower_bound": 3235887.3,
+   "abs_gap": 5838.0,
+   "rel_gap": 0.001801,
+   "runtime_s": 1800.0,
+   "status": 9,
+   "phase2_log": true
+  },
+  "eps_0.20": {
+   "archive_level": "search_log",
+   "log_lines": 939,
+   "incumbent": 3234472.3,
+   "lower_bound": 3233477.5,
+   "abs_gap": 994.8,
+   "rel_gap": 0.000308,
+   "runtime_s": 1800.0,
+   "status": 9,
+   "phase2_log": true
+  },
+  "lam_10000": {
+   "archive_level": "search_log",
+   "log_lines": 1280,
+   "incumbent": 3256429.8,
+   "lower_bound": 3251564.5,
+   "abs_gap": 4865.3,
+   "rel_gap": 0.001494,
+   "runtime_s": 7200.1,
+   "status": 9,
+   "phase2_log": null
+  },
+  "lam_1000": {
+   "archive_level": "search_log",
+   "log_lines": 626,
+   "incumbent": 3225246.8,
+   "lower_bound": 3223786.4,
+   "abs_gap": 1460.4,
+   "rel_gap": 0.000453,
+   "runtime_s": 3600.3,
+   "status": 9,
+   "phase2_log": null
+  },
+  "lam_2000": {
+   "archive_level": "search_log",
+   "log_lines": 377,
+   "incumbent": 3233774.3,
+   "lower_bound": 3232836.4,
+   "abs_gap": 937.9,
+   "rel_gap": 0.00029,
+   "runtime_s": 927.1,
+   "status": 2,
+   "phase2_log": null
+  },
+  "lam_200": {
+   "archive_level": "search_log",
+   "log_lines": 413,
+   "incumbent": 3213413.1,
+   "lower_bound": 3211298.8,
+   "abs_gap": 2114.3,
+   "rel_gap": 0.000658,
+   "runtime_s": 3600.2,
+   "status": 9,
+   "phase2_log": null
+  },
+  "lam_3500": {
+   "archive_level": "search_log",
+   "log_lines": 875,
+   "incumbent": 3244659.2,
+   "lower_bound": 3242097.8,
+   "abs_gap": 2561.4,
+   "rel_gap": 0.000789,
+   "runtime_s": 7200.1,
+   "status": 9,
+   "phase2_log": null
+  },
+  "lam_5000": {
+   "archive_level": "search_log",
+   "log_lines": 573,
+   "incumbent": 3248616.3,
+   "lower_bound": 3243063.1,
+   "abs_gap": 5553.2,
+   "rel_gap": 0.001709,
+   "runtime_s": 3600.1,
+   "status": 9,
+   "phase2_log": null
+  },
+  "lam_500": {
+   "archive_level": "search_log",
+   "log_lines": 424,
+   "incumbent": 3219993.8,
+   "lower_bound": 3217560.8,
+   "abs_gap": 2433.0,
+   "rel_gap": 0.000756,
+   "runtime_s": 3600.1,
+   "status": 9,
+   "phase2_log": null
+  },
+  "bp_lam_1205": {
+   "archive_level": "search_log",
+   "log_lines": 593,
+   "incumbent": 3232779.4,
+   "lower_bound": 3222418.8,
+   "abs_gap": 10360.6,
+   "rel_gap": 0.003205,
+   "runtime_s": 3600.2,
+   "status": 9,
+   "phase2_log": null
+  },
+  "bp_lam_3766": {
+   "archive_level": "search_log",
+   "log_lines": 714,
+   "incumbent": 3245374.0,
+   "lower_bound": 3241149.1,
+   "abs_gap": 4224.9,
+   "rel_gap": 0.001302,
+   "runtime_s": 3600.1,
+   "status": 9,
+   "phase2_log": null
+  },
+  "bp_lam_687": {
+   "archive_level": "search_log",
+   "log_lines": 487,
+   "incumbent": 3222187.0,
+   "lower_bound": 3218307.0,
+   "abs_gap": 3880.0,
+   "rel_gap": 0.001204,
+   "runtime_s": 3600.1,
+   "status": 9,
+   "phase2_log": null
+  },
+  "econ_lam0_ops": {
+   "archive_level": "search_log",
+   "log_lines": 76,
+   "incumbent": 3209936.8,
+   "lower_bound": 3209375.9,
+   "abs_gap": 560.9,
+   "rel_gap": 0.000175,
+   "runtime_s": 3.5,
+   "status": 2,
+   "phase2_log": null
+  }
+ },
+ "summary": {
+  "n_runs": 42,
+  "with_search_log": 42,
+  "record_only": 0
+ },
+ "hardware": {
+  "machine": "Intel Xeon Gold 6138",
+  "cores": "80",
+  "ram_gb": "282",
+  "os": "Ubuntu 18.04 LTS",
+  "hosts": [
+   "manager.inescc.pt"
+  ],
+  "note": "all runs on a single host"
+ },
+ "solver": {
+  "name": "Gurobi",
+  "version": [
+   11,
+   0,
+   3
+  ],
+  "interface": "gurobipy, Python 3.9.13",
+  "threads": "4 / 6 / 8 / 14",
+  "params_changed": {
+   "MIPGapAbs": 1000.0,
+   "TimeLimit": "3600 s (7200 s for hard cap and price points)",
+   "Threads": "4 / 6 / 8 / 14",
+   "NodefileStart": "1 GB (tree spilled to disk)",
+   "NodefileDir": "gurobi_nodefiles",
+   "SoftMemLimit": "11 GB",
+   "LogToConsole": 0
+  },
+  "seed": "default (not varied)",
+  "mip_start": "recorded design used as warm start in the frontier refinement pass"
+ },
+ "disclosure": "Solver logs are archived for all 42 of 42 runs."
+}

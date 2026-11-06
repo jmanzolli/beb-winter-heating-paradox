@@ -89,7 +89,10 @@ class BusClass:
 # converted at the Paper 1 exchange rate 1.37 CAD/USD.
 BATT_COST = 205.5
 BUS_BASE = 1_370_000.0
-MASS_PEN_EXT = 0.02
+# v9 (2026-11): cost parameters below can be overridden from the inputs file
+# so the v9 runs adopt the companion study's values while the v8 inputs still
+# reproduce v8 exactly (every default here is the v8 value).
+MASS_PEN_EXT = float(INP.get("mass_pen_ext", 0.02))
 BUS_CLASSES = [
     BusClass("NF-std-FFH",   525.0, True,  BUS_BASE, 0.0),
     BusClass("NF-std-eOnly", 525.0, False, BUS_BASE, 0.0),
@@ -114,20 +117,37 @@ SITE_FIXED_COST = 150_000.0   # $ per newly activated terminal charging site
                               # (civil works, switchgear, interconnection) TODO source
 def max_ch(n):                # depot must refill whole fleet overnight
     return 64 if n == "depot" else 8
+# Cost points (kW, CAD). v8 placed the 160 kCAD point at 160 kW; the source
+# (Manzolli et al. 2025, Sustainable Futures, Charger C) gives 120 kW.
+CHARGER_COST_POINTS = [tuple(p) for p in INP.get(
+    "charger_cost_points",
+    [(50, 40_000), (90, 66_000), (160, 160_000), (440, 334_000)])]
 def charger_cost(p):
-    pts = [(50, 40_000), (90, 66_000), (160, 160_000), (440, 334_000)]
+    pts = CHARGER_COST_POINTS
     if p <= pts[0][0]: return pts[0][1]
     for (p1, c1), (p2, c2) in zip(pts, pts[1:]):
         if p <= p2:
             return c1 + (c2 - c1) * (p - p1) / (p2 - p1)
     return pts[-1][1] * p / pts[-1][0]
 
-def tou(t):
+# v9: if the inputs carry an hourly price profile (season -> 24 values,
+# hour index = hour starting), it replaces the TOU schedule below.
+ENERGY_PRICE_HOURLY = INP.get("energy_price_hourly")
+def tou(t, w=None):
+    if ENERGY_PRICE_HOURLY:
+        season = "offseason" if (w is not None and w in HEATLESS) else "winter"
+        return ENERGY_PRICE_HOURLY[season][int(step_hour(t)) % 24]
     h = step_hour(t)
     if 7 <= h < 11 or 17 <= h < 19: return 0.182
     if 11 <= h < 17:                return 0.122
     return 0.087
-DEMAND_CHARGE_MONTH = 12.0
+DEMAND_CHARGE_MONTH = float(INP.get("demand_charge_month", 12.0))
+# per-site override (e.g. a depot in a larger rate class); other sites use
+# DEMAND_CHARGE_MONTH
+DEMAND_CHARGE_BY_SITE = {n: float(v) for n, v in
+                         INP.get("demand_charge_by_site", {}).items()}
+def demand_rate(n):
+    return DEMAND_CHARGE_BY_SITE.get(n, DEMAND_CHARGE_MONTH)
 WINTER_MONTHS = 5
 OFFSEASON_MONTHS = 7
 DIESEL_PRICE = 1.86
@@ -142,6 +162,15 @@ FFH_FUEL_KG_H = 3.6
 DIESEL_DENSITY_KG_L = 0.837
 FFH_KWH_PER_L = FFH_NOM_KW / (FFH_FUEL_KG_H / DIESEL_DENSITY_KG_L)
 CARBON_PRICE_T = 100.0
+# v9 add-ons (defaults = v8): cabin-heat demand multiplier (companion study's
+# structural range, -6% to +3.5%), burner fuel-rate multiplier (70-115% of
+# rated), battery wear cost per kWh charged, minimum depot plug session
+# (time steps), and heater efficiency/COP by scenario (heat-pump variant).
+HEAT_DEMAND_MULT = float(INP.get("heat_demand_mult", 1.0))
+FUEL_RATE_MULT = float(INP.get("fuel_rate_mult", 1.0))
+BATTERY_WEAR_CAD_KWH = float(INP.get("battery_wear_cad_per_kwh", 0.0))
+MIN_PLUG_STEPS = int(INP.get("min_plug_steps", 1))
+ETA_EL_BY_SCEN = INP.get("eta_el_by_scen")
 
 # scenarios: ECCC Toronto City, winters 2024-25 & 2025-26 (see fit_inputs.py)
 # + off-season (Apr-Oct, zero cabin heat) when present in the input file (v5)
@@ -187,8 +216,11 @@ def q_heat_rate(T_amb, f_stop, v):
 # scale, New Flyer). Replaces the linear 0.5192 + 0.0054 T form.
 GAMMA_T, KAPPA_T = 0.3301, 0.0117
 
+# v9 add-on: shift of the logit intercept to move the fleet-average useful
+# fraction across the companion study's admissible range (0.55-0.60)
+PHI_LOGIT_SHIFT = float(INP.get("phi_logit_shift", 0.0))
 def phi_useful(T_amb):
-    return 1.0 / (1.0 + math.exp(-(GAMMA_T + KAPPA_T * T_amb)))
+    return 1.0 / (1.0 + math.exp(-(GAMMA_T + PHI_LOGIT_SHIFT + KAPPA_T * T_amb)))
 
 # --- traction: fitted interface (Choga-style), drivetrain only --------------
 # v7 override: if the instance carries per-band intensity tables
@@ -413,15 +445,15 @@ def build_model(eps_cap_t=None, carbon_price_t=CARBON_PRICE_T, eta_el_by_scen=No
     PERIODS = ["win", "off"]
     N_MONTHS = {"win": WINTER_MONTHS, "off": OFFSEASON_MONTHS}
     rho = m.addVars(N, PERIODS, lb=0.0, name="rho_period")
-    demand_annual = DEMAND_CHARGE_MONTH * gp.quicksum(
-        N_MONTHS[l] * rho[n, l] for n in N for l in PERIODS)
+    demand_annual = gp.quicksum(
+        demand_rate(n) * N_MONTHS[l] * rho[n, l] for n in N for l in PERIODS)
 
     opex, diesel = {}, {}
     m._scen = {}
     for w in W:
         T_amb = SCEN[w][0]
         phi = phi_useful(T_amb)
-        eta_el_w = (eta_el_by_scen or {}).get(w, ETA_EL)
+        eta_el_w = (eta_el_by_scen or ETA_EL_BY_SCEN or {}).get(w, ETA_EL)
         cap_der, acc_der = DERATE[w]
         acc_w = BUS_ACCEPT * acc_der
 
@@ -432,6 +464,18 @@ def build_model(eps_cap_t=None, carbon_price_t=CARBON_PRICE_T, eta_el_by_scen=No
         z = m.addVars(B, K, vtype=GRB.BINARY, name=f"z_{w}")
         u = m.addVars(ckeys, vtype=GRB.BINARY, name=f"u_{w}")
         c = m.addVars(ckeys, lb=0.0, name=f"c_{w}")
+        # v9 add-on: minimum depot plug session. A bus that plugs in at the
+        # depot stays plugged for MIN_PLUG_STEPS consecutive steps (or until
+        # its depot dwell ends), so plugs cannot rotate buses every 15 min.
+        if MIN_PLUG_STEPS > 1:
+            for b in B:
+                dset = {t for (n_, t) in AVAIL[b] if n_ == "depot"}
+                for t in sorted(dset):
+                    prev = u[b, "depot", t - 1] if (t - 1) in dset else 0.0
+                    for k in range(1, MIN_PLUG_STEPS):
+                        if (t + k) in dset:
+                            m.addConstr(u[b, "depot", t + k]
+                                        >= u[b, "depot", t] - prev)
         ppre = m.addVars(pkeys, lb=0.0, name=f"ppre_{w}")
         upre = m.addVars(pkeys, vtype=GRB.BINARY, name=f"upre_{w}")
         qel = m.addVars(TI, lb=0.0, name=f"qel_{w}")
@@ -460,7 +504,7 @@ def build_model(eps_cap_t=None, carbon_price_t=CARBON_PRICE_T, eta_el_by_scen=No
             for i, tr in enumerate(blk.trips):
                 tm, hm = LM.get((w, b, i), (1.0, 1.0))
                 qtrip[i] = (0.0 if w in HEATLESS
-                            else hm * q_heat_rate(T_amb, tr.f_stop, tr.speed)
+                            else hm * HEAT_DEMAND_MULT * q_heat_rate(T_amb, tr.f_stop, tr.speed)
                             * tr.dur_h)
                 dist = tr.dist_km + (DEADHEAD_KM if i in (0, nt - 1) else 0.0)
                 # branch names are 'r<route>_<variant>' (e.g. r52_E0); the
@@ -584,11 +628,16 @@ def build_model(eps_cap_t=None, carbon_price_t=CARBON_PRICE_T, eta_el_by_scen=No
 
         # liters = burner-on time x volumetric rate = qff / (phi x nominal
         # heat flow) x rate = qff / (phi x FFH_KWH_PER_L)   [Paper 1 convention]
-        m.addConstr(D == gp.quicksum(qff[b, i] for (b, i) in TI) / (phi * FFH_KWH_PER_L))
+        m.addConstr(D == FUEL_RATE_MULT * gp.quicksum(qff[b, i] for (b, i) in TI)
+                    / (phi * FFH_KWH_PER_L))
         diesel[w] = D
 
-        energy_cost = (gp.quicksum(tou(t) * DT * c[b, n, t] for (b, n, t) in ckeys)
-                       + gp.quicksum(tou(t) * DT * ppre[b, t] for (b, t) in pkeys))
+        energy_cost = (gp.quicksum(tou(t, w) * DT * c[b, n, t] for (b, n, t) in ckeys)
+                       + gp.quicksum(tou(t, w) * DT * ppre[b, t] for (b, t) in pkeys))
+        # v9 add-on: battery wear priced per kWh charged into the pack
+        if BATTERY_WEAR_CAD_KWH:
+            energy_cost = energy_cost + BATTERY_WEAR_CAD_KWH * ETA_CH * DT * gp.quicksum(
+                c[b, n, t] for (b, n, t) in ckeys)
         opex[w] = energy_cost + DIESEL_PRICE * D \
                   + carbon_price_t * CO2_PER_L * D / 1000.0
         m._scen[w] = dict(z=z, u=u, c=c, ppre=ppre, upre=upre, qel=qel, qff=qff,

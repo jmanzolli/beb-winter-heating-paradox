@@ -1,6 +1,6 @@
 {
-  "title": "Diesel Heat in Zero-Emission Fleets: reproduction package",
-  "description": "Code, inputs, archived solver results and logs reproducing every number, table and figure of 'Diesel Heat in Zero-Emission Fleets: Stochastic Planning and Operation of Cold-Climate Electric Buses'. Two-stage stochastic MILP for cold-climate battery-electric bus fleet planning with fuel-fired-heater retention, EVSE-coupled preconditioning, emissions policy and division-scale coordination. This version (v2.0.1) supersedes v1.0.1: every thermal input was re-estimated from the revised companion study and the vehicle and battery costs were corrected to CAD, so all results changed. It adds the implied depot-configuration sweep, the reliability-matched premium, and a soft cabin-heat balance used to compute the value of the stochastic solution. v2.0.1 corrects the archive of v2.0.0: one diagnostic re-solve had been run on a different host, and the record and provenance now come from a single machine; it also adds the severe-band factor sensitivity re-run under the current inputs and the split traction tables.",
+  "title": "Diesel Heating in Zero-Emission Bus Fleets: Stochastic Planning under Winter Uncertainty: reproduction package",
+  "description": "Code, inputs, archived solver results and logs reproducing every number, table and figure of 'Diesel Heating in Zero-Emission Bus Fleets: Stochastic Planning under Winter Uncertainty'. Two-stage stochastic MILP for cold-climate battery-electric bus fleet planning with fuel-fired-heater retention, EVSE-coupled preconditioning, emissions policy and division-scale coordination. This version (v2.1.0, the v9 campaign) supersedes v2.0.1: the cost inputs are aligned with the companion study (Liu et al., Applied Energy, in press): 2026 Toronto Hydro demand charges, a +3.7% extended-battery traction penalty, the corrected charger cost point, and an hourly energy price at the companion study's 0.12 CAD/kWh level; scenario weights come from 24 winters of ECCC data. All results changed. It adds sensitivity variants for the companion study's declared ranges, heat-pump heating, minimum plug sessions, battery wear and daily-minimum weights.",
   "creators": [
     {
       "name": "Manzolli, Jônatas Augusto",
@@ -33,5 +33,6 @@
     "charging infrastructure",
     "MILP",
     "reproducibility"
-  ]
+  ],
+  "version": "v2.1.0"
 }

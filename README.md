@@ -1,11 +1,10 @@
-# Diesel Heat in Zero-Emission Fleets — reproduction package
+# Diesel Heating in Zero-Emission Bus Fleets — reproduction package
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21652815.svg)](https://doi.org/10.5281/zenodo.21652815)
 
 Code, inputs, results, and solver logs for:
 
-> **Diesel Heat in Zero-Emission Fleets: Stochastic Planning and Operation
-> of Cold-Climate Electric Buses**
+> **Diesel Heating in Zero-Emission Bus Fleets: Stochastic Planning under Winter Uncertainty**
 
 A two-stage stochastic MILP that jointly selects bus heating and battery
 specifications, charging infrastructure, terminal activation, and grid
@@ -18,6 +17,59 @@ this repository from the archived result files. Nothing is transcribed by
 hand.**
 
 ---
+
+## v2.1.0 (v9 campaign) supersedes v2.0.x
+
+The model and the thermal inputs are those of v2.0.x. The cost inputs are
+aligned with the companion study (Liu et al., *Applied Energy*, in press), so
+**all results changed**; numbers from v2.0.x should not be quoted against this
+version.
+
+| parameter | v8 (v2.0.x) | v9 (v2.1.0) |
+|---|---|---|
+| demand charge, Route 52 and division terminals | 12 CAD/kW-month | 18.06 (Toronto Hydro GS 50–999 kW, 2026) |
+| demand charge, division depot | 12 | 16.08 (GS 1,000–4,999 kW, 2026) |
+| extended-battery traction penalty | +2% | +3.7% |
+| charger cost point 160 kCAD | at 160 kW | at 120 kW |
+| energy price | representative TOU | 0.12 CAD/kWh level + hourly HOEP deviation |
+| scenario weights | two winters | 24 winters of ECCC daily means (83/38/21/7/2 days) |
+| division stopping rule | 1% or 4 h | 0.5% or 6 h |
+
+| file | what it holds |
+|---|---|
+| `results/campaign_v9_results.json` | Route 52 campaign (40 feasible runs + 2 infeasible by construction) |
+| `results/campaign_division_v9.json` | division cases A, C, D |
+| `results/provenance_v9.json` | per-run provenance |
+| `results/rel_v9_*.json`, `results/relmatch_v9.json` | out-of-sample reliability and raised-reserve designs |
+| `results/evpi_vss_v9.json` | soft heat balance and value of the stochastic solution |
+| `results/calib_chargers_v9.json` | implied depot-configuration sweep |
+| `results/addon_*_v9.json`, `sev115_v9.json`, `sev130_v9.json` | sensitivity variants (companion-study ranges, heat pump, plug sessions, wear, weights, severe traction) |
+| `results/figdata_price_v9.json` | depot load and hourly price for the price figure |
+| `configs/route52_inputs_v9*.json`, `garage_inputs_v9.json`, `eccc_winter_bands_v9.json` | v9 instances and the 24-winter weather record |
+| `logs/solver_logs_v9.tar.gz` | all v9 solver logs |
+
+Regenerate every table and figure of the v9 manuscript (from `src/`, with the
+`configs/` and `results/` files copied next to the scripts):
+
+```bash
+export ROUTE_INPUTS=route52_inputs_v9.json TAB_NO_REV=1
+export TAB_RES=campaign_v9_results.json TAB_DIV=campaign_division_v9.json
+export TAB_PROV=provenance_v9.json
+export TAB_REL_BASE=rel_v9_econ_full.json TAB_REL_ZERO=rel_v9_zero_cv00.json
+export SUPP_REL_BASE=$TAB_REL_BASE SUPP_REL_ZERO=$TAB_REL_ZERO SUPP_REL_FULL=$TAB_REL_BASE
+export SUPP_CALIB=calib_chargers_v9.json SUPP_RELMATCH=relmatch_v9.json SUPP_VER=v9
+python3 make_tables_v6.py && python3 make_supp_tables.py
+FIG_RES=$TAB_RES FIG_DIV=$TAB_DIV FIG_DETBAND=detband_v9.json \
+FIG_REL_BASE=$TAB_REL_BASE FIG_REL_ZERO=$TAB_REL_ZERO python3 make_fig_m.py
+V9_DIR=. V9_WEATHER=eccc_winter_bands_v9.json python3 make_figs_v9extra.py
+CHECK_RES=$TAB_RES CHECK_PROV=$TAB_PROV python3 check_results_v5.py   # failures: 0
+```
+
+The campaign itself was run with `run_all_v9.sh` and, after the first eight
+hours, `run_rest_v9.sh`, which runs the same solves as one-label shards in
+parallel (`shard_solve_v9.py`, `core_finish_v9.py`).
+
+The v8 archive below is kept unchanged for reference.
 
 ## v2.0.x supersedes v1.0.1
 

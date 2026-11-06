@@ -73,6 +73,8 @@ def limits(m, label, tlim=TLIM, gap=ABS_GAP):
     m.Params.OutputFlag = 0
     m.Params.LogFile = f"{LOGDIR}/{label}.log"
     m.Params.MIPGapAbs = gap
+    # v9: optional relative-gap stop (e.g. 0.005); default = Gurobi's 1e-4
+    m.Params.MIPGap = float(os.environ.get("DIV_MIPGAP", 1e-4))
     m.Params.TimeLimit = tlim
     m.Params.Threads = THREADS
     m.Params.NodefileStart = NODEFILE_GB

@@ -1,0 +1,87 @@
+{
+ "heat_penalty_CAD_per_kWh": 1000.0,
+ "runs": {
+  "RP_stochastic": {
+   "label": "RP_stochastic",
+   "objective": 3209697.3,
+   "bound": 3208743.3,
+   "abs_gap": 954.0,
+   "resource_cost": 3209697.3,
+   "unmet_heat_kWh_yr": 0.0,
+   "penalty_cost": 0.0,
+   "co2_t": 19.665,
+   "time_s": 1034.2
+  },
+  "EEV_meantemp": {
+   "label": "EEV_meantemp",
+   "objective": 17119071.2,
+   "bound": 17107604.6,
+   "abs_gap": 11466.6,
+   "resource_cost": 3192813.7,
+   "unmet_heat_kWh_yr": 13926.3,
+   "penalty_cost": 13926257.5,
+   "co2_t": 0.0,
+   "time_s": 1800.0
+  },
+  "WS_by_band": {
+   "mild": {
+    "label": "WS_mild",
+    "objective": 2979276.0,
+    "bound": 2978277.1,
+    "abs_gap": 998.9,
+    "resource_cost": 2979276.0,
+    "unmet_heat_kWh_yr": 0.0,
+    "penalty_cost": 0.0,
+    "co2_t": 0.176,
+    "time_s": 49.9
+   },
+   "cold": {
+    "label": "WS_cold",
+    "objective": 2948675.8,
+    "bound": 2947855.1,
+    "abs_gap": 820.7,
+    "resource_cost": 2948675.8,
+    "unmet_heat_kWh_yr": 0.0,
+    "penalty_cost": 0.0,
+    "co2_t": 51.232,
+    "time_s": 212.4
+   },
+   "verycold": {
+    "label": "WS_verycold",
+    "objective": 2936667.0,
+    "bound": 2928946.7,
+    "abs_gap": 7720.3,
+    "resource_cost": 2936667.0,
+    "unmet_heat_kWh_yr": 0.0,
+    "penalty_cost": 0.0,
+    "co2_t": 29.513,
+    "time_s": 600.0
+   },
+   "extreme": {
+    "label": "WS_extreme",
+    "objective": 2929791.9,
+    "bound": 2913687.8,
+    "abs_gap": 16104.1,
+    "resource_cost": 2929791.9,
+    "unmet_heat_kWh_yr": 0.0,
+    "penalty_cost": 0.0,
+    "co2_t": 12.861,
+    "time_s": 600.0
+   },
+   "severe": {
+    "label": "WS_severe",
+    "objective": 2923121.5,
+    "bound": 2907016.4,
+    "abs_gap": 16105.1,
+    "resource_cost": 2923121.5,
+    "unmet_heat_kWh_yr": 0.0,
+    "penalty_cost": 0.0,
+    "co2_t": 4.204,
+    "time_s": 600.0
+   }
+  }
+ },
+ "VSS": 13909373.9,
+ "VSS_resource_only": -16883.6,
+ "EEV_unmet_heat_kWh_yr": 13926.3
+}

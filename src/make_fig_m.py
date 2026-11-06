@@ -40,7 +40,7 @@ plt.rcParams.update({
 OUT = "ieee_figs"
 os.makedirs(OUT, exist_ok=True)
 # submission master (../Overleaf); superseded long draft is archived
-FIGDIRS = [d for d in ("../Overleaf/figures",)
+FIGDIRS = [d for d in ("../overleaf-git/figures",)
            if os.path.isdir(d)]
 
 RES = os.environ.get("FIG_RES", "campaign_v5_results.json")
@@ -82,22 +82,20 @@ def fig_ops(name="fig3_ops"):
     qel = [so[w]["q_el_kWh"] for w in BANDS]
     qff = [so[w]["q_ffh_kWh"] for w in BANDS]
     dsl = [so[w]["diesel_L"] for w in BANDS]
-    xt = [f"{BAND_LBL[w]}\n{so[w]['T']:+.1f}°C\n{so[w]['days']} d"
-          for w in BANDS]
+    xt = [f"{BAND_LBL[w]}\n{so[w]['T']:+.1f}°C" for w in BANDS]
 
-    fig, (a, b) = plt.subplots(2, 1, figsize=(3.5, 3.35))
+    fig, (a, b) = plt.subplots(2, 1, figsize=(3.5, 2.5), sharex=True)
 
     a.bar(x, pre, color=TEAL, label="Preconditioning", width=0.6)
     a.bar(x, qel, bottom=pre, color=BLUE, label="Electric heating",
           width=0.6)
     a.bar(x, qff, bottom=[p + q for p, q in zip(pre, qel)], color=ORANGE,
           label="Fuel-fired heating", width=0.6)
-    a.set_ylabel("Delivered cabin heat (kWh/day)")
-    a.set_xticks(list(x))
-    a.set_xticklabels(xt, fontsize=6.4)
-    a.legend(loc="lower center", bbox_to_anchor=(0.5, 1.02), ncol=3,
+    a.set_ylabel("Cabin heat\n(kWh/day)")
+    a.legend(loc="lower left", bbox_to_anchor=(0.0, 1.0), ncol=3,
              handlelength=1.0, columnspacing=0.9, fontsize=6.4)
-    a.set_title("(a)", fontsize=9, fontweight="bold", pad=22)
+    a.text(-0.02, 1.0, "(a)", transform=a.transAxes, fontsize=9,
+           fontweight="bold", ha="right", va="bottom")
     tots = [p + q + f for p, q, f in zip(pre, qel, qff)]
     a.set_ylim(0, max(tots) * 1.14)
     # FFH share printed where the burner contributes materially
@@ -108,7 +106,7 @@ def fig_ops(name="fig3_ops"):
                    fontsize=6.3, color=ORANGE)
 
     b.bar(x, dsl, color=ORANGE, width=0.6, label="Diesel")
-    b.set_ylabel("Diesel (L/day)", color=ORANGE)
+    b.set_ylabel("Diesel\n(L/day)", color=ORANGE)
     b.tick_params(axis="y", colors=ORANGE)
     b.set_xticks(list(x))
     b.set_xticklabels(xt, fontsize=6.4)
@@ -117,16 +115,17 @@ def fig_ops(name="fig3_ops"):
         b2.plot(list(x), [OPS[w]["min_reserve_kWh"] for w in BANDS],
                 color=BLUE, marker="o", ms=3.5, lw=1.0,
                 label="Min. arrival margin")
-        b2.set_ylabel("Min. arrival margin\nabove SoC floor (kWh)",
+        b2.set_ylabel("Min. margin\n(kWh)",
                       color=BLUE)
         b2.tick_params(axis="y", colors=BLUE)
         b2.spines["right"].set_visible(True)
         b2.spines["right"].set_linewidth(0.6)
         b2.grid(False)
         b2.set_ylim(bottom=0)
-    b.set_title("(b)", fontsize=9, fontweight="bold", pad=5)
+    b.text(-0.02, 1.0, "(b)", transform=b.transAxes, fontsize=9,
+           fontweight="bold", ha="right", va="bottom")
 
-    fig.tight_layout(h_pad=1.6)
+    fig.tight_layout(h_pad=0.6)
     save(fig, name)
 
 
@@ -163,18 +162,18 @@ def fig_frontier(name="fig4_frontier"):
 
     # text-box anchor points in DATA coordinates, chosen to sit in empty
     # regions of the plane so no box crosses the frontier curve
-    DEP = os.environ.get("FIG_DEP", "eps_0.50")
-    MIX = os.environ.get("FIG_MIX", "eps_0.20")
-    # Labels carry only the design identifier and its name; the fleet and
-    # charger counts they used to repeat are in Table IV, and stacking them
-    # here made the boxes large enough to cross the frontier they annotate.
-    named = {"econ_lam0": ("(D0) Economic\nbaseline", (21.0, 14.5), "right"),
-             DEP: ("(D1) Depot capacity\nexpansion", (12.8, 24.5), "left"),
-             MIX: ("(D2) Mixed-fleet\ntransition", (7.0, 7.0), "left"),
-             "eps_0.00": ("(D4) Full heating\nelectrification", (5.0, 40.0),
+    # v9 representatives (Table IV columns D1-D4)
+    DEP = os.environ.get("FIG_DEP", "eps_0.70")
+    MIX = os.environ.get("FIG_MIX", "eps_0.35")
+    TER = os.environ.get("FIG_TER", "eps_0.10")
+    named = {"econ_lam0": ("(D0) Economic\nbaseline", (18.6, 9.0), "right"),
+             DEP: ("(D1) Depot charger\nreconfiguration", (10.2, 20.0), "left"),
+             MIX: ("(D2) Mixed\nfleet", (6.2, 33.0), "left"),
+             TER: ("(D3) Terminal\ncharger upgrade", (4.2, 45.0), "left"),
+             "eps_0.00": ("(D4) Full heating\nelectrification", (2.2, 58.0),
                           "left")}
 
-    fig, ax = plt.subplots(figsize=(3.5, 2.8))
+    fig, ax = plt.subplots(figsize=(3.5, 2.35))
 
     co2_dep = RUNS[DEP]["co2_t"]
     co2_mix = RUNS[MIX]["co2_t"]
@@ -184,10 +183,9 @@ def fig_frontier(name="fig4_frontier"):
     ax.axvspan(-co2_max * 0.02, co2_mix, color="0.82", zorder=0)
     ytop = max(ys) * 1.32
     for xc, lbl, yf in (
-            (0.5 * (co2_dep + co2_max), "Depot and operational\nabatement",
-             1.00),
-            (0.5 * (co2_mix + co2_dep), "Mixed fleet\nand grid", 0.86),
-            (0.5 * co2_mix, "Terminal charging,\nFFH removal", 1.00)):
+            (0.5 * (co2_dep + co2_max), "Depot charging", 1.00),
+            (0.5 * (co2_mix + co2_dep), "Mixed fleet", 1.00),
+            (0.5 * co2_mix, "Terminal\ncharging", 1.00)):
         ax.text(xc, ytop * yf, lbl, ha="center", va="top", fontsize=6.0,
                 color="0.25")
 
@@ -206,18 +204,18 @@ def fig_frontier(name="fig4_frontier"):
                     bbox=dict(boxstyle="round,pad=0.22", fc="white",
                               ec="0.6", lw=0.4, alpha=1.0))
 
-    for lb, lam in (("lam_200", 200), ("lam_3500", 3500)):
+    for lb, lam in (("lam_3500", 3500),):
         if lb in RUNS:
             r = RUNS[lb]
             ax.plot(r["co2_t"], (r["F1"] - f0) / 1e3, "D", mfc="white",
                     mec=ORANGE, ms=4.5, mew=1.0, zorder=4)
             ax.annotate(f"$\\lambda$={lam}", (r["co2_t"],
                                               (r["F1"] - f0) / 1e3),
-                        textcoords="offset points", xytext=(2, -12),
+                        textcoords="offset points", xytext=(-30, -9),
                         fontsize=6.0, color=ORANGE)
 
     ax.set_xlabel("Onboard emissions (t$\\mathrm{CO_2}$/yr)")
-    ax.set_ylabel("Incremental cost vs. baseline (kCAD/yr)")
+    ax.set_ylabel("Incremental cost (kCAD/yr)")
     ax.set_xlim(-co2_max * 0.02, co2_max * 1.04)
     ax.set_ylim(min(ys) - 1.5, ytop * 1.02)
     fig.tight_layout()
@@ -276,7 +274,7 @@ def fig_uncertainty(name="fig5_uncertainty"):
     ra = json.load(open(RELB))["levels"]["heat_cv_0.00"]
     rz = json.load(open(RELZ))["levels"]["heat_cv_0.00"]
 
-    fig, b = plt.subplots(figsize=(3.5, 2.3))
+    fig, b = plt.subplots(figsize=(3.5, 1.85))
     x = range(len(BANDS))
     RED = "#8C2D2D"
     series = [("Baseline, SoC floor",
@@ -292,7 +290,7 @@ def fig_uncertainty(name="fig5_uncertainty"):
                label=lb)
     b.set_xticks(list(x))
     b.set_xticklabels([BAND_LBL[w] for w in BANDS], fontsize=7)
-    b.set_ylabel("Compliant winter days (%)")
+    b.set_ylabel("Compliant days (%)")
     b.set_ylim(25, 103)
     b.legend(fontsize=5.8, loc="lower left", ncol=1, handlelength=1.6)
     fig.tight_layout()

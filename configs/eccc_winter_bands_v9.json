@@ -1,0 +1,197 @@
+{
+ "source": "ECCC climate-daily, Toronto City (climate IDs 6158355 / 6158350), daily mean temperature",
+ "winters": {
+  "2002-03": {
+   "n": 150,
+   "mild": 64,
+   "cold": 39,
+   "verycold": 33,
+   "extreme": 10,
+   "severe": 4
+  },
+  "2003-04": {
+   "n": 152,
+   "mild": 85,
+   "cold": 38,
+   "verycold": 18,
+   "extreme": 8,
+   "severe": 3
+  },
+  "2004-05": {
+   "n": 151,
+   "mild": 79,
+   "cold": 38,
+   "verycold": 21,
+   "extreme": 8,
+   "severe": 5
+  },
+  "2005-06": {
+   "n": 151,
+   "mild": 87,
+   "cold": 43,
+   "verycold": 20,
+   "extreme": 1,
+   "severe": 0
+  },
+  "2006-07": {
+   "n": 151,
+   "mild": 89,
+   "cold": 26,
+   "verycold": 25,
+   "extreme": 10,
+   "severe": 1
+  },
+  "2007-08": {
+   "n": 152,
+   "mild": 70,
+   "cold": 55,
+   "verycold": 23,
+   "extreme": 4,
+   "severe": 0
+  },
+  "2008-09": {
+   "n": 151,
+   "mild": 70,
+   "cold": 43,
+   "verycold": 26,
+   "extreme": 11,
+   "severe": 1
+  },
+  "2009-10": {
+   "n": 151,
+   "mild": 92,
+   "cold": 37,
+   "verycold": 17,
+   "extreme": 5,
+   "severe": 0
+  },
+  "2010-11": {
+   "n": 151,
+   "mild": 65,
+   "cold": 48,
+   "verycold": 33,
+   "extreme": 5,
+   "severe": 0
+  },
+  "2011-12": {
+   "n": 152,
+   "mild": 113,
+   "cold": 29,
+   "verycold": 8,
+   "extreme": 2,
+   "severe": 0
+  },
+  "2012-13": {
+   "n": 149,
+   "mild": 93,
+   "cold": 37,
+   "verycold": 14,
+   "extreme": 5,
+   "severe": 0
+  },
+  "2013-14": {
+   "n": 150,
+   "mild": 52,
+   "cold": 36,
+   "verycold": 38,
+   "extreme": 19,
+   "severe": 5
+  },
+  "2014-15": {
+   "n": 148,
+   "mild": 55,
+   "cold": 40,
+   "verycold": 31,
+   "extreme": 17,
+   "severe": 5
+  },
+  "2015-16": {
+   "n": 146,
+   "mild": 101,
+   "cold": 29,
+   "verycold": 12,
+   "extreme": 2,
+   "severe": 2
+  },
+  "2016-17": {
+   "n": 148,
+   "mild": 92,
+   "cold": 34,
+   "verycold": 22,
+   "extreme": 0,
+   "severe": 0
+  },
+  "2017-18": {
+   "n": 142,
+   "mild": 74,
+   "cold": 30,
+   "verycold": 26,
+   "extreme": 8,
+   "severe": 4
+  },
+  "2018-19": {
+   "n": 148,
+   "mild": 70,
+   "cold": 45,
+   "verycold": 24,
+   "extreme": 5,
+   "severe": 4
+  },
+  "2019-20": {
+   "n": 150,
+   "mild": 91,
+   "cold": 44,
+   "verycold": 12,
+   "extreme": 3,
+   "severe": 0
+  },
+  "2020-21": {
+   "n": 151,
+   "mild": 91,
+   "cold": 39,
+   "verycold": 19,
+   "extreme": 2,
+   "severe": 0
+  },
+  "2021-22": {
+   "n": 149,
+   "mild": 84,
+   "cold": 31,
+   "verycold": 24,
+   "extreme": 9,
+   "severe": 1
+  },
+  "2022-23": {
+   "n": 151,
+   "mild": 101,
+   "cold": 41,
+   "verycold": 6,
+   "extreme": 3,
+   "severe": 0
+  },
+  "2023-24": {
+   "n": 151,
+   "mild": 114,
+   "cold": 27,
+   "verycold": 8,
+   "extreme": 2,
+   "severe": 0
+  },
+  "2024-25": {
+   "n": 151,
+   "mild": 79,
+   "cold": 46,
+   "verycold": 21,
+   "extreme": 5,
+   "severe": 0
+  },
+  "2025-26": {
+   "n": 148,
+   "mild": 73,
+   "cold": 35,
+   "verycold": 27,
+   "extreme": 11,
+   "severe": 2
+  }
+ }
+}
