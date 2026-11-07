@@ -233,6 +233,11 @@ def case_A():
     division_inputs = os.environ["ROUTE_INPUTS"]
     base = json.load(open(division_inputs))
     routes = sorted({route_of(b) for b in base["branches"]})
+    # review (2026-11-06): DIV_ROUTES restricts case A to a subset of routes so
+    # the fourteen independent solves can run as parallel processes
+    if os.environ.get("DIV_ROUTES"):
+        keep = set(os.environ["DIV_ROUTES"].split(","))
+        routes = [r for r in routes if str(r) in keep]
     agg = {"label": "A_fragmented", "per_route": {}}
     tot = {k: 0.0 for k in ("total_annual_cost", "differentiating_cost",
                             "diesel_L", "co2_t")}
@@ -241,8 +246,14 @@ def case_A():
     worst_gap = 0.0
     for r in routes:
         brs = {k: v for k, v in base["branches"].items() if route_of(k) == r}
-        sites = sorted({"depot"} | {v["site_west"] for v in brs.values()}
-                       | {v["site_east"] for v in brs.values()})
+        # review fix (2026-11-06): only real candidate sites. The branch
+        # table marks non-candidate termini as "none"; the old set union made
+        # "none" a buildable site in the per-route subproblems (route 99 built
+        # a charger there) although the division instance excludes it.
+        cand = set(base["sites"])
+        sites = sorted({"depot"} | ({v["site_west"] for v in brs.values()}
+                                    | {v["site_east"] for v in brs.values()})
+                       & cand)
         sub = dict(base)
         sub["branches"] = brs
         sub["sites"] = sites
@@ -268,6 +279,23 @@ def case_A():
             print(f"A route {r} -> NO SOLUTION", flush=True)
             continue
         rec = summarize(m, f"A_route_{r}")
+        # review: depot load profile and depot-only billing of this route, so
+        # the fragmented plan can be re-billed on one shared depot meter
+        h = m._handles
+        rec["depot_kW"] = {
+            w: [round(sum(m._scen[w]["c"][b, "depot", t].X for b in range(R.N_BLOCKS)
+                          if (b, "depot", t) in m._scen[w]["c"])
+                      + sum(m._scen[w]["ppre"][b, t].X for b in range(R.N_BLOCKS)
+                            if (b, t) in m._scen[w]["ppre"]), 2)
+                for t in R.STEPS] for w in R.SCEN}
+        rec["depot_rho_kW"] = {l: round(h["rho"]["depot", l].X, 1)
+                               for l in ("win", "off")}
+        rec["depot_demand_cost"] = round(R.demand_rate("depot") * (
+            R.WINTER_MONTHS * h["rho"]["depot", "win"].X
+            + R.OFFSEASON_MONTHS * h["rho"]["depot", "off"].X), 1)
+        rec["depot_grid_cost"] = round(R.CRF_GRID * sum(
+            R.GRID_TIER_COST[j] * h["ygrid"]["depot", j].X
+            for j in range(len(R.GRID_TIERS))), 1)
         agg["per_route"][r] = rec
         for k in tot:
             tot[k] += rec[k]

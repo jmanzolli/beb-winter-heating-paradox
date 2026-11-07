@@ -17,7 +17,7 @@ OUTF = os.environ["DETBAND_OUT"]
 runs = {r["label"]: r for r in json.load(open(RESF))["runs"]
         if "error" not in r and not r.get("infeasible")}
 out = {}
-for lbl in ("det_meanT", "econ_lam0"):
+for lbl in os.environ.get("DETBAND_LABELS", "det_meanT,econ_lam0").split(","):
     if lbl not in runs:
         print("missing", lbl)
         continue
@@ -35,7 +35,13 @@ for lbl in ("det_meanT", "econ_lam0"):
             for j in range(len(R.GRID_TIERS)):
                 m.addConstr(h["ygrid"][n, j] == d["ygrid"][(n, j)])
         m.Params.OutputFlag = 0
-        m.Params.MIPGap = 0.002
+        if os.environ.get("DETBAND_SLACK_ONLY", "0") == "1":
+            # review fix: minimize shortfall alone to 1e-3 kWh (see reliability_v5)
+            m.setObjective(m._shortfall)
+            m.Params.MIPGap = 0.0
+            m.Params.MIPGapAbs = 1e-3
+        else:
+            m.Params.MIPGap = 0.002
         m.Params.TimeLimit = 600
         m.Params.Threads = 4
         m.optimize()

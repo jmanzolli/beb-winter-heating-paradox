@@ -18,6 +18,42 @@ hand.**
 
 ---
 
+## v2.2.0 (revision after internal peer review) supersedes v2.1.1
+
+The v9 campaign of v2.1.1 is unchanged; this version adds the runs and
+re-evaluations made after a structured peer review of the manuscript
+(2026-11-06), the scripts that merge them into the v9 archive, and the
+generators of the revised manuscript. Model, inputs and v9 solves are the
+same, so v2.1.1 numbers that the revision did not touch remain valid.
+
+| change | files |
+|---|---|
+| Out-of-sample reliability re-evaluated with a shortfall-only objective at zero relative gap (the cost objective at a 0.2% gap left several kWh of avoidable slack); slack split into floor, reserve and overnight closure; D4 at cabin-heat CV 0.20/0.40 | `src/reliability_v5.py` (`REL_SLACK_ONLY=1`), `results/review_v9/relrev_v9_*.json`, merged in `results/rel_v9rev_*.json` |
+| Mean-temperature band re-check with the same objective | `src/detband_check.py` (`DETBAND_SLACK_ONLY=1`), `results/review_v9/detbandrev_v9.json` |
+| FFH capital cost 7.5/10/12.5 kCAD per heater; D3 re-solve from the 5,000 CAD/t design; design-day (severe-band) benchmark | `src/review_runs_v9.py`, `results/review_v9/rev_*.json` |
+| Unrounded scenario weights | `configs/route52_inputs_v9_fracw.json`, `results/review_v9/addon_fracw_v9.json` |
+| Fragmented division case re-solved without the placeholder `none` site (it had become buildable in the per-route subproblems), with per-route depot load saved; re-billing on one shared connection and coincident-peak meter | `src/campaign_division_v5.py`, `src/merge_fragmented_v9.py`, `results/review_v9/divrev_A_route_*.json`, `results/campaign_division_v9rev.json` |
+| Re-pricing of D0 and D4 against each of the 24 historical winters | `src/winters_reprice_v9.py`, `results/winters_reprice_v9.json` |
+| Frontier built from pooled cap and carbon-price solutions; certified increment ranges; D2 = 0.20 cap, D3 = 5,000 CAD/t solution | `src/make_tables_v6.py`, `src/make_supp_tables.py`, `src/make_fig_m.py` |
+| Route 52 archive with the review runs, and its provenance (47 of 47 runs with search logs) | `results/campaign_v9rev_results.json`, `results/provenance_v9rev.json`, `src/make_provenance_v9rev.py` |
+| Review solver logs | `logs/solver_logs_review_v9.tar.gz` |
+| Legacy two-winter `eccc.counts_by_winter` block removed from the v9 inputs (no code read it; the weights are the 24-winter counts in `eccc_winter_bands_v9.json`) | `configs/*_v9*.json` |
+
+The review runs were launched with `src/run_review_v9.sh` on the same server
+(Gurobi 11.0.3).
+
+Regenerate every table and figure of the revised manuscript (from `src/`,
+with `configs/`, `results/` and `results/review_v9/` copied next to the
+scripts and `eccc_winter_bands_v9.json` also placed in `data_v9/`):
+
+```bash
+DATA=. OUT=out ./regen_review_v9.sh
+ROUTE_INPUTS=route52_inputs_v9.json CHECK_RES=campaign_v9rev_results.json \
+CHECK_PROV=provenance_v9rev.json python3 check_results_v5.py   # failures: 0
+```
+
+The v2.1.1 section below is kept unchanged for reference.
+
 ## v2.1.1 (v9 campaign) supersedes v2.0.x
 
 Zenodo record 10.5281/zenodo.23995255, labelled v2.1.0, was created in error from the v2.0.1 tree and does not contain the v9 campaign; use v2.1.1.

@@ -152,9 +152,16 @@ block-correlated traction uncertainty.}
 """ % "\n".join(rows)
     write("tab_reliability.tex", body)
 
+    zfull = load(os.environ.get("SUPP_REL_ZERO_FULL", ""))  if os.environ.get("SUPP_REL_ZERO_FULL") else None
     if full:
-        lv = full["levels"]
-        rws = []
+      rws = []
+      # review (2026-11-06): stress levels for (D0) and, when available, (D4)
+      for dname, src in (("(D0)", full), ("(D4)", zfull)):
+        if not src:
+            continue
+        lv = src["levels"]
+        if rws:
+            rws.append(r"\midrule")
         for key in sorted(lv):
             cv = key.replace("heat_cv_", "")
             ww = lv[key]["winter_weighted"]
@@ -163,19 +170,22 @@ block-correlated traction uncertainty.}
             # rev. 2026-09-28: winter-weighted floor compliance, quoted in the
             # manuscript (95.4% at CV 0.40) but absent from the v8 table
             fl = sum(lv[key][w]["p_soc_floor_ok"] * W[w] for w in W) / sum(W.values())
-            rws.append(f"{cv} & {per} & {100*ww['p_day_fully_served']:.1f} & "
+            rws.append(f"{dname} & {cv} & {per} & {100*ww['p_day_fully_served']:.1f} & "
                        f"{rev(f'{100*fl:.1f}')} & "
                        f"{ww['expected_shortfall_kWh_per_winter']:,.1f} \\\\")
+      if rws:
         body2 = r"""\begin{table}[!ht]
 \caption{Cabin-heat stress levels: share of reserve-compliant days
-by band on the economic baseline design, with the winter-weighted
-shares of reserve-compliant and floor-compliant days.}
+by band for designs (D0) and (D4), with the winter-weighted
+shares of reserve-compliant and floor-compliant days; unsolved
+draws count as failures.}
 \label{tab:supp-stress}
 \centering
 \footnotesize
-\begin{tabular}{@{}lrrrrrrrr@{}}
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{@{}llrrrrrrrr@{}}
 \toprule
-\textbf{CV} & \textbf{Mild} & \textbf{Cold} & \textbf{V.\ cold} &
+\textbf{Design} & \textbf{CV} & \textbf{Mild} & \textbf{Cold} & \textbf{V.\ cold} &
 \textbf{Extreme} & \textbf{Severe} & \textbf{Winter \%%} &
 \textbf{Floor \%%} & \textbf{kWh/winter} \\
 \midrule
@@ -337,37 +347,39 @@ def table_relmatch():
             return None, None
         L = d["levels"]["heat_cv_0.00"]
         return (100 * sum(L[w]["p_soc_floor_ok"] * W[w] for w in W) / T,
-                100 * sum(L[w]["p_all_trips_served"] * W[w] for w in W) / T)
+                100 * sum(L[w]["p_all_trips_served"] * W[w] for w in W) / T,
+                100 * L["severe"]["p_all_trips_served"])
 
-    fl0, rs0 = compl(os.environ.get("SUPP_REL_ZERO", "rel_v8_zero_cv00.json"))
-    rows = [f"10 (base) & {(z['F1']-b['F1'])/1e3:+.1f} & {fl0:.2f} & {rs0:.2f} \\\\"]
+    fl0, rs0, sv0 = compl(os.environ.get("SUPP_REL_ZERO", "rel_v8_zero_cv00.json"))
+    rows = [f"10 (base) & {(z['F1']-b['F1'])/1e3:+.1f} & {fl0:.2f} & {rs0:.2f} & {sv0:.1f} \\\\"]
     for g in sorted(int(l.split("_r")[1]) for l in M if l.startswith("relmatch_eps0_r")):
         lab = f"relmatch_eps0_r{g}"
-        fl, rs = compl(f"rel_{os.environ.get('SUPP_VER', 'v8')}_{lab}.json")
+        fl, rs, sv = compl(f"rel_{os.environ.get('SUPP_VER', 'v8')}_{lab}.json")
         if fl is None:
             continue
-        rows.append(f"{g} & {(M[lab]['F1']-b['F1'])/1e3:+.1f} & {fl:.2f} & {rs:.2f} \\\\")
-    flb, rsb = compl(os.environ.get("SUPP_REL_BASE", "rel_v8_econ_full.json"))
+        rows.append(f"{g} & {(M[lab]['F1']-b['F1'])/1e3:+.1f} & {fl:.2f} & {rs:.2f} & {sv:.1f} \\\\")
+    flb, rsb, svb = compl(os.environ.get("SUPP_REL_BASE", "rel_v8_econ_full.json"))
     body = r"""\begin{table}[!ht]
 \caption{FFH-free design re-selected at higher planning reserves.}
 \label{tab:supp-relmatch}
 \centering
 \footnotesize
-\setlength{\tabcolsep}{6pt}
-\begin{tabular}{@{}lrrr@{}}
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}lrrrr@{}}
 \toprule
-\textbf{\makecell{Planning reserve\\$\Gamma^{\mathrm{ret}}$ (kWh)}} &
-\textbf{\makecell{Premium over\\baseline (kCAD/yr)}} &
+\textbf{\makecell{Reserve\\$\Gamma^{\mathrm{ret}}$ (kWh)}} &
+\textbf{\makecell{Premium\\(kCAD/yr)}} &
 \textbf{\makecell{Floor\\(\%% of days)}} &
-\textbf{\makecell{Reserve\\(\%% of days)}} \\
+\textbf{\makecell{Reserve\\(\%% of days)}} &
+\textbf{\makecell{Severe,\\reserve (\%%)}} \\
 \midrule
 %s
 \midrule
-\multicolumn{2}{@{}l}{Economic baseline, for reference} & %.2f & %.2f \\
+\multicolumn{2}{@{}l}{Economic baseline, for reference} & %.2f & %.2f & %.1f \\
 \bottomrule
 \end{tabular}
 \end{table}
-""" % ("\n".join(rows), flb, rsb)
+""" % ("\n".join(rows), flb, rsb, svb)
     write("tab_relmatch.tex", body)
 
 
@@ -401,17 +413,20 @@ def table_fuelrate(runs, frontier):
     rate. With the designs held fixed this is an exact rescaling, so the
     table needs no new solve; whether the designs themselves move is the
     re-solve listed as future work (R1)."""
-    labels = ["econ_lam0"] + list(frontier)
+    # review (2026-11-06): the envelope is built from every feasible cap AND
+    # carbon-price solution, not from the cap runs alone
+    labels = (["econ_lam0"] + list(frontier)
+              + [l for l in runs if l.startswith(("lam_", "bp_lam_", "eps_0.10r"))])
     b, z = runs["econ_lam0"], runs["eps_0.00"]
     rows = []
     for r in (0.70, 1.00, 1.15):
         env = envelope(runs, labels, r)
         f1b = b["F1"] + (r - 1) * b["cost_parts"]["diesel_cost"]
         avg = (z["F1"] - f1b) / (r * b["co2_t"])
-        sl = " & ".join(f"{e[2]/1e3:.2f}" for e in env)
+        # the number of envelope segments varies with r; report its ends
+        sl = f"{env[0][2]/1e3:.2f} & {env[-1][2]/1e3:.2f} & {len(env)}"
         rows.append(f"{100*r:.0f} & {r*b['diesel_L']:,.0f} & {r*b['co2_t']:.1f} & "
                     f"{sl} & {avg/1e3:.2f} \\\\")
-    nseg = len(envelope(runs, labels, 1.0))
     body = r"""\begin{table}[!ht]
 \caption{Burner fuel-rate range of \cite{liu2026zero} applied to the
 Route~52 designs, with designs and dispatch held fixed: economic-baseline
@@ -420,18 +435,19 @@ baseline to full electrification, and the average abatement cost.}
 \label{tab:supp-fuelrate}
 \centering
 \footnotesize
-\setlength{\tabcolsep}{5pt}
-\begin{tabular}{@{}rrr%s r@{}}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}rrrrrrr@{}}
 \toprule
 \textbf{\makecell{Fuel rate\\(\%%\ rated)}} & \textbf{\makecell{Diesel\\(L/yr)}} &
-\textbf{\makecell{\COtwo{}\\(t/yr)}} & \multicolumn{%d}{c}{\textbf{Envelope slopes (kCAD/t)}} &
+\textbf{\makecell{\COtwo{}\\(t/yr)}} & \textbf{\makecell{First slope\\(kCAD/t)}} &
+\textbf{\makecell{Last slope\\(kCAD/t)}} & \textbf{\makecell{Seg-\\ments}} &
 \textbf{\makecell{Average\\(kCAD/t)}} \\
 \midrule
 %s
 \bottomrule
 \end{tabular}
 \end{table}
-""" % ("r" * nseg, nseg, "\n".join(rows))
+""" % ("\n".join(rows),)
     write("tab_fuelrate.tex", body)
 
 

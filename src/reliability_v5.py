@@ -88,6 +88,13 @@ HEAT_CVS = [float(x) for x in
 # (p_soc_floor_ok below), which is common to every setting, so a conservative
 # operating policy is not penalised for meeting a stricter internal target.
 REL_RESERVE = os.environ.get("REL_RESERVE")
+# Review fix (2026-11-06): with REL_SLACK_ONLY=1 the recourse minimizes the
+# elastic slack alone, to an absolute tolerance of 1e-3 kWh. The cost-based
+# objective used before carried the fixed first-stage capital (~2.8 MCAD), so
+# a 0.2% relative MIP gap could leave several kWh of avoidable slack, larger
+# than the 0.1 kWh failure threshold. Reliability asks whether the realized
+# day can be served at all, so the dispatch cost does not belong in it.
+SLACK_ONLY = os.environ.get("REL_SLACK_ONLY", "0") == "1"
 BANDS = [w for w in R.SCEN if w not in R.HEATLESS]
 
 
@@ -201,7 +208,12 @@ def simulate(w, lm, zfix, design):
     for b, k in zfix[w].items():
         m.addConstr(z[b, k] == 1)
     m.Params.OutputFlag = 0
-    m.Params.MIPGap = 0.002
+    if SLACK_ONLY:
+        m.setObjective(m._shortfall)
+        m.Params.MIPGap = 0.0
+        m.Params.MIPGapAbs = 1e-3
+    else:
+        m.Params.MIPGap = 0.002
     m.Params.TimeLimit = 300
     m.Params.Threads = 2
     m.optimize()
@@ -227,7 +239,15 @@ def simulate(w, lm, zfix, design):
         margins.append(mn)
         if mn < -1e-3:
             nfail += 1
+    def _sum(prefix):
+        return float(sum(v.X for v in m.getVars() if v.VarName.startswith(prefix)))
+    s_floor = _sum(f"slack_{w}_")
+    s_res = _sum(f"slackret_{w}_")
+    s_cyc = _sum(f"slackcyc_{w}_")
     return {"solved": True, "shortfall_kWh": round(float(short), 3),
+            "slack_floor_kWh": round(s_floor, 3),
+            "slack_reserve_kWh": round(s_res, 3),
+            "slack_closure_kWh": round(s_cyc, 3),
             "feasible": bool(short < 0.1),
             "min_reserve_kWh": round(float(min(margins)), 2),
             "blocks_infeasible": nfail,
@@ -296,6 +316,19 @@ if __name__ == "__main__":
                 if mins else None,
                 "min_reserve_median": round(mins[len(mins) // 2], 2)
                 if mins else None,
+                # review fix: shortfall split by constraint (kWh, mean over
+                # all draws) and share of draws with each kind above 0.1 kWh
+                "slack_split_mean_kWh": {
+                    k: round(float(np.mean([r[f"slack_{k}_kWh"] for r in ok])), 3)
+                    for k in ("floor", "reserve", "closure")} if ok else None,
+                "slack_split_p_gt_0p1": {
+                    k: round(sum(1 for r in ok if r[f"slack_{k}_kWh"] > 0.1)
+                             / max(1, len(res)), 4)
+                    for k in ("floor", "reserve", "closure")} if ok else None,
+                "shortfall_given_fail_mean_kWh": round(float(np.mean(
+                    [r["shortfall_kWh"] for r in ok if not r["feasible"]])), 3)
+                if any(not r["feasible"] for r in ok) else 0.0,
+                "slack_only_objective": SLACK_ONLY,
                 "mean_blocks_infeasible": round(
                     float(np.mean([r["blocks_infeasible"] for r in ok])), 3),
             }

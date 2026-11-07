@@ -241,8 +241,10 @@ def table_designs(runs, labels=None):
     rz = load(os.environ.get("TAB_REL_ZERO", "reliability_zeroemission.json"))
     W = {w: R.SCEN[w][1] for w in ("mild", "cold", "verycold", "extreme", "severe")}  # v9: from the inputs
     def _floor(rr):
+        # review (2026-11-06): days on which every trip is served with the
+        # end-of-day reserve met (slack-only re-evaluation)
         lv = rr["levels"]["heat_cv_0.00"]
-        return 100 * sum(lv[w]["p_soc_floor_ok"] * W[w] for w in W) / sum(W.values())
+        return 100 * sum(lv[w]["p_all_trips_served"] * W[w] for w in W) / sum(W.values())
     if ra:
         rel["econ_lam0"] = _floor(ra)
     if rz:
@@ -300,6 +302,8 @@ def table_designs(runs, labels=None):
         # is what distinguishes them, and two caps can trigger the same move
         if lb not in ("econ_lam0", "det_meanT") and _ffh(r) > 0:
             name = name + (r"\textbf{(%d FFH)}" % _ffh(r),)
+        if lb.startswith("lam_"):
+            name = name[:-1] + (name[-1] + r"$^{\mathrm{c}}$",)
         # a short identifier so the prose can name a column without
         # restating its whole configuration
         if lb == "det_meanT":
@@ -366,12 +370,25 @@ def table_designs(runs, labels=None):
         if r.get("phase2"):
             return num((r["phase2"]["cost_incumbent_ph1"] - base_f1) / 1e3, 1)
         return num((r["F1"] - base_f1) / 1e3, 1)
-    rows.append(("Increment, phase-1 incumbent (kCAD/yr)" + rev(r"$^{\mathrm{a}}$")).ljust(40) + " & " +
-                " & ".join(_ph1(r) for r in sel) + r" \\")
+    # review (2026-11-06): the certification rule fixes the ORDER of the
+    # designs, not the size of their increments; report the interval that the
+    # bounds allow, [lb_i - F1_0, F1_i - lb_0]
+    lb0 = runs["econ_lam0"].get("lb", base_f1)
+    def _ivl(r):
+        if r["label"] in det or r["label"] == "econ_lam0":
+            return "---"
+        # a price solution bounds the objective F1 + lam*E; any design with
+        # emissions <= E* then costs at least lb - lam*E*
+        lbF = r.get("lb", r["F1"]) - (r.get("lam") or 0.0) * r["co2_t"]
+        lo = (lbF - base_f1) / 1e3
+        hi = (r["F1"] - lb0) / 1e3
+        return f"{lo:.1f}--{hi:.1f}"
+    rows.append(("Increment, certified range (kCAD/yr)" + rev(r"$^{\mathrm{a}}$")).ljust(40) + " & " +
+                " & ".join(_ivl(r) for r in sel) + r" \\")
     rows.append("Feasible on full scenario set".ljust(40) + " & " +
                 " & ".join("no" if r["label"] in det else "yes"
                            for r in sel) + r" \\")
-    rows.append("Winter days above SoC floor (\\%)".ljust(40) + " & " +
+    rows.append("Winter days fully served (\\%)".ljust(40) + " & " +
                 " & ".join(num(rel.get(r["label"]), 2) for r in sel) + r" \\")
     rows.append("Absolute optimality gap (kCAD/yr)".ljust(40) + " & " +
                 " & ".join(num(r["abs_gap"] / 1e3, 2) for r in sel) + r" \\")
@@ -387,16 +404,22 @@ def table_designs(runs, labels=None):
     dm = runs.get("det_meanT", {})
     t_mean = (dm.get("scen_ops", {}).get("winteravg", {}) or {}).get("T")
     theta = runs["econ_lam0"].get("phase2", {}).get("lex_tol", 500.0) / 1e3
-    note_a = (r"$^{\mathrm{a}}$Before the lexicographic emissions pass "
-              r"(Sec.~II-D), which may spend up to $\theta=%.1f$~kCAD/yr; "
-              r"hence the negative (D0) entry." % theta)
+    note_a = (r"$^{\mathrm{a}}$From the solver lower bounds of this design "
+              r"and of (D0); the lexicographic emissions pass (Sec.~II-D) may "
+              r"add up to $\theta=%.1f$~kCAD/yr to the tabulated cost." % theta)
     note_b = ""
     if t_mean is not None:
         note_b = (r" $^{\mathrm{b}}$Optimized on one mean winter day "
                   r"($%.1f^\circ$C) plus the off-season day; not operable on "
                   r"the full scenario set, so diesel and emissions are omitted "
                   r"(full-set re-evaluation: Sec.~IV-C)." % t_mean)
-    notes = rev(r"\parbox{\textwidth}{\footnotesize " + note_a + note_b + "}")
+    note_c = ""
+    for r in sel:
+        if (r.get("lam") or 0) > 0 and r["label"].startswith("lam_"):
+            note_c += (r" $^{\mathrm{c}}$Solution at a carbon price of "
+                       r"%s~CAD/t\COtwo{}, which dominates the solution of the "
+                       r"nearest cap." % f"{r['lam']:,.0f}".replace(",", "{,}"))
+    notes = rev(r"\parbox{\textwidth}{\footnotesize " + note_a + note_b + note_c + "}")
     body = r"""\begin{table*}[!t]
 \caption{Representative Route~52 designs and mean-temperature benchmark.}
 \label{tab:designs}

@@ -677,26 +677,7 @@
  },
  "eccc": {
   "source": "ECCC climate-daily API, Toronto City (CLIMATE_IDENTIFIER 6158355)",
-  "winters": [
-   "2024-25",
-   "2025-26"
-  ],
-  "counts_by_winter": {
-   "2024-25": {
-    "mild_ge0": 48,
-    "cold": 54,
-    "verycold": 35,
-    "extreme": 13,
-    "severe_lt-15": 1
-   },
-   "2025-26": {
-    "mild_ge0": 41,
-    "cold": 35,
-    "verycold": 38,
-    "extreme": 25,
-    "severe_lt-15": 11
-   }
-  }
+  "note": "Scenario weights (scenarios.*.days) are the 24-winter mean band counts in eccc_winter_bands_v9.json. The two-winter counts carried over from v8 were removed in v2.2.0 (review item m11); no code reads this block."
  },
  "grid_upgrade_cost_per_kw": 200.0,
  "grid_cost_note": "NREL/industry depot grid-upgrade range 100-300 $/kW; Toronto Hydro: project-specific capital contribution, no public schedule",

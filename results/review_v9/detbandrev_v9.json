@@ -1,0 +1,116 @@
+{
+ "det_meanT": {
+  "mild": {
+   "solved": true,
+   "shortfall_kWh": 0.0,
+   "feasible": true,
+   "T": 2.5
+  },
+  "cold": {
+   "solved": true,
+   "shortfall_kWh": 3.6,
+   "feasible": false,
+   "T": -2.5
+  },
+  "verycold": {
+   "solved": true,
+   "shortfall_kWh": 404.5,
+   "feasible": false,
+   "T": -7.5
+  },
+  "extreme": {
+   "solved": true,
+   "shortfall_kWh": 2607.2,
+   "feasible": false,
+   "T": -12.5
+  },
+  "severe": {
+   "solved": true,
+   "shortfall_kWh": 5124.2,
+   "feasible": false,
+   "T": -17.5
+  },
+  "offseason": {
+   "solved": true,
+   "shortfall_kWh": 0.0,
+   "feasible": true,
+   "T": 16.8
+  }
+ },
+ "econ_lam0": {
+  "mild": {
+   "solved": true,
+   "shortfall_kWh": 0.0,
+   "feasible": true,
+   "T": 2.5
+  },
+  "cold": {
+   "solved": true,
+   "shortfall_kWh": 0.0,
+   "feasible": true,
+   "T": -2.5
+  },
+  "verycold": {
+   "solved": true,
+   "shortfall_kWh": 0.0,
+   "feasible": true,
+   "T": -7.5
+  },
+  "extreme": {
+   "solved": true,
+   "shortfall_kWh": 0.0,
+   "feasible": true,
+   "T": -12.5
+  },
+  "severe": {
+   "solved": true,
+   "shortfall_kWh": 0.0,
+   "feasible": true,
+   "T": -17.5
+  },
+  "offseason": {
+   "solved": true,
+   "shortfall_kWh": 0.0,
+   "feasible": true,
+   "T": 16.8
+  }
+ },
+ "eps_0.00": {
+  "mild": {
+   "solved": true,
+   "shortfall_kWh": 0.0,
+   "feasible": true,
+   "T": 2.5
+  },
+  "cold": {
+   "solved": true,
+   "shortfall_kWh": 0.0,
+   "feasible": true,
+   "T": -2.5
+  },
+  "verycold": {
+   "solved": true,
+   "shortfall_kWh": 0.0,
+   "feasible": true,
+   "T": -7.5
+  },
+  "extreme": {
+   "solved": true,
+   "shortfall_kWh": 0.0,
+   "feasible": true,
+   "T": -12.5
+  },
+  "severe": {
+   "solved": true,
+   "shortfall_kWh": 0.0,
+   "feasible": true,
+   "T": -17.5
+  },
+  "offseason": {
+   "solved": true,
+   "shortfall_kWh": 0.0,
+   "feasible": true,
+   "T": 16.8
+  }
+ }
+}

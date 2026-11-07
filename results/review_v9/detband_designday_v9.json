@@ -1,0 +1,40 @@
+{
+ "det_designday": {
+  "mild": {
+   "solved": true,
+   "shortfall_kWh": 0.0,
+   "feasible": true,
+   "T": 2.5
+  },
+  "cold": {
+   "solved": true,
+   "shortfall_kWh": 0.0,
+   "feasible": true,
+   "T": -2.5
+  },
+  "verycold": {
+   "solved": true,
+   "shortfall_kWh": 0.0,
+   "feasible": true,
+   "T": -7.5
+  },
+  "extreme": {
+   "solved": true,
+   "shortfall_kWh": 0.0,
+   "feasible": true,
+   "T": -12.5
+  },
+  "severe": {
+   "solved": true,
+   "shortfall_kWh": 0.0,
+   "feasible": true,
+   "T": -17.5
+  },
+  "offseason": {
+   "solved": true,
+   "shortfall_kWh": 0.0,
+   "feasible": true,
+   "T": 16.8
+  }
+ }
+}

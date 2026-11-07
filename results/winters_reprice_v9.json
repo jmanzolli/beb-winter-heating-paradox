@@ -1,0 +1,285 @@
+{
+ "note": "Re-price the economic baseline (D0) and the FFH-free design (D4) against\neach of the 24 historical winters (review item R7).\n\nThe designs and their per-band daily operation are those of the planning\nsolution (campaign_v9_results.json, scen_ops). Capital, demand charges and\nthe off-season day do not depend on the winter's band mix, so only the\nweighted daily operating cost and diesel change: for winter y,\n  cost_y = F1 + sum_w (days_{w,y} - h_w) * opex_w,\n  co2_y  = sum_w days_{w,y} * diesel_w * 2.68 kg/L.\nWrites winters_reprice_v9.json and prints the range across winters.",
+ "winters": {
+  "2002-03": {
+   "econ_lam0": {
+    "cost_kCAD": 3216.18,
+    "co2_t": 27.49
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3277.39,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 61.21
+  },
+  "2003-04": {
+   "econ_lam0": {
+    "cost_kCAD": 3211.4,
+    "co2_t": 19.5
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3276.33,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 64.93
+  },
+  "2004-05": {
+   "econ_lam0": {
+    "cost_kCAD": 3213.33,
+    "co2_t": 23.12
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3276.54,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 63.21
+  },
+  "2005-06": {
+   "econ_lam0": {
+    "cost_kCAD": 3204.54,
+    "co2_t": 10.34
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3273.84,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 69.3
+  },
+  "2006-07": {
+   "econ_lam0": {
+    "cost_kCAD": 3211.0,
+    "co2_t": 20.1
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3275.62,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 64.62
+  },
+  "2007-08": {
+   "econ_lam0": {
+    "cost_kCAD": 3208.83,
+    "co2_t": 14.7
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3276.16,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 67.33
+  },
+  "2008-09": {
+   "econ_lam0": {
+    "cost_kCAD": 3213.24,
+    "co2_t": 22.38
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3276.89,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 63.65
+  },
+  "2009-10": {
+   "econ_lam0": {
+    "cost_kCAD": 3205.77,
+    "co2_t": 12.5
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3274.01,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 68.24
+  },
+  "2010-11": {
+   "econ_lam0": {
+    "cost_kCAD": 3210.82,
+    "co2_t": 18.38
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3276.4,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 65.58
+  },
+  "2011-12": {
+   "econ_lam0": {
+    "cost_kCAD": 3201.6,
+    "co2_t": 6.45
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3272.62,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 71.02
+  },
+  "2012-13": {
+   "econ_lam0": {
+    "cost_kCAD": 3203.61,
+    "co2_t": 11.52
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3272.32,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 68.71
+  },
+  "2013-14": {
+   "econ_lam0": {
+    "cost_kCAD": 3223.76,
+    "co2_t": 38.14
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3279.95,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 56.19
+  },
+  "2014-15": {
+   "econ_lam0": {
+    "cost_kCAD": 3219.64,
+    "co2_t": 34.37
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3277.61,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 57.97
+  },
+  "2015-16": {
+   "econ_lam0": {
+    "cost_kCAD": 3200.35,
+    "co2_t": 10.39
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3269.53,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 69.18
+  },
+  "2016-17": {
+   "econ_lam0": {
+    "cost_kCAD": 3201.66,
+    "co2_t": 9.54
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3271.3,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 69.64
+  },
+  "2017-18": {
+   "econ_lam0": {
+    "cost_kCAD": 3206.9,
+    "co2_t": 22.89
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3270.24,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 63.34
+  },
+  "2018-19": {
+   "econ_lam0": {
+    "cost_kCAD": 3209.83,
+    "co2_t": 20.57
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3274.31,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 64.48
+  },
+  "2019-20": {
+   "econ_lam0": {
+    "cost_kCAD": 3203.09,
+    "co2_t": 9.57
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3272.75,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 69.66
+  },
+  "2020-21": {
+   "econ_lam0": {
+    "cost_kCAD": 3204.58,
+    "co2_t": 10.64
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3273.72,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 69.14
+  },
+  "2021-22": {
+   "econ_lam0": {
+    "cost_kCAD": 3209.14,
+    "co2_t": 19.22
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3274.21,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 65.07
+  },
+  "2022-23": {
+   "econ_lam0": {
+    "cost_kCAD": 3201.97,
+    "co2_t": 7.43
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3272.6,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 70.63
+  },
+  "2023-24": {
+   "econ_lam0": {
+    "cost_kCAD": 3200.75,
+    "co2_t": 6.32
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3271.83,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 71.08
+  },
+  "2024-25": {
+   "econ_lam0": {
+    "cost_kCAD": 3207.53,
+    "co2_t": 14.36
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3274.96,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 67.43
+  },
+  "2025-26": {
+   "econ_lam0": {
+    "cost_kCAD": 3211.72,
+    "co2_t": 23.52
+   },
+   "eps_0.00": {
+    "cost_kCAD": 3274.79,
+    "co2_t": 0.0
+   },
+   "premium_kCAD": 63.07
+  }
+ },
+ "summary": {
+  "premium_kCAD_min_max": [
+   56.2,
+   71.1
+  ],
+  "premium_min_winter": "2013-14",
+  "premium_max_winter": "2023-24",
+  "baseline_co2_t_min_max": [
+   6.3,
+   38.1
+  ],
+  "baseline_cost_kCAD_min_max": [
+   3200.3,
+   3223.8
+  ]
+ }
+}

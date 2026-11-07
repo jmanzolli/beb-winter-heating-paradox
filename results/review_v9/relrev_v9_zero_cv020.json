@@ -1,0 +1,183 @@
+{
+ "design_label": "eps_0.00",
+ "design": {
+  "NF-std-eOnly": 17,
+  "NF-ext-eOnly": 1
+ },
+ "chargers": {
+  "depot:300": 3,
+  "lawrenceStn:300": 1,
+  "lawrenceWestStn:100": 1
+ },
+ "n_per_band": 1000,
+ "seed": 20260725,
+ "traction_residuals": {
+  "n_bus_days": 1377,
+  "unit": "one telemetry row = one bus-day (median 13 h, 184 km)",
+  "mean_ratio": 0.9934,
+  "sd_ratio": 0.0762,
+  "p05": 0.881,
+  "p95": 1.117,
+  "cold_subset_n": 50,
+  "cold_mean_ratio": 1.0176,
+  "cold_sd_ratio": 0.0693,
+  "source": "route-band interface (v7) evaluated on Route 52 runs"
+ },
+ "levels": {
+  "heat_cv_0.20": {
+   "mild": {
+    "T": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "n_unsolved": 0,
+    "unsolved_status": null,
+    "p_all_trips_served": 1.0,
+    "p_soc_floor_ok": 1.0,
+    "reserve_setting_kWh": 10.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 36.08,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "slack_split_p_gt_0p1": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_only_objective": true,
+    "mean_blocks_infeasible": 0.0
+   },
+   "cold": {
+    "T": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "n_unsolved": 0,
+    "unsolved_status": null,
+    "p_all_trips_served": 0.999,
+    "p_soc_floor_ok": 0.999,
+    "reserve_setting_kWh": 10.0,
+    "expected_shortfall_kWh": 0.034,
+    "p95_shortfall_kWh": 0.0,
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 12.29,
+    "slack_split_mean_kWh": {
+     "floor": 0.012,
+     "reserve": 0.022,
+     "closure": 0.0
+    },
+    "slack_split_p_gt_0p1": {
+     "floor": 0.001,
+     "reserve": 0.001,
+     "closure": 0.0
+    },
+    "shortfall_given_fail_mean_kWh": 34.15,
+    "slack_only_objective": true,
+    "mean_blocks_infeasible": 0.001
+   },
+   "verycold": {
+    "T": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 997,
+    "n_unsolved": 3,
+    "unsolved_status": [
+     3
+    ],
+    "p_all_trips_served": 0.985,
+    "p_soc_floor_ok": 0.989,
+    "reserve_setting_kWh": 10.0,
+    "expected_shortfall_kWh": 0.387,
+    "p95_shortfall_kWh": 0.0,
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 10.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.151,
+     "reserve": 0.236,
+     "closure": 0.0
+    },
+    "slack_split_p_gt_0p1": {
+     "floor": 0.008,
+     "reserve": 0.012,
+     "closure": 0.0
+    },
+    "shortfall_given_fail_mean_kWh": 32.193,
+    "slack_only_objective": true,
+    "mean_blocks_infeasible": 0.008
+   },
+   "extreme": {
+    "T": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 988,
+    "n_unsolved": 12,
+    "unsolved_status": [
+     3
+    ],
+    "p_all_trips_served": 0.791,
+    "p_soc_floor_ok": 0.858,
+    "reserve_setting_kWh": 10.0,
+    "expected_shortfall_kWh": 7.46,
+    "p95_shortfall_kWh": 51.978,
+    "min_reserve_p05": -19.64,
+    "min_reserve_median": 10.0,
+    "slack_split_mean_kWh": {
+     "floor": 2.817,
+     "reserve": 4.642,
+     "closure": 0.001
+    },
+    "slack_split_p_gt_0p1": {
+     "floor": 0.127,
+     "reserve": 0.197,
+     "closure": 0.001
+    },
+    "shortfall_given_fail_mean_kWh": 37.413,
+    "slack_only_objective": true,
+    "mean_blocks_infeasible": 0.157
+   },
+   "severe": {
+    "T": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 924,
+    "n_unsolved": 76,
+    "unsolved_status": [
+     3
+    ],
+    "p_all_trips_served": 0.19,
+    "p_soc_floor_ok": 0.335,
+    "reserve_setting_kWh": 10.0,
+    "expected_shortfall_kWh": 83.295,
+    "p95_shortfall_kWh": 312.554,
+    "min_reserve_p05": -61.03,
+    "min_reserve_median": -7.08,
+    "slack_split_mean_kWh": {
+     "floor": 32.202,
+     "reserve": 49.019,
+     "closure": 2.075
+    },
+    "slack_split_p_gt_0p1": {
+     "floor": 0.587,
+     "reserve": 0.734,
+     "closure": 0.163
+    },
+    "shortfall_given_fail_mean_kWh": 104.857,
+    "slack_only_objective": true,
+    "mean_blocks_infeasible": 1.532
+   },
+   "winter_weighted": {
+    "p_day_fully_served": 0.9772,
+    "expected_shortfall_kWh_per_winter": 228.2
+   }
+  }
+ },
+ "method": "empirical block-day traction residuals (out of sample) plus parametric lognormal cabin-heat stress levels; design and day-ahead assignment fixed; dispatch re-optimized; penalized slack measures shortfall",
+ "heat_uncertainty_note": "cabin-heat dispersion is a declared stress level, not an empirical estimate: FFH output is unmetered and Route 52 electric-heating runtime is a median 0.11 h/day, so no delivered-heat residual can be formed",
+ "minutes": 186.9
+}

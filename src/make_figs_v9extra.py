@@ -161,7 +161,7 @@ def fig_price():
 
 # ---------------------------------------------------------------- robustness
 VARIANTS = [
-    ("Base (v9)", None),
+    ("Base case", None),
     ("Useful-heat fraction 0.55", "addon_phi055_v9.json"),
     ("Useful-heat fraction 0.60", "addon_phi060_v9.json"),
     ("Cabin heat $-$6%", "addon_heat094_v9.json"),
@@ -191,7 +191,7 @@ def fig_robust():
                      100 * (z["F1"] - e["F1"]) / e["F1"]))
     n = len(rows)
     y = np.arange(n)[::-1]
-    fig, (a, b) = plt.subplots(1, 2, figsize=(COLW, 2.45), sharey=True,
+    fig, (a, b) = plt.subplots(1, 2, figsize=(COLW, 2.2), sharey=True,
                                gridspec_kw={"width_ratios": [1, 1],
                                             "wspace": 0.08})
     for ax in (a, b):
@@ -232,8 +232,17 @@ def fig_robust():
 
 # ---------------------------------------------------------------- division
 def fig_division():
-    D = json.load(open(f"{V9}/campaign_division_v9.json"))["cases"]
-    A = json.load(open(f"{V9}/campaign_division_v9_A.json"))["cases"]["A_fragmented"]
+    # review (2026-11-06): one file holds the re-solved fragmented case
+    # (placeholder site removed) and its common-basis re-billing
+    _df = os.environ.get("V9_DIV")
+    if _df:
+        D = json.load(open(_df))["cases"]
+        A = D["A_fragmented"]
+    else:
+        D = json.load(open(f"{V9}/campaign_division_v9.json"))["cases"]
+        A = json.load(open(f"{V9}/campaign_division_v9_A.json"))["cases"]["A_fragmented"]
+    a_cb = (A.get("common_basis") or {}).get("differentiating_cost")
+    a_cb = a_cb / 1e3 if a_cb else None
     pr = A["per_route"].values()
     a_inc = A["differentiating_cost"] / 1e3
     a_lb = (A["differentiating_cost"] - sum(r["abs_gap"] for r in pr)) / 1e3
@@ -258,6 +267,12 @@ def fig_division():
         a.vlines(i, cs[1], cs[2], color=cs[5], lw=3.2, alpha=0.45)
         a.scatter([i], [cs[2]], s=18, color=cs[5], zorder=3, marker="o")
         a.scatter([i], [cs[1]], s=18, color=cs[5], zorder=3, marker="_")
+    if a_cb:
+        a.scatter([0], [a_cb], s=22, facecolors="none", edgecolors=GRAY,
+                  zorder=3, marker="s", lw=0.8)
+        a.text(0.15, a_cb, "one\nconnection", fontsize=5.4, color=GRAY,
+               va="center", ha="left")
+        a.set_ylim(top=a_cb + 45)
     a.axhline(a_lb, color=GRAY, lw=0.6, ls=":")
     a.axhline(best, color=BLUE, lw=0.6, ls=":")
     a.annotate("", xy=(0.5, best), xytext=(0.5, a_lb),

@@ -84,7 +84,7 @@ def fig_ops(name="fig3_ops"):
     dsl = [so[w]["diesel_L"] for w in BANDS]
     xt = [f"{BAND_LBL[w]}\n{so[w]['T']:+.1f}°C" for w in BANDS]
 
-    fig, (a, b) = plt.subplots(2, 1, figsize=(3.5, 2.5), sharex=True)
+    fig, (a, b) = plt.subplots(2, 1, figsize=(3.5, 2.25), sharex=True)
 
     a.bar(x, pre, color=TEAL, label="Preconditioning", width=0.6)
     a.bar(x, qel, bottom=pre, color=BLUE, label="Electric heating",
@@ -154,18 +154,25 @@ def fig_frontier(name="fig4_frontier"):
     base = RUNS["econ_lam0"]
     f0 = base["F1"]
 
-    eps = sorted((r for l, r in RUNS.items() if l.startswith("eps_")),
-                 key=lambda r: -r["co2_t"])
-    pts = [base] + eps
-    xs = [r["co2_t"] for r in pts]
-    ys = [(r["F1"] - f0) / 1e3 for r in pts]
+    # review (2026-11-06): the frontier is the envelope of every cap AND
+    # price solution, since a price solution can dominate a capped one
+    pool = [r for l, r in RUNS.items()
+            if l == "econ_lam0" or l.startswith(("eps_", "lam_", "bp_lam_"))]
+    nd = [p for p in pool if not any(
+        (q["co2_t"] <= p["co2_t"] and q["F1"] < p["F1"] - 1e-6) or
+        (q["co2_t"] < p["co2_t"] - 1e-6 and q["F1"] <= p["F1"]) for q in pool)]
+    nd.sort(key=lambda r: -r["co2_t"])
+    xs = [r["co2_t"] for r in nd]
+    ys = [(r["F1"] - f0) / 1e3 for r in nd]
+    eps_pts = [r for r in pool if r["label"].startswith("eps_")]
+    lam_pts = [r for r in pool if r["label"].startswith(("lam_", "bp_lam_"))]
 
     # text-box anchor points in DATA coordinates, chosen to sit in empty
     # regions of the plane so no box crosses the frontier curve
     # v9 representatives (Table IV columns D1-D4)
     DEP = os.environ.get("FIG_DEP", "eps_0.70")
-    MIX = os.environ.get("FIG_MIX", "eps_0.35")
-    TER = os.environ.get("FIG_TER", "eps_0.10")
+    MIX = os.environ.get("FIG_MIX", "eps_0.20")
+    TER = os.environ.get("FIG_TER", "lam_5000")
     named = {"econ_lam0": ("(D0) Economic\nbaseline", (18.6, 9.0), "right"),
              DEP: ("(D1) Depot charger\nreconfiguration", (10.2, 20.0), "left"),
              MIX: ("(D2) Mixed\nfleet", (6.2, 33.0), "left"),
@@ -173,7 +180,7 @@ def fig_frontier(name="fig4_frontier"):
              "eps_0.00": ("(D4) Full heating\nelectrification", (2.2, 58.0),
                           "left")}
 
-    fig, ax = plt.subplots(figsize=(3.5, 2.35))
+    fig, ax = plt.subplots(figsize=(3.5, 2.15))
 
     co2_dep = RUNS[DEP]["co2_t"]
     co2_mix = RUNS[MIX]["co2_t"]
@@ -190,7 +197,11 @@ def fig_frontier(name="fig4_frontier"):
                 color="0.25")
 
     ax.plot(xs, ys, color=GRAY, lw=0.8, zorder=2)
-    ax.plot(xs, ys, "o", color=GRAY, ms=2.6, zorder=3)
+    ax.plot([r["co2_t"] for r in eps_pts], [(r["F1"] - f0) / 1e3 for r in eps_pts],
+            "o", color=GRAY, ms=2.6, zorder=3, label="Emissions cap")
+    ax.plot([r["co2_t"] for r in lam_pts], [(r["F1"] - f0) / 1e3 for r in lam_pts],
+            "D", mfc="white", mec=ORANGE, ms=3.2, mew=0.8, zorder=3,
+            label="Carbon price")
 
     for lb, (txt, pos, ha) in named.items():
         r = RUNS[lb]
@@ -204,15 +215,8 @@ def fig_frontier(name="fig4_frontier"):
                     bbox=dict(boxstyle="round,pad=0.22", fc="white",
                               ec="0.6", lw=0.4, alpha=1.0))
 
-    for lb, lam in (("lam_3500", 3500),):
-        if lb in RUNS:
-            r = RUNS[lb]
-            ax.plot(r["co2_t"], (r["F1"] - f0) / 1e3, "D", mfc="white",
-                    mec=ORANGE, ms=4.5, mew=1.0, zorder=4)
-            ax.annotate(f"$\\lambda$={lam}", (r["co2_t"],
-                                              (r["F1"] - f0) / 1e3),
-                        textcoords="offset points", xytext=(-30, -9),
-                        fontsize=6.0, color=ORANGE)
+    ax.legend(fontsize=5.8, loc="center right", bbox_to_anchor=(1.0, 0.52),
+              handlelength=1.2, frameon=False)
 
     ax.set_xlabel("Onboard emissions (t$\\mathrm{CO_2}$/yr)")
     ax.set_ylabel("Incremental cost (kCAD/yr)")
@@ -271,27 +275,29 @@ def fig_routes(name="figS_routes"):
 def fig_uncertainty(name="fig5_uncertainty"):
     """Out-of-sample compliance by band: economic baseline vs. the
     full-electrification design, floor and reserve criteria."""
-    ra = json.load(open(RELB))["levels"]["heat_cv_0.00"]
-    rz = json.load(open(RELZ))["levels"]["heat_cv_0.00"]
+    LA = json.load(open(RELB))["levels"]
+    LZ = json.load(open(RELZ))["levels"]
+    ra, rz = LA["heat_cv_0.00"], LZ["heat_cv_0.00"]
+    ra2, rz2 = LA.get("heat_cv_0.20"), LZ.get("heat_cv_0.20")
 
     fig, b = plt.subplots(figsize=(3.5, 1.85))
     x = range(len(BANDS))
     RED = "#8C2D2D"
-    series = [("Baseline, SoC floor",
-               [100 * ra[w]["p_soc_floor_ok"] for w in BANDS], BLUE, "o"),
-              ("Baseline, incl. reserve",
-               [100 * ra[w]["p_all_trips_served"] for w in BANDS], TEAL, "s"),
-              ("Full elec., SoC floor",
-               [100 * rz[w]["p_soc_floor_ok"] for w in BANDS], ORANGE, "^"),
-              ("Full elec., incl. reserve",
-               [100 * rz[w]["p_all_trips_served"] for w in BANDS], RED, "D")]
-    for lb, ys, c, mk in series:
-        b.plot(list(x), ys, "-", color=c, marker=mk, ms=3.4, lw=1.1,
-               label=lb)
+    # review (2026-11-06): days on which every trip is served with the
+    # reserve met; traction draws only, and with cabin-heat CV 0.20
+    series = [("(D0), traction", ra, BLUE, "o", "-"),
+              ("(D4), traction", rz, ORANGE, "^", "-")]
+    if ra2 and rz2:
+        series += [("(D0), + heat CV 0.2", ra2, BLUE, "o", "--"),
+                   ("(D4), + heat CV 0.2", rz2, ORANGE, "^", "--")]
+    for lb, L, c, mk, ls in series:
+        b.plot(list(x), [100 * L[w]["p_all_trips_served"] for w in BANDS],
+               ls, color=c, marker=mk, ms=3.4, lw=1.1, label=lb,
+               mfc=c if ls == "-" else "white")
     b.set_xticks(list(x))
     b.set_xticklabels([BAND_LBL[w] for w in BANDS], fontsize=7)
-    b.set_ylabel("Compliant days (%)")
-    b.set_ylim(25, 103)
+    b.set_ylabel("Days fully served (%)")
+    b.set_ylim(0, 105)
     b.legend(fontsize=5.8, loc="lower left", ncol=1, handlelength=1.6)
     fig.tight_layout()
     save(fig, name)
