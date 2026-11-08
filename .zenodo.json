@@ -1,6 +1,6 @@
 {
   "title": "Diesel Heating in Zero-Emission Bus Fleets: Stochastic Planning under Winter Uncertainty: reproduction package",
-  "description": "Code, inputs, archived solver results and logs reproducing every number, table and figure of 'Diesel Heating in Zero-Emission Bus Fleets: Stochastic Planning under Winter Uncertainty'. Two-stage stochastic MILP for cold-climate battery-electric bus fleet planning with fuel-fired-heater retention, EVSE-coupled preconditioning, emissions policy and division-scale coordination. This version (v2.2.0) adds the runs made after a structured peer review of the manuscript to the v9 campaign of v2.1.1: reliability re-evaluated with a shortfall-only objective at zero gap, heater capital-cost runs, a design-day benchmark, unrounded scenario weights, a re-solved fragmented division case with shared-connection re-billing, re-pricing against 24 historical winters, and a frontier built from pooled cap and carbon-price solutions. The v9 solves of v2.1.1 are unchanged.",
+  "description": "Code, inputs, archived solver results and logs reproducing every number, table and figure of 'Diesel Heating in Zero-Emission Bus Fleets: Stochastic Planning under Winter Uncertainty'. Two-stage stochastic MILP for cold-climate battery-electric bus fleet planning with fuel-fired-heater retention, EVSE-coupled preconditioning, emissions policy and division-scale coordination. This version (v2.3.0) leaves the results of v2.2.0 unchanged and adds what the long-format version of the manuscript needs: single-column (page-width and landscape) copies of every generated table, and a severe-day operation figure of designs D0 and D4 with its archived data, which can be redrawn without a solver.",
   "creators": [
     {
       "name": "Manzolli, Jônatas Augusto",
@@ -34,5 +34,5 @@
     "MILP",
     "reproducibility"
   ],
-  "version": "v2.2.0"
+  "version": "v2.3.0"
 }

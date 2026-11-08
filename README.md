@@ -18,6 +18,27 @@ hand.**
 
 ---
 
+## v2.3.0 (long-format manuscript) supersedes v2.2.0
+
+Results are unchanged from v2.2.0. This version adds what the long-format
+(Elsevier, single-column) version of the manuscript needs:
+
+| change | files |
+|---|---|
+| Page-width and landscape copies of every generated table for the single-column layout (`*_m2.tex`; a table that is full-width in the IEEE layout and has seven or more columns becomes a `sidewaystable`; IEEE section numbers in notes are mapped to the long-format labels). The IEEE tables are unchanged. | `src/make_tables_v6.py`, `src/make_supp_tables.py`, `tables/*_m2.tex` |
+| Severe-day operation figure with the current design labels: (D0) and (D4) fixed to their archived designs and re-dispatched (lambda = 0, MIPGap 0.2%), plus the cost composition of (D0)-(D4). The `solve` step needs Gurobi; the `render` step redraws the figure from the archived data without a solver. | `src/fig_severe_day.py`, `results/fig_severe_day_data.json`, `figures/fig_severe_day.pdf` |
+| The regeneration script also draws the severe-day figure. | `src/regen_review_v9.sh` |
+
+Regenerate every table and figure of both manuscript versions (from `src/`,
+with `configs/`, `results/` and `results/review_v9/` copied next to the
+scripts and `eccc_winter_bands_v9.json` also placed in `data_v9/`):
+
+```bash
+DATA=. OUT=out ./regen_review_v9.sh
+```
+
+The v2.2.0 section below is kept unchanged for reference.
+
 ## v2.2.0 (revision after internal peer review) supersedes v2.1.1
 
 The v9 campaign of v2.1.1 is unchanged; this version adds the runs and

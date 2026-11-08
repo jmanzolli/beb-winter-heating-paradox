@@ -24,3 +24,6 @@ FIG_REL_BASE=$DATA/rel_v9rev_econ_full.json FIG_REL_ZERO=$DATA/rel_v9rev_zero_fu
   python3 make_fig_m.py
 V9_DIR=$DATA V9_INPUTS=$DATA/route52_inputs_v9.json V9_WEATHER=${V9_WEATHER:-data_v9/eccc_winter_bands_v9.json} \
 V9_DIV=$DATA/campaign_division_v9rev.json python3 make_figs_v9extra.py
+# severe-day operation figure, drawn from its archived data (no solver needed;
+# "python3 fig_severe_day.py solve" re-creates the data with Gurobi)
+FIGSEV_RES=$DATA/campaign_v9rev_results.json FIGSEV_DATA=$DATA/fig_severe_day_data.json python3 fig_severe_day.py render
