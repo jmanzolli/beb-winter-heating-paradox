@@ -183,7 +183,10 @@ def solve_case(label, freeze_z=False, route_lock=False, tlim=TLIM):
     m = R.build_model(carbon_price_t=LAM, fix_fleet_total=True,
                       diff_objective=True)
     sf = os.environ.get("DIV_START_FROM")
-    if sf and not route_lock:
+    # review 2026-11-09 (M7): the shared-pool design (case C) is feasible for
+    # the route-locked case B as well (its frozen assignment gives per-route
+    # class counts), so B may be MIP-started from it with DIV_START_ROUTELOCK=1
+    if sf and (not route_lock or os.environ.get("DIV_START_ROUTELOCK") == "1"):
         fn, case = sf.rsplit(":", 1)
         rec0 = json.load(open(fn))["cases"].get(case)
         if rec0:

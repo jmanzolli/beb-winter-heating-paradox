@@ -1,6 +1,6 @@
 {
-  "title": "Diesel Heating in Zero-Emission Bus Fleets: Stochastic Planning under Winter Uncertainty: reproduction package",
-  "description": "Code, inputs, archived solver results and logs reproducing every number, table and figure of 'Diesel Heating in Zero-Emission Bus Fleets: Stochastic Planning under Winter Uncertainty'. Two-stage stochastic MILP for cold-climate battery-electric bus fleet planning with fuel-fired-heater retention, EVSE-coupled preconditioning, emissions policy and division-scale coordination. This version (v2.3.0) leaves the results of v2.2.0 unchanged and adds what the long-format version of the manuscript needs: single-column (page-width and landscape) copies of every generated table, and a severe-day operation figure of designs D0 and D4 with its archived data, which can be redrawn without a solver.",
+  "title": "Eliminating Diesel Heaters from Electric Buses: Joint Fleet, Charging, and Grid Optimization for Extreme Winter Conditions: reproduction package",
+  "description": "Code, inputs and results for a two-stage scenario-based mixed-integer model that plans battery-electric bus fleets in cold climates. The model chooses, for each bus, a diesel cabin heater or electric heating only, together with battery size, depot and terminal chargers, and grid connection, and dispatches heat and charging over weather bands built from 24 winters of Toronto temperature records. It is applied to Toronto Transit Commission Route 52 (18 buses) and to the Arrow Road division (14 routes, 183 buses). Contents: (1) model and campaign scripts (Python, Gurobi 11); (2) processed, non-confidential inputs: schedules derived from the public timetable feed, heating and traction model coefficients, weather band counts, tariffs and cost parameters; (3) complete result files and solver logs for the cost-emissions frontier, the sensitivity runs, the heater-price runs, the single-day benchmarks and the four division plans; (4) the out-of-sample reliability test (1,000 sampled days per weather band, three outcomes) with per-draw results for the designs tested under the hedged day-ahead assignment; (5) scripts that regenerate the tables and figures of the paper. The trip-level telemetry of the Toronto Transit Commission is not included and cannot be redistributed; the empirical models estimated from it are provided, so every optimization result can be regenerated without the raw data. This version (v2.4.0) corresponds to the manuscript submitted to Transportation Research Part C.",
   "creators": [
     {
       "name": "Manzolli, Jônatas Augusto",
@@ -27,12 +27,13 @@
   "upload_type": "software",
   "keywords": [
     "electric buses",
-    "cold-climate transit",
-    "stochastic programming",
-    "fuel-fired heaters",
+    "cabin heating",
+    "diesel heater",
+    "winter operations",
     "charging infrastructure",
-    "MILP",
+    "mixed-integer programming",
+    "Toronto",
     "reproducibility"
   ],
-  "version": "v2.3.0"
+  "version": "v2.4.0"
 }

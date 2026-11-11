@@ -1,0 +1,156 @@
+{
+ "runs": [
+  {
+   "label": "ffh_capex_l0_20000",
+   "lam": 0.0,
+   "eps": null,
+   "obj": 3247609.1,
+   "lb": 3240857.6,
+   "abs_gap": 6751.5,
+   "rel_gap": 0.002079,
+   "time_s": 7200.1,
+   "status": 9,
+   "phase2": null,
+   "host": "manager.inescc.pt",
+   "threads": 4,
+   "F1": 3247609.1,
+   "co2_t": 4.222,
+   "diesel_L": 1575.2,
+   "diesel_by_scen": {
+    "mild": 0.0,
+    "cold": 0.0,
+    "verycold": 0.0,
+    "extreme": 147.45,
+    "severe": 271.53,
+    "offseason": 0.0
+   },
+   "scen_ops": {
+    "mild": {
+     "T": 2.5,
+     "days": 83,
+     "q_el_kWh": 2066.4,
+     "q_ffh_kWh": 0.0,
+     "diesel_L": 0.0,
+     "precond_kWh": 34.5,
+     "electricity_cost": 691.08
+    },
+    "cold": {
+     "T": -2.5,
+     "days": 38,
+     "q_el_kWh": 2383.6,
+     "q_ffh_kWh": 0.0,
+     "diesel_L": 0.0,
+     "precond_kWh": 67.5,
+     "electricity_cost": 743.4
+    },
+    "verycold": {
+     "T": -7.5,
+     "days": 21,
+     "q_el_kWh": 2718.4,
+     "q_ffh_kWh": 0.0,
+     "diesel_L": 0.0,
+     "precond_kWh": 80.5,
+     "electricity_cost": 807.23
+    },
+    "extreme": {
+     "T": -12.5,
+     "days": 7,
+     "q_el_kWh": 2390.1,
+     "q_ffh_kWh": 654.9,
+     "diesel_L": 147.45,
+     "precond_kWh": 109.0,
+     "electricity_cost": 817.63
+    },
+    "severe": {
+     "T": -17.5,
+     "days": 2,
+     "q_el_kWh": 2224.5,
+     "q_ffh_kWh": 1174.0,
+     "diesel_L": 271.53,
+     "precond_kWh": 104.5,
+     "electricity_cost": 816.23
+    },
+    "offseason": {
+     "T": 16.8,
+     "days": 214,
+     "q_el_kWh": 0.0,
+     "q_ffh_kWh": 0.0,
+     "diesel_L": 0.0,
+     "precond_kWh": 0.0,
+     "electricity_cost": 437.95
+    }
+   },
+   "cost_parts": {
+    "bus_capital": 2795184.0,
+    "charger_site_capital": 105068.8,
+    "grid_capital": 8020.0,
+    "demand_charges": 126768.8,
+    "electricity": 203637.6,
+    "ffh_om": 6000.0,
+    "diesel_cost": 2929.9,
+    "carbon_cost": 0.0,
+    "diesel_L": 1575.2,
+    "co2_t": 4.2,
+    "F1": 3247609.1
+   },
+   "n_ffh": 6,
+   "n_ext": 0,
+   "fleet": {
+    "NF-std-FFH": 6,
+    "NF-std-eOnly": 12
+   },
+   "chargers": {
+    "depot:450": 2,
+    "lawrenceStn:300": 1
+   },
+   "grid_kW": {
+    "depot": 250.0,
+    "lawrenceStn": 250.0
+   },
+   "precond": {
+    "peak_kW": 23.0,
+    "annual_kWh": 8090.1,
+    "tau_h": 0.5
+   },
+   "rho_kW": {
+    "depot:win": 712.7,
+    "depot:off": 298.8,
+    "lawrenceStn:win": 116.0,
+    "lawrenceStn:off": 112.0
+   }
+  }
+ ],
+ "meta": {
+  "inputs": "route52_inputs_v9.json",
+  "abs_gap": 1000.0,
+  "lex_tol": 500.0,
+  "scen_days": {
+   "mild": 83,
+   "cold": 38,
+   "verycold": 21,
+   "extreme": 7,
+   "severe": 2,
+   "offseason": 214
+  },
+  "ffh_nominal_kw": 35.0,
+  "ffh_useful_kw_by_scen": {
+   "mild": 20.61,
+   "cold": 20.11,
+   "verycold": 19.61,
+   "extreme": 19.1,
+   "severe": 18.6,
+   "offseason": 22.0
+  },
+  "el_heater_rated_kw": 23.0,
+  "reserve_kwh": 10.0,
+  "formulation": "v6 (C1 heater-bounded preconditioning, C2 chi retention, C3 single plug per bus, C4 FFH-free procurement)",
+  "precond_tau_h": 0.5,
+  "precond_max_kwh": 10.0,
+  "gurobi": [
+   11,
+   0,
+   3
+  ],
+  "threads": "all (default)"
+ }
+}

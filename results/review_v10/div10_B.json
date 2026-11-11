@@ -1,0 +1,54 @@
+{
+ "cases": {
+  "B_shared_infra_route_locked": {
+   "label": "B_shared_infra_route_locked",
+   "obj_solver": 3252274.9,
+   "lb_solver": 3113370.3,
+   "abs_gap": 138904.6,
+   "rel_gap_diff_cost": 0.04271,
+   "time_s": 21600.2,
+   "status": 9,
+   "total_annual_cost": 31532362.9,
+   "differentiating_cost": 3252274.9,
+   "cost_parts": {
+    "battery_increment": 0.0,
+    "charger_site_capital": 507873.1,
+    "grid_capital": 72180.0,
+    "demand_charges": 763514.2,
+    "electricity": 1681070.1,
+    "ffh_om": 100000.0,
+    "diesel_cost": 127637.5
+   },
+   "n_buses": 183,
+   "n_ffh": 100,
+   "n_ext": 0,
+   "fleet": {
+    "NF-std-FFH": 100,
+    "NF-std-eOnly": 83
+   },
+   "chargers": {
+    "depot:450": 12,
+    "pioneerVillage:450": 3
+   },
+   "n_opp_chargers": 3,
+   "grid_kW": {
+    "depot": 4000.0,
+    "pioneerVillage": 500.0
+   },
+   "peak_depot_kW": 4600.0,
+   "diesel_L": 68622.3,
+   "co2_t": 183.908
+  }
+ },
+ "meta": {
+  "minutes": 360.2,
+  "lam": 0.0,
+  "tau": 25000.0,
+  "abs_gap_diff_cost": 2000.0,
+  "gurobi": [
+   11,
+   0,
+   3
+  ]
+ }
+}

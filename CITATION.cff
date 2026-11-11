@@ -2,11 +2,11 @@ cff-version: 1.2.0
 message: >-
   If you use this code or these results, please cite the manuscript below
   and this repository.
-title: "Diesel Heating in Zero-Emission Bus Fleets: Stochastic Planning under Winter Uncertainty — reproduction package"
+title: "Eliminating Diesel Heaters from Electric Buses: Joint Fleet, Charging, and Grid Optimization for Extreme Winter Conditions — reproduction package"
 type: software
-version: v2.3.0
-date-released: 2026-11-07
-repository-code: "https://github.com/jmanzolli/beb-winter-heating-paradox"
+version: v2.4.0
+date-released: 2026-11-11
+repository-code: "https://github.com/jmanzolli/Eliminating-Diesel-Heaters-from-Electric-Buses"
 doi: 10.5281/zenodo.21652815
 license: MIT
 authors:

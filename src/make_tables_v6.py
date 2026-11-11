@@ -77,7 +77,7 @@ def rev(s):
 
 
 def _m2_variant(body):
-    """Long-format (main_2, single-column elsarticle) copy of a table.
+    """Long-format (main_2, two-column Elsevier CAS) copy of a table.
     Tables that are full-width (table*) in the two-column IEEE layout and have
     seven or more columns go on a landscape page (sidewaystable); the others
     become one-column tables. The tabular is capped at the available width
@@ -96,14 +96,52 @@ def _m2_variant(body):
                 spec += ch
             k += 1
         ncol = sum(spec.count(c) for c in "lrcpX")
-    wide = "\\begin{table*}" in body and ncol >= 7
-    env = "sidewaystable" if wide else "table"
-    b = _re.sub(r"\\begin\{table\*?\}(\[[^\]]*\])?", "\\\\begin{" + env + "}", body)
+    # review (2026-11-08): main_2 uses the two-column Elsevier CAS class.
+    # Tables that are full-width in the IEEE layout, or have seven or more
+    # columns, span both columns (table*); the others stay in one column.
+    # adjustbox caps each at \linewidth, which is the column inside table
+    # and the full text width inside table*.
+    wide = "\\begin{table*}" in body or ncol >= 7
+    env = "table*" if wide else "table"
+    b = _re.sub(r"\\begin\{table\*?\}(\[[^\]]*\])?", "\\\\begin{" + env + "}" + ("[pos=tp]" if wide else "[pos=htbp]"), body)
     b = _re.sub(r"\\end\{table\*?\}", "\\\\end{" + env + "}", b)
-    b = _re.sub(r"\\begin\{tabular\}", r"\\begin{adjustbox}{max width=\\textwidth}\\begin{tabular}", b, count=1)
-    i = b.rfind("\\end{tabular}")
-    if i >= 0:
-        b = b[:i] + "\\end{tabular}\\end{adjustbox}" + b[i + len("\\end{tabular}"):]
+    # every tabular becomes \\fittab{spec}{rows} (defined in main_2.tex):
+    # spread to the line width when narrower, scaled down when wider;
+    # tables of three columns or fewer keep their natural width
+    out, k = [], 0
+    while True:
+        a = b.find("\\begin{tabular}{", k)
+        if a < 0:
+            out.append(b[k:])
+            break
+        out.append(b[k:a])
+        j, depth = a + len("\\begin{tabular}{"), 1
+        while depth:
+            depth += (b[j] == "{") - (b[j] == "}")
+            j += 1
+        spec = b[a + len("\\begin{tabular}{"):j - 1]
+        e = b.find("\\end{tabular}", j)
+        rows = b[j:e]
+        top = 0
+        nc, depth = 0, 0
+        for ch in spec:
+            depth += (ch == "{") - (ch == "}")
+            if depth == 0 and ch in "lrcpX":
+                nc += 1
+        if spec.startswith("@{}"):
+            spec = spec[3:]
+            lead = "@{}"
+        else:
+            lead = ""
+        cmd = "\\fittabnat" if nc <= 3 else "\\fittab"
+        sp = (lead + spec) if cmd == "\\fittabnat" else spec
+        out.append(cmd + "{" + sp + "}{" + rows + "}")
+        k = e + len("\\end{tabular}")
+    b = "".join(out)
+    # one type size for every table in the long-format version
+    b = b.replace("\\scriptsize", "\\small").replace("\\footnotesize", "\\small")
+    # notes typeset in a full-width parbox must follow the float width
+    b = b.replace("\\parbox{\\textwidth}", "\\parbox{\\linewidth}")
     for old, lab in (("Sec.~II-D", "sec:mo"), ("Sec.~IV-C", "sec:reliability")):
         b = b.replace(old, "Section~\\ref{" + lab + "}")
     return b

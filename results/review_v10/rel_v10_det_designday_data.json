@@ -1,0 +1,232 @@
+{
+ "protocol": "v10",
+ "design_label": "det_designday",
+ "design": {
+  "NF-std-FFH": 3,
+  "NF-std-eOnly": 13,
+  "NF-ext-eOnly": 2
+ },
+ "chargers": {
+  "depot:300": 3,
+  "lawrenceStn:300": 1
+ },
+ "n_per_band": 1000,
+ "seed": 20261109,
+ "hard_floor_soc": 0.05,
+ "n_trips_per_day": 276,
+ "traction": {
+  "n_bus_days": 1377,
+  "n_dates": 263,
+  "n_dates_multi": 230,
+  "mean_bus_days_per_date": 5.84,
+  "band_n": {
+   "mild": 1173,
+   "cold": 154,
+   "verycold": 44,
+   "extreme": 5,
+   "severe": 1
+  },
+  "min_band_n": 30,
+  "mu_log_ratio": {
+   "mild": -0.01095,
+   "cold": -0.00594,
+   "verycold": 0.01561,
+   "extreme": 0.01524,
+   "severe": 0.01524
+  },
+  "mean_ratio_by_band": {
+   "mild": 0.9891,
+   "cold": 0.9941,
+   "verycold": 1.0157,
+   "extreme": 1.0154,
+   "severe": 1.0154
+  },
+  "pooled_mean_ratio": 0.9934,
+  "cold_subset_n": 50,
+  "cold_mean_ratio": 1.0176,
+  "sd_log_total": 0.0753,
+  "sd_log_between_dates": 0.0454,
+  "sd_log_within_date": 0.0592,
+  "share_var_between_dates": 0.37,
+  "date_effect_shrink": 0.88
+ },
+ "temps_note": "ECCC climate-daily mean temperature, Toronto City 6158355 with 6158350 filling gaps; Nov-Mar winters 2002-03..2025-26; band counts match the planning weights in 23 of 24 winters",
+ "heat": {
+  "sigma_kW": 1.66,
+  "source": "companion thermal model residual scale on trip-averaged heating demand (Appendix A.2)",
+  "cv_at_band_T": {
+   "mild": 0.199,
+   "cold": 0.171,
+   "verycold": 0.15,
+   "extreme": 0.133,
+   "severe": 0.12
+  }
+ },
+ "levels": {
+  "data": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.59,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 63.07,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.217
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.32,
+    "p_reserve_compliant": 0.825,
+    "p_trips_completed": 0.983,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.825,
+    "mean_trips_lost": 0.021,
+    "share_trips_lost": 7.6e-05,
+    "mean_trips_lost_given_fail": 0.12,
+    "expected_shortfall_kWh": 5.121,
+    "p95_shortfall_kWh": 36.059,
+    "shortfall_given_fail_mean_kWh": 29.263,
+    "slack_split_mean_kWh": {
+     "floor": 1.994,
+     "reserve": 3.127,
+     "closure": 0.0
+    },
+    "min_reserve_p05": -12.96,
+    "min_reserve_median": 14.71,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.172
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.18,
+    "p_reserve_compliant": 0.382,
+    "p_trips_completed": 0.833,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.382,
+    "mean_trips_lost": 0.247,
+    "share_trips_lost": 0.000895,
+    "mean_trips_lost_given_fail": 0.4,
+    "expected_shortfall_kWh": 36.989,
+    "p95_shortfall_kWh": 155.939,
+    "shortfall_given_fail_mean_kWh": 59.853,
+    "slack_split_mean_kWh": {
+     "floor": 17.053,
+     "reserve": 19.064,
+     "closure": 0.872
+    },
+    "min_reserve_p05": -46.87,
+    "min_reserve_median": 2.18,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.726,
+    "heat_cv_mean": 0.151
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -11.95,
+    "p_reserve_compliant": 0.897,
+    "p_trips_completed": 0.988,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.897,
+    "mean_trips_lost": 0.091,
+    "share_trips_lost": 0.00033,
+    "mean_trips_lost_given_fail": 0.883,
+    "expected_shortfall_kWh": 18.017,
+    "p95_shortfall_kWh": 15.437,
+    "shortfall_given_fail_mean_kWh": 174.925,
+    "slack_split_mean_kWh": {
+     "floor": 5.705,
+     "reserve": 6.436,
+     "closure": 5.876
+    },
+    "min_reserve_p05": -1.96,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 5.859,
+    "heat_cv_mean": 0.135
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.94,
+    "p_reserve_compliant": 0.37,
+    "p_trips_completed": 0.874,
+    "p_comfort_met": 0.999,
+    "p_reserve_and_comfort": 0.37,
+    "mean_trips_lost": 0.485,
+    "share_trips_lost": 0.001757,
+    "mean_trips_lost_given_fail": 0.77,
+    "expected_shortfall_kWh": 107.215,
+    "p95_shortfall_kWh": 455.775,
+    "shortfall_given_fail_mean_kWh": 170.182,
+    "slack_split_mean_kWh": {
+     "floor": 37.539,
+     "reserve": 51.101,
+     "closure": 18.575
+    },
+    "min_reserve_p05": -51.17,
+    "min_reserve_median": 2.96,
+    "mean_heat_short_kWh_day": 0.001,
+    "mean_next_day_deficit_kWh": 17.59,
+    "heat_cv_mean": 0.121
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.85689,
+    "p_day_trips_completed": 0.97027,
+    "p_day_comfort_met": 0.99999,
+    "reserve_breach_days_per_winter": 21.609,
+    "trip_loss_days_per_winter": 4.489,
+    "trips_lost_per_winter": 7.59,
+    "share_winter_trips_lost": 0.0001822,
+    "expected_shortfall_kWh_per_winter": 1311.9,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 21.353,
+      "max": 34.891,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 4.451,
+      "max": 7.816,
+      "worst_winter": "2013-14"
+     },
+     "trips_lost": {
+      "mean": 7.36,
+      "max": 14.3,
+      "worst_winter": "2013-14"
+     }
+    }
+   }
+  }
+ },
+ "minutes": 598.2
+}

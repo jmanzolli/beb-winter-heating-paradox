@@ -1,0 +1,58 @@
+{
+ "cases": {
+  "D_full_coordination": {
+   "label": "D_full_coordination",
+   "obj_solver": 3318017.9,
+   "lb_solver": 3140086.6,
+   "abs_gap": 177931.3,
+   "rel_gap_diff_cost": 0.053626,
+   "time_s": 21600.2,
+   "status": 9,
+   "total_annual_cost": 31598105.9,
+   "differentiating_cost": 3318017.9,
+   "cost_parts": {
+    "battery_increment": 0.0,
+    "charger_site_capital": 668343.9,
+    "grid_capital": 84210.0,
+    "demand_charges": 734220.6,
+    "electricity": 1747606.7,
+    "ffh_om": 58000.0,
+    "diesel_cost": 25636.7
+   },
+   "n_buses": 183,
+   "n_ffh": 58,
+   "n_ext": 0,
+   "fleet": {
+    "NF-std-FFH": 58,
+    "NF-std-eOnly": 125
+   },
+   "chargers": {
+    "depot:450": 11,
+    "lawrenceStn:450": 1,
+    "pioneerVillage:450": 3,
+    "yorkMillsStn:450": 4
+   },
+   "n_opp_chargers": 8,
+   "grid_kW": {
+    "depot": 4000.0,
+    "lawrenceStn": 250.0,
+    "pioneerVillage": 500.0,
+    "yorkMillsStn": 500.0
+   },
+   "peak_depot_kW": 4099.3,
+   "diesel_L": 13783.2,
+   "co2_t": 36.939
+  }
+ },
+ "meta": {
+  "minutes": 360.2,
+  "lam": 0.0,
+  "tau": 25000.0,
+  "abs_gap_diff_cost": 2000.0,
+  "gurobi": [
+   11,
+   0,
+   3
+  ]
+ }
+}

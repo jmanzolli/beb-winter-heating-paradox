@@ -1,0 +1,4260 @@
+{
+ "capex": {
+  "runs": {
+   "15000": {
+    "F1": 3240034.8,
+    "lb": 3237654.3,
+    "abs_gap": 2380.5,
+    "n_ffh": 18,
+    "co2_t": 19.026,
+    "chargers": {
+     "depot:450": 2
+    }
+   },
+   "17500": {
+    "F1": 3245019.2,
+    "lb": 3238472.0,
+    "abs_gap": 6547.2,
+    "n_ffh": 18,
+    "co2_t": 18.615,
+    "chargers": {
+     "depot:450": 2
+    }
+   },
+   "20000": {
+    "F1": 3247609.1,
+    "lb": 3240857.6,
+    "abs_gap": 6751.5,
+    "n_ffh": 6,
+    "co2_t": 4.222,
+    "chargers": {
+     "depot:450": 2,
+     "lawrenceStn:300": 1
+    }
+   },
+   "25000": {
+    "F1": 3251056.9,
+    "lb": 3246555.9,
+    "abs_gap": 4501.0,
+    "n_ffh": 6,
+    "co2_t": 4.219,
+    "chargers": {
+     "depot:450": 2,
+     "lawrenceStn:300": 1
+    }
+   },
+   "30000": {
+    "F1": 3254376.7,
+    "lb": 3251333.7,
+    "abs_gap": 3043.0,
+    "n_ffh": 6,
+    "co2_t": 4.222,
+    "chargers": {
+     "depot:450": 2,
+     "lawrenceStn:300": 1
+    }
+   }
+  },
+  "best_by_heaters": {
+   "18": {
+    "label": "capex_17500",
+    "F0": 3209487.2
+   },
+   "6": {
+    "label": "capex_30000",
+    "F0": 3234072.7
+   },
+   "0": {
+    "label": "eps_0.00",
+    "F0": 3275491.9
+   },
+   "5": {
+    "label": "eps_0.10",
+    "F0": 3242225.3
+   },
+   "3": {
+    "label": "det_designday_eval",
+    "F0": 3250039.3
+   }
+  },
+  "envelope": [
+   [
+    0.0,
+    18
+   ],
+   [
+    18170.0,
+    6
+   ],
+   [
+    47190.0,
+    3
+   ],
+   [
+    75220.0,
+    0
+   ]
+  ]
+ },
+ "evals": {
+  "econ_lam0_eval": {
+   "F1": 3209684.1,
+   "abs_gap": 308.2,
+   "n_ffh": 18,
+   "co2_t": 19.19
+  },
+  "det_designday_eval": {
+   "F1": 3250039.3,
+   "abs_gap": 145.5,
+   "n_ffh": 3,
+   "co2_t": 1.132
+  }
+ },
+ "reliability": {
+  "econ_lam0|trac_fixT": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 2.5,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 87.56,
+    "min_reserve_median": 145.2,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.0
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.5,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 83.2,
+    "min_reserve_median": 136.28,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.0
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.5,
+    "p_reserve_compliant": 0.995,
+    "p_trips_completed": 0.999,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.995,
+    "mean_trips_lost": 0.001,
+    "share_trips_lost": 4e-06,
+    "mean_trips_lost_given_fail": 0.2,
+    "expected_shortfall_kWh": 0.249,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 49.804,
+    "slack_split_mean_kWh": {
+     "floor": 0.034,
+     "reserve": 0.07,
+     "closure": 0.145
+    },
+    "min_reserve_p05": 80.55,
+    "min_reserve_median": 118.26,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.145,
+    "heat_cv_mean": 0.0
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -12.5,
+    "p_reserve_compliant": 0.997,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.997,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.408,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 135.995,
+    "slack_split_mean_kWh": {
+     "floor": 0.029,
+     "reserve": 0.085,
+     "closure": 0.294
+    },
+    "min_reserve_p05": 51.49,
+    "min_reserve_median": 87.47,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.294,
+    "heat_cv_mean": 0.0
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -17.5,
+    "p_reserve_compliant": 0.968,
+    "p_trips_completed": 0.996,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.968,
+    "mean_trips_lost": 0.02,
+    "share_trips_lost": 7.2e-05,
+    "mean_trips_lost_given_fail": 0.625,
+    "expected_shortfall_kWh": 6.034,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 188.55,
+    "slack_split_mean_kWh": {
+     "floor": 1.065,
+     "reserve": 1.381,
+     "closure": 3.587
+    },
+    "min_reserve_p05": 21.89,
+    "min_reserve_median": 67.93,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 3.587,
+    "heat_cv_mean": 0.0
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.99874,
+    "p_day_trips_completed": 0.99981,
+    "p_day_comfort_met": 1.0,
+    "reserve_breach_days_per_winter": 0.19,
+    "trip_loss_days_per_winter": 0.029,
+    "trips_lost_per_winter": 0.06,
+    "share_winter_trips_lost": 1.5e-06,
+    "expected_shortfall_kWh_per_winter": 20.2,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 0.175,
+      "max": 0.407,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 0.027,
+      "max": 0.058,
+      "worst_winter": "2013-14"
+     },
+     "trips_lost": {
+      "mean": 0.052,
+      "max": 0.14,
+      "worst_winter": "2013-14"
+     }
+    }
+   }
+  },
+  "eps_0.00|trac_fixT": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 2.5,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 52.17,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.0
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.5,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 24.02,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.0
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.5,
+    "p_reserve_compliant": 0.995,
+    "p_trips_completed": 0.998,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.995,
+    "mean_trips_lost": 0.002,
+    "share_trips_lost": 7e-06,
+    "mean_trips_lost_given_fail": 0.4,
+    "expected_shortfall_kWh": 1.728,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 345.526,
+    "slack_split_mean_kWh": {
+     "floor": 0.278,
+     "reserve": 0.641,
+     "closure": 0.809
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.673,
+    "heat_cv_mean": 0.0
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -12.5,
+    "p_reserve_compliant": 0.981,
+    "p_trips_completed": 0.999,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.981,
+    "mean_trips_lost": 0.019,
+    "share_trips_lost": 6.9e-05,
+    "mean_trips_lost_given_fail": 1.0,
+    "expected_shortfall_kWh": 3.24,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 170.529,
+    "slack_split_mean_kWh": {
+     "floor": 1.092,
+     "reserve": 1.127,
+     "closure": 1.021
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 1.021,
+    "heat_cv_mean": 0.0
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -17.5,
+    "p_reserve_compliant": 0.446,
+    "p_trips_completed": 0.921,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.446,
+    "mean_trips_lost": 0.279,
+    "share_trips_lost": 0.001011,
+    "mean_trips_lost_given_fail": 0.504,
+    "expected_shortfall_kWh": 83.953,
+    "p95_shortfall_kWh": 317.518,
+    "shortfall_given_fail_mean_kWh": 151.54,
+    "slack_split_mean_kWh": {
+     "floor": 23.74,
+     "reserve": 40.307,
+     "closure": 19.907
+    },
+    "min_reserve_p05": -32.49,
+    "min_reserve_median": 8.5,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 16.938,
+    "heat_cv_mean": 0.0
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.99109,
+    "p_day_trips_completed": 0.99863,
+    "p_day_comfort_met": 1.0,
+    "reserve_breach_days_per_winter": 1.346,
+    "trip_loss_days_per_winter": 0.207,
+    "trips_lost_per_winter": 0.73,
+    "share_winter_trips_lost": 1.76e-05,
+    "expected_shortfall_kWh_per_winter": 226.9,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 1.083,
+      "max": 3.321,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 0.171,
+      "max": 0.49,
+      "worst_winter": "2013-14"
+     },
+     "trips_lost": {
+      "mean": 0.595,
+      "max": 1.83,
+      "worst_winter": "2013-14"
+     }
+    }
+   }
+  },
+  "econ_lam0|trac": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.6,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 94.26,
+    "min_reserve_median": 151.12,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.0
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.31,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 83.23,
+    "min_reserve_median": 137.45,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.0
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.35,
+    "p_reserve_compliant": 0.997,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.997,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.079,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 26.38,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.079
+    },
+    "min_reserve_p05": 81.34,
+    "min_reserve_median": 118.72,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.079,
+    "heat_cv_mean": 0.0
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -12.04,
+    "p_reserve_compliant": 0.994,
+    "p_trips_completed": 0.996,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.994,
+    "mean_trips_lost": 0.006,
+    "share_trips_lost": 2.2e-05,
+    "mean_trips_lost_given_fail": 1.0,
+    "expected_shortfall_kWh": 2.536,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 422.673,
+    "slack_split_mean_kWh": {
+     "floor": 0.357,
+     "reserve": 0.581,
+     "closure": 1.597
+    },
+    "min_reserve_p05": 50.4,
+    "min_reserve_median": 87.05,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 1.597,
+    "heat_cv_mean": 0.0
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.88,
+    "p_reserve_compliant": 0.973,
+    "p_trips_completed": 0.998,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.973,
+    "mean_trips_lost": 0.011,
+    "share_trips_lost": 4e-05,
+    "mean_trips_lost_given_fail": 0.407,
+    "expected_shortfall_kWh": 2.824,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 104.586,
+    "slack_split_mean_kWh": {
+     "floor": 0.61,
+     "reserve": 0.717,
+     "closure": 1.496
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 68.17,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 1.496,
+    "heat_cv_mean": 0.0
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.99895,
+    "p_day_trips_completed": 0.99979,
+    "p_day_comfort_met": 1.0,
+    "reserve_breach_days_per_winter": 0.159,
+    "trip_loss_days_per_winter": 0.032,
+    "trips_lost_per_winter": 0.06,
+    "share_winter_trips_lost": 1.5e-06,
+    "expected_shortfall_kWh_per_winter": 25.1,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 0.144,
+      "max": 0.363,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 0.029,
+      "max": 0.086,
+      "worst_winter": "2013-14"
+     },
+     "trips_lost": {
+      "mean": 0.055,
+      "max": 0.17,
+      "worst_winter": "2013-14"
+     }
+    }
+   }
+  },
+  "eps_0.00|trac": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.6,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 12.13,
+    "min_reserve_median": 69.4,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.0
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.31,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 26.54,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.0
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.35,
+    "p_reserve_compliant": 0.997,
+    "p_trips_completed": 0.998,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.997,
+    "mean_trips_lost": 0.002,
+    "share_trips_lost": 7e-06,
+    "mean_trips_lost_given_fail": 0.667,
+    "expected_shortfall_kWh": 1.041,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 346.996,
+    "slack_split_mean_kWh": {
+     "floor": 0.176,
+     "reserve": 0.379,
+     "closure": 0.486
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.412,
+    "heat_cv_mean": 0.0
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -12.04,
+    "p_reserve_compliant": 0.977,
+    "p_trips_completed": 0.994,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.977,
+    "mean_trips_lost": 0.097,
+    "share_trips_lost": 0.000351,
+    "mean_trips_lost_given_fail": 4.217,
+    "expected_shortfall_kWh": 16.453,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 715.357,
+    "slack_split_mean_kWh": {
+     "floor": 5.65,
+     "reserve": 5.3,
+     "closure": 5.503
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 5.477,
+    "heat_cv_mean": 0.0
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.88,
+    "p_reserve_compliant": 0.576,
+    "p_trips_completed": 0.919,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.576,
+    "mean_trips_lost": 0.231,
+    "share_trips_lost": 0.000837,
+    "mean_trips_lost_given_fail": 0.545,
+    "expected_shortfall_kWh": 71.885,
+    "p95_shortfall_kWh": 377.66,
+    "shortfall_given_fail_mean_kWh": 169.541,
+    "slack_split_mean_kWh": {
+     "floor": 19.252,
+     "reserve": 36.536,
+     "closure": 16.097
+    },
+    "min_reserve_p05": -36.07,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 13.874,
+    "heat_cv_mean": 0.0
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.9929,
+    "p_day_trips_completed": 0.99837,
+    "p_day_comfort_met": 1.0,
+    "reserve_breach_days_per_winter": 1.072,
+    "trip_loss_days_per_winter": 0.246,
+    "trips_lost_per_winter": 1.18,
+    "share_winter_trips_lost": 2.84e-05,
+    "expected_shortfall_kWh_per_winter": 280.8,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 0.866,
+      "max": 2.671,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 0.206,
+      "max": 0.595,
+      "worst_winter": "2013-14"
+     },
+     "trips_lost": {
+      "mean": 1.025,
+      "max": 3.07,
+      "worst_winter": "2013-14"
+     }
+    }
+   }
+  },
+  "relmatch_eps0_r25|trac": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.6,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 25.3,
+    "min_reserve_median": 82.5,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.0
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.31,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 42.58,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.0
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.35,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 15.9,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.0
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -12.04,
+    "p_reserve_compliant": 0.992,
+    "p_trips_completed": 0.995,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.992,
+    "mean_trips_lost": 0.038,
+    "share_trips_lost": 0.000138,
+    "mean_trips_lost_given_fail": 4.75,
+    "expected_shortfall_kWh": 7.552,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 943.955,
+    "slack_split_mean_kWh": {
+     "floor": 2.039,
+     "reserve": 2.596,
+     "closure": 2.916
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 3.002,
+    "heat_cv_mean": 0.0
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.88,
+    "p_reserve_compliant": 0.879,
+    "p_trips_completed": 0.994,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.879,
+    "mean_trips_lost": 0.062,
+    "share_trips_lost": 0.000225,
+    "mean_trips_lost_given_fail": 0.512,
+    "expected_shortfall_kWh": 14.948,
+    "p95_shortfall_kWh": 30.368,
+    "shortfall_given_fail_mean_kWh": 123.534,
+    "slack_split_mean_kWh": {
+     "floor": 4.837,
+     "reserve": 7.501,
+     "closure": 2.61
+    },
+    "min_reserve_p05": -1.85,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 2.58,
+    "heat_cv_mean": 0.0
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.99803,
+    "p_day_trips_completed": 0.99969,
+    "p_day_comfort_met": 1.0,
+    "reserve_breach_days_per_winter": 0.298,
+    "trip_loss_days_per_winter": 0.047,
+    "trips_lost_per_winter": 0.39,
+    "share_winter_trips_lost": 9.4e-06,
+    "expected_shortfall_kWh_per_winter": 82.8,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 0.238,
+      "max": 0.757,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 0.042,
+      "max": 0.125,
+      "worst_winter": "2013-14"
+     },
+     "trips_lost": {
+      "mean": 0.341,
+      "max": 1.03,
+      "worst_winter": "2013-14"
+     }
+    }
+   }
+  },
+  "relmatch_eps0_r100|trac": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.6,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 107.1,
+    "min_reserve_median": 155.77,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.0
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.31,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 67.49,
+    "min_reserve_median": 112.88,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.0
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.35,
+    "p_reserve_compliant": 0.999,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.999,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.019,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 18.51,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.019
+    },
+    "min_reserve_p05": 28.17,
+    "min_reserve_median": 69.27,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.019,
+    "heat_cv_mean": 0.0
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -12.04,
+    "p_reserve_compliant": 0.994,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.994,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 3.498,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 583.082,
+    "slack_split_mean_kWh": {
+     "floor": 0.001,
+     "reserve": 0.03,
+     "closure": 3.468
+    },
+    "min_reserve_p05": 10.06,
+    "min_reserve_median": 35.13,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 3.462,
+    "heat_cv_mean": 0.0
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.88,
+    "p_reserve_compliant": 0.927,
+    "p_trips_completed": 0.998,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.927,
+    "mean_trips_lost": 0.002,
+    "share_trips_lost": 7e-06,
+    "mean_trips_lost_given_fail": 0.027,
+    "expected_shortfall_kWh": 5.221,
+    "p95_shortfall_kWh": 5.491,
+    "shortfall_given_fail_mean_kWh": 71.525,
+    "slack_split_mean_kWh": {
+     "floor": 0.234,
+     "reserve": 0.465,
+     "closure": 4.522
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 12.14,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 4.46,
+    "heat_cv_mean": 0.0
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.99862,
+    "p_day_trips_completed": 0.99997,
+    "p_day_comfort_met": 1.0,
+    "reserve_breach_days_per_winter": 0.209,
+    "trip_loss_days_per_winter": 0.004,
+    "trips_lost_per_winter": 0.0,
+    "share_winter_trips_lost": 1e-07,
+    "expected_shortfall_kWh_per_winter": 35.3,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 0.172,
+      "max": 0.517,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 0.003,
+      "max": 0.01,
+      "worst_winter": "2004-05"
+     },
+     "trips_lost": {
+      "mean": 0.003,
+      "max": 0.01,
+      "worst_winter": "2002-03"
+     }
+    }
+   }
+  },
+  "relmatch_eps0_r100#h|trac": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.6,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 106.37,
+    "min_reserve_median": 155.25,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.0
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.31,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 63.69,
+    "min_reserve_median": 113.19,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.0
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.35,
+    "p_reserve_compliant": 0.999,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.999,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.02,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 19.602,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.02
+    },
+    "min_reserve_p05": 29.97,
+    "min_reserve_median": 72.08,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.02,
+    "heat_cv_mean": 0.0
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -12.04,
+    "p_reserve_compliant": 0.994,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.994,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 3.516,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 585.991,
+    "slack_split_mean_kWh": {
+     "floor": 0.001,
+     "reserve": 0.03,
+     "closure": 3.486
+    },
+    "min_reserve_p05": 13.5,
+    "min_reserve_median": 43.84,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 3.479,
+    "heat_cv_mean": 0.0
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.88,
+    "p_reserve_compliant": 0.927,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.927,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 4.591,
+    "p95_shortfall_kWh": 4.243,
+    "shortfall_given_fail_mean_kWh": 62.884,
+    "slack_split_mean_kWh": {
+     "floor": 0.081,
+     "reserve": 0.173,
+     "closure": 4.336
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 13.88,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 4.323,
+    "heat_cv_mean": 0.0
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.99862,
+    "p_day_trips_completed": 1.0,
+    "p_day_comfort_met": 1.0,
+    "reserve_breach_days_per_winter": 0.209,
+    "trip_loss_days_per_winter": 0.0,
+    "trips_lost_per_winter": 0.0,
+    "share_winter_trips_lost": 0.0,
+    "expected_shortfall_kWh_per_winter": 34.2,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 0.172,
+      "max": 0.517,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 0.0,
+      "max": 0.0,
+      "worst_winter": "2002-03"
+     },
+     "trips_lost": {
+      "mean": 0.0,
+      "max": 0.0,
+      "worst_winter": "2002-03"
+     }
+    }
+   }
+  },
+  "det_designday|trac": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.6,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 14.03,
+    "min_reserve_median": 72.04,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.0
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.31,
+    "p_reserve_compliant": 0.963,
+    "p_trips_completed": 0.992,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.963,
+    "mean_trips_lost": 0.008,
+    "share_trips_lost": 2.9e-05,
+    "mean_trips_lost_given_fail": 0.216,
+    "expected_shortfall_kWh": 1.336,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 36.107,
+    "slack_split_mean_kWh": {
+     "floor": 0.554,
+     "reserve": 0.782,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 28.33,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.0
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.35,
+    "p_reserve_compliant": 0.392,
+    "p_trips_completed": 0.957,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.392,
+    "mean_trips_lost": 0.057,
+    "share_trips_lost": 0.000207,
+    "mean_trips_lost_given_fail": 0.094,
+    "expected_shortfall_kWh": 18.616,
+    "p95_shortfall_kWh": 71.983,
+    "shortfall_given_fail_mean_kWh": 30.618,
+    "slack_split_mean_kWh": {
+     "floor": 6.557,
+     "reserve": 11.52,
+     "closure": 0.539
+    },
+    "min_reserve_p05": -24.4,
+    "min_reserve_median": 5.59,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.409,
+    "heat_cv_mean": 0.0
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -12.04,
+    "p_reserve_compliant": 0.981,
+    "p_trips_completed": 0.995,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.981,
+    "mean_trips_lost": 0.078,
+    "share_trips_lost": 0.000283,
+    "mean_trips_lost_given_fail": 4.105,
+    "expected_shortfall_kWh": 13.71,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 721.568,
+    "slack_split_mean_kWh": {
+     "floor": 4.237,
+     "reserve": 4.328,
+     "closure": 5.145
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 5.207,
+    "heat_cv_mean": 0.0
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.88,
+    "p_reserve_compliant": 0.546,
+    "p_trips_completed": 0.937,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.546,
+    "mean_trips_lost": 0.191,
+    "share_trips_lost": 0.000692,
+    "mean_trips_lost_given_fail": 0.421,
+    "expected_shortfall_kWh": 53.553,
+    "p95_shortfall_kWh": 266.258,
+    "shortfall_given_fail_mean_kWh": 117.957,
+    "slack_split_mean_kWh": {
+     "floor": 15.815,
+     "reserve": 29.295,
+     "closure": 8.442
+    },
+    "min_reserve_p05": -32.79,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 7.273,
+    "heat_cv_mean": 0.0
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.89924,
+    "p_day_trips_completed": 0.99094,
+    "p_day_comfort_met": 1.0,
+    "reserve_breach_days_per_winter": 15.215,
+    "trip_loss_days_per_winter": 1.368,
+    "trips_lost_per_winter": 2.43,
+    "share_winter_trips_lost": 5.83e-05,
+    "expected_shortfall_kWh_per_winter": 644.8,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 15.095,
+      "max": 27.067,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 1.343,
+      "max": 2.332,
+      "worst_winter": "2013-14"
+     },
+     "trips_lost": {
+      "mean": 2.308,
+      "max": 4.89,
+      "worst_winter": "2013-14"
+     }
+    }
+   }
+  },
+  "det_designday#h|trac": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.6,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 38.47,
+    "min_reserve_median": 89.0,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.0
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.31,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 42.25,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.0
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.35,
+    "p_reserve_compliant": 0.997,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.997,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.725,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 241.793,
+    "slack_split_mean_kWh": {
+     "floor": 0.067,
+     "reserve": 0.209,
+     "closure": 0.449
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.389,
+    "heat_cv_mean": 0.0
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -12.04,
+    "p_reserve_compliant": 0.973,
+    "p_trips_completed": 0.995,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.973,
+    "mean_trips_lost": 0.085,
+    "share_trips_lost": 0.000308,
+    "mean_trips_lost_given_fail": 3.148,
+    "expected_shortfall_kWh": 14.324,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 530.52,
+    "slack_split_mean_kWh": {
+     "floor": 4.609,
+     "reserve": 4.528,
+     "closure": 5.188
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 5.249,
+    "heat_cv_mean": 0.0
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.88,
+    "p_reserve_compliant": 0.546,
+    "p_trips_completed": 0.938,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.546,
+    "mean_trips_lost": 0.19,
+    "share_trips_lost": 0.000688,
+    "mean_trips_lost_given_fail": 0.419,
+    "expected_shortfall_kWh": 53.553,
+    "p95_shortfall_kWh": 266.258,
+    "shortfall_given_fail_mean_kWh": 117.957,
+    "slack_split_mean_kWh": {
+     "floor": 15.815,
+     "reserve": 29.295,
+     "closure": 8.442
+    },
+    "min_reserve_p05": -32.79,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 7.27,
+    "heat_cv_mean": 0.0
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.99232,
+    "p_day_trips_completed": 0.99895,
+    "p_day_comfort_met": 1.0,
+    "reserve_breach_days_per_winter": 1.16,
+    "trip_loss_days_per_winter": 0.159,
+    "trips_lost_per_winter": 0.98,
+    "share_winter_trips_lost": 2.34e-05,
+    "expected_shortfall_kWh_per_winter": 222.6,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 0.938,
+      "max": 2.897,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 0.128,
+      "max": 0.405,
+      "worst_winter": "2013-14"
+     },
+     "trips_lost": {
+      "mean": 0.844,
+      "max": 2.57,
+      "worst_winter": "2013-14"
+     }
+    }
+   }
+  },
+  "econ_lam0|data": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.59,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 88.94,
+    "min_reserve_median": 150.28,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.217
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.32,
+    "p_reserve_compliant": 0.999,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.999,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.042,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 42.301,
+    "slack_split_mean_kWh": {
+     "floor": 0.016,
+     "reserve": 0.026,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 84.08,
+    "min_reserve_median": 136.01,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.172
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.18,
+    "p_reserve_compliant": 0.997,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.997,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.096,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 31.858,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.096
+    },
+    "min_reserve_p05": 80.93,
+    "min_reserve_median": 118.37,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.096,
+    "heat_cv_mean": 0.151
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -11.95,
+    "p_reserve_compliant": 0.993,
+    "p_trips_completed": 0.996,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.993,
+    "mean_trips_lost": 0.006,
+    "share_trips_lost": 2.2e-05,
+    "mean_trips_lost_given_fail": 0.857,
+    "expected_shortfall_kWh": 3.072,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 438.908,
+    "slack_split_mean_kWh": {
+     "floor": 0.408,
+     "reserve": 0.679,
+     "closure": 1.985
+    },
+    "min_reserve_p05": 51.35,
+    "min_reserve_median": 87.66,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 1.985,
+    "heat_cv_mean": 0.135
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.94,
+    "p_reserve_compliant": 0.968,
+    "p_trips_completed": 0.995,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.968,
+    "mean_trips_lost": 0.017,
+    "share_trips_lost": 6.2e-05,
+    "mean_trips_lost_given_fail": 0.531,
+    "expected_shortfall_kWh": 6.965,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 217.671,
+    "slack_split_mean_kWh": {
+     "floor": 1.265,
+     "reserve": 1.589,
+     "closure": 4.111
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 69.49,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 4.111,
+    "heat_cv_mean": 0.121
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.99858,
+    "p_day_trips_completed": 0.99975,
+    "p_day_comfort_met": 1.0,
+    "reserve_breach_days_per_winter": 0.214,
+    "trip_loss_days_per_winter": 0.038,
+    "trips_lost_per_winter": 0.08,
+    "share_winter_trips_lost": 1.8e-06,
+    "expected_shortfall_kWh_per_winter": 39.0,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 0.196,
+      "max": 0.443,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 0.034,
+      "max": 0.101,
+      "worst_winter": "2013-14"
+     },
+     "trips_lost": {
+      "mean": 0.065,
+      "max": 0.2,
+      "worst_winter": "2013-14"
+     }
+    }
+   }
+  },
+  "eps_0.00|data": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.59,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 61.64,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.217
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.32,
+    "p_reserve_compliant": 0.999,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.999,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.008,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 8.422,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.008,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 17.86,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.172
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.18,
+    "p_reserve_compliant": 0.996,
+    "p_trips_completed": 0.997,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.996,
+    "mean_trips_lost": 0.004,
+    "share_trips_lost": 1.4e-05,
+    "mean_trips_lost_given_fail": 1.0,
+    "expected_shortfall_kWh": 2.046,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 511.417,
+    "slack_split_mean_kWh": {
+     "floor": 0.414,
+     "reserve": 0.753,
+     "closure": 0.878
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.8,
+    "heat_cv_mean": 0.151
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -11.95,
+    "p_reserve_compliant": 0.899,
+    "p_trips_completed": 0.987,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.899,
+    "mean_trips_lost": 0.116,
+    "share_trips_lost": 0.00042,
+    "mean_trips_lost_given_fail": 1.149,
+    "expected_shortfall_kWh": 21.801,
+    "p95_shortfall_kWh": 12.614,
+    "shortfall_given_fail_mean_kWh": 215.851,
+    "slack_split_mean_kWh": {
+     "floor": 7.314,
+     "reserve": 8.03,
+     "closure": 6.457
+    },
+    "min_reserve_p05": 1.03,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 6.32,
+    "heat_cv_mean": 0.135
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.94,
+    "p_reserve_compliant": 0.404,
+    "p_trips_completed": 0.871,
+    "p_comfort_met": 0.999,
+    "p_reserve_and_comfort": 0.404,
+    "mean_trips_lost": 0.551,
+    "share_trips_lost": 0.001996,
+    "mean_trips_lost_given_fail": 0.924,
+    "expected_shortfall_kWh": 126.596,
+    "p95_shortfall_kWh": 603.083,
+    "shortfall_given_fail_mean_kWh": 212.41,
+    "slack_split_mean_kWh": {
+     "floor": 40.356,
+     "reserve": 57.876,
+     "closure": 28.365
+    },
+    "min_reserve_p05": -47.48,
+    "min_reserve_median": 5.55,
+    "mean_heat_short_kWh_day": 0.001,
+    "mean_next_day_deficit_kWh": 26.624,
+    "heat_cv_mean": 0.121
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.98662,
+    "p_day_trips_completed": 0.99727,
+    "p_day_comfort_met": 0.99999,
+    "reserve_breach_days_per_winter": 2.021,
+    "trip_loss_days_per_winter": 0.412,
+    "trips_lost_per_winter": 2.0,
+    "share_winter_trips_lost": 4.79e-05,
+    "expected_shortfall_kWh_per_winter": 449.1,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 1.694,
+      "max": 5.087,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 0.346,
+      "max": 1.006,
+      "worst_winter": "2013-14"
+     },
+     "trips_lost": {
+      "mean": 1.684,
+      "max": 5.11,
+      "worst_winter": "2013-14"
+     }
+    }
+   }
+  },
+  "relmatch_eps0_r25|data": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.59,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 13.47,
+    "min_reserve_median": 77.24,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.217
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.32,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 35.3,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.172
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.18,
+    "p_reserve_compliant": 0.998,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.998,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.036,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 17.806,
+    "slack_split_mean_kWh": {
+     "floor": 0.007,
+     "reserve": 0.024,
+     "closure": 0.004
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.151
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -11.95,
+    "p_reserve_compliant": 0.972,
+    "p_trips_completed": 0.993,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.972,
+    "mean_trips_lost": 0.04,
+    "share_trips_lost": 0.000145,
+    "mean_trips_lost_given_fail": 1.429,
+    "expected_shortfall_kWh": 8.403,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 300.117,
+    "slack_split_mean_kWh": {
+     "floor": 2.408,
+     "reserve": 3.003,
+     "closure": 2.992
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 3.018,
+    "heat_cv_mean": 0.135
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.94,
+    "p_reserve_compliant": 0.742,
+    "p_trips_completed": 0.954,
+    "p_comfort_met": 0.999,
+    "p_reserve_and_comfort": 0.742,
+    "mean_trips_lost": 0.219,
+    "share_trips_lost": 0.000793,
+    "mean_trips_lost_given_fail": 0.849,
+    "expected_shortfall_kWh": 42.714,
+    "p95_shortfall_kWh": 118.463,
+    "shortfall_given_fail_mean_kWh": 165.559,
+    "slack_split_mean_kWh": {
+     "floor": 15.747,
+     "reserve": 18.691,
+     "closure": 8.276
+    },
+    "min_reserve_p05": -23.9,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.001,
+    "mean_next_day_deficit_kWh": 8.339,
+    "heat_cv_mean": 0.121
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.99501,
+    "p_day_trips_completed": 0.99907,
+    "p_day_comfort_met": 0.99999,
+    "reserve_breach_days_per_winter": 0.754,
+    "trip_loss_days_per_winter": 0.141,
+    "trips_lost_per_winter": 0.72,
+    "share_winter_trips_lost": 1.72e-05,
+    "expected_shortfall_kWh_per_winter": 145.0,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 0.621,
+      "max": 1.898,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 0.116,
+      "max": 0.363,
+      "worst_winter": "2013-14"
+     },
+     "trips_lost": {
+      "mean": 0.597,
+      "max": 1.85,
+      "worst_winter": "2013-14"
+     }
+    }
+   }
+  },
+  "relmatch_eps0_r100|data": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.59,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 83.9,
+    "min_reserve_median": 141.48,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.217
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.32,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 47.88,
+    "min_reserve_median": 107.36,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.172
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.18,
+    "p_reserve_compliant": 0.998,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.998,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.038,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 18.759,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.038
+    },
+    "min_reserve_p05": 17.41,
+    "min_reserve_median": 63.21,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.038,
+    "heat_cv_mean": 0.151
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -11.95,
+    "p_reserve_compliant": 0.991,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.991,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 3.701,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 411.274,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.036,
+     "closure": 3.665
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 32.71,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 3.656,
+    "heat_cv_mean": 0.135
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.94,
+    "p_reserve_compliant": 0.901,
+    "p_trips_completed": 0.992,
+    "p_comfort_met": 0.999,
+    "p_reserve_and_comfort": 0.9,
+    "mean_trips_lost": 0.023,
+    "share_trips_lost": 8.3e-05,
+    "mean_trips_lost_given_fail": 0.232,
+    "expected_shortfall_kWh": 14.614,
+    "p95_shortfall_kWh": 22.583,
+    "shortfall_given_fail_mean_kWh": 147.62,
+    "slack_split_mean_kWh": {
+     "floor": 1.393,
+     "reserve": 1.786,
+     "closure": 11.435
+    },
+    "min_reserve_p05": 9.87,
+    "min_reserve_median": 11.8,
+    "mean_heat_short_kWh_day": 0.001,
+    "mean_next_day_deficit_kWh": 11.187,
+    "heat_cv_mean": 0.121
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.99799,
+    "p_day_trips_completed": 0.99989,
+    "p_day_comfort_met": 0.99999,
+    "reserve_breach_days_per_winter": 0.303,
+    "trip_loss_days_per_winter": 0.016,
+    "trips_lost_per_winter": 0.05,
+    "share_winter_trips_lost": 1.1e-06,
+    "expected_shortfall_kWh_per_winter": 55.9,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 0.253,
+      "max": 0.742,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 0.012,
+      "max": 0.04,
+      "worst_winter": "2004-05"
+     },
+     "trips_lost": {
+      "mean": 0.035,
+      "max": 0.11,
+      "worst_winter": "2004-05"
+     }
+    }
+   }
+  },
+  "relmatch_eps0_r100#h|data": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.59,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 85.22,
+    "min_reserve_median": 142.99,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.217
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.32,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 51.78,
+    "min_reserve_median": 107.63,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.172
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.18,
+    "p_reserve_compliant": 0.998,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.998,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.046,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 23.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.046
+    },
+    "min_reserve_p05": 22.66,
+    "min_reserve_median": 63.15,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.046,
+    "heat_cv_mean": 0.151
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -11.95,
+    "p_reserve_compliant": 0.991,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.991,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 3.699,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 410.988,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.012,
+     "closure": 3.686
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 40.66,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 3.684,
+    "heat_cv_mean": 0.135
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.94,
+    "p_reserve_compliant": 0.913,
+    "p_trips_completed": 0.996,
+    "p_comfort_met": 0.999,
+    "p_reserve_and_comfort": 0.912,
+    "mean_trips_lost": 0.012,
+    "share_trips_lost": 4.3e-05,
+    "mean_trips_lost_given_fail": 0.138,
+    "expected_shortfall_kWh": 13.044,
+    "p95_shortfall_kWh": 15.28,
+    "shortfall_given_fail_mean_kWh": 149.927,
+    "slack_split_mean_kWh": {
+     "floor": 0.739,
+     "reserve": 0.971,
+     "closure": 11.335
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 12.77,
+    "mean_heat_short_kWh_day": 0.001,
+    "mean_next_day_deficit_kWh": 11.235,
+    "heat_cv_mean": 0.121
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.99815,
+    "p_day_trips_completed": 0.99995,
+    "p_day_comfort_met": 0.99999,
+    "reserve_breach_days_per_winter": 0.279,
+    "trip_loss_days_per_winter": 0.008,
+    "trips_lost_per_winter": 0.02,
+    "share_winter_trips_lost": 6e-07,
+    "expected_shortfall_kWh_per_winter": 52.9,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 0.235,
+      "max": 0.682,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 0.006,
+      "max": 0.02,
+      "worst_winter": "2004-05"
+     },
+     "trips_lost": {
+      "mean": 0.018,
+      "max": 0.06,
+      "worst_winter": "2004-05"
+     }
+    }
+   }
+  },
+  "det_designday|data": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.59,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 63.07,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.217
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.32,
+    "p_reserve_compliant": 0.825,
+    "p_trips_completed": 0.983,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.825,
+    "mean_trips_lost": 0.021,
+    "share_trips_lost": 7.6e-05,
+    "mean_trips_lost_given_fail": 0.12,
+    "expected_shortfall_kWh": 5.121,
+    "p95_shortfall_kWh": 36.059,
+    "shortfall_given_fail_mean_kWh": 29.263,
+    "slack_split_mean_kWh": {
+     "floor": 1.994,
+     "reserve": 3.127,
+     "closure": 0.0
+    },
+    "min_reserve_p05": -12.96,
+    "min_reserve_median": 14.71,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.172
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.18,
+    "p_reserve_compliant": 0.382,
+    "p_trips_completed": 0.833,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.382,
+    "mean_trips_lost": 0.247,
+    "share_trips_lost": 0.000895,
+    "mean_trips_lost_given_fail": 0.4,
+    "expected_shortfall_kWh": 36.989,
+    "p95_shortfall_kWh": 155.939,
+    "shortfall_given_fail_mean_kWh": 59.853,
+    "slack_split_mean_kWh": {
+     "floor": 17.053,
+     "reserve": 19.064,
+     "closure": 0.872
+    },
+    "min_reserve_p05": -46.87,
+    "min_reserve_median": 2.18,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.726,
+    "heat_cv_mean": 0.151
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -11.95,
+    "p_reserve_compliant": 0.897,
+    "p_trips_completed": 0.988,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.897,
+    "mean_trips_lost": 0.091,
+    "share_trips_lost": 0.00033,
+    "mean_trips_lost_given_fail": 0.883,
+    "expected_shortfall_kWh": 18.017,
+    "p95_shortfall_kWh": 15.437,
+    "shortfall_given_fail_mean_kWh": 174.925,
+    "slack_split_mean_kWh": {
+     "floor": 5.705,
+     "reserve": 6.436,
+     "closure": 5.876
+    },
+    "min_reserve_p05": -1.96,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 5.859,
+    "heat_cv_mean": 0.135
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.94,
+    "p_reserve_compliant": 0.37,
+    "p_trips_completed": 0.874,
+    "p_comfort_met": 0.999,
+    "p_reserve_and_comfort": 0.37,
+    "mean_trips_lost": 0.485,
+    "share_trips_lost": 0.001757,
+    "mean_trips_lost_given_fail": 0.77,
+    "expected_shortfall_kWh": 107.215,
+    "p95_shortfall_kWh": 455.775,
+    "shortfall_given_fail_mean_kWh": 170.182,
+    "slack_split_mean_kWh": {
+     "floor": 37.539,
+     "reserve": 51.101,
+     "closure": 18.575
+    },
+    "min_reserve_p05": -51.17,
+    "min_reserve_median": 2.96,
+    "mean_heat_short_kWh_day": 0.001,
+    "mean_next_day_deficit_kWh": 17.59,
+    "heat_cv_mean": 0.121
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.85689,
+    "p_day_trips_completed": 0.97027,
+    "p_day_comfort_met": 0.99999,
+    "reserve_breach_days_per_winter": 21.609,
+    "trip_loss_days_per_winter": 4.489,
+    "trips_lost_per_winter": 7.59,
+    "share_winter_trips_lost": 0.0001822,
+    "expected_shortfall_kWh_per_winter": 1311.9,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 21.353,
+      "max": 34.891,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 4.451,
+      "max": 7.816,
+      "worst_winter": "2013-14"
+     },
+     "trips_lost": {
+      "mean": 7.36,
+      "max": 14.3,
+      "worst_winter": "2013-14"
+     }
+    }
+   }
+  },
+  "det_designday#h|data": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.59,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 18.0,
+    "min_reserve_median": 79.44,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.217
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.32,
+    "p_reserve_compliant": 0.999,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.999,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.008,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 8.422,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.008,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 32.78,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.172
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.18,
+    "p_reserve_compliant": 0.993,
+    "p_trips_completed": 0.998,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.993,
+    "mean_trips_lost": 0.002,
+    "share_trips_lost": 7e-06,
+    "mean_trips_lost_given_fail": 0.286,
+    "expected_shortfall_kWh": 1.54,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 219.99,
+    "slack_split_mean_kWh": {
+     "floor": 0.212,
+     "reserve": 0.423,
+     "closure": 0.905
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.815,
+    "heat_cv_mean": 0.151
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -11.95,
+    "p_reserve_compliant": 0.869,
+    "p_trips_completed": 0.984,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.869,
+    "mean_trips_lost": 0.096,
+    "share_trips_lost": 0.000348,
+    "mean_trips_lost_given_fail": 0.733,
+    "expected_shortfall_kWh": 19.313,
+    "p95_shortfall_kWh": 25.216,
+    "shortfall_given_fail_mean_kWh": 147.425,
+    "slack_split_mean_kWh": {
+     "floor": 6.245,
+     "reserve": 7.136,
+     "closure": 5.931
+    },
+    "min_reserve_p05": -6.9,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 5.907,
+    "heat_cv_mean": 0.135
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.94,
+    "p_reserve_compliant": 0.37,
+    "p_trips_completed": 0.874,
+    "p_comfort_met": 0.999,
+    "p_reserve_and_comfort": 0.37,
+    "mean_trips_lost": 0.485,
+    "share_trips_lost": 0.001757,
+    "mean_trips_lost_given_fail": 0.77,
+    "expected_shortfall_kWh": 107.215,
+    "p95_shortfall_kWh": 455.775,
+    "shortfall_given_fail_mean_kWh": 170.182,
+    "slack_split_mean_kWh": {
+     "floor": 37.539,
+     "reserve": 51.101,
+     "closure": 18.575
+    },
+    "min_reserve_p05": -51.17,
+    "min_reserve_median": 2.96,
+    "mean_heat_short_kWh_day": 0.001,
+    "mean_next_day_deficit_kWh": 17.591,
+    "heat_cv_mean": 0.121
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.98436,
+    "p_day_trips_completed": 0.99731,
+    "p_day_comfort_met": 0.99999,
+    "reserve_breach_days_per_winter": 2.362,
+    "trip_loss_days_per_winter": 0.406,
+    "trips_lost_per_winter": 1.68,
+    "share_winter_trips_lost": 4.04e-05,
+    "expected_shortfall_kWh_per_winter": 382.3,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 2.003,
+      "max": 5.941,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 0.34,
+      "max": 1.01,
+      "worst_winter": "2013-14"
+     },
+     "trips_lost": {
+      "mean": 1.411,
+      "max": 4.33,
+      "worst_winter": "2013-14"
+     }
+    }
+   }
+  },
+  "econ_lam0|cv0.20": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.59,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 88.12,
+    "min_reserve_median": 150.24,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.2
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.32,
+    "p_reserve_compliant": 0.999,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.999,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.042,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 42.301,
+    "slack_split_mean_kWh": {
+     "floor": 0.016,
+     "reserve": 0.026,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 84.08,
+    "min_reserve_median": 136.27,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.2
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.18,
+    "p_reserve_compliant": 0.997,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.997,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.096,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 31.858,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.096
+    },
+    "min_reserve_p05": 80.45,
+    "min_reserve_median": 118.47,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.096,
+    "heat_cv_mean": 0.2
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -11.95,
+    "p_reserve_compliant": 0.993,
+    "p_trips_completed": 0.996,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.993,
+    "mean_trips_lost": 0.006,
+    "share_trips_lost": 2.2e-05,
+    "mean_trips_lost_given_fail": 0.857,
+    "expected_shortfall_kWh": 3.072,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 438.908,
+    "slack_split_mean_kWh": {
+     "floor": 0.408,
+     "reserve": 0.679,
+     "closure": 1.985
+    },
+    "min_reserve_p05": 49.4,
+    "min_reserve_median": 86.95,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 1.985,
+    "heat_cv_mean": 0.2
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.94,
+    "p_reserve_compliant": 0.939,
+    "p_trips_completed": 0.989,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.939,
+    "mean_trips_lost": 0.028,
+    "share_trips_lost": 0.000101,
+    "mean_trips_lost_given_fail": 0.459,
+    "expected_shortfall_kWh": 8.842,
+    "p95_shortfall_kWh": 2.638,
+    "shortfall_given_fail_mean_kWh": 144.955,
+    "slack_split_mean_kWh": {
+     "floor": 2.149,
+     "reserve": 2.43,
+     "closure": 4.263
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 66.4,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 4.263,
+    "heat_cv_mean": 0.2
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.9982,
+    "p_day_trips_completed": 0.99967,
+    "p_day_comfort_met": 1.0,
+    "reserve_breach_days_per_winter": 0.272,
+    "trip_loss_days_per_winter": 0.05,
+    "trips_lost_per_winter": 0.1,
+    "share_winter_trips_lost": 2.4e-06,
+    "expected_shortfall_kWh_per_winter": 42.8,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 0.241,
+      "max": 0.588,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 0.043,
+      "max": 0.131,
+      "worst_winter": "2013-14"
+     },
+     "trips_lost": {
+      "mean": 0.081,
+      "max": 0.25,
+      "worst_winter": "2013-14"
+     }
+    }
+   }
+  },
+  "eps_0.00|cv0.20": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.59,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 62.36,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.2
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.32,
+    "p_reserve_compliant": 0.999,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.999,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.005,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 5.299,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.005,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 17.13,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.2
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.18,
+    "p_reserve_compliant": 0.985,
+    "p_trips_completed": 0.996,
+    "p_comfort_met": 0.999,
+    "p_reserve_and_comfort": 0.985,
+    "mean_trips_lost": 0.009,
+    "share_trips_lost": 3.3e-05,
+    "mean_trips_lost_given_fail": 0.6,
+    "expected_shortfall_kWh": 2.53,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 168.641,
+    "slack_split_mean_kWh": {
+     "floor": 0.623,
+     "reserve": 1.014,
+     "closure": 0.893
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.015,
+    "mean_next_day_deficit_kWh": 0.83,
+    "heat_cv_mean": 0.2
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -11.95,
+    "p_reserve_compliant": 0.729,
+    "p_trips_completed": 0.946,
+    "p_comfort_met": 0.989,
+    "p_reserve_and_comfort": 0.727,
+    "mean_trips_lost": 0.179,
+    "share_trips_lost": 0.000649,
+    "mean_trips_lost_given_fail": 0.661,
+    "expected_shortfall_kWh": 34.211,
+    "p95_shortfall_kWh": 103.996,
+    "shortfall_given_fail_mean_kWh": 126.238,
+    "slack_split_mean_kWh": {
+     "floor": 12.282,
+     "reserve": 15.183,
+     "closure": 6.746
+    },
+    "min_reserve_p05": -26.89,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.267,
+    "mean_next_day_deficit_kWh": 6.625,
+    "heat_cv_mean": 0.2
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.94,
+    "p_reserve_compliant": 0.206,
+    "p_trips_completed": 0.662,
+    "p_comfort_met": 0.929,
+    "p_reserve_and_comfort": 0.204,
+    "mean_trips_lost": 1.169,
+    "share_trips_lost": 0.004236,
+    "mean_trips_lost_given_fail": 1.472,
+    "expected_shortfall_kWh": 206.856,
+    "p95_shortfall_kWh": 895.838,
+    "shortfall_given_fail_mean_kWh": 260.524,
+    "slack_split_mean_kWh": {
+     "floor": 77.708,
+     "reserve": 93.477,
+     "closure": 35.671
+    },
+    "min_reserve_p05": -78.48,
+    "min_reserve_median": -11.64,
+    "mean_heat_short_kWh_day": 1.905,
+    "mean_next_day_deficit_kWh": 34.487,
+    "heat_cv_mean": 0.2
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.97458,
+    "p_day_trips_completed": 0.99246,
+    "p_day_comfort_met": 0.99841,
+    "reserve_breach_days_per_winter": 3.838,
+    "trip_loss_days_per_winter": 1.138,
+    "trips_lost_per_winter": 3.78,
+    "share_winter_trips_lost": 9.07e-05,
+    "expected_shortfall_kWh_per_winter": 706.5,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 3.33,
+      "max": 9.725,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 0.955,
+      "max": 2.868,
+      "worst_winter": "2013-14"
+     },
+     "trips_lost": {
+      "mean": 3.148,
+      "max": 9.59,
+      "worst_winter": "2013-14"
+     }
+    }
+   }
+  },
+  "relmatch_eps0_r25|cv0.20": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.59,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 12.56,
+    "min_reserve_median": 78.64,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.2
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.32,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 35.45,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.2
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.18,
+    "p_reserve_compliant": 0.993,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 0.999,
+    "p_reserve_and_comfort": 0.992,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.125,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 17.83,
+    "slack_split_mean_kWh": {
+     "floor": 0.025,
+     "reserve": 0.08,
+     "closure": 0.019
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.015,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.2
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -11.95,
+    "p_reserve_compliant": 0.908,
+    "p_trips_completed": 0.976,
+    "p_comfort_met": 0.989,
+    "p_reserve_and_comfort": 0.899,
+    "mean_trips_lost": 0.064,
+    "share_trips_lost": 0.000232,
+    "mean_trips_lost_given_fail": 0.696,
+    "expected_shortfall_kWh": 11.335,
+    "p95_shortfall_kWh": 22.373,
+    "shortfall_given_fail_mean_kWh": 123.21,
+    "slack_split_mean_kWh": {
+     "floor": 3.929,
+     "reserve": 4.59,
+     "closure": 2.816
+    },
+    "min_reserve_p05": -5.13,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.267,
+    "mean_next_day_deficit_kWh": 2.845,
+    "heat_cv_mean": 0.2
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.94,
+    "p_reserve_compliant": 0.49,
+    "p_trips_completed": 0.835,
+    "p_comfort_met": 0.929,
+    "p_reserve_and_comfort": 0.482,
+    "mean_trips_lost": 0.488,
+    "share_trips_lost": 0.001768,
+    "mean_trips_lost_given_fail": 0.957,
+    "expected_shortfall_kWh": 78.223,
+    "p95_shortfall_kWh": 309.546,
+    "shortfall_given_fail_mean_kWh": 153.377,
+    "slack_split_mean_kWh": {
+     "floor": 32.487,
+     "reserve": 36.209,
+     "closure": 9.527
+    },
+    "min_reserve_p05": -55.57,
+    "min_reserve_median": 9.24,
+    "mean_heat_short_kWh_day": 1.905,
+    "mean_next_day_deficit_kWh": 9.688,
+    "heat_cv_mean": 0.2
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.98801,
+    "p_day_trips_completed": 0.9967,
+    "p_day_comfort_met": 0.99841,
+    "reserve_breach_days_per_winter": 1.811,
+    "trip_loss_days_per_winter": 0.498,
+    "trips_lost_per_winter": 1.42,
+    "share_winter_trips_lost": 3.42e-05,
+    "expected_shortfall_kWh_per_winter": 238.4,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 1.529,
+      "max": 4.564,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 0.409,
+      "max": 1.281,
+      "worst_winter": "2013-14"
+     },
+     "trips_lost": {
+      "mean": 1.165,
+      "max": 3.66,
+      "worst_winter": "2013-14"
+     }
+    }
+   }
+  },
+  "relmatch_eps0_r100|cv0.20": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.59,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 81.34,
+    "min_reserve_median": 142.99,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.2
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.32,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 41.47,
+    "min_reserve_median": 105.28,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.2
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.18,
+    "p_reserve_compliant": 0.998,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 0.999,
+    "p_reserve_and_comfort": 0.997,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.061,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 30.542,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.061
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 58.16,
+    "mean_heat_short_kWh_day": 0.015,
+    "mean_next_day_deficit_kWh": 0.061,
+    "heat_cv_mean": 0.2
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -11.95,
+    "p_reserve_compliant": 0.985,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 0.989,
+    "p_reserve_and_comfort": 0.975,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 3.718,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 247.852,
+    "slack_split_mean_kWh": {
+     "floor": 0.067,
+     "reserve": 0.205,
+     "closure": 3.445
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 27.61,
+    "mean_heat_short_kWh_day": 0.267,
+    "mean_next_day_deficit_kWh": 3.431,
+    "heat_cv_mean": 0.2
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.94,
+    "p_reserve_compliant": 0.826,
+    "p_trips_completed": 0.966,
+    "p_comfort_met": 0.929,
+    "p_reserve_and_comfort": 0.795,
+    "mean_trips_lost": 0.054,
+    "share_trips_lost": 0.000196,
+    "mean_trips_lost_given_fail": 0.31,
+    "expected_shortfall_kWh": 22.075,
+    "p95_shortfall_kWh": 93.112,
+    "shortfall_given_fail_mean_kWh": 126.867,
+    "slack_split_mean_kWh": {
+     "floor": 3.634,
+     "reserve": 4.677,
+     "closure": 13.764
+    },
+    "min_reserve_p05": -12.32,
+    "min_reserve_median": 11.04,
+    "mean_heat_short_kWh_day": 1.905,
+    "mean_next_day_deficit_kWh": 13.397,
+    "heat_cv_mean": 0.2
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.99672,
+    "p_day_trips_completed": 0.99955,
+    "p_day_comfort_met": 0.99841,
+    "reserve_breach_days_per_winter": 0.495,
+    "trip_loss_days_per_winter": 0.068,
+    "trips_lost_per_winter": 0.11,
+    "share_winter_trips_lost": 2.6e-06,
+    "expected_shortfall_kWh_per_winter": 71.5,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 0.407,
+      "max": 1.231,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 0.052,
+      "max": 0.17,
+      "worst_winter": "2004-05"
+     },
+     "trips_lost": {
+      "mean": 0.083,
+      "max": 0.27,
+      "worst_winter": "2004-05"
+     }
+    }
+   }
+  },
+  "relmatch_eps0_r100#h|cv0.20": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.59,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 84.98,
+    "min_reserve_median": 144.65,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.2
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.32,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 41.1,
+    "min_reserve_median": 106.59,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.2
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.18,
+    "p_reserve_compliant": 0.998,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 0.999,
+    "p_reserve_and_comfort": 0.997,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.062,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 31.223,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.062
+    },
+    "min_reserve_p05": 12.9,
+    "min_reserve_median": 62.14,
+    "mean_heat_short_kWh_day": 0.015,
+    "mean_next_day_deficit_kWh": 0.062,
+    "heat_cv_mean": 0.2
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -11.95,
+    "p_reserve_compliant": 0.985,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 0.989,
+    "p_reserve_and_comfort": 0.975,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 3.659,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 243.919,
+    "slack_split_mean_kWh": {
+     "floor": 0.049,
+     "reserve": 0.131,
+     "closure": 3.479
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 36.46,
+    "mean_heat_short_kWh_day": 0.267,
+    "mean_next_day_deficit_kWh": 3.468,
+    "heat_cv_mean": 0.2
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.94,
+    "p_reserve_compliant": 0.873,
+    "p_trips_completed": 0.986,
+    "p_comfort_met": 0.929,
+    "p_reserve_and_comfort": 0.834,
+    "mean_trips_lost": 0.028,
+    "share_trips_lost": 0.000101,
+    "mean_trips_lost_given_fail": 0.22,
+    "expected_shortfall_kWh": 17.757,
+    "p95_shortfall_kWh": 48.872,
+    "shortfall_given_fail_mean_kWh": 139.819,
+    "slack_split_mean_kWh": {
+     "floor": 1.846,
+     "reserve": 2.276,
+     "closure": 13.635
+    },
+    "min_reserve_p05": 3.72,
+    "min_reserve_median": 11.51,
+    "mean_heat_short_kWh_day": 1.905,
+    "mean_next_day_deficit_kWh": 13.4,
+    "heat_cv_mean": 0.2
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.99734,
+    "p_day_trips_completed": 0.99981,
+    "p_day_comfort_met": 0.99841,
+    "reserve_breach_days_per_winter": 0.401,
+    "trip_loss_days_per_winter": 0.028,
+    "trips_lost_per_winter": 0.06,
+    "share_winter_trips_lost": 1.3e-06,
+    "expected_shortfall_kWh_per_winter": 62.4,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 0.335,
+      "max": 0.996,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 0.022,
+      "max": 0.07,
+      "worst_winter": "2004-05"
+     },
+     "trips_lost": {
+      "mean": 0.043,
+      "max": 0.14,
+      "worst_winter": "2004-05"
+     }
+    }
+   }
+  },
+  "det_designday|cv0.20": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.59,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 65.45,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.2
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.32,
+    "p_reserve_compliant": 0.791,
+    "p_trips_completed": 0.966,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.791,
+    "mean_trips_lost": 0.046,
+    "share_trips_lost": 0.000167,
+    "mean_trips_lost_given_fail": 0.22,
+    "expected_shortfall_kWh": 7.94,
+    "p95_shortfall_kWh": 52.155,
+    "shortfall_given_fail_mean_kWh": 37.992,
+    "slack_split_mean_kWh": {
+     "floor": 3.479,
+     "reserve": 4.462,
+     "closure": 0.0
+    },
+    "min_reserve_p05": -20.67,
+    "min_reserve_median": 12.28,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.2
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.18,
+    "p_reserve_compliant": 0.364,
+    "p_trips_completed": 0.77,
+    "p_comfort_met": 0.999,
+    "p_reserve_and_comfort": 0.364,
+    "mean_trips_lost": 0.398,
+    "share_trips_lost": 0.001442,
+    "mean_trips_lost_given_fail": 0.626,
+    "expected_shortfall_kWh": 50.911,
+    "p95_shortfall_kWh": 219.685,
+    "shortfall_given_fail_mean_kWh": 80.049,
+    "slack_split_mean_kWh": {
+     "floor": 26.057,
+     "reserve": 23.949,
+     "closure": 0.906
+    },
+    "min_reserve_p05": -58.29,
+    "min_reserve_median": -0.45,
+    "mean_heat_short_kWh_day": 0.015,
+    "mean_next_day_deficit_kWh": 0.759,
+    "heat_cv_mean": 0.2
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -11.95,
+    "p_reserve_compliant": 0.734,
+    "p_trips_completed": 0.954,
+    "p_comfort_met": 0.99,
+    "p_reserve_and_comfort": 0.732,
+    "mean_trips_lost": 0.138,
+    "share_trips_lost": 0.0005,
+    "mean_trips_lost_given_fail": 0.519,
+    "expected_shortfall_kWh": 28.063,
+    "p95_shortfall_kWh": 83.443,
+    "shortfall_given_fail_mean_kWh": 105.499,
+    "slack_split_mean_kWh": {
+     "floor": 10.063,
+     "reserve": 12.161,
+     "closure": 5.839
+    },
+    "min_reserve_p05": -26.89,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.239,
+    "mean_next_day_deficit_kWh": 5.84,
+    "heat_cv_mean": 0.2
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.94,
+    "p_reserve_compliant": 0.199,
+    "p_trips_completed": 0.658,
+    "p_comfort_met": 0.941,
+    "p_reserve_and_comfort": 0.197,
+    "mean_trips_lost": 1.056,
+    "share_trips_lost": 0.003826,
+    "mean_trips_lost_given_fail": 1.318,
+    "expected_shortfall_kWh": 180.952,
+    "p95_shortfall_kWh": 735.86,
+    "shortfall_given_fail_mean_kWh": 225.908,
+    "slack_split_mean_kWh": {
+     "floor": 72.872,
+     "reserve": 84.31,
+     "closure": 23.769
+    },
+    "min_reserve_p05": -81.8,
+    "min_reserve_median": -12.7,
+    "mean_heat_short_kWh_day": 1.543,
+    "mean_next_day_deficit_kWh": 23.127,
+    "heat_cv_mean": 0.2
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.83601,
+    "p_day_trips_completed": 0.95279,
+    "p_day_comfort_met": 0.99862,
+    "reserve_breach_days_per_winter": 24.762,
+    "trip_loss_days_per_winter": 7.128,
+    "trips_lost_per_winter": 13.18,
+    "share_winter_trips_lost": 0.0003163,
+    "expected_shortfall_kWh_per_winter": 1929.2,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 24.339,
+      "max": 40.751,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 6.982,
+      "max": 12.548,
+      "worst_winter": "2013-14"
+     },
+     "trips_lost": {
+      "mean": 12.688,
+      "max": 24.68,
+      "worst_winter": "2013-14"
+     }
+    }
+   }
+  },
+  "det_designday#h|cv0.20": {
+   "mild": {
+    "T_rep": 2.5,
+    "days": 83,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": 4.59,
+    "p_reserve_compliant": 1.0,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 1.0,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.0,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 0.0,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.0,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 21.07,
+    "min_reserve_median": 78.89,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.2
+   },
+   "cold": {
+    "T_rep": -2.5,
+    "days": 38,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -2.32,
+    "p_reserve_compliant": 0.999,
+    "p_trips_completed": 1.0,
+    "p_comfort_met": 1.0,
+    "p_reserve_and_comfort": 0.999,
+    "mean_trips_lost": 0.0,
+    "share_trips_lost": 0.0,
+    "mean_trips_lost_given_fail": 0.0,
+    "expected_shortfall_kWh": 0.005,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 5.299,
+    "slack_split_mean_kWh": {
+     "floor": 0.0,
+     "reserve": 0.005,
+     "closure": 0.0
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 30.55,
+    "mean_heat_short_kWh_day": 0.0,
+    "mean_next_day_deficit_kWh": 0.0,
+    "heat_cv_mean": 0.2
+   },
+   "verycold": {
+    "T_rep": -7.5,
+    "days": 21,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -7.18,
+    "p_reserve_compliant": 0.98,
+    "p_trips_completed": 0.995,
+    "p_comfort_met": 0.999,
+    "p_reserve_and_comfort": 0.98,
+    "mean_trips_lost": 0.007,
+    "share_trips_lost": 2.5e-05,
+    "mean_trips_lost_given_fail": 0.35,
+    "expected_shortfall_kWh": 2.348,
+    "p95_shortfall_kWh": 0.0,
+    "shortfall_given_fail_mean_kWh": 117.384,
+    "slack_split_mean_kWh": {
+     "floor": 0.565,
+     "reserve": 0.833,
+     "closure": 0.949
+    },
+    "min_reserve_p05": 10.0,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.015,
+    "mean_next_day_deficit_kWh": 0.862,
+    "heat_cv_mean": 0.2
+   },
+   "extreme": {
+    "T_rep": -12.5,
+    "days": 7,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -11.95,
+    "p_reserve_compliant": 0.705,
+    "p_trips_completed": 0.944,
+    "p_comfort_met": 0.99,
+    "p_reserve_and_comfort": 0.703,
+    "mean_trips_lost": 0.155,
+    "share_trips_lost": 0.000562,
+    "mean_trips_lost_given_fail": 0.525,
+    "expected_shortfall_kWh": 30.772,
+    "p95_shortfall_kWh": 99.385,
+    "shortfall_given_fail_mean_kWh": 104.311,
+    "slack_split_mean_kWh": {
+     "floor": 11.423,
+     "reserve": 13.429,
+     "closure": 5.92
+    },
+    "min_reserve_p05": -30.46,
+    "min_reserve_median": 10.0,
+    "mean_heat_short_kWh_day": 0.239,
+    "mean_next_day_deficit_kWh": 5.961,
+    "heat_cv_mean": 0.2
+   },
+   "severe": {
+    "T_rep": -17.5,
+    "days": 2,
+    "n": 1000,
+    "n_solved": 1000,
+    "T_drawn_mean": -16.94,
+    "p_reserve_compliant": 0.199,
+    "p_trips_completed": 0.658,
+    "p_comfort_met": 0.941,
+    "p_reserve_and_comfort": 0.197,
+    "mean_trips_lost": 1.056,
+    "share_trips_lost": 0.003826,
+    "mean_trips_lost_given_fail": 1.318,
+    "expected_shortfall_kWh": 180.952,
+    "p95_shortfall_kWh": 735.86,
+    "shortfall_given_fail_mean_kWh": 225.908,
+    "slack_split_mean_kWh": {
+     "floor": 72.872,
+     "reserve": 84.31,
+     "closure": 23.769
+    },
+    "min_reserve_p05": -81.8,
+    "min_reserve_median": -12.7,
+    "mean_heat_short_kWh_day": 1.543,
+    "mean_next_day_deficit_kWh": 23.127,
+    "heat_cv_mean": 0.2
+   },
+   "winter_weighted": {
+    "p_day_reserve_compliant": 0.97268,
+    "p_day_trips_completed": 0.99218,
+    "p_day_comfort_met": 0.99862,
+    "reserve_breach_days_per_winter": 4.125,
+    "trip_loss_days_per_winter": 1.181,
+    "trips_lost_per_winter": 3.34,
+    "share_winter_trips_lost": 8.02e-05,
+    "expected_shortfall_kWh_per_winter": 626.8,
+    "historical_24_winters": {
+     "reserve_breach_days": {
+      "mean": 3.601,
+      "max": 10.406,
+      "worst_winter": "2013-14"
+     },
+     "trip_loss_days": {
+      "mean": 0.995,
+      "max": 2.964,
+      "worst_winter": "2013-14"
+     },
+     "trips_lost": {
+      "mean": 2.778,
+      "max": 8.49,
+      "worst_winter": "2013-14"
+     }
+    }
+   }
+  }
+ },
+ "hedged_assignment": {
+  "relmatch_eps0_r100#h": {
+   "mild": {
+    "T": 0.8,
+    "kappa_tolerated": 1.6828,
+    "note": "bisection",
+    "class_of_block": {
+     "0": "NF-std-eOnly",
+     "1": "NF-std-eOnly",
+     "2": "NF-std-eOnly",
+     "3": "NF-std-eOnly",
+     "4": "NF-std-eOnly",
+     "5": "NF-std-eOnly",
+     "6": "NF-std-eOnly",
+     "7": "NF-std-eOnly",
+     "8": "NF-std-eOnly",
+     "9": "NF-std-eOnly",
+     "10": "NF-std-eOnly",
+     "11": "NF-std-eOnly",
+     "12": "NF-std-eOnly",
+     "13": "NF-std-eOnly",
+     "14": "NF-std-eOnly",
+     "15": "NF-ext-eOnly",
+     "16": "NF-ext-eOnly",
+     "17": "NF-std-eOnly"
+    }
+   },
+   "cold": {
+    "T": -4.4,
+    "kappa_tolerated": 1.5461,
+    "note": "bisection",
+    "class_of_block": {
+     "0": "NF-ext-eOnly",
+     "1": "NF-std-eOnly",
+     "2": "NF-std-eOnly",
+     "3": "NF-std-eOnly",
+     "4": "NF-std-eOnly",
+     "5": "NF-std-eOnly",
+     "6": "NF-std-eOnly",
+     "7": "NF-std-eOnly",
+     "8": "NF-ext-eOnly",
+     "9": "NF-std-eOnly",
+     "10": "NF-std-eOnly",
+     "11": "NF-std-eOnly",
+     "12": "NF-std-eOnly",
+     "13": "NF-std-eOnly",
+     "14": "NF-std-eOnly",
+     "15": "NF-std-eOnly",
+     "16": "NF-std-eOnly",
+     "17": "NF-std-eOnly"
+    }
+   },
+   "verycold": {
+    "T": -9.4,
+    "kappa_tolerated": 1.4094,
+    "note": "bisection",
+    "class_of_block": {
+     "0": "NF-std-eOnly",
+     "1": "NF-std-eOnly",
+     "2": "NF-ext-eOnly",
+     "3": "NF-std-eOnly",
+     "4": "NF-std-eOnly",
+     "5": "NF-std-eOnly",
+     "6": "NF-std-eOnly",
+     "7": "NF-std-eOnly",
+     "8": "NF-std-eOnly",
+     "9": "NF-std-eOnly",
+     "10": "NF-std-eOnly",
+     "11": "NF-std-eOnly",
+     "12": "NF-std-eOnly",
+     "13": "NF-std-eOnly",
+     "14": "NF-std-eOnly",
+     "15": "NF-std-eOnly",
+     "16": "NF-ext-eOnly",
+     "17": "NF-std-eOnly"
+    }
+   },
+   "extreme": {
+    "T": -14.0,
+    "kappa_tolerated": 1.2016,
+    "note": "bisection",
+    "class_of_block": {
+     "0": "NF-ext-eOnly",
+     "1": "NF-ext-eOnly",
+     "2": "NF-std-eOnly",
+     "3": "NF-std-eOnly",
+     "4": "NF-std-eOnly",
+     "5": "NF-std-eOnly",
+     "6": "NF-std-eOnly",
+     "7": "NF-std-eOnly",
+     "8": "NF-std-eOnly",
+     "9": "NF-std-eOnly",
+     "10": "NF-std-eOnly",
+     "11": "NF-std-eOnly",
+     "12": "NF-std-eOnly",
+     "13": "NF-std-eOnly",
+     "14": "NF-std-eOnly",
+     "15": "NF-std-eOnly",
+     "16": "NF-std-eOnly",
+     "17": "NF-std-eOnly"
+    }
+   },
+   "severe": {
+    "T": -19.04,
+    "kappa_tolerated": 1.0703,
+    "note": "bisection",
+    "class_of_block": {
+     "0": "NF-std-eOnly",
+     "1": "NF-std-eOnly",
+     "2": "NF-std-eOnly",
+     "3": "NF-std-eOnly",
+     "4": "NF-std-eOnly",
+     "5": "NF-std-eOnly",
+     "6": "NF-std-eOnly",
+     "7": "NF-ext-eOnly",
+     "8": "NF-std-eOnly",
+     "9": "NF-std-eOnly",
+     "10": "NF-std-eOnly",
+     "11": "NF-ext-eOnly",
+     "12": "NF-std-eOnly",
+     "13": "NF-std-eOnly",
+     "14": "NF-std-eOnly",
+     "15": "NF-std-eOnly",
+     "16": "NF-std-eOnly",
+     "17": "NF-std-eOnly"
+    }
+   }
+  },
+  "det_designday#h": {
+   "mild": {
+    "T": 0.8,
+    "kappa_tolerated": 1.568,
+    "note": "bisection",
+    "class_of_block": {
+     "0": "NF-std-eOnly",
+     "1": "NF-std-eOnly",
+     "2": "NF-std-eOnly",
+     "3": "NF-std-eOnly",
+     "4": "NF-std-eOnly",
+     "5": "NF-std-eOnly",
+     "6": "NF-std-eOnly",
+     "7": "NF-std-FFH",
+     "8": "NF-std-eOnly",
+     "9": "NF-std-eOnly",
+     "10": "NF-std-eOnly",
+     "11": "NF-std-eOnly",
+     "12": "NF-std-eOnly",
+     "13": "NF-std-eOnly",
+     "14": "NF-std-FFH",
+     "15": "NF-std-FFH",
+     "16": "NF-ext-eOnly",
+     "17": "NF-ext-eOnly"
+    }
+   },
+   "cold": {
+    "T": -4.4,
+    "kappa_tolerated": 1.4641,
+    "note": "bisection",
+    "class_of_block": {
+     "0": "NF-std-eOnly",
+     "1": "NF-std-eOnly",
+     "2": "NF-std-eOnly",
+     "3": "NF-std-eOnly",
+     "4": "NF-std-eOnly",
+     "5": "NF-std-eOnly",
+     "6": "NF-std-eOnly",
+     "7": "NF-std-FFH",
+     "8": "NF-std-eOnly",
+     "9": "NF-std-eOnly",
+     "10": "NF-std-eOnly",
+     "11": "NF-std-eOnly",
+     "12": "NF-std-eOnly",
+     "13": "NF-std-eOnly",
+     "14": "NF-std-FFH",
+     "15": "NF-ext-eOnly",
+     "16": "NF-std-FFH",
+     "17": "NF-ext-eOnly"
+    }
+   },
+   "verycold": {
+    "T": -9.4,
+    "kappa_tolerated": 1.3438,
+    "note": "bisection",
+    "class_of_block": {
+     "0": "NF-std-eOnly",
+     "1": "NF-std-eOnly",
+     "2": "NF-std-eOnly",
+     "3": "NF-std-eOnly",
+     "4": "NF-std-eOnly",
+     "5": "NF-std-eOnly",
+     "6": "NF-std-eOnly",
+     "7": "NF-std-FFH",
+     "8": "NF-std-eOnly",
+     "9": "NF-std-eOnly",
+     "10": "NF-std-eOnly",
+     "11": "NF-std-eOnly",
+     "12": "NF-std-eOnly",
+     "13": "NF-std-eOnly",
+     "14": "NF-std-FFH",
+     "15": "NF-std-FFH",
+     "16": "NF-ext-eOnly",
+     "17": "NF-ext-eOnly"
+    }
+   },
+   "extreme": {
+    "T": -14.0,
+    "kappa_tolerated": 1.1359,
+    "note": "bisection",
+    "class_of_block": {
+     "0": "NF-std-eOnly",
+     "1": "NF-std-eOnly",
+     "2": "NF-std-eOnly",
+     "3": "NF-std-eOnly",
+     "4": "NF-std-eOnly",
+     "5": "NF-std-eOnly",
+     "6": "NF-std-eOnly",
+     "7": "NF-std-FFH",
+     "8": "NF-std-eOnly",
+     "9": "NF-std-eOnly",
+     "10": "NF-std-eOnly",
+     "11": "NF-std-eOnly",
+     "12": "NF-std-eOnly",
+     "13": "NF-std-eOnly",
+     "14": "NF-std-FFH",
+     "15": "NF-ext-eOnly",
+     "16": "NF-ext-eOnly",
+     "17": "NF-std-FFH"
+    }
+   },
+   "severe": {
+    "T": -19.04,
+    "kappa_tolerated": 0.9883,
+    "note": "bisection",
+    "class_of_block": {
+     "0": "NF-std-eOnly",
+     "1": "NF-std-eOnly",
+     "2": "NF-std-eOnly",
+     "3": "NF-std-eOnly",
+     "4": "NF-std-eOnly",
+     "5": "NF-std-eOnly",
+     "6": "NF-std-eOnly",
+     "7": "NF-std-FFH",
+     "8": "NF-std-eOnly",
+     "9": "NF-std-eOnly",
+     "10": "NF-std-eOnly",
+     "11": "NF-std-eOnly",
+     "12": "NF-std-eOnly",
+     "13": "NF-std-eOnly",
+     "14": "NF-std-FFH",
+     "15": "NF-ext-eOnly",
+     "16": "NF-std-FFH",
+     "17": "NF-ext-eOnly"
+    }
+   }
+  }
+ },
+ "division": {
+  "A": {
+   "ub": 3441893.8,
+   "lb": 3350740.6,
+   "parts": {
+    "battery_increment": 0.0,
+    "charger_site_capital": 607245.1000000001,
+    "grid_capital": 44110.0,
+    "demand_charges": 920710.6000000001,
+    "electricity": 1650377.8999999997,
+    "ffh_om": 120000.0,
+    "diesel_cost": 99450.2
+   },
+   "shared_linear": 3491587.824
+  },
+  "B": {
+   "label": "B_shared_infra_route_locked",
+   "obj_solver": 3252274.9,
+   "lb_solver": 3113370.3,
+   "abs_gap": 138904.6,
+   "rel_gap_diff_cost": 0.04271,
+   "time_s": 21600.2,
+   "status": 9,
+   "total_annual_cost": 31532362.9,
+   "differentiating_cost": 3252274.9,
+   "cost_parts": {
+    "battery_increment": 0.0,
+    "charger_site_capital": 507873.1,
+    "grid_capital": 72180.0,
+    "demand_charges": 763514.2,
+    "electricity": 1681070.1,
+    "ffh_om": 100000.0,
+    "diesel_cost": 127637.5
+   },
+   "n_buses": 183,
+   "n_ffh": 100,
+   "n_ext": 0,
+   "fleet": {
+    "NF-std-FFH": 100,
+    "NF-std-eOnly": 83
+   },
+   "chargers": {
+    "depot:450": 12,
+    "pioneerVillage:450": 3
+   },
+   "n_opp_chargers": 3,
+   "grid_kW": {
+    "depot": 4000.0,
+    "pioneerVillage": 500.0
+   },
+   "peak_depot_kW": 4600.0,
+   "diesel_L": 68622.3,
+   "co2_t": 183.908
+  },
+  "C": {
+   "obj_solver": 3239022.1,
+   "lb_solver": 3082286.5,
+   "n_ffh": 78,
+   "cost_parts": {
+    "battery_increment": 0.0,
+    "charger_site_capital": 555213.3,
+    "grid_capital": 76190.0,
+    "demand_charges": 761321.2,
+    "electricity": 1713353.3,
+    "ffh_om": 78000.0,
+    "diesel_cost": 54944.4
+   },
+   "peak_depot_kW": 4600.0
+  },
+  "D_v10": {
+   "label": "D_full_coordination",
+   "obj_solver": 3318017.9,
+   "lb_solver": 3140086.6,
+   "abs_gap": 177931.3,
+   "rel_gap_diff_cost": 0.053626,
+   "time_s": 21600.2,
+   "status": 9,
+   "total_annual_cost": 31598105.9,
+   "differentiating_cost": 3318017.9,
+   "cost_parts": {
+    "battery_increment": 0.0,
+    "charger_site_capital": 668343.9,
+    "grid_capital": 84210.0,
+    "demand_charges": 734220.6,
+    "electricity": 1747606.7,
+    "ffh_om": 58000.0,
+    "diesel_cost": 25636.7
+   },
+   "n_buses": 183,
+   "n_ffh": 58,
+   "n_ext": 0,
+   "fleet": {
+    "NF-std-FFH": 58,
+    "NF-std-eOnly": 125
+   },
+   "chargers": {
+    "depot:450": 11,
+    "lawrenceStn:450": 1,
+    "pioneerVillage:450": 3,
+    "yorkMillsStn:450": 4
+   },
+   "n_opp_chargers": 8,
+   "grid_kW": {
+    "depot": 4000.0,
+    "lawrenceStn": 250.0,
+    "pioneerVillage": 500.0,
+    "yorkMillsStn": 500.0
+   },
+   "peak_depot_kW": 4099.3,
+   "diesel_L": 13783.2,
+   "co2_t": 36.939
+  },
+  "coord_interval": [
+   3140086.6,
+   3239022.1
+  ]
+ }
+}
